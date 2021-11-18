@@ -1,0 +1,40 @@
+import React from 'react'
+import {
+    Text, Button, StyleSheet, TouchableOpacity
+} from 'react-native';
+import { Screen } from '../components';
+
+
+function Main({ navigation }) {
+    return (
+        <Screen>
+            <TouchableOpacity
+
+                onPress={() => navigation.navigate('Store')}
+                style={styles.button}
+            >
+                <Text style={styles.text}>Go to Store</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+
+                onPress={() => navigation.navigate('Detail')}
+                style={styles.button}
+            >
+                <Text style={styles.text}>Go to Detail</Text>
+            </TouchableOpacity>
+        </Screen>
+    );
+}
+
+const styles = StyleSheet.create({
+    button: {
+        backgroundColor: 'blue',
+        marginBottom: 10,
+        padding: 10,
+        borderRadius: 10
+    },
+    text: {
+        color: "white"
+    }
+})
+export default Main
