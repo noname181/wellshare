@@ -26,7 +26,7 @@ function Main({ navigation }) {
 
                 onPress={() => navigation.navigate('Hospital_42_1')}
                 style={styles.button}
-                >
+            >
                 <Text style={styles.text}>Go to Hospital Page 42_1</Text>
             </TouchableOpacity>
         </Screen>
@@ -35,13 +35,13 @@ function Main({ navigation }) {
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: 'blue',
+        backgroundColor: '#6287fa',
         marginBottom: 10,
         padding: 10,
         borderRadius: 10
     },
     text: {
-        color: "white"
+        color: "#fff"
     }
 })
 export default Main
