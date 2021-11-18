@@ -37,8 +37,9 @@ function Hospital_42_1() {
                 <View style={styles.row__info}>
                     <View style={styles.row__info__child}>
                         <View style={styles.row__info__child__text}>
-                            <Text >조형래</Text>
+                            <Text style={styles.row__info__child__text1}>조형래</Text>
                             <Text style={styles.row__info__child__text2}>|</Text>
+                            <Text style={styles.row__info__child__text3}>010-2009-7723</Text>
                         </View>
                         <View>
                             
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
         borderColor: 0,
         borderRadius: 6,
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         shadowColor: '#e8e9ea',
         shadowOffset: { width: 1, height: 1 },
         shadowOpacity:  0.4,
@@ -72,10 +73,25 @@ const styles = StyleSheet.create({
         elevation: 1,
     },
     row__info__child__text:{
-        paddingTop:15,
+
         paddingLeft: 10,
         display: 'flex',
         flexDirection:'row',
+        alignItems: 'center'
+    },
+    row__info__child__text1:{
+        fontWeight: 'bold',
+        color: 'black'
+
+    },
+    row__info__child__text2:{
+        paddingLeft:5,
+        paddingRight: 5,
+        color: '#e1e1e1',
+        fontSize: 16,
+    },
+    row__info__child__text3:{
+        fontSize: 14,
     },
     button_search:{
         width: '100%',
