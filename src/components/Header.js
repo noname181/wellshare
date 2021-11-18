@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 
-function Header({ isHome, styleIcon }) {
+function Header({ isHome, styleIcon, title }) {
     const navigation = useNavigation();
 
     return (
@@ -14,12 +14,12 @@ function Header({ isHome, styleIcon }) {
                     :
                     <View style={[styles.direct, styleIcon]}>
                         <TouchableOpacity style={styles.icon} onPress={() => navigation.goBack()}>
-                            <Icon name='arrow-back' color={'#000'} size={24} />
+                            <Icon name='chevron-back' color={'#000'} size={24} />
                         </TouchableOpacity>
 
                     </View>
             }
-            <Text style={styles.title}>Home</Text>
+            <Text style={styles.title}>{title}</Text>
         </View>
     );
 }
@@ -46,11 +46,10 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         color: '#000',
-        fontStyle: 'italic'
     },
     direct: {
         position: 'absolute',
-        left: 15,
+        left: 10,
         height: '100%',
         alignItems: 'center',
         justifyContent: 'center',

@@ -14,20 +14,24 @@ function HomeStack() {
             <Stack.Screen
                 name="Main"
                 component={Main}
-                options={{ header: props => <Header isHome={true} {...props} /> }}
+                options={{ header: props => <Header title="Main" isHome={true} {...props} /> }}
             />
             <Stack.Screen
                 name="Store"
                 component={Store}
-                options={{ header: props => <Header isHome={false} {...props} /> }}
+                options={{ header: props => <Header title="Store" isHome={false} {...props} /> }}
             />
             <Stack.Screen
                 name="Detail"
                 component={Detail}
-                options={{ header: props => <Header isHome={false} {...props} /> }}
+                options={{ header: props => <Header title="Detail" isHome={false} {...props} /> }}
             />
 
-            <Stack.Screen name="Hospital_42_1" component={Hospital_42_1} />
+            <Stack.Screen
+                name="Hospital_42_1"
+                component={Hospital_42_1}
+                options={{ header: props => <Header title="Hospital_42_1" isHome={false} {...props} /> }}
+            />
         </Stack.Navigator>
     );
 }
