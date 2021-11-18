@@ -4,6 +4,7 @@ import Store from '../screens/Store';
 import Detail from '../screens/Detail';
 import Main from '../screens/Main';
 import Header from '../components/Header';
+import Hospital_42_1 from '../screens/Hospital_42_1';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,8 @@ function HomeStack() {
                 component={Detail}
                 options={{ header: props => <Header isHome={false} {...props} /> }}
             />
+
+            <Stack.Screen name="Hospital_42_1" component={Hospital_42_1} />
         </Stack.Navigator>
     );
 }
