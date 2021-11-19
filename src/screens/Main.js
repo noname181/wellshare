@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-    Text, Button, StyleSheet, TouchableOpacity
+    Text, StyleSheet, TouchableOpacity,
 } from 'react-native';
 import { Screen } from '../components';
 
@@ -8,6 +8,7 @@ import { Screen } from '../components';
 function Main({ navigation }) {
     return (
         <Screen>
+
             <TouchableOpacity
 
                 onPress={() => navigation.navigate('Store')}
