@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
     },
     nlLogin: {
         backgroundColor: '#fff',
-        height: '80%',
+        // height: '80%',
+        paddingVertical: 60,
         justifyContent: 'center',
         paddingHorizontal: 16,
         marginTop: -60,
@@ -104,7 +105,8 @@ const styles = StyleSheet.create({
     },
     nlLogo: {
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginBottom: 30
     },
     nlRelative: {
         position: 'relative'
