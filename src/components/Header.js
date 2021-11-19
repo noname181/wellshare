@@ -3,21 +3,21 @@ import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 
-function Header({ isHome, styleIcon, title }) {
+function Header({ isBack, styleIcon, title }) {
     const navigation = useNavigation();
 
     return (
         <View style={styles.container}>
             {
-                isHome ?
-                    null
-                    :
+                isBack ?
                     <View style={[styles.direct, styleIcon]}>
                         <TouchableOpacity style={styles.icon} onPress={() => navigation.goBack()}>
                             <Icon name='chevron-back' color={'#000'} size={24} />
                         </TouchableOpacity>
 
                     </View>
+                    :
+                    null
             }
             <Text style={styles.title}>{title}</Text>
         </View>

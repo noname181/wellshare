@@ -5,6 +5,7 @@ import Setting from '../screens/Setting'
 import Profile from '../screens/Profile'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Image, View, StyleSheet, Text } from 'react-native'
+import Header from '../components/Header'
 
 const Tab = createBottomTabNavigator();
 
@@ -28,7 +29,8 @@ function TabNavigation({ route, navigation }) {
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
                         <Image resizeMode="contain" source={require('../images/list.png')} style={[styles.icon, { tintColor: focused ? '#7c257a' : '#b2b2b2' }]}></Image>
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
-                    </View>)
+                    </View>),
+                    header: props => <Header title="명단" isBack={false} {...props} />
                 }}
 
             />
@@ -40,7 +42,8 @@ function TabNavigation({ route, navigation }) {
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
                         <Image resizeMode="contain" source={require('../images/notice.png')} style={[styles.icon, { tintColor: focused ? '#7c257a' : '#b2b2b2' }]}></Image>
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>공지사항</Text>
-                    </View>)
+                    </View>),
+                    header: props => <Header title="공지사항" isBack={false} {...props} />
                 }}
             />
             <Tab.Screen
@@ -51,7 +54,8 @@ function TabNavigation({ route, navigation }) {
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
                         <Image resizeMode="contain" source={require('../images/profile.png')} style={[styles.icon, { tintColor: focused ? '#7c257a' : '#b2b2b2' }]}></Image>
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>나의정보</Text>
-                    </View>)
+                    </View>),
+                    header: props => <Header title="나의정보" isBack={false} {...props} />
                 }}
             />
         </Tab.Navigator>
