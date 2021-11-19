@@ -4,7 +4,7 @@ import {
     View,
     StyleSheet,
     Image,
-    Button
+    TouchableOpacity,
 } from 'react-native';
 import { Screen } from '../components';
 import Calendar from '../images/user/calendarPNG.png'
@@ -18,17 +18,17 @@ function User_List() {
                     <Image style={styles.icon_calendar} source={Calendar} />
                     <Text style={styles.text_calendar}>2021-05-01</Text>
                 </View>
-                <View style={styles.h_three_button}>
-                    <Button style={styles.button} title="Press me" />
+                <View >
+                    <TouchableOpacity >
+                        <Text>aaa</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </Screen>
     );
 }
 const styles = StyleSheet.create({
-    button:{
-        width: '33.33% - 5'
-    },
+
     h_three_button:{
         display: 'flex',
         justifyContent: 'space-between',
