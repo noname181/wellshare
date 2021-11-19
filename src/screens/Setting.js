@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, View, Text, TouchableOpacity, FlatList} from 'react-native';
+import {StyleSheet,SafeAreaView,  View, Text, TouchableOpacity, FlatList, StatusBar} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Screen } from '../components';
 
@@ -21,9 +21,27 @@ const DATA = [
         title: '공지사항 1입니다.',
         regdate: '2021.10.13',
         content: '- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위',
-        },
+    },
     {
         id: '4',
+        title: '공지사항 1입니다.',
+        regdate: '2021.10.13',
+        content: '- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위',
+    },
+    {
+        id: '5',
+        title: '공지사항 1입니다.',
+        regdate: '2021.10.13',
+        content: '- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위',
+    },
+    {
+        id: '6',
+        title: '공지사항 1입니다.',
+        regdate: '2021.10.13',
+        content: '- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위',
+    },
+    {
+        id: '7',
         title: '공지사항 1입니다.',
         regdate: '2021.10.13',
         content: '- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위',
@@ -33,18 +51,19 @@ const DATA = [
 const Item = ({id, title, regdate, content}) => (
 <TouchableOpacity style={styles.nlItem}>
     <View style={styles.nlHead}>
-        <Text style={styles.nlTitle}>
+        <View style={styles.nlRow}>
             <Text style={styles.nlNo}>{id}.</Text>
-            {title}
-        </Text>
+            <Text style={styles.nlTitle}>{title}</Text>
+        </View>
+        
         <Text style={styles.nlDate}>{regdate}</Text>
         
-        <Icon style={styles.nlArrow} name='chevron-down-outline' color={'#000'} size={20} />
+        <Icon style={styles.nlArrow} name='chevron-down-outline' color={'#9b9b9b'} size={20} />
        
         
     </View>
     <View style={styles.nlContent}>
-        <Text >{content}</Text>
+        <Text style={{color: '#000'}}>{content}</Text>
     </View>
 </TouchableOpacity>
 );
@@ -54,22 +73,25 @@ function Setting() {
         <Item id={item.id} title={item.title} regdate={item.regdate} content={item.content}/>
     );
     return (
-        <Screen>
+        <Screen >
             <FlatList
                 data={DATA}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
+                style={styles.nlList}
+                inverted 
             />
         </Screen>
     );
 }
 const styles = StyleSheet.create({
-    nlWrapper: {
-        backgroundColor: '#f6f7f8',
-        paddingHorizontal: 24
+    nlList: {
+        flex: 1,
+        margin: -5
     },
     nlItem: {
         margin: 5,
+        paddingVertical: 2,
         backgroundColor: '#fff',
         borderRadius: 10,
         borderStyle: 'solid',
@@ -89,18 +111,22 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#000'
     },
+    nlRow: {
+        flexDirection: 'row'
+    },
     nlDate: {
-        fontSize: 14
+        fontSize: 14,
+        paddingTop: 4
 
     },
     nlContent: {
-        padding: 10,
+        padding: 15,
         fontSize: 14,
         color: '#000'
     },
     nlHead: {
         position: 'relative',
-        padding: 10,
+        padding: 15,
         borderBottomColor: '#e1e1e1',
         borderStyle: 'solid',
         borderBottomWidth: 1,
@@ -113,6 +139,9 @@ const styles = StyleSheet.create({
     },
     nlNo: {
         color: '#7c257a',
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginRight: 3
     }
 
 });
