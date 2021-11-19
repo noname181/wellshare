@@ -4,7 +4,6 @@ import {
     View,
     StyleSheet,
     Image,
-    TextInput,
 } from 'react-native';
 import { Screen } from '../components';
 import Avatar from '../images/user/avatarPNG.png';
@@ -53,8 +52,8 @@ const styles = StyleSheet.create({
         display:'flex',
         flexDirection:'row',
         alignItems:'center',
-        paddingTop:20,
-        paddingBottom:20,
+        paddingTop:22,
+        paddingBottom:22,
         paddingLeft:12,
     },
     h_row:{
@@ -63,7 +62,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
     },
     text_profile:{
-        fontSize: 15,
+        fontSize: 16,
     },
     Icon_profile:{
         marginRight:10,
@@ -72,10 +71,12 @@ const styles = StyleSheet.create({
     },
     Avatar_icon_image:{
         position:'absolute',
+        width:125,
+        height:125,
 
     },
     Avatar_icon:{
-        top: -50,
+        top: -60,
         display:'flex',
         alignItems:'center',
         position:'relative'
@@ -84,7 +85,8 @@ const styles = StyleSheet.create({
     
     profile_main_hero: {
         backgroundColor: '#fff',
-        marginTop: 80,
+        marginTop: 72,
+        paddingTop:10,
         marginBottom:12,
         paddingBottom: 26,
         display: 'flex',
@@ -92,6 +94,11 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 8,
         position: 'relative',
+        shadowColor: '#000',
+        shadowOffset: {width: 1, height: 3},
+        shadowOpacity: 0.1,
+        elevation: 3,
+        
     },
     profile_main_logout: {
         backgroundColor: '#fff',
@@ -99,6 +106,10 @@ const styles = StyleSheet.create({
         borderColor: '#e1e1e1',
         borderWidth: 1,
         borderRadius: 8,
+        shadowColor: '#000',
+        shadowOffset: {width: 1, height: 3},
+        shadowOpacity: 0.1,
+        elevation: 3,
     },
 
     pf_box_information_first: {
