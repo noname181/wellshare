@@ -36,12 +36,12 @@ function HomeStack() {
             <Stack.Screen
                 name="User_My_Profile"
                 component={User_My_Profile}
-                options={{ header: props => <Header title="나의정보" isHome={false} {...props} /> }}
+                options={{ header: props => <Header title="나의정보" isBack={true} {...props} /> }}
             />
             <Stack.Screen
                 name="User_List"
                 component={User_List}
-                options={{ header: props => <Header title="명단" isHome={false} {...props} /> }}
+                options={{ header: props => <Header title="명단" isBack={true} {...props} /> }}
             />
         </Stack.Navigator>
     );
