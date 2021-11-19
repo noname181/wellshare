@@ -18,7 +18,7 @@ function Hospital_42_1() {
         <Screen>
             <View style={styles.body_42_1}>
                 <View style={styles.box_calendar}>
-                    <Image style={styles.Calendar_icon1} source={Calendar_icon} />
+                    <Calendar_icon fill={'#000000'} />
                     <Text style={styles.text_calendar}>2021-05-01</Text>
                 </View>
                 <View style={styles.row__search}>
@@ -30,7 +30,7 @@ function Hospital_42_1() {
                     </View>
                     <View style={styles.width20}>
                         <View style={styles.button_search}>
-                            <Image style={styles.Search_icon} source={Search_icon} />
+
                         </View>
                     </View>
                 </View>
