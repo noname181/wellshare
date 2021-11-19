@@ -11,6 +11,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		30F7D9A9274808E9001E3FB0 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30F7D9A8274808E9001E3FB0 /* libRNVectorIcons.a */; };
 		349EC8F3CEE196BFEE261522 /* libPods-WellshareUser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 712B5734254A4799D55176F1 /* libPods-WellshareUser.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		90CF933C755A39DD32272E70 /* libPods-WellshareUser-WellshareUserTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E2F04A6603ECDAB0735F017 /* libPods-WellshareUser-WellshareUserTests.a */; };
@@ -36,6 +37,23 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = WellshareUser/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = WellshareUser/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = WellshareUser/main.m; sourceTree = "<group>"; };
+		30F7D979274801F6001E3FB0 /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
+		30F7D97A274801F6001E3FB0 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
+		30F7D97B274801F6001E3FB0 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
+		30F7D97C274801F6001E3FB0 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
+		30F7D97D274801F6001E3FB0 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Brands.ttf; sourceTree = "<group>"; };
+		30F7D97E274801F6001E3FB0 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
+		30F7D97F274801F6001E3FB0 /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AntDesign.ttf; sourceTree = "<group>"; };
+		30F7D980274801F6001E3FB0 /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Foundation.ttf; sourceTree = "<group>"; };
+		30F7D981274801F6001E3FB0 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
+		30F7D982274801F6001E3FB0 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Solid.ttf; sourceTree = "<group>"; };
+		30F7D983274801F6001E3FB0 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Regular.ttf; sourceTree = "<group>"; };
+		30F7D984274801F6001E3FB0 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		30F7D985274801F6001E3FB0 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
+		30F7D986274801F6001E3FB0 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
+		30F7D987274801F6001E3FB0 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
+		30F7D988274801F6001E3FB0 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
+		30F7D9A8274808E9001E3FB0 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E2F04A6603ECDAB0735F017 /* libPods-WellshareUser-WellshareUserTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WellshareUser-WellshareUserTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		58DAEF8F659C2B6200A08599 /* Pods-WellshareUser-WellshareUserTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WellshareUser-WellshareUserTests.release.xcconfig"; path = "Target Support Files/Pods-WellshareUser-WellshareUserTests/Pods-WellshareUser-WellshareUserTests.release.xcconfig"; sourceTree = "<group>"; };
 		5EBF935A426A0CDDAF402709 /* Pods-WellshareUser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WellshareUser.release.xcconfig"; path = "Target Support Files/Pods-WellshareUser/Pods-WellshareUser.release.xcconfig"; sourceTree = "<group>"; };
@@ -59,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30F7D9A9274808E9001E3FB0 /* libRNVectorIcons.a in Frameworks */,
 				349EC8F3CEE196BFEE261522 /* libPods-WellshareUser.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,14 +115,46 @@
 			name = WellshareUser;
 			sourceTree = "<group>";
 		};
+		15455B1CFF3C458D9FB1960D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				30F7D9A8274808E9001E3FB0 /* libRNVectorIcons.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				712B5734254A4799D55176F1 /* libPods-WellshareUser.a */,
 				4E2F04A6603ECDAB0735F017 /* libPods-WellshareUser-WellshareUserTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		30F7D978274801F6001E3FB0 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				30F7D979274801F6001E3FB0 /* Fontisto.ttf */,
+				30F7D97A274801F6001E3FB0 /* Octicons.ttf */,
+				30F7D97B274801F6001E3FB0 /* Feather.ttf */,
+				30F7D97C274801F6001E3FB0 /* Entypo.ttf */,
+				30F7D97D274801F6001E3FB0 /* FontAwesome5_Brands.ttf */,
+				30F7D97E274801F6001E3FB0 /* MaterialCommunityIcons.ttf */,
+				30F7D97F274801F6001E3FB0 /* AntDesign.ttf */,
+				30F7D980274801F6001E3FB0 /* Foundation.ttf */,
+				30F7D981274801F6001E3FB0 /* Ionicons.ttf */,
+				30F7D982274801F6001E3FB0 /* FontAwesome5_Solid.ttf */,
+				30F7D983274801F6001E3FB0 /* FontAwesome5_Regular.ttf */,
+				30F7D984274801F6001E3FB0 /* FontAwesome.ttf */,
+				30F7D985274801F6001E3FB0 /* Zocial.ttf */,
+				30F7D986274801F6001E3FB0 /* EvilIcons.ttf */,
+				30F7D987274801F6001E3FB0 /* SimpleLineIcons.ttf */,
+				30F7D988274801F6001E3FB0 /* MaterialIcons.ttf */,
+			);
+			name = Fonts;
+			path = "../node_modules/react-native-vector-icons/Fonts";
 			sourceTree = "<group>";
 		};
 		50A82940D95C0422CE56E4CA /* Pods */ = {
@@ -127,12 +178,14 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				30F7D978274801F6001E3FB0 /* Fonts */,
 				13B07FAE1A68108700A75B9A /* WellshareUser */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* WellshareUserTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				50A82940D95C0422CE56E4CA /* Pods */,
+				15455B1CFF3C458D9FB1960D /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -435,6 +488,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = WellshareUserTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -459,6 +513,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = WellshareUserTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -486,6 +541,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5QHJHGX6MP;
 				ENABLE_BITCODE = NO;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = WellshareUser/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -512,6 +568,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5QHJHGX6MP;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = WellshareUser/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
