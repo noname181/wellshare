@@ -30,6 +30,20 @@ function Main({ navigation }) {
             >
                 <Text style={styles.text}>Go to Hospital Page 42_1</Text>
             </TouchableOpacity>
+            <TouchableOpacity
+
+            onPress={() => navigation.navigate('User_My_Profile')}
+            style={styles.button}
+            >
+            <Text style={styles.text}>Go to User_My_Profile</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+
+            onPress={() => navigation.navigate('User_List')}
+            style={styles.button}
+            >
+            <Text style={styles.text}>Go to User_List</Text>
+            </TouchableOpacity>
         </Screen>
     );
 }
