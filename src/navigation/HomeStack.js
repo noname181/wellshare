@@ -5,6 +5,7 @@ import Detail from '../screens/Detail';
 import Main from '../screens/Main';
 import Header from '../components/Header';
 import Hospital_42_1 from '../screens/Hospital_42_1';
+import User_My_Profile from '../screens/User_My_Profile';
 
 const Stack = createStackNavigator();
 
@@ -26,11 +27,10 @@ function HomeStack() {
                 component={Detail}
                 options={{ header: props => <Header title="Detail" isHome={false} {...props} /> }}
             />
-
             <Stack.Screen
-                name="Hospital_42_1"
-                component={Hospital_42_1}
-                options={{ header: props => <Header title="Hospital_42_1" isHome={false} {...props} /> }}
+                name="User_My_Profile"
+                component={User_My_Profile}
+                options={{ header: props => <Header title="나의정보" isHome={false} {...props} /> }}
             />
         </Stack.Navigator>
     );
