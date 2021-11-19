@@ -1,5 +1,5 @@
-import React from 'react'
-import {StyleSheet,SafeAreaView,  View, Text, TouchableOpacity, FlatList, StatusBar} from 'react-native';
+import React, { useState } from 'react'
+import {StyleSheet, View, Text, Pressable, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Screen } from '../components';
 
@@ -48,30 +48,36 @@ const DATA = [
     },
 ];
   
-const Item = ({id, title, regdate, content}) => (
-<TouchableOpacity style={styles.nlItem}>
+const Item = ({item, onPress, typeDisplay, nameIcon}) => (
+<Pressable activeOpacity='1' style={styles.nlItem} onPress={onPress}>
     <View style={styles.nlHead}>
         <View style={styles.nlRow}>
-            <Text style={styles.nlNo}>{id}.</Text>
-            <Text style={styles.nlTitle}>{title}</Text>
+            <Text style={styles.nlNo}>{item.id}.</Text>
+            <Text style={styles.nlTitle}>{item.title}</Text>
         </View>
-        
-        <Text style={styles.nlDate}>{regdate}</Text>
-        
-        <Icon style={styles.nlArrow} name='chevron-down-outline' color={'#9b9b9b'} size={20} />
-       
-        
+        <Text style={styles.nlDate}>{item.regdate}</Text>
+        <Icon style={[styles.nlArrow]} name={nameIcon} color={'#9b9b9b'} size={20}  />
     </View>
-    <View style={styles.nlContent}>
-        <Text style={{color: '#000'}}>{content}</Text>
+    <View style={styles.nlContent} display={typeDisplay}>
+        <Text style={{color: '#000'}}>{item.content}</Text>
     </View>
-</TouchableOpacity>
+</Pressable>
 );
 
 function Setting() {
-    const renderItem = ({item}) => (
-        <Item id={item.id} title={item.title} regdate={item.regdate} content={item.content}/>
-    );
+    const [selectedId, setSelectedId] = useState(null);
+    const renderItem = ({item}) => {
+        const itemActive =  item.id === selectedId ? 'flex' : 'none';
+        const arrow = item.id === selectedId ? 'chevron-up-outline' : 'chevron-down-outline';
+        return (
+            <Item item={item}
+                item={item}
+                onPress={() => setSelectedId(item.id)}
+                nameIcon={arrow}
+                typeDisplay={itemActive}
+            />
+        );
+    }
     return (
         <Screen >
             <FlatList
@@ -79,6 +85,7 @@ function Setting() {
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
                 style={styles.nlList}
+                extraData={selectedId}
                 inverted 
             />
         </Screen>
@@ -122,14 +129,15 @@ const styles = StyleSheet.create({
     nlContent: {
         padding: 15,
         fontSize: 14,
-        color: '#000'
+        color: '#000',
+        borderTopColor: '#e1e1e1',
+        borderStyle: 'solid',
+        borderTopWidth: 1,
+        
     },
     nlHead: {
         position: 'relative',
         padding: 15,
-        borderBottomColor: '#e1e1e1',
-        borderStyle: 'solid',
-        borderBottomWidth: 1,
         
     },
     nlArrow: {
