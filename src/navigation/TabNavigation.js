@@ -3,10 +3,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Home from '../screens/Home'
 import Setting from '../screens/Setting'
 import Profile from '../screens/Profile'
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Image, View, StyleSheet, Text } from 'react-native'
 import Header from '../components/Header'
-import { SvgUri } from 'react-native-svg';
+import List_Active from '../images/svg/List_Active'
+import List from '../images/svg/List'
+import Notice from '../images/svg/Notice'
+import Notice_Active from '../images/svg/Notice_Active'
+import Profile_Active from '../images/svg/Profile_Active'
+import Profile_Icon from '../images/svg/Profile'
+
 const Tab = createBottomTabNavigator();
 
 function TabNavigation({ route, navigation }) {
@@ -27,11 +32,7 @@ function TabNavigation({ route, navigation }) {
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        <SvgUri
-                            height={16}
-                            color={"#000"}
-                            uri={focused ? "https://scsman23.cafe24.com/upload/svg_app/list-active.svg" : "https://scsman23.cafe24.com/upload/svg_app/list.svg"}
-                        />
+                        {focused ? <List_Active height={16} width={16} /> : <List height={16} width={16} />}
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
                     </View>),
                     header: props => <Header title="명단" isBack={false} {...props} />
@@ -44,11 +45,7 @@ function TabNavigation({ route, navigation }) {
                 options={{
 
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        <SvgUri
-                            height={16}
-                            color={"#000"}
-                            uri={focused ? "https://scsman23.cafe24.com/upload/svg_app/notice-active.svg" : "https://scsman23.cafe24.com/upload/svg_app/notice.svg"}
-                        />
+                        {focused ? <Notice_Active height={16} width={16} /> : <Notice height={16} width={16} />}
 
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>공지사항</Text>
                     </View>),
@@ -61,11 +58,7 @@ function TabNavigation({ route, navigation }) {
                 options={{
 
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        <SvgUri
-                            height={16}
-                            color={"#000"}
-                            uri={focused ? "https://scsman23.cafe24.com/upload/svg_app/profile-active.svg" : "https://scsman23.cafe24.com/upload/svg_app/profile.svg"}
-                        />
+                        {focused ? <Profile_Active height={16} width={16} /> : <Profile_Icon height={16} width={16} />}
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>나의정보</Text>
                     </View>),
                     header: props => <Header title="나의정보" isBack={false} {...props} />

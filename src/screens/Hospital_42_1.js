@@ -9,7 +9,8 @@ import {
 
 } from 'react-native';
 import { Screen } from '../components';
-import { SvgUri } from 'react-native-svg';
+import CalendarIcon from '../images/svg/CalendarIcon'
+import SearchIcon from '../images/svg/SearchIcon'
 
 function Hospital_42_1() {
 
@@ -19,9 +20,7 @@ function Hospital_42_1() {
 
             <View style={styles.body_42_1}>
                 <View style={styles.box_calendar}>
-                    <SvgUri
-                        uri="https://scsman23.cafe24.com/upload/svg_app/calendar_icon.svg"
-                    />
+                    <CalendarIcon width={16} height={16} />
                     <Text style={styles.text_calendar}>2021-05-01</Text>
                 </View>
                 <View style={styles.row__search}>
@@ -33,9 +32,7 @@ function Hospital_42_1() {
                     </View>
                     <View style={styles.width20}>
                         <View style={styles.button_search}>
-                            <SvgUri
-                                uri="https://scsman23.cafe24.com/upload/svg_app/search_icon.svg"
-                            />
+                            <SearchIcon width={20} height={20} />
                         </View>
                     </View>
                 </View>

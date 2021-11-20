@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {StyleSheet, View, Text, Pressable, FlatList} from 'react-native';
+import { StyleSheet, View, Text, Pressable, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Screen } from '../components';
 
@@ -47,8 +47,8 @@ const DATA = [
         content: '- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위',
     },
 ];
-  
-const Item = ({item, onPress, typeDisplay, nameIcon}) => (
+
+const Item = ({ item, onPress, typeDisplay, nameIcon }) => (
     <Pressable style={styles.nlItem} onPress={onPress}>
         <View style={styles.nlHead}>
             <View style={styles.nlRow}>
@@ -56,18 +56,18 @@ const Item = ({item, onPress, typeDisplay, nameIcon}) => (
                 <Text style={styles.nlTitle}>{item.title}</Text>
             </View>
             <Text style={styles.nlDate}>{item.regdate}</Text>
-            <Icon style={[styles.nlArrow]} name={nameIcon} color={'#9b9b9b'} size={20}  />
+            <Icon style={[styles.nlArrow]} name={nameIcon} color={'#9b9b9b'} size={20} />
         </View>
         <View style={styles.nlContent} display={typeDisplay}>
-            <Text style={{color: '#000'}}>{item.content}</Text>
+            <Text style={{ color: '#000' }}>{item.content}</Text>
         </View>
     </Pressable>
 );
 
 function Setting() {
     const [selectedId, setSelectedId] = useState(null);
-    const renderItem = ({item}) => {
-        const itemActive =  item.id === selectedId ? 'flex' : 'none';
+    const renderItem = ({ item }) => {
+        const itemActive = item.id === selectedId ? 'flex' : 'none';
         const arrow = item.id === selectedId ? 'chevron-up-outline' : 'chevron-down-outline';
         return (
             <Item item={item}
@@ -78,14 +78,15 @@ function Setting() {
         );
     }
     return (
-        <Screen style={{paddingVertical: 0, paddingHorizontal: 10}}>
+        <Screen style={{ paddingVertical: 0, paddingHorizontal: 10 }}>
             <FlatList
                 data={DATA}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
                 style={styles.nlList}
                 extraData={selectedId}
-                inverted 
+                inverted
+                showsVerticalScrollIndicator={false}
             />
         </Screen>
     );
@@ -132,12 +133,12 @@ const styles = StyleSheet.create({
         borderTopColor: '#e1e1e1',
         borderStyle: 'solid',
         borderTopWidth: 1,
-        
+
     },
     nlHead: {
         position: 'relative',
         padding: 15,
-        
+
     },
     nlArrow: {
         position: 'absolute',
