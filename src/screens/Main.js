@@ -23,13 +23,13 @@ function Main({ navigation }) {
             >
                 <Text style={styles.text}>Go to Detail</Text>
             </TouchableOpacity>
-            <TouchableOpacity
+            {/* <TouchableOpacity
 
                 onPress={() => navigation.navigate('Hospital_42_1')}
                 style={styles.button}
             >
                 <Text style={styles.text}>Go to Hospital Page 42_1</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity
 
             onPress={() => navigation.navigate('User_My_Profile')}
