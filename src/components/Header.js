@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 function Header({ isBack, styleIcon, title }) {
     const navigation = useNavigation();
@@ -10,12 +11,12 @@ function Header({ isBack, styleIcon, title }) {
         <View style={styles.container}>
             {
                 isBack ?
-                    <View style={[styles.direct, styleIcon]}>
-                        <TouchableOpacity style={styles.icon} onPress={() => navigation.goBack()}>
-                            <Icon name='chevron-back' color={'#000'} size={24} />
-                        </TouchableOpacity>
+                    <TouchableOpacity style={[styles.direct, styleIcon]} onPress={() => navigation.goBack()}>
 
-                    </View>
+                        <Icon name='chevron-back' color={'#000'} size={24} />
+
+
+                    </TouchableOpacity>
                     :
                     null
             }
@@ -26,6 +27,7 @@ function Header({ isBack, styleIcon, title }) {
 
 const styles = StyleSheet.create({
     container: {
+        marginTop: Platform.OS == 'ios' ? getStatusBarHeight() : 0,
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',
@@ -34,13 +36,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#e9e9e9',
         flexDirection: 'row',
         shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 10
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.5,
-        elevation: 5
+
     },
     title: {
         fontSize: 18,
@@ -53,6 +49,7 @@ const styles = StyleSheet.create({
         height: '100%',
         alignItems: 'center',
         justifyContent: 'center',
+        paddingRight: 10,
     },
 });
 

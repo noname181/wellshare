@@ -9,16 +9,19 @@ import {
 
 } from 'react-native';
 import { Screen } from '../components';
-import Calendar_icon from '../images/hospital/calendar_icon.svg'
-import Search_icon from '../images/hospital/search_icon.svg'
-
+import { SvgUri } from 'react-native-svg';
 
 function Hospital_42_1() {
+
     return (
         <Screen>
+
+
             <View style={styles.body_42_1}>
                 <View style={styles.box_calendar}>
-                    <Calendar_icon fill={'#000000'} />
+                    <SvgUri
+                        uri="https://scsman23.cafe24.com/upload/svg_app/calendar_icon.svg"
+                    />
                     <Text style={styles.text_calendar}>2021-05-01</Text>
                 </View>
                 <View style={styles.row__search}>
@@ -30,7 +33,9 @@ function Hospital_42_1() {
                     </View>
                     <View style={styles.width20}>
                         <View style={styles.button_search}>
-
+                            <SvgUri
+                                uri="https://scsman23.cafe24.com/upload/svg_app/search_icon.svg"
+                            />
                         </View>
                     </View>
                 </View>
@@ -97,9 +102,9 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 40,
         backgroundColor: '#7c257a',
-        paddingLeft: 10,
         borderRadius: 6,
-
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     pt10: {
         paddingTop: 10,
@@ -130,17 +135,18 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 0,
         borderRadius: 6,
-        display: 'flex',
-        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
         shadowColor: '#e8e9ea',
         shadowOffset: { width: 1, height: 1 },
         shadowOpacity: 0.4,
         shadowRadius: 3,
         elevation: 1,
-        position: 'relative'
+        position: 'relative',
+        paddingHorizontal: 10
     },
     text_calendar: {
-        paddingLeft: 38,
+        paddingLeft: 10,
     },
     Calendar_icon1: {
         width: 20,
