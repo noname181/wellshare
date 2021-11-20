@@ -27,7 +27,7 @@ function Header({ isBack, styleIcon, title }) {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: Platform.OS == 'ios' ? getStatusBarHeight() : 0,
+        marginTop: getStatusBarHeight(),
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',
