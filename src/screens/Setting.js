@@ -49,19 +49,19 @@ const DATA = [
 ];
   
 const Item = ({item, onPress, typeDisplay, nameIcon}) => (
-<Pressable activeOpacity='1' style={styles.nlItem} onPress={onPress}>
-    <View style={styles.nlHead}>
-        <View style={styles.nlRow}>
-            <Text style={styles.nlNo}>{item.id}.</Text>
-            <Text style={styles.nlTitle}>{item.title}</Text>
+    <Pressable style={styles.nlItem} onPress={onPress}>
+        <View style={styles.nlHead}>
+            <View style={styles.nlRow}>
+                <Text style={styles.nlNo}>{item.id}.</Text>
+                <Text style={styles.nlTitle}>{item.title}</Text>
+            </View>
+            <Text style={styles.nlDate}>{item.regdate}</Text>
+            <Icon style={[styles.nlArrow]} name={nameIcon} color={'#9b9b9b'} size={20}  />
         </View>
-        <Text style={styles.nlDate}>{item.regdate}</Text>
-        <Icon style={[styles.nlArrow]} name={nameIcon} color={'#9b9b9b'} size={20}  />
-    </View>
-    <View style={styles.nlContent} display={typeDisplay}>
-        <Text style={{color: '#000'}}>{item.content}</Text>
-    </View>
-</Pressable>
+        <View style={styles.nlContent} display={typeDisplay}>
+            <Text style={{color: '#000'}}>{item.content}</Text>
+        </View>
+    </Pressable>
 );
 
 function Setting() {
@@ -71,7 +71,6 @@ function Setting() {
         const arrow = item.id === selectedId ? 'chevron-up-outline' : 'chevron-down-outline';
         return (
             <Item item={item}
-                item={item}
                 onPress={() => setSelectedId(item.id)}
                 nameIcon={arrow}
                 typeDisplay={itemActive}
@@ -79,7 +78,7 @@ function Setting() {
         );
     }
     return (
-        <Screen >
+        <Screen style={{paddingVertical: 0, paddingHorizontal: 10}}>
             <FlatList
                 data={DATA}
                 renderItem={renderItem}
@@ -93,11 +92,11 @@ function Setting() {
 }
 const styles = StyleSheet.create({
     nlList: {
-        flex: 1,
-        margin: -5
+        flex: 1
     },
     nlItem: {
-        margin: 5,
+        marginVertical: 7,
+        marginHorizontal: 5,
         paddingVertical: 2,
         backgroundColor: '#fff',
         borderRadius: 10,
