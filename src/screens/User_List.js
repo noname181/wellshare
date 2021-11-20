@@ -73,6 +73,7 @@ function User_List() {
                         </View>
                     </View>
                 </View>
+                
             </View>
         </Screen>
     );
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
         display:'flex',
         flexDirection:'row',
         justifyContent: 'space-between',
-        paddingTop:20,
+        paddingTop:14,
         paddingLeft: 18,
         paddingRight:18,
     },
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems:'center',
         paddingTop:15,
-        paddingBottom:20,
+        paddingBottom:21,
         paddingLeft: 18,
         paddingRight:18,
     },
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
     },
     h_button:{
         backgroundColor: '#fff',
-        height: 46,
+        height: 48,
         width: 122,
         alignItems: 'center',
         justifyContent: 'center',
@@ -172,7 +173,7 @@ const styles = StyleSheet.create({
     },
     h_button_active:{
         backgroundColor: '#7c257a',
-        height: 46,
+        height: 48,
         width: 123,
         alignItems: 'center',
         justifyContent: 'center',
@@ -211,7 +212,7 @@ const styles = StyleSheet.create({
     },
     box_calendar: {
         backgroundColor: '#fff',
-        height: 46,
+        height: 49,
         borderWidth: 0,
         borderColor: '#e1e1e1',
         borderRadius: 6,
