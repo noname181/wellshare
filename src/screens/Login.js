@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert} from
 
 import Logo from '../images/logo.png';
 export default function Login() {
-    const onPress = () => navigation.navigate('Notice');
+    const onPress = () => Alert.alert('Hello');
     return (
         <View style={styles.nlWrapper}>
             <View style={styles.nlBg1}></View>
@@ -15,12 +15,16 @@ export default function Login() {
                     <View style={styles.nlRelative}>
                         <TextInput style={styles.nlInput}  placeholder="전화번호"></TextInput>
                         <TouchableOpacity style={styles.nlButtonOTP} activeOpacity={0.8}>
-                        <Text style={styles.nlColorWhite}>OTP 발송</Text>
-                    </TouchableOpacity>
+                            <Text style={styles.nlColorWhite}>OTP 발송</Text>
+                        </TouchableOpacity>
                     </View>
-                    <TextInput style={styles.nlInput}  placeholder="OTP"></TextInput>
+                    <View style={styles.nlRelative}>
+                        <TextInput style={styles.nlInput}  placeholder="OTP"></TextInput>
+                        <Text style={styles.nlCountNum}>00:56</Text>
+                    </View>
+                    
                     <TouchableOpacity style={styles.nlButtonLogin} activeOpacity={0.8}  onPress={onPress}>
-                        <Text style={[styles.nlColorWhite, styles.nlFont16]}>Login</Text>
+                        <Text style={[styles.nlColorWhite, styles.nlTextButton]}>로그인</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -30,16 +34,11 @@ export default function Login() {
 const styles = StyleSheet.create({
     nlInput: {
       paddingHorizontal: 15,
-      fontSize: 13,
+      fontSize: 15,
       borderStyle: 'solid',
       borderColor: '#f0f0f0',
       borderBottomWidth: 1,
       marginTop: 20
-    },
-    nlLabel: {
-        fontSize: 13,
-        marginTop: 15,
-        marginBottom: 5
     },
     nlWrapper: {
         justifyContent: 'center',
@@ -84,7 +83,9 @@ const styles = StyleSheet.create({
         marginTop: 60,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 6
+        borderRadius: 6,
+        fontSize: 30,
+        fontWeight: 'bold'
     },
     nlButtonOTP: {
         backgroundColor: '#7c257a',
@@ -97,11 +98,23 @@ const styles = StyleSheet.create({
         right: 0,
         bottom: 10
     },
+    nlCountNum : {
+        position: 'absolute',
+        right: 0,
+        bottom: 15,
+        color: '#e40a0a',
+        fontSize: 15,
+
+    },
     nlColorWhite: {
         color: '#fff',
     },
     nlFont16: {
         fontSize: 16,
+    },
+    nlTextButton: {
+        fontSize: 18,
+        fontWeight: 'bold'
     },
     nlLogo: {
         alignItems: 'center',
