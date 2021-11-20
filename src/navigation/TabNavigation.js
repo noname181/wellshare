@@ -32,7 +32,7 @@ function TabNavigation({ route, navigation }) {
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        {focused ? <List_Active height={16} width={16} /> : <List height={16} width={16} />}
+                        {focused ? <List_Active height={19} width={19} /> : <List height={19} width={19} />}
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
                     </View>),
                     header: props => <Header title="명단" isBack={false} {...props} />
@@ -45,7 +45,7 @@ function TabNavigation({ route, navigation }) {
                 options={{
 
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        {focused ? <Notice_Active height={16} width={16} /> : <Notice height={16} width={16} />}
+                        {focused ? <Notice_Active height={20} width={17} /> : <Notice height={20} width={17} />}
 
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>공지사항</Text>
                     </View>),
@@ -58,8 +58,8 @@ function TabNavigation({ route, navigation }) {
                 options={{
 
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        {focused ? <Profile_Active height={16} width={16} /> : <Profile_Icon height={16} width={16} />}
-                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>나의정보</Text>
+                        {focused ? <Profile_Active height={22} width={22} /> : <Profile_Icon height={22} width={22} />}
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2', marginTop: 1 }]}>나의정보</Text>
                     </View>),
                     header: props => <Header title="나의정보" isBack={false} {...props} />
                 }}
