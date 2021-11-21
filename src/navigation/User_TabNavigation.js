@@ -1,21 +1,31 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Home from '../screens/User/Home'
 import Setting from '../screens/User/Setting'
 import Profile from '../screens/User/Profile'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text, InteractionManager, ActivityIndicator } from 'react-native'
 import Header from '../components/Header'
 import List from '../images/svg/List'
 import Notice from '../images/svg/Notice'
 import Profile_Icon from '../images/svg/Profile'
+import Screen from '../components/Screen';
 
 const Tab = createBottomTabNavigator();
 
 function TabNavigation({ route, navigation }) {
+    const [isReady, setIsReady] = useState(false);
 
+    useEffect(() => {
 
+        InteractionManager.runAfterInteractions(() => {
+            setIsReady(true)
+        })
+        return () => {
+
+        };
+    }, []);
     return (
-        <Tab.Navigator
+        isReady ? <Tab.Navigator
             screenOptions={{
                 tabBarShowLabel: false,
                 tabBarStyle: {
@@ -60,7 +70,9 @@ function TabNavigation({ route, navigation }) {
                     header: props => <Header title="나의정보" isBack={false} {...props} />
                 }}
             />
-        </Tab.Navigator>
+        </Tab.Navigator> : <><Header isBack={true} title="명단"></Header><Screen>
+
+        </Screen></>
     )
 }
 
