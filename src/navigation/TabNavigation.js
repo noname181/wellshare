@@ -3,13 +3,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Home from '../screens/Home'
 import Setting from '../screens/Setting'
 import Profile from '../screens/Profile'
-import { Image, View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
 import Header from '../components/Header'
-import List_Active from '../images/svg/List_Active'
 import List from '../images/svg/List'
 import Notice from '../images/svg/Notice'
-import Notice_Active from '../images/svg/Notice_Active'
-import Profile_Active from '../images/svg/Profile_Active'
 import Profile_Icon from '../images/svg/Profile'
 
 const Tab = createBottomTabNavigator();
@@ -32,7 +29,7 @@ function TabNavigation({ route, navigation }) {
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        {focused ? <List_Active height={19} width={19} /> : <List height={19} width={19} />}
+                        <List height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
                     </View>),
                     header: props => <Header title="명단" isBack={false} {...props} />
@@ -45,8 +42,7 @@ function TabNavigation({ route, navigation }) {
                 options={{
 
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        {focused ? <Notice_Active height={20} width={17} /> : <Notice height={20} width={17} />}
-
+                        <Notice height={19} width={17} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>공지사항</Text>
                     </View>),
                     header: props => <Header title="공지사항" isBack={false} {...props} />
@@ -58,8 +54,8 @@ function TabNavigation({ route, navigation }) {
                 options={{
 
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        {focused ? <Profile_Active height={22} width={22} /> : <Profile_Icon height={22} width={22} />}
-                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2', marginTop: 1 }]}>나의정보</Text>
+                        <Profile_Icon height={19} width={22} color={focused ? '#7c257a' : '#b2b2b2'} />
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>나의정보</Text>
                     </View>),
                     header: props => <Header title="나의정보" isBack={false} {...props} />
                 }}

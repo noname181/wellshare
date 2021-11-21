@@ -36,6 +36,10 @@ const styles = StyleSheet.create({
         borderBottomColor: '#e9e9e9',
         flexDirection: 'row',
         shadowColor: '#000',
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity: 0.4,
+        shadowRadius: 3,
+        elevation: 5,
 
     },
     title: {
