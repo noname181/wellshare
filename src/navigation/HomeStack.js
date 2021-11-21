@@ -1,5 +1,5 @@
 import React from 'react'
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import Store from '../screens/Store';
 import Detail from '../screens/Detail';
 import Main from '../screens/Main';
@@ -12,7 +12,11 @@ const Stack = createStackNavigator();
 
 function HomeStack() {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator
+            screenOptions={{
+                ...TransitionPresets.SlideFromRightIOS
+            }}
+        >
             <Stack.Screen
                 name="Main"
                 component={Main}

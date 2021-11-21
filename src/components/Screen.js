@@ -6,7 +6,7 @@ function Screen({ children, style }) {
     return (
 
         <View style={[styles.screen, style]}>
-            <StatusBar translucent barStyle={'light-content'} backgroundColor={'transparent'}></StatusBar>
+            <StatusBar translucent barStyle={'light-content'} backgroundColor={'#7c257a'}></StatusBar>
             {children}
         </View>
 
