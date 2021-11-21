@@ -8,26 +8,28 @@ function Header({ isBack, styleIcon, title }) {
     const navigation = useNavigation();
 
     return (
-        <View style={styles.container}>
-            {
-                isBack ?
-                    <TouchableOpacity style={[styles.direct, styleIcon]} onPress={() => navigation.goBack()}>
+        <>
+            <View style={{ height: getStatusBarHeight(), backgroundColor: '#7c257a' }}></View>
+            <View style={styles.container}>
+                {
+                    isBack ?
+                        <TouchableOpacity style={[styles.direct, styleIcon]} onPress={() => navigation.goBack()}>
 
-                        <Icon name='chevron-back' color={'#000'} size={24} />
+                            <Icon name='chevron-back' color={'#000'} size={24} />
 
 
-                    </TouchableOpacity>
-                    :
-                    null
-            }
-            <Text style={styles.title}>{title}</Text>
-        </View>
+                        </TouchableOpacity>
+                        :
+                        null
+                }
+                <Text style={styles.title}>{title}</Text>
+            </View>
+        </>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: getStatusBarHeight(),
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',

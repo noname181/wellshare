@@ -32,7 +32,7 @@ function TabNavigation({ route, navigation }) {
                         <List height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
                     </View>),
-                    header: props => <Header title="명단" isBack={false} {...props} />
+
                 }}
 
             />
