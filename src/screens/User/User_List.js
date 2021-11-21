@@ -6,8 +6,8 @@ import {
     Image,
     TouchableOpacity,
 } from 'react-native';
-import { Screen } from '../components';
-import Calendar from '../images/svg/CalendarIcon';
+import Screen from '../../components/Screen';
+import Calendar from '../../images/svg/CalendarIcon';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 function User_List() {

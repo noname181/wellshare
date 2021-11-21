@@ -2,7 +2,7 @@ import React from 'react'
 import {
     Text,
 } from 'react-native';
-import { Screen } from '../components';
+import Screen from '../../components/Screen';
 
 function Profile() {
     return (

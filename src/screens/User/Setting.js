@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet, View, Text, Pressable, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Screen } from '../components';
+import Screen from '../../components/Screen';
 
 const DATA = [
     {
@@ -85,7 +85,6 @@ function Setting() {
                 keyExtractor={item => item.id}
                 style={styles.nlList}
                 extraData={selectedId}
-                inverted
                 showsVerticalScrollIndicator={false}
             />
         </Screen>

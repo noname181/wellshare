@@ -8,15 +8,15 @@
 
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import TabNavigation from './src/navigation/TabNavigation';
-import Login from './src/screens/Login';
+import App_StackNavigation from './src/navigation/App_StackNavigation';
+
 
 const App = () => {
 
   return (
     <NavigationContainer>
-       <TabNavigation></TabNavigation>
-     </NavigationContainer>
+      <App_StackNavigation></App_StackNavigation>
+    </NavigationContainer>
   );
 };
 

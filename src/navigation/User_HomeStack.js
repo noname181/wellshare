@@ -1,12 +1,12 @@
 import React from 'react'
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
-import Store from '../screens/Store';
-import Detail from '../screens/Detail';
-import Main from '../screens/Main';
+import Store from '../screens/User/Store';
+import Detail from '../screens/User/Detail';
+import Main from '../screens/User/Main';
 import Header from '../components/Header';
 import Hospital_42_1 from '../screens/Hospital_42_1';
-import User_My_Profile from '../screens/User_My_Profile';
-import User_List from '../screens/User_List';
+import User_My_Profile from '../screens/User/User_My_Profile';
+import User_List from '../screens/User/User_List';
 
 const Stack = createStackNavigator();
 
@@ -20,7 +20,7 @@ function HomeStack() {
             <Stack.Screen
                 name="Main"
                 component={Main}
-                options={{ header: props => <Header title="명단" isBack={false} {...props} /> }}
+                options={{ header: props => <Header title="명단" isBack={true} {...props} /> }}
             />
             <Stack.Screen
                 name="Store"

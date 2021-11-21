@@ -5,11 +5,11 @@ import {
     StyleSheet,
     Image,
 } from 'react-native';
-import { Screen } from '../components';
-import Avatar from '../images/user/avatarPNG.png';
-import Name from '../images/svg/ProfileName';
-import Phone from '../images/svg/ProfilePhone';
-import Logout from '../images/svg/ProfileLogout';
+import Screen from '../../components/Screen';
+import Avatar from '../../images/user/avatarPNG.png';
+import Name from '../../images/svg/ProfileName';
+import Phone from '../../images/svg/ProfilePhone';
+import Logout from '../../images/svg/ProfileLogout';
 
 
 function User_My_Profile() {

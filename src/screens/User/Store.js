@@ -2,16 +2,16 @@ import React from 'react'
 import {
     Text,
 } from 'react-native';
-import { Screen } from '../components';
+import Screen from '../../components/Screen';
 
 
-function Detail() {
+function Store() {
     return (
         <Screen>
-            <Text>Detail!</Text>
+            <Text>Store!</Text>
         </Screen>
     );
 }
 
 
-export default Detail
+export default Store
