@@ -54,7 +54,7 @@ function TabNavigation({ route, navigation }) {
                 options={{
 
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        <Profile_Icon height={19} width={22} color={focused ? '#7c257a' : '#b2b2b2'} />
+                        <Profile_Icon height={19} width={25} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>나의정보</Text>
                     </View>),
                     header: props => <Header title="나의정보" isBack={false} {...props} />
