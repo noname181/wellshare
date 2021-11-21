@@ -52,7 +52,7 @@ function TabNavigation({ route, navigation }) {
                 options={{
 
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        <Notice height={19} width={17} color={focused ? '#7c257a' : '#b2b2b2'} />
+                        <Notice height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>공지사항</Text>
                     </View>),
                     header: props => <Header title="공지사항" isBack={false} {...props} />
