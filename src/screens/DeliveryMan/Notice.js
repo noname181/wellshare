@@ -7,7 +7,12 @@ const DATA = [
         id: '1',
         regdate: '2021.10.13',
         title: '공지사항 1입니다.',
-        content: '- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위'
+        content: 
+`- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위
+- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위
+- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위
+- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위
+        `
     },
     {
         id: '2',
@@ -131,7 +136,7 @@ const styles = StyleSheet.create({
         borderTopColor: '#e1e1e1',
         borderStyle: 'solid',
         borderTopWidth: 1,
-
+        whiteSpace: 'pre-wrap'
     },
     nlHead: {
         position: 'relative',

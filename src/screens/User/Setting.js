@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
         borderTopColor: '#e1e1e1',
         borderStyle: 'solid',
         borderTopWidth: 1,
+        whiteSpace: 'pre-wrap',
 
     },
     nlHead: {
