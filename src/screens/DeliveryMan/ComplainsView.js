@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
-
+//import RNPickerSelect from 'react-native-picker-select';
 import Screen from '../../components/Screen';
 import DeleteImage from '../../images/deliveryman/delete.png';
 import DownloadImage from '../../images/deliveryman/download.png';
@@ -23,7 +23,7 @@ function ComplainsView({ navigation }) {
                 </View>
                 <View style={[styles.nlAnswer, styles.nlCardSpace, styles.nlRow]}>
                     <View>
-                        <Text style={[styles.nlIcon,]}>A</Text>
+                        <Text style={styles.nlIcon}>A</Text>
                     </View>
                     <View style={{width: '100%'}}>
                         <View style={[styles.nlRow, styles.nlBetween]}>
@@ -82,15 +82,23 @@ function ComplainsView({ navigation }) {
                     </View>
                 </View>
             </View>
-            <View style={styles.nlCard}>
-                
-                <TextInput style={styles.nlTextInput}
-                multiline={true}
-                numberOfLines={10}
-                />
-                <TouchableOpacity style={styles.nlButtonWhite}>
-                    <Text style={styles.nlFont16}>
-                        write
+            <View style={[styles.nlCard, {backgroundColor: '#fff', padding: 20}]}>
+                {/* <RNPickerSelect
+                    // onValueChange={(value) => console.log(value)}
+                    items={[
+                        { label: 'Football', value: 'football' },
+                        { label: 'Baseball', value: 'baseball' },
+                        { label: 'Hockey', value: 'hockey' },
+                    ]}
+                /> */}
+                <TextInput multiline={true}
+                        numberOfLines={8} 
+                         style={styles.nlTextInput}>
+
+                </TextInput>
+                <TouchableOpacity >
+                    <Text style={[styles.nlFont16, styles.nlBold, styles.nlButtonWhite]} >
+                        Write
                     </Text> 
                 </TouchableOpacity>
             </View>
@@ -179,13 +187,15 @@ const styles = StyleSheet.create({
         marginTop: 10,
         paddingHorizontal: 20,
         paddingVertical: 10,
-        orderStyle: 'solid',
+        borderStyle: 'solid',
         borderWidth: 1,
         borderColor: '#e1e1e1',
         borderRadius: 5,
+        width: 140,
+        textAlign: 'center'
     },
     nlFont16: {
-        fontSize: '16',
+        fontSize: 16,
     },
     nlBold: {
         fontWeight: 'bold',
@@ -196,9 +206,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#e1e1e1',
         borderRadius: 5,
-    },
-    nlMax: {
-        width: ''
     }
 
 });
