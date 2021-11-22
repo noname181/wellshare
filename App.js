@@ -9,6 +9,8 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import App_StackNavigation from './src/navigation/App_StackNavigation';
+import { Provider } from 'react-redux';
+import store from './src/redux/store';
 import { enableScreens, enableFreeze } from 'react-native-screens';
 enableFreeze(true);
 enableScreens(true);
@@ -16,9 +18,11 @@ enableScreens(true);
 const App = () => {
 
   return (
-    <NavigationContainer>
-      <App_StackNavigation></App_StackNavigation>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <App_StackNavigation></App_StackNavigation>
+      </NavigationContainer>
+    </Provider>
   );
 };
 

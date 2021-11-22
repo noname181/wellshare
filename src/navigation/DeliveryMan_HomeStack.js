@@ -1,11 +1,7 @@
 import React from 'react'
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import Header from '../components/Header';
-import Main from '../screens/Hospital/Main';
-import Hospital_42_1 from '../screens/Hospital/Hospital_42_1';
-import Notice from '../screens/Hospital/Notice';
-
-
+import Main from '../screens/DeliveryMan/Notice';
 const Stack = createStackNavigator();
 
 function HomeStack() {
@@ -21,11 +17,6 @@ function HomeStack() {
                 options={{ header: props => <Header title="명단" isBack={true} {...props} /> }}
             />
             <Stack.Screen
-                name="Hospital_42_1"
-                component={Hospital_42_1}
-                options={{ header: props => <Header title="민원" isBack={true} {...props} /> }}
-            />
-            <Stack.Screen
                 name="Notice"
                 component={Notice}
                 options={{ header: props => <Header title="Notice" isBack={false} {...props} /> }}
@@ -33,5 +24,6 @@ function HomeStack() {
         </Stack.Navigator>
     );
 }
+
 
 export default HomeStack

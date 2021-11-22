@@ -7,8 +7,8 @@ import Notice from '../images/svg/Notice'
 import Profile_Icon from '../images/svg/Profile'
 import Screen from '../components/Screen';
 import Home from '../screens/Hospital/Home';
-import Main from '../screens/Hospital/Main'
-import NoticeScreen from '../screens/Hospital/Notice'
+import Main from '../screens/Hospital/Main';
+import NoticeScreen from '../screens/Hospital/Notice';
 
 
 
@@ -70,17 +70,16 @@ function TabNavigation({ route, navigation }) {
                 name="NoticeScreen"
                 component={NoticeScreen}
                 options={{
-                    headerShown: false,
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
                         <Profile_Icon height={19} width={25} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
                     </View>),
-
+                    header: props => <Header title="공지사항" isBack={false} {...props} />
                 }}
 
             />
             <Tab.Screen
-                name="Main3"
+                name="Main4"
                 component={Main}
                 options={{
                     headerShown: false,
