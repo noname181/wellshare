@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     },
     row__info: {
         display: 'flex',
-        paddingTop: 10,
+        paddingBottom: 13,
         width: '100%'
     },
 
@@ -96,7 +96,8 @@ const styles = StyleSheet.create({
     },
     row__info__child__text1: {
         fontWeight: 'bold',
-        color: 'black'
+        color: 'black',
+        fontSize: 15,
 
     },
     row__info__child__text2: {
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     row__info__child__text3: {
-        fontSize: 14,
+        fontSize: 15,
     },
     button_search: {
         width: '100%',
@@ -122,6 +123,7 @@ const styles = StyleSheet.create({
     row__search: {
         flexWrap: 'wrap',
         paddingTop: 14,
+        paddingBottom: 14,
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
@@ -142,8 +144,8 @@ const styles = StyleSheet.create({
         paddingLeft: 14,
         paddingRight: 14,
         backgroundColor: '#fff',
-        paddingTop:16,
-        paddingBottom: 16,
+        paddingTop:21,
+        paddingBottom: 21,
         borderWidth: 1,
         borderColor: '#e1e1e1',
         borderRadius: 6,
@@ -198,6 +200,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 1, height: 3 },
         shadowOpacity: 0.1,
         elevation: 4,
+        fontSize: 14,
 
 
     }
