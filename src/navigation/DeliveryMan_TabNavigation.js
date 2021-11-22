@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { View, StyleSheet, Text, InteractionManager } from 'react-native'
+import Header from '../components/Header'
+import Screen from '../components/Screen'
 import Main from '../screens/DeliveryMan/Main'
-import { View, StyleSheet, Text } from 'react-native'
+import NoticeScreen from '../screens/DeliveryMan/Notice'
 import List from '../images/svg/List'
 import Notice from '../images/svg/Notice'
 import Profile_Icon from '../images/svg/Profile'
@@ -13,9 +16,18 @@ const Tab = createBottomTabNavigator();
 
 function TabNavigation({ route, navigation }) {
 
+    const [isReady, setIsReady] = useState(false);
 
+    useEffect(() =>{
+        InteractionManager.runAfterInteractions(() =>{
+            setIsReady(true)
+        })
+        return () =>{
+
+        };
+    }, []);
     return (
-        <Tab.Navigator
+        isReady ?  <Tab.Navigator
             screenOptions={{
                 tabBarShowLabel: false,
                 tabBarStyle: {
@@ -50,7 +62,19 @@ function TabNavigation({ route, navigation }) {
 
             />
             <Tab.Screen
-                name="Main3"
+                name="NoticeScreen"
+                component={NoticeScreen}
+                options={{
+                    tabBarIcon: ({ focused }) => (<View style={styles.tab}>
+                        <Notice height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
+                    </View>),
+                    header: props => <Header title="공지사항" isBack={false} {...props} />
+                }}
+
+            />
+            <Tab.Screen
+                name="Main4"
                 component={Main}
                 options={{
                     headerShown: false,
@@ -62,7 +86,9 @@ function TabNavigation({ route, navigation }) {
                 }}
 
             />
-        </Tab.Navigator>
+        </Tab.Navigator> : <><Header isBack={true} title="명단"></Header><Screen>
+
+        </Screen></>
     )
 }
 
