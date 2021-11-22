@@ -2,8 +2,9 @@ import React from 'react'
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import Header from '../components/Header';
 import Main from '../screens/Hospital/Main';
-import Hospital_42_1 from '../screens/Hospital/Hospital_42_1';
+import Complains1 from '../screens/Hospital/Complains1';
 import Notice from '../screens/Hospital/Notice';
+import Complains2 from '../screens/Hospital/Complains2';
 
 
 const Stack = createStackNavigator();
@@ -21,8 +22,13 @@ function HomeStack() {
                 options={{ header: props => <Header title="명단" isBack={true} {...props} /> }}
             />
             <Stack.Screen
-                name="Hospital_42_1"
-                component={Hospital_42_1}
+                name="Complains1"
+                component={Complains1}
+                options={{ header: props => <Header title="민원" isBack={true} {...props} /> }}
+            />
+            <Stack.Screen
+                name="Complains2"
+                component={Complains2}
                 options={{ header: props => <Header title="민원" isBack={true} {...props} /> }}
             />
             <Stack.Screen

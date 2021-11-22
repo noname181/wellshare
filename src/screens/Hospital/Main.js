@@ -7,10 +7,17 @@ function Main({ navigation }) {
         <Screen showHeader={false}>
             <TouchableOpacity
 
-            onPress={() => navigation.navigate('Hospital_42_1')}
+            onPress={() => navigation.navigate('Complains1')}
             style={styles.button}
             >
-            <Text style={styles.text}>Go to Hospital_42_1</Text>
+            <Text style={styles.text}>Go to Complains1</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+
+            onPress={() => navigation.navigate('Complains2')}
+            style={styles.button}
+            >
+            <Text style={styles.text}>Go to Complains2</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.goBack()}>
 

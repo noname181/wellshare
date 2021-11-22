@@ -9,6 +9,7 @@ import Screen from '../components/Screen';
 import Home from '../screens/Hospital/Home';
 import Main from '../screens/Hospital/Main';
 import NoticeScreen from '../screens/Hospital/Notice';
+import Complain1Screen from '../screens/Hospital/Complains1'
 
 
 
@@ -54,14 +55,14 @@ function TabNavigation({ route, navigation }) {
 
             />
             <Tab.Screen
-                name="Main2"
-                component={Main}
+                name="Complain1Screen"
+                component={Complain1Screen}
                 options={{
-                    headerShown: false,
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
                         <Notice height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
-                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>민원</Text>
                     </View>),
+                    header: props => <Header title="민원" isBack={false} {...props} />
 
                 }}
 
