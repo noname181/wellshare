@@ -11,11 +11,9 @@ const store = createStore(
     rootReducer,
     applyMiddleware(
         thunk,
-        // createLogger(),
+        createLogger(),
     ),
 );
 
 // Exports
-export {
-    store,
-}
+export default store

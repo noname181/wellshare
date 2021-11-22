@@ -10,7 +10,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import App_StackNavigation from './src/navigation/App_StackNavigation';
 import { Provider } from 'react-redux';
-import { store } from './src/redux/store';
+import store from './src/redux/store';
 import { enableScreens, enableFreeze } from 'react-native-screens';
 enableFreeze(true);
 enableScreens(true);
