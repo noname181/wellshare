@@ -1,22 +1,38 @@
-import React from 'react'
+import React , { useState, useEffect } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import Main from '../screens/Hospital/Main'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text, InteractionManager } from 'react-native'
 import Header from '../components/Header'
 import List from '../images/svg/List'
 import Notice from '../images/svg/Notice'
 import Profile_Icon from '../images/svg/Profile'
+import Screen from '../components/Screen';
+import Home from '../screens/Hospital/Home';
+import Main from '../screens/Hospital/Main'
+
+
+
+
 
 
 
 
 const Tab = createBottomTabNavigator();
 
-function TabNavigation({ route, navigation }) {
 
+function TabNavigation({ route, navigation }) {
+    const [isReady, setIsReady] = useState(false);
+
+    useEffect(() =>{
+        InteractionManager.runAfterInteractions(() =>{
+            setIsReady(true)
+        })
+        return () =>{
+
+        };
+    }, []);
 
     return (
-        <Tab.Navigator
+        isReady ? <Tab.Navigator
             screenOptions={{
                 tabBarShowLabel: false,
                 tabBarStyle: {
@@ -25,8 +41,8 @@ function TabNavigation({ route, navigation }) {
             }}
         >
             <Tab.Screen
-                name="Main"
-                component={Main}
+                name="Home"
+                component={Home}
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
@@ -64,7 +80,9 @@ function TabNavigation({ route, navigation }) {
 
             />
 
-        </Tab.Navigator>
+        </Tab.Navigator> : <><Header isBack={true} title="명단"></Header><Screen>
+
+        </Screen></>
     )
 }
 

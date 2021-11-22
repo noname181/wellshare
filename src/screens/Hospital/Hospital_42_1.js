@@ -8,9 +8,11 @@ import {
     Button,
 
 } from 'react-native';
-import { Screen } from '../components';
-import CalendarIcon from '../images/svg/CalendarIcon'
-import SearchIcon from '../images/svg/SearchIcon'
+// import { Screen } from '../../components';
+import CalendarIcon from '../../images/svg/CalendarIcon';
+import SearchIcon from '../../images/svg/SearchIcon';
+import Screen from '../../components/Screen';
+
 
 function Hospital_42_1() {
 

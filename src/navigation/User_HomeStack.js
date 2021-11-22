@@ -4,7 +4,6 @@ import Store from '../screens/User/Store';
 import Detail from '../screens/User/Detail';
 import Main from '../screens/User/Main';
 import Header from '../components/Header';
-import Hospital_42_1 from '../screens/Hospital_42_1';
 import User_My_Profile from '../screens/User/User_My_Profile';
 import User_List from '../screens/User/User_List';
 
@@ -31,11 +30,6 @@ function HomeStack() {
                 name="Detail"
                 component={Detail}
                 options={{ header: props => <Header title="Detail" isBack={true} {...props} /> }}
-            />
-            <Stack.Screen
-                name="Hospital_42_1"
-                component={Hospital_42_1}
-                options={{ header: props => <Header title="Hospital_42_1" isBack={true} {...props} /> }}
             />
             <Stack.Screen
                 name="User_My_Profile"

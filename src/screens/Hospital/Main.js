@@ -5,7 +5,13 @@ import Screen from '../../components/Screen';
 function Main({ navigation }) {
     return (
         <Screen showHeader={false}>
-            <Text>Hospital</Text>
+            <TouchableOpacity
+
+            onPress={() => navigation.navigate('Hospital_42_1')}
+            style={styles.button}
+            >
+            <Text style={styles.text}>Go to Hospital_42_1</Text>
+            </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.goBack()}>
 
                 <Text>Go back</Text>
@@ -16,7 +22,15 @@ function Main({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    container: {}
-});
+    button: {
+        backgroundColor: '#7c257a',
+        marginBottom: 10,
+        padding: 10,
+        borderRadius: 10
+    },
+    text: {
+        color: "#fff"
+    }
+})
 
 export default Main;
