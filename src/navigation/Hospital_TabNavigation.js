@@ -9,7 +9,12 @@ import Screen from '../components/Screen';
 import Home from '../screens/Hospital/Home';
 import Main from '../screens/Hospital/Main';
 import NoticeScreen from '../screens/Hospital/Notice';
-import Complain1Screen from '../screens/Hospital/Complains1'
+import Complain1Screen from '../screens/Hospital/Complains1';
+import Hospital_list from '../images/svg/Hospital_list';
+import Hospital_complain from '../images/svg/Hospital_complain';
+import Hospital_notice from '../images/svg/Hospital_notice';
+import Hospital_profile from '../images/svg/Hospital_profile';
+
 
 
 
@@ -47,7 +52,7 @@ function TabNavigation({ route, navigation }) {
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        <List height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
+                        <Hospital_list height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
                     </View>),
 
@@ -59,7 +64,7 @@ function TabNavigation({ route, navigation }) {
                 component={Complain1Screen}
                 options={{
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        <Notice height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
+                        <Hospital_complain height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>민원</Text>
                     </View>),
                     header: props => <Header title="민원" isBack={false} {...props} />
@@ -72,8 +77,8 @@ function TabNavigation({ route, navigation }) {
                 component={NoticeScreen}
                 options={{
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        <Profile_Icon height={19} width={25} color={focused ? '#7c257a' : '#b2b2b2'} />
-                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
+                        <Hospital_notice height={19} width={25} color={focused ? '#7c257a' : '#b2b2b2'} />
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>공지사항</Text>
                     </View>),
                     header: props => <Header title="공지사항" isBack={false} {...props} />
                 }}
@@ -85,8 +90,8 @@ function TabNavigation({ route, navigation }) {
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        <Profile_Icon height={19} width={25} color={focused ? '#7c257a' : '#b2b2b2'} />
-                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
+                        <Hospital_profile height={19} width={25} color={focused ? '#7c257a' : '#b2b2b2'} />
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>나의정보</Text>
                     </View>),
 
                 }}
