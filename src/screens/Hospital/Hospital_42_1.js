@@ -6,35 +6,49 @@ import {
     Image,
     TextInput,
     Button,
+    TouchableOpacity
 
 } from 'react-native';
 // import { Screen } from '../../components';
 import CalendarIcon from '../../images/svg/CalendarIcon';
 import SearchIcon from '../../images/svg/SearchIcon';
 import Screen from '../../components/Screen';
+import Icon from 'react-native-vector-icons/Ionicons';
+
 
 
 function Hospital_42_1() {
 
     return (
-        <Screen>
-
-
-            <View style={styles.body_42_1}>
+        <Screen style={styles.body_42_1}>
+            <View>
                 <View style={styles.box_calendar}>
                     <CalendarIcon width={16} height={16} />
                     <Text style={styles.text_calendar}>2021-05-01</Text>
+                    <Icon style={styles.icon_select} name={'chevron-down-outline'} color={'#9b9b9b'} size={20} />
                 </View>
                 <View style={styles.row__search}>
                     <View style={styles.width40}>
-                        <TextInput style={styles.text_input} />
+                        <TextInput value='010-2009-7712' style={styles.text_input} />
                     </View>
                     <View style={styles.width40}>
-                        <TextInput style={styles.text_input} placeholder="조형래" />
+                        <TextInput style={styles.text_input} value='조형래' />
                     </View>
                     <View style={styles.width20}>
-                        <View style={styles.button_search}>
-                            <SearchIcon width={20} height={20} />
+                        <TouchableOpacity activeOpacity={0.8} style={styles.button_search}>
+                            <SearchIcon width={23} height={23} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <View style={styles.row__info}>
+                    <View style={styles.row__info__child}>
+                        <View style={styles.row__info__child__text}>
+                            <Text style={styles.row__info__child__text1}>조형래</Text>
+                            <Text style={styles.row__info__child__text2}>|</Text>
+                            <Text style={styles.row__info__child__text3}>010-2009-7723</Text>
+                        </View>
+                        <View style={styles.h_circle_blue}>
+                            <Text style={styles.h_circle_number}>2</Text>
                         </View>
                     </View>
                 </View>
@@ -45,8 +59,8 @@ function Hospital_42_1() {
                             <Text style={styles.row__info__child__text2}>|</Text>
                             <Text style={styles.row__info__child__text3}>010-2009-7723</Text>
                         </View>
-                        <View>
-
+                        <View style={styles.h_circle_blue}>
+                            <Text style={styles.h_circle_number}>4</Text>
                         </View>
                     </View>
                 </View>
@@ -56,29 +70,26 @@ function Hospital_42_1() {
 }
 
 const styles = StyleSheet.create({
+    h_circle_number:{
+        color: '#fff',
+        fontWeight:'bold',
+    },
+    h_circle_blue:{
+        width:25,
+        height:25,
+        backgroundColor:'#465CDB',
+        alignItems:'center',
+        justifyContent:'center',
+        borderRadius:25/2,
+    },
     row__info: {
         display: 'flex',
         paddingTop: 10,
         width: '100%'
     },
-    row__info__child: {
-        backgroundColor: '#fff',
-        width: '100%',
-        height: 55,
-        borderWidth: 1,
-        borderColor: 0,
-        borderRadius: 6,
-        display: 'flex',
-        justifyContent: 'center',
-        shadowColor: '#e8e9ea',
-        shadowOffset: { width: 1, height: 1 },
-        shadowOpacity: 0.4,
-        shadowRadius: 3,
-        elevation: 1,
-    },
+
     row__info__child__text: {
 
-        paddingLeft: 10,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center'
@@ -99,9 +110,9 @@ const styles = StyleSheet.create({
     },
     button_search: {
         width: '100%',
-        height: 40,
+        height: 46,
         backgroundColor: '#7c257a',
-        borderRadius: 6,
+        borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -109,10 +120,10 @@ const styles = StyleSheet.create({
         paddingTop: 10,
     },
     row__search: {
-        display: 'flex',
         flexWrap: 'wrap',
-        paddingTop: 10,
+        paddingTop: 14,
         flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     width40: {
         width: '39%',
@@ -125,27 +136,49 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     body_42_1: {
-        backgroundColor: 'F6F7F8',
+        backgroundColor: '#f6f7f8',
+    },
+    row__info__child: {
+        paddingLeft: 14,
+        paddingRight: 14,
+        backgroundColor: '#fff',
+        paddingTop:16,
+        paddingBottom: 16,
+        borderWidth: 1,
+        borderColor: '#e1e1e1',
+        borderRadius: 6,
+        alignItems: 'center',
+        flexDirection:'row',
+        justifyContent:'space-between',
+        shadowColor: '#222',
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.1,
+        shadowRadius: 10,
+        elevation: 3,
     },
     box_calendar: {
         backgroundColor: '#fff',
-        width: '100%',
-        height: 40,
-        borderWidth: 1,
-        borderColor: 0,
+        height: 46,
+        borderWidth: 0,
+        borderColor: '#e1e1e1',
         borderRadius: 6,
         alignItems: 'center',
         flexDirection: 'row',
-        shadowColor: '#e8e9ea',
-        shadowOffset: { width: 1, height: 1 },
-        shadowOpacity: 0.4,
-        shadowRadius: 3,
-        elevation: 1,
+        shadowColor: '#222',
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.1,
+        shadowRadius: 10,
+        elevation: 4,
         position: 'relative',
-        paddingHorizontal: 10
+        paddingHorizontal: 15
     },
     text_calendar: {
         paddingLeft: 10,
+        fontSize: 15
+    },
+    icon_select: {
+        position: 'absolute',
+        right: 17,
     },
     Calendar_icon1: {
         width: 20,
@@ -155,18 +188,17 @@ const styles = StyleSheet.create({
     text_input: {
         backgroundColor: '#fff',
         paddingLeft: 14,
-        width: '100%',
-        height: 40,
-        borderWidth: 1,
-        borderColor: 0,
+        height: 46,
+        borderWidth: 0,
+        borderColor: '#e1e1e1',
         borderRadius: 6,
-        display: 'flex',
         justifyContent: 'center',
-        shadowColor: '#e8e9ea',
-        shadowOffset: { width: 1, height: 1 },
-        shadowOpacity: 0.4,
-        shadowRadius: 3,
-        elevation: 1,
+        flexDirection: 'row',
+        shadowColor: '#000',
+        shadowOffset: { width: 1, height: 3 },
+        shadowOpacity: 0.1,
+        elevation: 4,
+
 
     }
 

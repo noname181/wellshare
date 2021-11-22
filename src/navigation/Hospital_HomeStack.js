@@ -23,7 +23,7 @@ function HomeStack() {
             <Stack.Screen
                 name="Hospital_42_1"
                 component={Hospital_42_1}
-                options={{ header: props => <Header title="Hospital_42_1" isBack={true} {...props} /> }}
+                options={{ header: props => <Header title="민원" isBack={true} {...props} /> }}
             />
         </Stack.Navigator>
     );

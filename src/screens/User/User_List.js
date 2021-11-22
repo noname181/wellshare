@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     },
     h_button_active: {
         backgroundColor: '#7c257a',
-        height: 48,
+        height: 46,
         width: 123,
         alignItems: 'center',
         justifyContent: 'center',
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
     },
     box_calendar: {
         backgroundColor: '#fff',
-        height: 49,
+        height: 46,
         borderWidth: 0,
         borderColor: '#e1e1e1',
         borderRadius: 6,
