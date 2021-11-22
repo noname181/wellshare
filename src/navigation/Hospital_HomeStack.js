@@ -3,7 +3,7 @@ import { createStackNavigator, TransitionPresets } from '@react-navigation/stack
 import Header from '../components/Header';
 import Main from '../screens/Hospital/Main';
 import Hospital_42_1 from '../screens/Hospital/Hospital_42_1';
-
+import Notice from '../screens/Hospital/Notice'
 
 
 const Stack = createStackNavigator();
@@ -24,6 +24,11 @@ function HomeStack() {
                 name="Hospital_42_1"
                 component={Hospital_42_1}
                 options={{ header: props => <Header title="Hospital_42_1" isBack={true} {...props} /> }}
+            />
+            <Stack.Screen
+                name="Notice"
+                component={Notice}
+                options={{ header: props => <Header title="Notice" isBack={true} {...props} /> }}
             />
         </Stack.Navigator>
     );

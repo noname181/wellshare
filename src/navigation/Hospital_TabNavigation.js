@@ -8,7 +8,7 @@ import Profile_Icon from '../images/svg/Profile'
 import Screen from '../components/Screen';
 import Home from '../screens/Hospital/Home';
 import Main from '../screens/Hospital/Main'
-
+import NoticeScreen from '../screens/Hospital/Notice'
 
 
 
@@ -60,6 +60,19 @@ function TabNavigation({ route, navigation }) {
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
                         <Notice height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
+                    </View>),
+
+                }}
+
+            />
+            <Tab.Screen
+                name="NoticeScreen"
+                component={NoticeScreen}
+                options={{
+                    headerShown: false,
+                    tabBarIcon: ({ focused }) => (<View style={styles.tab}>
+                        <Profile_Icon height={19} width={25} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
                     </View>),
 
