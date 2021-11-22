@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { View, StyleSheet, Text, InteractionManager } from 'react-native'
-import Header from '../components/Header'
-import Screen from '../components/Screen'
-import Main from '../screens/DeliveryMan/Main'
-import NoticeScreen from '../screens/DeliveryMan/Notice'
-import List from '../images/svg/List'
-import Notice from '../images/svg/Notice'
-import Profile_Icon from '../images/svg/Profile'
+import React, { useState, useEffect } from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { View, StyleSheet, Text, InteractionManager } from 'react-native';
+import Header from '../components/Header';
+import Screen from '../components/Screen';
 
-
+import Main from '../screens/DeliveryMan/Main';
+import NoticeScreen from '../screens/DeliveryMan/Notice';
+import ComplainsScreen from '../screens/DeliveryMan/Complains';
+import ComplainsViewScreen  from '../screens/DeliveryMan/ComplainsView';
+import List from '../images/svg/List';
+import Notice from '../images/svg/Notice';
+import Profile_Icon from '../images/svg/Profile';
 
 
 const Tab = createBottomTabNavigator();
@@ -49,13 +50,13 @@ function TabNavigation({ route, navigation }) {
 
             />
             <Tab.Screen
-                name="Main2"
-                component={Main}
+                name="ComplainsViewScreen"
+                component={ComplainsViewScreen}
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
                         <Notice height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
-                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>ComplainsView</Text>
                     </View>),
 
                 }}

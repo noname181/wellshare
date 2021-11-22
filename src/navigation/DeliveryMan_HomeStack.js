@@ -2,6 +2,7 @@ import React from 'react'
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import Header from '../components/Header';
 import Main from '../screens/DeliveryMan/Notice';
+import ComplainsView  from '../screens/DeliveryMan/ComplainsView';
 const Stack = createStackNavigator();
 
 function HomeStack() {
@@ -20,6 +21,11 @@ function HomeStack() {
                 name="Notice"
                 component={Notice}
                 options={{ header: props => <Header title="Notice" isBack={false} {...props} /> }}
+            />
+            <Stack.Screen
+                name="ComplainsView"
+                component={ComplainsView}
+                options={{ header: props => <Header title="ComplainsView" isBack={false} {...props} /> }}
             />
         </Stack.Navigator>
     );
