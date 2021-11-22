@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { StyleSheet, View, Text, Pressable, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Screen from '../../components/Screen';
-
 const DATA = [
     {
         id: '1',
@@ -64,7 +63,7 @@ const Item = ({ item, onPress, typeDisplay, nameIcon }) => (
     </Pressable>
 );
 
-function Notice() {
+function Notice({ navigation }) {
     const [selectedId, setSelectedId] = useState(null);
     const renderItem = ({ item }) => {
         const itemActive = item.id === selectedId ? 'flex' : 'none';
