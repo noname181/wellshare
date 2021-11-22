@@ -17,7 +17,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 
 
-function Hospital_42_1() {
+function Complains1() {
 
     return (
         <Screen style={styles.body_42_1}>
@@ -207,4 +207,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Hospital_42_1
+export default Complains1

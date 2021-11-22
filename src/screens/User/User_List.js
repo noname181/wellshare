@@ -130,8 +130,8 @@ const styles = StyleSheet.create({
     },
     h_button: {
         backgroundColor: '#fff',
-        height: 48,
-        width: 122,
+        height: 46,
+        width: '32%',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 6,
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     h_button_active: {
         backgroundColor: '#7c257a',
         height: 46,
-        width: 123,
+        width: '32%',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 6,
