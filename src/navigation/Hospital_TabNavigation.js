@@ -1,4 +1,4 @@
-import React , { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { View, StyleSheet, Text, InteractionManager } from 'react-native'
 import Header from '../components/Header'
@@ -28,11 +28,11 @@ const Tab = createBottomTabNavigator();
 function TabNavigation({ route, navigation }) {
     const [isReady, setIsReady] = useState(false);
 
-    useEffect(() =>{
-        InteractionManager.runAfterInteractions(() =>{
+    useEffect(() => {
+        InteractionManager.runAfterInteractions(() => {
             setIsReady(true)
         })
-        return () =>{
+        return () => {
 
         };
     }, []);
@@ -52,8 +52,8 @@ function TabNavigation({ route, navigation }) {
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        <Hospital_list height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
-                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
+                        <Hospital_list height={15} width={18} color={focused ? '#7c257a' : '#d8d8d8'} />
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#d8d8d8' }]}>명단</Text>
                     </View>),
 
                 }}
@@ -64,8 +64,8 @@ function TabNavigation({ route, navigation }) {
                 component={Complain1Screen}
                 options={{
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        <Hospital_complain height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
-                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>민원</Text>
+                        <Hospital_complain height={18} width={17} color={focused ? '#7c257a' : '#d8d8d8'} />
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#d8d8d8' }]}>민원</Text>
                     </View>),
                     header: props => <Header title="민원" isBack={false} {...props} />
 
@@ -77,8 +77,8 @@ function TabNavigation({ route, navigation }) {
                 component={NoticeScreen}
                 options={{
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        <Hospital_notice height={19} width={25} color={focused ? '#7c257a' : '#b2b2b2'} />
-                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>공지사항</Text>
+                        <Hospital_notice height={18} width={18} color={focused ? '#7c257a' : '#d8d8d8'} />
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#d8d8d8' }]}>공지사항</Text>
                     </View>),
                     header: props => <Header title="공지사항" isBack={false} {...props} />
                 }}
@@ -90,8 +90,8 @@ function TabNavigation({ route, navigation }) {
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        <Hospital_profile height={19} width={25} color={focused ? '#7c257a' : '#b2b2b2'} />
-                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>나의정보</Text>
+                        <Hospital_profile height={19} width={19} color={focused ? '#7c257a' : '#d8d8d8'} />
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#d8d8d8' }]}>나의정보</Text>
                     </View>),
 
                 }}
