@@ -17,7 +17,7 @@ function Complains({ navigation }) {
                         <View>
                             <Text style={styles.nlColorGrey}>수령인</Text>
                         </View>
-                        <View style={styles.nlTextRight}>
+                        <View >
                             <Text style={styles.nlColorBlack}>조조조</Text>
                         </View>
                     </View>
@@ -26,7 +26,7 @@ function Complains({ navigation }) {
                         <View>
                             <Text style={styles.nlColorGrey}>민원내역</Text>
                         </View>
-                        <View style={styles.nlTextRight}>
+                        <View >
                             <Text style={styles.nlMarkBlue}>5</Text>
                         </View>
                     </View>
@@ -35,7 +35,7 @@ function Complains({ navigation }) {
                         <View>
                             <Text style={styles.nlColorGrey}>패키지</Text>
                         </View>
-                        <View style={styles.nlTextRight}>
+                        <View >
                             <Text style={styles.nlColorBlack}>1-1완료</Text>
                         </View>
                     </View>
@@ -44,7 +44,7 @@ function Complains({ navigation }) {
                         <View>
                             <Text style={styles.nlColorGrey}>특이사항</Text>
                         </View>
-                        <View style={styles.nlTextRight}>
+                        <View >
                             <Text style={styles.nlColorBlack}>빠른배송 부탁드립니다.</Text>
                         </View>
                     </View>
@@ -63,7 +63,7 @@ function Complains({ navigation }) {
                         <View>
                             <Text style={styles.nlColorGrey}>수령인 주소.</Text>
                         </View>
-                        <View style={styles.nlTextRight}>
+                        <View >
                             <Text style={styles.nlColorBlack}>개포로 20길 17, 2층</Text>
                         </View>
                     </View>
@@ -72,7 +72,7 @@ function Complains({ navigation }) {
                         <View>
                             <Text style={styles.nlColorGrey}>배송예정일</Text>
                         </View>
-                        <View style={styles.nlTextRight}>
+                        <View >
                             <Text style={styles.nlColorBlack}>2021.11.1 09:12</Text>
                         </View>
                     </View>
@@ -84,7 +84,7 @@ function Complains({ navigation }) {
                         <View>
                             <Text style={styles.nlColorGrey}>배송인</Text>
                         </View>
-                        <View style={styles.nlTextRight}>
+                        <View >
                             <Text style={styles.nlColorBlack}>조형래</Text>
                         </View>
                     </View>
@@ -103,7 +103,7 @@ function Complains({ navigation }) {
                         <View>
                             <Text style={styles.nlColorGrey}>배송상태</Text>
                         </View>
-                        <View style={styles.nlTextRight}>
+                        <View >
                             <Text style={styles.nlColorBlack}>배송중</Text>
                         </View>
                     </View>
@@ -112,7 +112,7 @@ function Complains({ navigation }) {
                         <View>
                             <Text style={styles.nlColorGrey}>배송완료일</Text>
                         </View>
-                        <View style={styles.nlTextRight}>
+                        <View >
                             <Text style={styles.nlColorBlack}>2021.11.1 09:12</Text>
                         </View>
                     </View>
@@ -121,7 +121,7 @@ function Complains({ navigation }) {
                         <View>
                             <Text style={styles.nlColorGrey}>사진</Text>
                         </View>
-                        <View style={styles.nlTextRight}>
+                        <View >
                             <Image source={boxImage}></Image>
                         </View>
                     </View>
@@ -179,9 +179,6 @@ const styles = StyleSheet.create({
     nlItemInfo: {
         paddingVertical: 10
         
-    },
-    nlTextLeft: {
-
     },
     nlTextRight: {},
     nlButton: {
