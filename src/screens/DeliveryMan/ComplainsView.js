@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import Screen from '../../components/Screen';
+//Images
 import DeleteImage from '../../images/deliveryman/delete.png';
 import DownloadImage from '../../images/deliveryman/download.png';
 
