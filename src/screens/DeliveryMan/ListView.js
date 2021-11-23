@@ -14,65 +14,65 @@ function Complains({ navigation }) {
                 <View style={[styles.nlCard, {backgroundColor: '#fff', padding: 20}]}>
                     {/* Item Info */}
                     <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>수령인</Text>
                         </View>
-                        <View >
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorBlack}>조조조</Text>
                         </View>
                     </View>
                     {/* Item Info */}
                     <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>민원내역</Text>
                         </View>
-                        <View >
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlMarkBlue}>5</Text>
                         </View>
                     </View>
                     {/* Item Info */}
                     <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>패키지</Text>
                         </View>
-                        <View >
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorBlack}>1-1완료</Text>
                         </View>
                     </View>
                     {/* Item Info */}
                     <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>특이사항</Text>
                         </View>
-                        <View >
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorBlack}>빠른배송 부탁드립니다.</Text>
                         </View>
                     </View>
                     {/* Item Info */}
                     <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>수령인HP</Text>
                         </View>
-                        <View style={[styles.nlTextRight, styles.nlRow]}>
+                        <View style={[styles.nlAlignCenter, styles.nlRow]}>
                             <Image source={smsImage}></Image>
                             <Image source={phoneImage} style={{marginLeft: 10}}></Image>
                         </View>
                     </View>
                     {/* Item Info */}
                     <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View>
+                        <View  style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>수령인 주소.</Text>
                         </View>
-                        <View >
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorBlack}>개포로 20길 17, 2층</Text>
                         </View>
                     </View>
                     {/* Item Info */}
                     <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween]}>
-                        <View>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>배송예정일</Text>
                         </View>
-                        <View >
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorBlack}>2021.11.1 09:12</Text>
                         </View>
                     </View>
@@ -81,16 +81,16 @@ function Complains({ navigation }) {
                 <View style={[styles.nlCard, {backgroundColor: '#fff', padding: 20}]}>
                     {/* Item Info */}
                     <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>배송인</Text>
                         </View>
-                        <View >
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorBlack}>조형래</Text>
                         </View>
                     </View>
                     {/* Item Info */}
                     <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>배송인HP</Text>
                         </View>
                         <View style={[styles.nlTextRight, styles.nlRow]}>
@@ -100,25 +100,25 @@ function Complains({ navigation }) {
                     </View>
                     {/* Item Info */}
                     <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>배송상태</Text>
                         </View>
-                        <View >
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorBlack}>배송중</Text>
                         </View>
                     </View>
                     {/* Item Info */}
                     <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>배송완료일</Text>
                         </View>
-                        <View >
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorBlack}>2021.11.1 09:12</Text>
                         </View>
                     </View>
                     {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween]}>
-                        <View>
+                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, {alignItems: 'flex-start'}]}>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>사진</Text>
                         </View>
                         <View >
@@ -171,13 +171,15 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     nlAlignCenter: {
-        alignItems: 'center'
+        alignItems: 'center',
+        alignContent: 'center'
     },
     nlMax: {
         width: '100%',
     },
     nlItemInfo: {
-        paddingVertical: 10
+        paddingVertical: 10,
+        minHeight: 51
         
     },
     nlTextRight: {},
