@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
-//import RNPickerSelect from 'react-native-picker-select';
+// import RNPickerSelect from 'react-native-picker-select/src/index.js';
 import Screen from '../../components/Screen';
 import DeleteImage from '../../images/deliveryman/delete.png';
 import DownloadImage from '../../images/deliveryman/download.png';
@@ -84,7 +84,7 @@ function ComplainsView({ navigation }) {
             </View>
             <View style={[styles.nlCard, {backgroundColor: '#fff', padding: 20}]}>
                 {/* <RNPickerSelect
-                    // onValueChange={(value) => console.log(value)}
+                    onValueChange={(value) => console.log(value)}
                     items={[
                         { label: 'Football', value: 'football' },
                         { label: 'Baseball', value: 'baseball' },
