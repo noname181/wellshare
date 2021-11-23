@@ -178,8 +178,8 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     nlItemInfo: {
-        paddingVertical: 10,
-        minHeight: 51
+        paddingVertical: 6,
+        minHeight: 46
         
     },
     nlTextRight: {},
