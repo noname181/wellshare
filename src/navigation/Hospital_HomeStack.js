@@ -5,7 +5,8 @@ import Main from '../screens/Hospital/Main';
 import Complains1 from '../screens/Hospital/Complains1';
 import Notice from '../screens/Hospital/Notice';
 import Complains2 from '../screens/Hospital/Complains2';
-import List from '../screens/Hospital/List'
+import List from '../screens/Hospital/List';
+import Profile from '../screens/Hospital/Profile'
 
 
 const Stack = createStackNavigator();
@@ -41,6 +42,11 @@ function HomeStack() {
                 name="List"
                 component={List}
                 options={{ header: props => <Header title="명단" isBack={false} {...props} /> }}
+            />
+            <Stack.Screen
+                name="Profile"
+                component={Profile}
+                options={{ header: props => <Header title="나의정보" isBack={false} {...props} /> }}
             />
         </Stack.Navigator>
     );
