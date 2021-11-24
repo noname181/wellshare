@@ -21,8 +21,8 @@ function ComplainsView({ navigation }) {
                             <View style={styles.nlRelative}>
                                 <Text style={styles.nlTitle}>공지사항 1입니다</Text>
                             </View>
-                            <Text  numberOfLines={1} style={{marginRight: 60}}>1. Screen_short_2021-11-06aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</Text>
-                            <Text style={styles.nlDate}>2021.10.13</Text>
+                            <Text style={[styles.nlMarginTop10, {maxWidth: '80%'}]} numberOfLines={1}>1. Screen_short_2021-11-06aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</Text>
+                            <Text style={[styles.nlDate, styles.nlMarginTop10]}>2021.10.13</Text>
                         </View>
                     </View>
                     <View style={[styles.nlAnswer, styles.nlCardSpace, styles.nlRow]}>
@@ -109,7 +109,15 @@ const styles = StyleSheet.create({
         borderColor: '#e1e1e1',
         borderRadius: 10,
         overflow: 'hidden',
-        
+        borderColor: '#e1e1e1',
+        shadowColor: "#222",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.1,
+        shadowRadius: 10,
+        elevation: 3,
     },
     nlRow: {
         flexDirection: 'row',
@@ -185,7 +193,9 @@ const styles = StyleSheet.create({
     },
     nlButtonWhite: {
         backgroundColor: '#fff',
+        color: '#000',
         marginTop: 10,
+        fontSize: 18,
         paddingHorizontal: 20,
         paddingVertical: 10,
         borderStyle: 'solid',
@@ -225,6 +235,9 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         textAlignVertical: 'top',
         paddingHorizontal: 16,
+    }, 
+    nlMarginTop10: {
+        marginTop: 10
     }
 
 });

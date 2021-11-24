@@ -160,7 +160,16 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         overflow: 'hidden',
         padding: 12,
-        marginBottom: 20
+        marginBottom: 20,
+        borderColor: '#e1e1e1',
+        shadowColor: "#222",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.1,
+        shadowRadius: 10,
+        elevation: 3,
         
     },
     nlRow: {
