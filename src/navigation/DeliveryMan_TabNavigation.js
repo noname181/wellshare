@@ -10,6 +10,7 @@ import ComplainsScreen from '../screens/DeliveryMan/Complains';
 import ComplainsViewScreen  from '../screens/DeliveryMan/ComplainsView';
 import ListView from '../screens/DeliveryMan/ListView';
 import MyProfileScreen from '../screens/DeliveryMan/MyProfile';
+import List_page from '../screens/DeliveryMan/List';
 //Images
 import List from '../images/svg/List';
 import Notice from '../images/svg/Notice';
@@ -53,6 +54,18 @@ function TabNavigation({ route, navigation }) {
 
             /> */}
             <Tab.Screen
+                name="List"
+                component={List_page}
+                options={{
+                    tabBarIcon: ({ focused }) => (<View style={styles.tab}>
+                        <Notice height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>List</Text>
+                    </View>),
+                    header: props => <Header title="명단" isBack={true} {...props} />
+                }}
+
+            />
+            <Tab.Screen
                 name="ListView"
                 component={ListView}
                 options={{
@@ -61,6 +74,18 @@ function TabNavigation({ route, navigation }) {
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
                     </View>),
                     header: props => <Header title="명단" isBack={true} {...props} />
+                }}
+
+            />
+            <Tab.Screen
+                name="ComplainsScreen"
+                component={ComplainsScreen}
+                options={{
+                    tabBarIcon: ({ focused }) => (<View style={styles.tab}>
+                        <Notice height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>Complain</Text>
+                    </View>),
+                    header: props => <Header title="민원" isBack={false} {...props} />
                 }}
 
             />
