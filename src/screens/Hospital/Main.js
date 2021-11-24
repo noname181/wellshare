@@ -19,6 +19,13 @@ function Main({ navigation }) {
             >
             <Text style={styles.text}>Go to Complains2</Text>
             </TouchableOpacity>
+            <TouchableOpacity
+
+            onPress={() => navigation.navigate('List')}
+            style={styles.button}
+            >
+            <Text style={styles.text}>Go to List</Text>
+            </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.goBack()}>
 
                 <Text>Go back</Text>

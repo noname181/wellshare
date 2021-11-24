@@ -14,6 +14,7 @@ import Hospital_list from '../images/svg/Hospital_list';
 import Hospital_complain from '../images/svg/Hospital_complain';
 import Hospital_notice from '../images/svg/Hospital_notice';
 import Hospital_profile from '../images/svg/Hospital_profile';
+import Hospital_list_page from '../screens/Hospital/List'
 
 
 
@@ -47,15 +48,16 @@ function TabNavigation({ route, navigation }) {
             }}
         >
             <Tab.Screen
-                name="Home"
-                component={Home}
+                name="Hospital_list_page"
+                component={Hospital_list_page}
                 options={{
-                    headerShown: false,
+                    headerShown: true,
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
                         <Hospital_list height={15} width={18} color={focused ? '#7c257a' : '#d8d8d8'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#d8d8d8' }]}>명단</Text>
+                        
                     </View>),
-
+                    header: props => <Header title="명단" isBack={true} {...props} />
                 }}
 
             />
