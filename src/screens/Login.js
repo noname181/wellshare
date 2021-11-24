@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert} from "react-native";
-
-import Logo from '../images/logo.png';
+//Images
+//import Logo from '../images/logo.png';
+import LogoImage from '../images/svg/LogoImage';
 export default function Login() {
     const onPress = () => Alert.alert('Hello');
     return (
@@ -10,7 +11,7 @@ export default function Login() {
             <View style={styles.nlBg2}>
                 <View style={styles.nlLogin}>
                     <View style={styles.nlLogo}>
-                        <Image source={Logo}/>
+                        <LogoImage width={142} height={67}/>
                     </View>
                     <View style={styles.nlRelative}>
                         <TextInput style={styles.nlInput}  placeholder="전화번호"></TextInput>
