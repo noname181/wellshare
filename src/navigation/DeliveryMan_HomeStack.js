@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Main from '../screens/DeliveryMan/Notice';
 import ComplainsView  from '../screens/DeliveryMan/ComplainsView';
 import ListView from '../screens/DeliveryMan/ListView';
+import MyProfile from '../screens/DeliveryMan/MyProfile';
 const Stack = createStackNavigator();
 
 function HomeStack() {
@@ -32,6 +33,11 @@ function HomeStack() {
                 name="ListView"
                 component={ListView}
                 options={{ header: props => <Header title="ListView" isBack={true} {...props} /> }}
+            />
+            <Stack.Screen
+                name="MyProfile"
+                component={MyProfile}
+                options={{ header: props => <Header title="MyProfile" isBack={true} {...props} /> }}
             />
         </Stack.Navigator>
     );

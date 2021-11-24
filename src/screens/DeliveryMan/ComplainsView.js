@@ -11,7 +11,7 @@ function ComplainsView({ navigation }) {
 
     return (
         <ScrollView>
-            <Screen>
+            <Screen >
                 <View style={styles.nlCard}>
                     <View style={[styles.nlQuestion,styles.nlCardSpace, styles.nlRow]}>
                         <View>
@@ -103,7 +103,7 @@ function ComplainsView({ navigation }) {
 }
 const styles = StyleSheet.create({
     nlCard: {
-        marginTop: 20,
+        marginBottom: 14,
         borderStyle: 'solid',
         borderWidth: 1,
         borderColor: '#e1e1e1',

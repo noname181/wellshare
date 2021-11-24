@@ -93,7 +93,7 @@ function Complains({ navigation }) {
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>배송인HP</Text>
                         </View>
-                        <View style={[styles.nlTextRight, styles.nlRow]}>
+                        <View style={[styles.nlRow]}>
                             <Image source={smsImage}></Image>
                             <Image source={phoneImage} style={{marginLeft: 10}}></Image>
                         </View>
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
         minHeight: 46
         
     },
-    nlTextRight: {},
+   
     nlButton: {
         backgroundColor: '#7c257a',
         marginBottom: 10,

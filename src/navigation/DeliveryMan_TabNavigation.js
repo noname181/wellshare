@@ -9,6 +9,7 @@ import NoticeScreen from '../screens/DeliveryMan/Notice';
 import ComplainsScreen from '../screens/DeliveryMan/Complains';
 import ComplainsViewScreen  from '../screens/DeliveryMan/ComplainsView';
 import ListView from '../screens/DeliveryMan/ListView';
+import MyProfileScreen from '../screens/DeliveryMan/MyProfile';
 //Images
 import List from '../images/svg/List';
 import Notice from '../images/svg/Notice';
@@ -67,12 +68,11 @@ function TabNavigation({ route, navigation }) {
                 name="ComplainsViewScreen"
                 component={ComplainsViewScreen}
                 options={{
-                    headerShown: false,
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
                         <Notice height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>ComplainsView</Text>
                     </View>),
-
+                    header: props => <Header title="공지사항" isBack={false} {...props} />
                 }}
 
             />
@@ -89,14 +89,14 @@ function TabNavigation({ route, navigation }) {
 
             />
             <Tab.Screen
-                name="Main4"
-                component={Main}
+                name="MyProfile"
+                component={MyProfileScreen}
                 options={{
-                    headerShown: false,
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
                         <Profile_Icon height={19} width={25} color={focused ? '#7c257a' : '#b2b2b2'} />
-                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>나의정보</Text>
                     </View>),
+                     header: props => <Header title="나의정보" isBack={false} {...props} />
 
                 }}
 
