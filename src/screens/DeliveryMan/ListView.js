@@ -2,9 +2,9 @@ import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, ScrollView, Image} from 'react-native';
 import Screen from '../../components/Screen';
 //Images
-import smsImage from '../../images/deliveryman/sms.png';
-import phoneImage from '../../images/deliveryman/phone.png';
 import boxImage from '../../images/deliveryman/box.png';
+import SMSIcon from '../../images/svg/SMSIcon';
+import PhoneIcon from '../../images/svg/PhoneIcon';
 
 function Complains({ navigation }) {
     return (
@@ -54,8 +54,12 @@ function Complains({ navigation }) {
                             <Text style={styles.nlColorGrey}>수령인HP</Text>
                         </View>
                         <View style={[styles.nlAlignCenter, styles.nlRow]}>
-                            <Image source={smsImage}></Image>
-                            <Image source={phoneImage} style={{marginLeft: 10}}></Image>
+                        <TouchableOpacity activeOpacity={1}>
+                                <SMSIcon height={30} width={30}/>
+                            </TouchableOpacity>
+                            <TouchableOpacity activeOpacity={1} style={{marginLeft: 10}}>
+                                <PhoneIcon height={30} width={30} />
+                            </TouchableOpacity>
                         </View>
                     </View>
                     {/* Item Info */}
@@ -94,8 +98,12 @@ function Complains({ navigation }) {
                             <Text style={styles.nlColorGrey}>배송인HP</Text>
                         </View>
                         <View style={[styles.nlRow]}>
-                            <Image source={smsImage}></Image>
-                            <Image source={phoneImage} style={{marginLeft: 10}}></Image>
+                            <TouchableOpacity activeOpacity={1}>
+                                <SMSIcon height={30} width={30}/>
+                            </TouchableOpacity>
+                            <TouchableOpacity activeOpacity={1} style={{marginLeft: 10}}>
+                                <PhoneIcon height={30} width={30} />
+                            </TouchableOpacity>
                         </View>
                     </View>
                     {/* Item Info */}

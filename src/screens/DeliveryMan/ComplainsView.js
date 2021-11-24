@@ -5,7 +5,8 @@ import Screen from '../../components/Screen';
 //Images
 import DeleteImage from '../../images/deliveryman/delete.png';
 import DownloadImage from '../../images/deliveryman/download.png';
-
+import DeleteIcon from '../../images/svg/DeleteIcon';
+import DownloadIcon from '../../images/svg/DownloadIcon';
 function ComplainsView({ navigation }) {
     const [selectedValue, setSelectedValue] = useState("java");
 
@@ -29,44 +30,50 @@ function ComplainsView({ navigation }) {
                         <View>
                             <Text style={styles.nlIcon}>A</Text>
                         </View>
-                        <View style={{width: '100%'}}>
-                            <View style={[styles.nlRow, styles.nlBetween]}>
-                                <Text style={styles.nlText}>공지사항 1입니다공지사항 1입니다 공지사항 1입니다</Text>
-                                <Image source={DeleteImage}/>
+                        <View style={{maxWidth: '100%'}}>
+                            <View style={[styles.nlRow, styles.nlBetween, {paddingRight: 20}]}>
+                                <Text style={[styles.nlText,]}>공지사항 1입니다공지사항 1입니다 공지사항 1입니다</Text>
+                                <TouchableOpacity>
+                                    <DeleteIcon width={13} height={16}/>
+                                </TouchableOpacity> 
+                                
                             </View>
+                            {/* File upload */}
                             <View style={[styles.nlFilePart, styles.nlRow]}>
                                 <Text style={styles.nlFileName} numberOfLines={1}>1. Screen_short_2021-11-06</Text>
                                 <View style={styles.nlActions, styles.nlRow}>
                                     <TouchableOpacity>
-                                        <Image source={DeleteImage} style={{width: 13, height: 16}}/>
+                                        <DeleteIcon width={13} height={16}/>
                                     </TouchableOpacity>
                                     <Text style={styles.nlLineVerticle}></Text>
-                                    <TouchableOpacity>
-                                        <Image source={DownloadImage} style={{width: 13, height: 13, marginTop: 2}}/>
+                                    <TouchableOpacity style={{paddingTop: 2}}>
+                                        <DeleteIcon width={13} height={13}/>
                                     </TouchableOpacity>
                                 </View>
                             </View>
+                            {/* File upload */}
                             <View style={[styles.nlFilePart, styles.nlRow]}>
                                 <Text style={styles.nlFileName} numberOfLines={1}>1. Screen_short_2021-11-06</Text>
                                 <View style={styles.nlActions, styles.nlRow}>
                                     <TouchableOpacity>
-                                        <Image source={DeleteImage} style={{width: 13, height: 16}}/>
+                                        <DeleteIcon width={13} height={16}/>
                                     </TouchableOpacity>
                                     <Text style={styles.nlLineVerticle}></Text>
-                                    <TouchableOpacity>
-                                        <Image source={DownloadImage} style={{width: 13, height: 13, marginTop: 2}}/>
+                                    <TouchableOpacity style={{paddingTop: 2}}>
+                                        <DeleteIcon width={13} height={13}/>
                                     </TouchableOpacity>
                                 </View>
                             </View>
+                            {/* File upload */}
                             <View style={[styles.nlFilePart, styles.nlRow]}>
                                 <Text style={styles.nlFileName} numberOfLines={1}>1. Screen_short_2021-11-06</Text>
                                 <View style={styles.nlActions, styles.nlRow}>
                                     <TouchableOpacity>
-                                        <Image source={DeleteImage} style={{width: 13, height: 16}}/>
+                                        <DeleteIcon width={13} height={16}/>
                                     </TouchableOpacity>
                                     <Text style={styles.nlLineVerticle}></Text>
-                                    <TouchableOpacity>
-                                        <Image source={DownloadImage} style={{width: 13, height: 13, marginTop: 2}}/>
+                                    <TouchableOpacity style={{paddingTop: 2}}>
+                                        <DeleteIcon width={13} height={13}/>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -177,8 +184,8 @@ const styles = StyleSheet.create({
         height: 12,
         width: 1,
         backgroundColor: '#b1b1b1',
-        marginHorizontal: 10,
-        marginTop: 2
+        marginHorizontal: 14,
+        marginTop: 3
     },
     nlActions: {
         width: '20%',
