@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, StyleSheet, Text} from 'react-native';
+import React, {useState} from 'react';
+import { View, StyleSheet, Text, Switch} from 'react-native';
 import Screen from '../../components/Screen';
 
 //Images
@@ -11,67 +11,76 @@ import DeliveryMyProfile5 from '../../images/svg/DeliveryMyProfile5';
 import DeliveryMyProfile6 from '../../images/svg/DeliveryMyProfile6';
 
 function My_Profile() {
+    const [isEnabled, setIsEnabled] = useState(false);
+    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     return (
         <Screen style={styles.nlContainer}>
             <View style={[styles.nlCard, {backgroundColor: '#fff'}]}>
                 {/* Item Info */}
                 <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween]}>
-                    <DeliveryMyProfile1 />
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <Text style={styles.nlColorGrey}>배송인</Text>
+                        <DeliveryMyProfile1 height={18} width={18} />
+                        <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>업무시간 설정: 8:00-20:00</Text>
                     </View>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <Text style={styles.nlColorBlack}>조형래</Text>
-                    </View>
-                </View>
-
-            </View>
-            <View style={[styles.nlCard, {backgroundColor: '#fff'}]}>
-                {/* Item Info */}
-                <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                    <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <Text style={styles.nlColorGrey}>배송인</Text>
-                    </View>
-                    <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <Text style={styles.nlColorBlack}>조형래</Text>
-                    </View>
-                </View>
-                {/* Item Info */}
-                <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                    <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <Text style={styles.nlColorGrey}>배송인</Text>
-                    </View>
-                    <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <Text style={styles.nlColorBlack}>조형래</Text>
-                    </View>
-                </View>
-                {/* Item Info */}
-                <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                    <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <Text style={styles.nlColorGrey}>배송인</Text>
-                    </View>
-                    <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <Text style={styles.nlColorBlack}>조형래</Text>
-                    </View>
-                </View>
-                {/* Item Info */}
-                <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                    <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <Text style={styles.nlColorGrey}>배송인</Text>
-                    </View>
-                    <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <Text style={styles.nlColorBlack}>조형래</Text>
+                    <Switch
+                        trackColor={{ false: "#767577", true: "#f2d4f1" }}
+                        thumbColor={isEnabled ? "#7c257a" : "#fff"}
+                        ios_backgroundColor="#3e3e3e"
+                        onValueChange={toggleSwitch}
+                        value={isEnabled}
+                    />
                     </View>
                 </View>
             </View>
             <View style={[styles.nlCard, {backgroundColor: '#fff'}]}>
                 {/* Item Info */}
-                <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween]}>
+                <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <Text style={styles.nlColorGrey}>배송인</Text>
+                        <DeliveryMyProfile2 height={18} width={18} />
+                        <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>아이디</Text>
+                    </View>
+                    <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                        <Text style={styles.nlColorBlack}>aaa</Text>
+                    </View>
+                </View>
+                {/* Item Info */}
+                <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                    <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                        <DeliveryMyProfile3 height={18} width={18} />
+                        <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>기사명</Text>
                     </View>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
                         <Text style={styles.nlColorBlack}>조형래</Text>
+                    </View>
+                </View>
+                {/* Item Info */}
+                <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                    <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                        <DeliveryMyProfile4 height={18} width={18} />
+                        <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>이메일</Text>
+                    </View>
+                    <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                        <Text style={styles.nlColorBlack}>개포로 20길 17, 2층</Text>
+                    </View>
+                </View>
+                {/* Item Info */}
+                <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                    <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                        <DeliveryMyProfile5 height={18} width={18} />
+                        <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>주소</Text>
+                    </View>
+                    <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                        <Text style={styles.nlColorBlack}>조형래 123@gmail.com</Text>
+                    </View>
+                </View>
+            </View>
+            <View style={[styles.nlCard, {backgroundColor: '#fff'}]}>
+                {/* Item Info */}
+                <View style={[styles.nlItemInfo, styles.nlRow]}>
+                    <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                        <DeliveryMyProfile6 height={18} width={18} />
+                        <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>로그아웃</Text>
                     </View>
                 </View>
 
@@ -128,6 +137,12 @@ const styles = StyleSheet.create({
     nlColorBlack: {
         color: '#000'
     },
+    nlMarginRight10: {
+        marginRight: 10
+    },
+    nlMarginLeft10: {
+        marginLeft: 10
+    }
 });
 
 export default My_Profile
