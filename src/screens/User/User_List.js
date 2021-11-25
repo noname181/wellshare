@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{useState} from 'react'
 import {
     Text,
     View,
@@ -11,6 +11,7 @@ import Calendar from '../../images/svg/CalendarIcon';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 function User_List() {
+    const [tabSlected, settabSlected] = useState(1);
     return (
         <Screen>
             <View style={styles.body_gray}>
@@ -20,14 +21,14 @@ function User_List() {
                     <Icon style={styles.icon_select} name={'chevron-down-outline'} color={'#9b9b9b'} size={20} />
                 </View>
                 <View style={styles.h_three_button}>
-                    <TouchableOpacity style={styles.h_button_active} activeOpacity={0.8}>
-                        <Text style={styles.h_text_clr_white}>전체</Text>
+                    <TouchableOpacity  activeOpacity={1} style={(tabSlected== 1)?styles.h_button_active:styles.h_button} onPress={() => settabSlected(1)}>
+                        <Text style={(tabSlected== 1)?styles.h_text_clr_white:styles.h_text_clr_black}>전체</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.h_button} activeOpacity={0.8}>
-                        <Text style={styles.h_text_clr_black}>배송전</Text>
+                    <TouchableOpacity activeOpacity={1} style={(tabSlected== 2)?styles.h_button_active:styles.h_button} onPress={() => settabSlected(2)}>
+                        <Text style={(tabSlected== 2)?styles.h_text_clr_white:styles.h_text_clr_black}>배송전</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.h_button} activeOpacity={0.8}>
-                        <Text style={styles.h_text_clr_black}>완료</Text>
+                    <TouchableOpacity activeOpacity={1} style={(tabSlected== 3)?styles.h_button_active:styles.h_button} onPress={() => settabSlected(3)}>
+                        <Text style={(tabSlected== 3)?styles.h_text_clr_white:styles.h_text_clr_black}>완료</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.h_box_list}>
@@ -181,7 +182,7 @@ const styles = StyleSheet.create({
     h_text_clr_white: {
         color: '#fff',
         fontSize: 15,
-        fontWeight: 'bold'
+
     },
     h_text_clr_black: {
         color: '#404148',
