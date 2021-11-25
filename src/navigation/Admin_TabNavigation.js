@@ -7,6 +7,7 @@ import Screen from '../components/Screen';
 import Main from '../screens/Admin/Main';
 import NoticeScreen from '../screens/Admin/Notice';
 import ListViewScreen from '../screens/Admin/ListView';
+import VehicleLocationViewScreen from '../screens/Admin/VehicleLocationView';
 //Images
 import List from '../images/svg/List';
 import Notice from '../images/svg/Notice';
@@ -41,15 +42,14 @@ function TabNavigation({ route, navigation }) {
                 }}
             />
             <Tab.Screen
-                name="Main2"
-                component={Main}
+                name="VehicleLocationView"
+                component={VehicleLocationViewScreen}
                 options={{
-                    headerShown: false,
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
                         <Notice height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
                     </View>),
-                    
+                     header: props => <Header title="명단" isBack={false} {...props} />
                 }}
 
             />
