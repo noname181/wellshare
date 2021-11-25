@@ -56,11 +56,14 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         overflow: 'hidden',
         height: 54,
+        width: '40%',
         
     },
     h_width_select_half:{
-        width: '30%',
-        justifyContent:'space-between',      
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+
     },
     nlPicker: {
         width: '100%',
@@ -74,7 +77,7 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         backgroundColor: '#fff',
-        paddingTop: 10
+        paddingTop: 10,
     },
     
 });
