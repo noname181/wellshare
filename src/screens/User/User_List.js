@@ -68,7 +68,7 @@ function User_List() {
                         </View>
                         <View>
                             <TouchableOpacity style={styles.h_button_list_green} activeOpacity={0.8}>
-                                <Text style={styles.h_text_small_clr_green}>완료</Text>
+                                <Text style={styles.h_text_small_clr_green}>배송전</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
