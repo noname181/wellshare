@@ -3,8 +3,6 @@ import { StyleSheet, View, Text, TouchableOpacity, Image, TextInput, ScrollView 
 import {Picker} from '@react-native-picker/picker';
 import Screen from '../../components/Screen';
 //Images
-import DeleteImage from '../../images/deliveryman/delete.png';
-import DownloadImage from '../../images/deliveryman/download.png';
 import DeleteIcon from '../../images/svg/DeleteIcon';
 import DownloadIcon from '../../images/svg/DownloadIcon';
 function ComplainsView({ navigation }) {
@@ -31,7 +29,7 @@ function ComplainsView({ navigation }) {
                             <Text style={styles.nlIcon}>A</Text>
                         </View>
                         <View style={{maxWidth: '100%'}}>
-                            <View style={[styles.nlRow, styles.nlBetween, {paddingRight: 20}]}>
+                            <View style={[styles.nlRow, styles.nlBetween, {paddingRight: 10}]}>
                                 <Text style={[styles.nlText,]}>공지사항 1입니다공지사항 1입니다 공지사항 1입니다</Text>
                                 <TouchableOpacity>
                                     <DeleteIcon width={13} height={16}/>
@@ -47,7 +45,7 @@ function ComplainsView({ navigation }) {
                                     </TouchableOpacity>
                                     <Text style={styles.nlLineVerticle}></Text>
                                     <TouchableOpacity style={{paddingTop: 2}}>
-                                        <DeleteIcon width={13} height={13}/>
+                                        <DownloadIcon width={13} height={13}/>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -60,7 +58,7 @@ function ComplainsView({ navigation }) {
                                     </TouchableOpacity>
                                     <Text style={styles.nlLineVerticle}></Text>
                                     <TouchableOpacity style={{paddingTop: 2}}>
-                                        <DeleteIcon width={13} height={13}/>
+                                        <DownloadIcon width={13} height={13}/>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -73,7 +71,7 @@ function ComplainsView({ navigation }) {
                                     </TouchableOpacity>
                                     <Text style={styles.nlLineVerticle}></Text>
                                     <TouchableOpacity style={{paddingTop: 2}}>
-                                        <DeleteIcon width={13} height={13}/>
+                                        <DownloadIcon width={13} height={13}/>
                                     </TouchableOpacity>
                                 </View>
                             </View>
