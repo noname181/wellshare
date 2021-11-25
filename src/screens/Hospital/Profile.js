@@ -159,7 +159,6 @@ const styles = StyleSheet.create({
     text_profile: {
         fontSize: 16,
         marginLeft: 10,
-        textAlign: 'right',
 
     },
     text_logout:{

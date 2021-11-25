@@ -7,6 +7,8 @@ import Screen from '../components/Screen';
 import Main from '../screens/Admin/Main';
 import NoticeScreen from '../screens/Admin/Notice';
 import ListViewScreen from '../screens/Admin/ListView';
+import ProfileScreen from '../screens/Admin/Profile';
+import ListScreen from '../screens/Admin/List'
 //Images
 import List from '../images/svg/List';
 import Notice from '../images/svg/Notice';
@@ -29,6 +31,17 @@ function TabNavigation({ route, navigation }) {
                 }
             }}
         >
+            <Tab.Screen
+                name="List"
+                component={ListScreen}
+                options={{
+                    tabBarIcon: ({ focused }) => (<View style={styles.tab}>
+                        <List height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
+                    </View>),
+                    header: props => <Header title="명단" isBack={false} {...props} />
+                }}
+            />
             <Tab.Screen
                 name="ListView"
                 component={ListViewScreen}
@@ -67,14 +80,15 @@ function TabNavigation({ route, navigation }) {
 
             />
             <Tab.Screen
-                name="Main4"
-                component={Main}
+                name="Profile"
+                component={ProfileScreen}
                 options={{
-                    headerShown: false,
+                    headerShown: true,
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
                         <Profile_Icon height={19} width={25} color={focused ? '#7c257a' : '#b2b2b2'} />
-                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>나의정보</Text>
                     </View>),
+                    header: props => <Header title="나의정보" isBack={true} {...props} />
                     
                 }}
 
