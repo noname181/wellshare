@@ -14,6 +14,8 @@ import VehicleLocationViewScreen from '../screens/Admin/VehicleLocationView';
 import List from '../images/svg/List';
 import Notice from '../images/svg/Notice';
 import Profile_Icon from '../images/svg/Profile';
+import Deliveryman_list from '../images/svg/Deliveryman_list';
+import Admin_map from '../images/svg/Admin_map'
 
 
 
@@ -37,7 +39,7 @@ function TabNavigation({ route, navigation }) {
                 component={ListScreen}
                 options={{
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        <List height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
+                        <Deliveryman_list height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
                     </View>),
                     header: props => <Header title="명단" isBack={false} {...props} />
@@ -59,10 +61,10 @@ function TabNavigation({ route, navigation }) {
                 component={VehicleLocationViewScreen}
                 options={{
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        <Notice height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
-                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
+                        <Admin_map height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>차량위치</Text>
                     </View>),
-                     header: props => <Header title="명단" isBack={false} {...props} />
+                     header: props => <Header title="차량위치" isBack={false} {...props} />
                 }}
 
             />
@@ -73,7 +75,7 @@ function TabNavigation({ route, navigation }) {
                     // headerShown: false,
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
                         <Notice height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
-                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>공지사항</Text>
                     </View>),
                     header: props => <Header title="공지사항" isBack={false} {...props} />
                 }}

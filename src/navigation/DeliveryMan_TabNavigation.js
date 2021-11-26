@@ -15,6 +15,8 @@ import List_page from '../screens/DeliveryMan/List';
 import List from '../images/svg/List';
 import Notice from '../images/svg/Notice';
 import Profile_Icon from '../images/svg/Profile';
+import Deliveryman_list from '../images/svg/Deliveryman_list';
+import Deliveryman_complain from '../images/svg/Deliveryman_complain';
 
 
 const Tab = createBottomTabNavigator();
@@ -58,8 +60,8 @@ function TabNavigation({ route, navigation }) {
                 component={List_page}
                 options={{
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        <Notice height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
-                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>List</Text>
+                        <Deliveryman_list height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
                     </View>),
                     header: props => <Header title="명단" isBack={true} {...props} />
                 }}
@@ -82,8 +84,8 @@ function TabNavigation({ route, navigation }) {
                 component={ComplainsScreen}
                 options={{
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        <Notice height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
-                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>Complain</Text>
+                        <Deliveryman_complain height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>민원</Text>
                     </View>),
                     header: props => <Header title="민원" isBack={false} {...props} />
                 }}
