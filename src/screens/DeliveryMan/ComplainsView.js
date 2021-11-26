@@ -225,10 +225,12 @@ const styles = StyleSheet.create({
         borderColor: '#e1e1e1',
         borderRadius: 5,
         overflow: 'hidden',
+        justifyContent: 'center'
     },
     nlPicker: {
         width: '100%',
-        height: '40'
+        height: 40,
+        
     },
     nlTextInput: {
         marginTop: 10,
