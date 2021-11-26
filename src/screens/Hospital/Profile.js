@@ -29,115 +29,115 @@ import Hospital_profileIcon11 from '../../images/svg/Hospital_profileIcon11';
 
 function Profile() {
     return (
-        <Screen  style={{backgroundColor: '#f6f7f8'}}>
-            <ScrollView>
-            <View style={styles.profile_main_hero}>
-                <View style={styles.Avatar_icon}>
-                    <Image style={styles.Avatar_icon_image} source={Avatar} />
+        <Screen style={{ backgroundColor: '#f6f7f8' }}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{ overflow: 'visible' }}>
+                <View style={styles.profile_main_hero}>
+                    <View style={styles.Avatar_icon}>
+                        <Image style={styles.Avatar_icon_image} source={Avatar} />
+                    </View>
+                    <View style={styles.Hospital_name}>
+                        <Text style={styles.Hospital_name_text}>강남보건소</Text>
+                    </View>
+                    <View style={styles.pf_box_information_first}>
+                        <View style={styles.h_row}>
+                            <Hospital_profileIcon1 height={16} width={16} />
+                            <Text style={styles.text_profile}>사업자등록번호</Text>
+                        </View>
+                        <View >
+                            <Text style={styles.text_profile_right}>45767</Text>
+                        </View>
+                    </View>
+                    <View style={styles.pf_box_information_second}>
+                        <View style={styles.h_row}>
+                            <Phone height={16} width={16} />
+                            <Text style={styles.text_profile}>대표전화</Text>
+                        </View>
+                        <View>
+                            <Text style={styles.text_profile_right}>010-2009-7723</Text>
+                        </View>
+                    </View>
+                    <View style={styles.pf_box_information_second}>
+                        <View style={styles.h_row}>
+                            <Hospital_profileIcon3 height={16} width={16} />
+                            <Text style={styles.text_profile}>팩스</Text>
+                        </View>
+                        <View>
+                            <Text style={styles.text_profile_right}>032025225366</Text>
+                        </View>
+                    </View>
+                    <View style={styles.pf_box_information_second}>
+                        <View style={styles.h_row}>
+                            <Hospital_profileIcon4 height={16} width={16} />
+                            <Text style={styles.text_profile}>이메일</Text>
+                        </View>
+                        <View>
+                            <Text style={styles.text_profile_right}>조형래 123@gmail.com</Text>
+                        </View>
+                    </View>
+                    <View style={styles.pf_box_information_second}>
+                        <View style={styles.h_row}>
+                            <Hospital_profileIcon5 height={16} width={16} />
+                            <Text style={styles.text_profile}>주소</Text>
+                        </View>
+                        <View style={{ width: 180 }}>
+                            <Text style={styles.text_profile_right}>서울특별시 강남구 역삼동 203-2 2층</Text>
+                        </View>
+                    </View>
+
                 </View>
-                <View style={styles.Hospital_name}>
-                    <Text style={styles.Hospital_name_text}>강남보건소</Text>
-                </View>
-                <View style={styles.pf_box_information_first}>
-                    <View style={styles.h_row}>
-                        <Hospital_profileIcon1 height={16} width={16}/>
-                        <Text style={styles.text_profile}>사업자등록번호</Text>
+                <View style={styles.profile_main_hero2}>
+                    <View style={styles.pf_box_main_hr2_1}>
+                        <View style={styles.h_row}>
+                            <Hospital_profileIcon6 height={16} width={16} />
+                            <Text style={styles.text_profile}>담당자명</Text>
+                        </View>
+                        <View>
+                            <Text style={styles.text_profile_right}>조형래</Text>
+                        </View>
                     </View>
-                    <View >
-                        <Text style={styles.text_profile_right}>45767</Text>
+                    <View style={styles.pf_box_main_hr2_2}>
+                        <View style={styles.h_row}>
+                            <Hospital_profileIcon7 height={16} width={16} />
+                            <Text style={styles.text_profile}>이메일</Text>
+                        </View>
+                        <View>
+                            <Text style={styles.text_profile_right}>청구담당 이메일</Text>
+                        </View>
                     </View>
-                </View>
-                <View style={styles.pf_box_information_second}>
-                    <View style={styles.h_row}>
-                        <Phone height={16} width={16} />
-                        <Text style={styles.text_profile}>대표전화</Text>
+                    <View style={styles.pf_box_main_hr2_2}>
+                        <View style={styles.h_row}>
+                            <Hospital_profileIcon8 height={20} width={20} />
+                            <Text style={styles.text_profile}>핸드폰</Text>
+                        </View>
+                        <View>
+                            <Text style={styles.text_profile_right}>010-2009-7723</Text>
+                        </View>
                     </View>
-                    <View>
-                        <Text style={styles.text_profile_right}>010-2009-7723</Text>
+                    <View style={styles.pf_box_main_hr2_2}>
+                        <View style={styles.h_row}>
+                            <Hospital_profileIcon9 height={16} width={16} />
+                            <Text style={styles.text_profile}>일반전화</Text>
+                        </View>
+                        <View>
+                            <Text style={styles.text_profile_right}>02-1234-1234</Text>
+                        </View>
                     </View>
-                </View>
-                <View style={styles.pf_box_information_second}>
-                    <View style={styles.h_row}>
-                        <Hospital_profileIcon3 height={16} width={16} />
-                        <Text style={styles.text_profile}>팩스</Text>
-                    </View>
-                    <View>
-                        <Text style={styles.text_profile_right}>032025225366</Text>
-                    </View>
-                </View>
-                <View style={styles.pf_box_information_second}>
-                    <View style={styles.h_row}>
-                        <Hospital_profileIcon4 height={16} width={16} />
-                        <Text style={styles.text_profile}>이메일</Text>
-                    </View>
-                    <View>
-                        <Text style={styles.text_profile_right}>조형래 123@gmail.com</Text>
-                    </View>
-                </View>
-                <View style={styles.pf_box_information_second}>
-                    <View style={styles.h_row}>
-                        <Hospital_profileIcon5 height={16} width={16} />
-                        <Text style={styles.text_profile}>주소</Text>
-                    </View>
-                    <View style={{width: 180}}>
-                        <Text style={styles.text_profile_right}>서울특별시 강남구 역삼동 203-2 2층</Text>
-                    </View>
-                </View>
-                
-            </View>
-            <View style={styles.profile_main_hero2}>
-                <View style={styles.pf_box_main_hr2_1}>
-                    <View style={styles.h_row}>
-                        <Hospital_profileIcon6 height={16} width={16} />
-                        <Text style={styles.text_profile}>담당자명</Text>
-                    </View>
-                    <View>
-                        <Text style={styles.text_profile_right}>조형래</Text>
+                    <View style={styles.pf_box_main_hr2_2}>
+                        <View style={styles.h_row}>
+                            <Hospital_profileIcon10 height={16} width={16} />
+                            <Text style={styles.text_profile}>청구서 도착 주소</Text>
+                        </View>
+                        <View style={{ width: 180 }}>
+                            <Text style={styles.text_profile_right}>서울특별시 강남구 역삼동 203-2 2층</Text>
+                        </View>
                     </View>
                 </View>
-                <View style={styles.pf_box_main_hr2_2}>
-                    <View style={styles.h_row}>
-                        <Hospital_profileIcon7 height={16} width={16} />
-                        <Text style={styles.text_profile}>이메일</Text>
-                    </View>
-                    <View>
-                        <Text style={styles.text_profile_right}>청구담당 이메일</Text>
+                <View style={styles.profile_main_logout}>
+                    <View style={styles.h_row_logout}>
+                        <Logout height={16} width={16} />
+                        <Text style={styles.text_logout}>로그아웃</Text>
                     </View>
                 </View>
-                <View style={styles.pf_box_main_hr2_2}>
-                    <View style={styles.h_row}>
-                        <Hospital_profileIcon8 height={20} width={20} />
-                        <Text style={styles.text_profile}>핸드폰</Text>
-                    </View>
-                    <View>
-                        <Text style={styles.text_profile_right}>010-2009-7723</Text>
-                    </View>
-                </View>
-                <View style={styles.pf_box_main_hr2_2}>
-                    <View style={styles.h_row}>
-                        <Hospital_profileIcon9 height={16} width={16} />
-                        <Text style={styles.text_profile}>일반전화</Text>
-                    </View>
-                    <View>
-                        <Text style={styles.text_profile_right}>02-1234-1234</Text>
-                    </View>
-                </View>
-                <View style={styles.pf_box_main_hr2_2}>
-                    <View style={styles.h_row}>
-                        <Hospital_profileIcon10 height={16} width={16} />
-                        <Text style={styles.text_profile}>청구서 도착 주소</Text>
-                    </View>
-                    <View style={{width: 180}}>
-                        <Text style={styles.text_profile_right}>서울특별시 강남구 역삼동 203-2 2층</Text>
-                    </View>
-                </View>
-            </View>
-            <View style={styles.profile_main_logout}>
-                <View style={styles.h_row_logout}>
-                    <Logout height={16} width={16} />
-                    <Text style={styles.text_logout}>로그아웃</Text>
-                </View>
-            </View>
             </ScrollView>
         </Screen>
     );
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
 
     },
-    text_logout:{
+    text_logout: {
         fontSize: 16,
         marginLeft: 10,
         color: '#404040',
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         flex: 1,
 
-        
+
     },
     Avatar_icon: {
         top: -60,
@@ -189,13 +189,13 @@ const styles = StyleSheet.create({
         position: 'relative'
 
     },
-    Hospital_name:{
-        position:'absolute',
-        alignItems:'center',
+    Hospital_name: {
+        position: 'absolute',
+        alignItems: 'center',
         top: 75,
         width: '100%',
     },
-    Hospital_name_text:{
+    Hospital_name_text: {
         fontWeight: 'bold',
         color: 'black',
         fontSize: 23,
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
         marginTop: 69,
         paddingTop: 10,
         marginBottom: 12,
-        justifyContent:'center',
+        justifyContent: 'center',
         borderColor: '#e1e1e1',
         borderWidth: 1,
         borderRadius: 8,
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
     profile_main_hero2: {
         backgroundColor: '#fff',
         paddingTop: 22,
-        justifyContent:'center',
+        justifyContent: 'center',
         marginBottom: 12,
         borderColor: '#e1e1e1',
         borderWidth: 1,
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 1, height: 3 },
         shadowOpacity: 0.1,
         elevation: 3,
-        marginBottom:50,
+        marginBottom: 50,
     },
 
     pf_box_information_first: {
@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
         marginTop: 122,
         paddingTop: 19,
         paddingBottom: 15,
-        borderTopColor:'#e1e1e1',
+        borderTopColor: '#e1e1e1',
         borderTopWidth: 1,
 
         marginLeft: 16,
@@ -264,24 +264,24 @@ const styles = StyleSheet.create({
         paddingBottom: 15,
         marginLeft: 16,
         marginRight: 16,
-        borderTopColor:'#e1e1e1',
+        borderTopColor: '#e1e1e1',
         borderTopWidth: 1,
     },
-    pf_box_main_hr2_1:{
+    pf_box_main_hr2_1: {
         justifyContent: 'space-between',
         flexDirection: 'row',
         marginBottom: 15,
         marginLeft: 16,
         marginRight: 16,
     },
-    pf_box_main_hr2_2:{
+    pf_box_main_hr2_2: {
         justifyContent: 'space-between',
         flexDirection: 'row',
         paddingTop: 16,
         marginBottom: 13,
         marginLeft: 16,
         marginRight: 16,
-        borderTopColor:'#e1e1e1',
+        borderTopColor: '#e1e1e1',
         borderTopWidth: 1,
     }
 
