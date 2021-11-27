@@ -1,4 +1,5 @@
-import React,{useState} from 'react'
+import React,{useState} from 'react';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import {
     Text,
     View,
@@ -9,20 +10,52 @@ import {
     TouchableOpacity
 
 } from 'react-native';
+
 import Screen from '../../components/Screen';
 import Calendar from '../../images/svg/CalendarIcon';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 function List() {
     const [tabSlected, settabSlected] = useState(1);
+    const [date, setDate] = useState(new Date());
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
+  
+    const onChange = (event, selectedDate) => {
+      const currentDate = selectedDate || date;
+      setShow(Platform.OS === 'ios');
+      setDate(currentDate);
+    };
+  
+    const showMode = (currentMode) => {
+      setShow(true);
+      setMode(currentMode);
+    };
+  
+    const showDatepicker = () => {
+      showMode('date');
+    };
+    const fortmatDate = () => {
+        return (date.getMonth() + 1) + "/" +date.getDate() + "/" +  date.getFullYear();
+    }
+    
     return (
         <Screen  style={{backgroundColor: '#f6f7f8'}}>
             <View style={styles.body_gray}>
-                <View style={styles.box_calendar}>
+                <TouchableOpacity  activeOpacity={1} style={styles.box_calendar} onPress={showDatepicker}>
                     <Calendar width={16} height={16} />
-                    <Text style={styles.text_calendar}>2021-05-01</Text>
+                    <Text style={styles.text_calendar}>{fortmatDate()}</Text>
                     <Icon style={styles.icon_select} name={'chevron-down-outline'} color={'#9b9b9b'} size={20} />
-                </View>
+                </TouchableOpacity>
+                {show && (
+                    <DateTimePicker
+                    testID="dateTimePicker"
+                    value={date}
+                    mode={mode}
+                    display="default"
+                    onChange={onChange}
+                    />
+                )}
                 <View style={styles.h_three_button}>
                     <TouchableOpacity  activeOpacity={1} style={(tabSlected== 1)?styles.h_button_active:styles.h_button} onPress={() => settabSlected(1)}>
                         <Text style={(tabSlected== 1)?styles.h_text_clr_white:styles.h_text_clr_black}>전체</Text>

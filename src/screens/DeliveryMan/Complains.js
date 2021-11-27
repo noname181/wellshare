@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useState} from 'react';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import {
     Text,
     View,
@@ -18,15 +19,46 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 
 function Complains() {
+    const [date, setDate] = useState(new Date());
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
+  
+    const onChange = (event, selectedDate) => {
+      const currentDate = selectedDate || date;
+      setShow(Platform.OS === 'ios');
+      setDate(currentDate);
+    };
+  
+    const showMode = (currentMode) => {
+      setShow(true);
+      setMode(currentMode);
+    };
+  
+    const showDatepicker = () => {
+      showMode('date');
+    };
+    
+    const fortmatDate = () => {
+        return (date.getMonth() + 1) + "/" +date.getDate() + "/" +  date.getFullYear();
+    }
 
     return (
         <Screen style={styles.body_42_1}>
             <View>
-                <View style={styles.box_calendar}>
+                <TouchableOpacity  activeOpacity={1} style={styles.box_calendar} onPress={showDatepicker}>
                     <CalendarIcon width={16} height={16} />
-                    <Text style={styles.text_calendar}>2021-05-01</Text>
+                    <Text style={styles.text_calendar}>{fortmatDate()}</Text>
                     <Icon style={styles.icon_select} name={'chevron-down-outline'} color={'#9b9b9b'} size={20} />
-                </View>
+                </TouchableOpacity>
+                {show && (
+                    <DateTimePicker
+                    testID="dateTimePicker"
+                    value={date}
+                    mode={mode}
+                    display="default"
+                    onChange={onChange}
+                    />
+                )}
                 <View style={styles.row__search}>
                     <View style={styles.width40}>
                         <TextInput value='010-2009-7712' style={styles.text_input} />
