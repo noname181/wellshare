@@ -16,11 +16,11 @@ function ComplainsView({ navigation }) {
                         <View>
                             <Text style={[styles.nlIcon, styles.nlIconQ]}>Q</Text>
                         </View>
-                        <View>
+                        <View style={{ flexGrow: 1}}>
                             <View style={styles.nlRelative}>
                                 <Text style={styles.nlTitle}>공지사항 1입니다</Text>
                             </View>
-                            <Text style={[styles.nlMarginTop10, {maxWidth: '80%'}]} numberOfLines={1}>1. Screen_short_2021-11-06aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</Text>
+                            <Text style={[styles.nlMarginTop10, styles.nlFileName]} numberOfLines={1}>1. Screen_short_2021-11-06aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</Text>
                             <Text style={[styles.nlDate, styles.nlMarginTop10]}>2021.10.13</Text>
                         </View>
                     </View>
@@ -28,8 +28,8 @@ function ComplainsView({ navigation }) {
                         <View>
                             <Text style={styles.nlIcon}>A</Text>
                         </View>
-                        <View style={{maxWidth: '100%'}}>
-                            <View style={[styles.nlRow, styles.nlBetween, {paddingRight: 10}]}>
+                        <View style={{ flexGrow: 1}}>
+                            <View style={[styles.nlRow, styles.nlBetween]}>
                                 <Text style={[styles.nlText,]}>공지사항 1입니다공지사항 1입니다 공지사항 1입니다</Text>
                                 <TouchableOpacity>
                                     <DeleteIcon width={13} height={16}/>
@@ -37,34 +37,8 @@ function ComplainsView({ navigation }) {
                                 
                             </View>
                             {/* File upload */}
-                            <View style={[styles.nlFilePart, styles.nlRow]}>
-                                <Text style={styles.nlFileName} numberOfLines={1}>1. Screen_short_2021-11-06</Text>
-                                <View style={styles.nlActions, styles.nlRow}>
-                                    <TouchableOpacity>
-                                        <DeleteIcon width={13} height={16}/>
-                                    </TouchableOpacity>
-                                    <Text style={styles.nlLineVerticle}></Text>
-                                    <TouchableOpacity style={{paddingTop: 2}}>
-                                        <DownloadIcon width={13} height={13}/>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                            {/* File upload */}
-                            <View style={[styles.nlFilePart, styles.nlRow]}>
-                                <Text style={styles.nlFileName} numberOfLines={1}>1. Screen_short_2021-11-06</Text>
-                                <View style={styles.nlActions, styles.nlRow}>
-                                    <TouchableOpacity>
-                                        <DeleteIcon width={13} height={16}/>
-                                    </TouchableOpacity>
-                                    <Text style={styles.nlLineVerticle}></Text>
-                                    <TouchableOpacity style={{paddingTop: 2}}>
-                                        <DownloadIcon width={13} height={13}/>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                            {/* File upload */}
-                            <View style={[styles.nlFilePart, styles.nlRow]}>
-                                <Text style={styles.nlFileName} numberOfLines={1}>1. Screen_short_2021-11-06</Text>
+                            <View style={[styles.nlFilePart, styles.nlRow, styles.nlBetween]}>
+                                <Text style={styles.nlFileName} numberOfLines={1}>1. Screen_short_2021-11-06bbbbbbbbbbbbbb</Text>
                                 <View style={styles.nlActions, styles.nlRow}>
                                     <TouchableOpacity>
                                         <DeleteIcon width={13} height={16}/>
@@ -79,7 +53,7 @@ function ComplainsView({ navigation }) {
                         </View>
                     </View>
                 </View>
-                <View style={[styles.nlCard, {backgroundColor: '#fff', padding: 20}]}>
+                <View style={[styles.nlCard, styles.nlWritePart]}>
                     <View style={styles.nlFormControl}>
                         <Picker
                             selectedValue={selectedValue}
@@ -126,7 +100,6 @@ const styles = StyleSheet.create({
     },
     nlRow: {
         flexDirection: 'row',
-        flexWrap: 'nowrap'
     },
     nlBetween: {
         justifyContent: 'space-between'
@@ -168,8 +141,7 @@ const styles = StyleSheet.create({
     },
     nlFileName: {
         fontSize: 14,
-        
-        width: '80%'
+        maxWidth: '70%'
     },
     nlDate: {
         color: '#b1b1b1',
@@ -186,15 +158,14 @@ const styles = StyleSheet.create({
         marginTop: 3
     },
     nlActions: {
-        width: '20%',
-        height: 16
+        minWidth: 56,
     },
     nlActionIcon: {
         height: 16
     },
     nlText: {
         fontSize: 14,
-        width: '80%'
+        maxWidth: '76%'
     },
     nlButtonWhite: {
         backgroundColor: '#fff',
@@ -243,6 +214,10 @@ const styles = StyleSheet.create({
     }, 
     nlMarginTop10: {
         marginTop: 10
+    },
+    nlWritePart: {
+        padding: 20,
+        backgroundColor: '#fff'
     }
 
 });
