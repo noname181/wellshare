@@ -31,7 +31,7 @@ function ComplainsView({ navigation }) {
                         <View style={{ flexGrow: 1}}>
                             <View style={[styles.nlRow, styles.nlBetween]}>
                                 <Text style={[styles.nlText,]}>공지사항 1입니다공지사항 1입니다 공지사항 1입니다</Text>
-                                <TouchableOpacity>
+                                <TouchableOpacity style={{marginTop: 2}}>
                                     <DeleteIcon width={13} height={16}/>
                                 </TouchableOpacity> 
                                 
