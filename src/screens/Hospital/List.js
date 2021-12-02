@@ -54,6 +54,8 @@ function List() {
                     mode={mode}
                     display="default"
                     onChange={onChange}
+                    
+
                     />
                 )}
                 <View style={styles.h_three_button}>
