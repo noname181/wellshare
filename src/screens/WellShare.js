@@ -7,6 +7,13 @@ function WellShare({ navigation }) {
     <Screen showHeader={false}>
       <TouchableOpacity
 
+        onPress={() => navigation.navigate('Login')}
+        style={styles.button}
+      >
+        <Text style={styles.text}>Login Page</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+
         onPress={() => navigation.navigate('User')}
         style={styles.button}
       >

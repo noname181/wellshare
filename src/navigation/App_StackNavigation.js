@@ -5,7 +5,7 @@ import Hospital_TabNavigation from '../navigation/Hospital_TabNavigation'
 import Admin_TabNavigation from '../navigation/Admin_TabNavigation'
 import DeliveryMan_TabNavigation from '../navigation/DeliveryMan_TabNavigation'
 import WellShare from '../screens/WellShare';
-import Header from '../components/Header';
+import Login from '../screens/Login';
 
 const Stack = createStackNavigator();
 
@@ -24,6 +24,11 @@ function HomeStack() {
 
                     headerShown: false
                 }}
+            />
+            <Stack.Screen
+                name="Login"
+                component={Login}
+                options={{ headerShown: false }}
             />
             <Stack.Screen
                 name="User"

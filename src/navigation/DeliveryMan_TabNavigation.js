@@ -7,7 +7,7 @@ import Screen from '../components/Screen';
 import Main from '../screens/DeliveryMan/Main';
 import NoticeScreen from '../screens/DeliveryMan/Notice';
 import ComplainsScreen from '../screens/DeliveryMan/Complains';
-import ComplainsViewScreen  from '../screens/DeliveryMan/ComplainsView';
+import ComplainsViewScreen from '../screens/DeliveryMan/ComplainsView';
 import ListView from '../screens/DeliveryMan/ListView';
 import MyProfileScreen from '../screens/DeliveryMan/MyProfile';
 import List_page from '../screens/DeliveryMan/List';
@@ -25,16 +25,16 @@ function TabNavigation({ route, navigation }) {
 
     const [isReady, setIsReady] = useState(false);
 
-    useEffect(() =>{
-        InteractionManager.runAfterInteractions(() =>{
+    useEffect(() => {
+        InteractionManager.runAfterInteractions(() => {
             setIsReady(true)
         })
-        return () =>{
+        return () => {
 
         };
     }, []);
     return (
-        isReady ?  <Tab.Navigator
+        isReady ? <Tab.Navigator
             screenOptions={{
                 tabBarShowLabel: false,
                 tabBarStyle: {
@@ -97,7 +97,7 @@ function TabNavigation({ route, navigation }) {
                 options={{
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
                         <Notice height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
-                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>ComplainsView</Text>
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>Complains</Text>
                     </View>),
                     header: props => <Header title="공지사항" isBack={false} {...props} />
                 }}
@@ -123,7 +123,7 @@ function TabNavigation({ route, navigation }) {
                         <Profile_Icon height={19} width={25} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>나의정보</Text>
                     </View>),
-                     header: props => <Header title="나의정보" isBack={false} {...props} />
+                    header: props => <Header title="나의정보" isBack={false} {...props} />
 
                 }}
 
