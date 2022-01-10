@@ -76,7 +76,7 @@ function Complains({ navigation }) {
                     <TouchableOpacity style={styles.row__info__child} onPress={() => navigation.navigate('ComplainView')}>
                         <View style={styles.row__info__child__text}>
                             <View>
-                                <Text style={styles.row__info__child__text1}>비번분실했어요3</Text>
+                                <Text style={styles.row__info__child__text1}>비번분실했어요</Text>
                             </View>
                             <View>
                                 <Text style={styles.row__info__child__text3}>2022.01.1 | 09:01</Text>
