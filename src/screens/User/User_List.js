@@ -1,72 +1,140 @@
-import React ,{useState} from 'react'
+import React, { useState } from 'react'
 import {
     Text,
     View,
     StyleSheet,
     Image,
     TouchableOpacity,
+    FlatList
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Screen from '../../components/Screen';
 import Calendar from '../../images/svg/CalendarIcon';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+const DATA = [
+    {
+        id: '1',
+        regdate: '2022-01-02',
+        name: '조형래 ',
+        phone: '010-2009-7723',
+        active: true
+    },
+    {
+        id: '2',
+        regdate: '2022-01-02',
+        name: '김상수 ',
+        phone: '010-5242-4213',
+        active: false
+    },
+    {
+        id: '3',
+        regdate: '2022-01-02',
+        name: '강우식 ',
+        phone: '010-5213-3423',
+        active: false
+    },
+    {
+        id: '4',
+        regdate: '2022-01-02',
+        name: '이명상 ',
+        phone: '010-5324-3231',
+        active: false
+    },
+
+];
+
+const Item = ({ item }) => (
+    <View style={styles.h_box_list}>
+        <View style={styles.h_box_list__first}>
+            <View style={styles.h_box_list__first_child1}>
+                <Text style={styles.h_bl_f_c1_text}>{item.regdate}</Text>
+            </View>
+            <View style={styles.h_box_list__first_child2}>
+                <Text style={styles.h_bl_f_c2_text1}>{item.name} </Text>
+                <Text style={styles.h_bl_f_c2_text2}>({item.phone})</Text>
+            </View>
+        </View>
+        <View style={styles.h_box_list__second}>
+            <View>
+                <Text style={styles.h_bl_s_text1}>1-1완모</Text>
+            </View>
+            <View>
+                <TouchableOpacity style={item.active ? styles.h_button_list_purple : styles.h_button_list_green} activeOpacity={0.8}>
+                    <Text style={item.active ? styles.h_text_small_clr_purple : styles.h_text_small_clr_green}>완료</Text>
+                </TouchableOpacity>
+            </View>
+        </View>
+    </View>
+);
+
 function User_List() {
     const [tabSlected, settabSlected] = useState(1);
-    
+
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
-  
+
     const onChange = (event, selectedDate) => {
-      const currentDate = selectedDate || date;
-      setShow(Platform.OS === 'ios');
-      setDate(currentDate);
+        console.log(selectedDate)
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'ios');
+        setDate(currentDate);
     };
-  
+
     const showMode = (currentMode) => {
-      setShow(true);
-      setMode(currentMode);
+        setShow(true);
+        setMode(currentMode);
     };
-  
+
     const showDatepicker = () => {
-      showMode('date');
+        showMode('date');
     };
     const fortmatDate = () => {
-        return (date.getMonth() + 1) + "/" +date.getDate() + "/" +  date.getFullYear();
+        return date.getFullYear() + "/" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate());
     }
+
+
+
     return (
         <Screen>
             <View style={styles.body_gray}>
-                <TouchableOpacity  activeOpacity={1} style={styles.box_calendar} onPress={showDatepicker}>
+                <TouchableOpacity activeOpacity={1} style={styles.box_calendar} onPress={showDatepicker}>
                     <Calendar width={16} height={16} />
                     <Text style={styles.text_calendar}>{fortmatDate()}</Text>
                     <Icon style={styles.icon_select} name={'chevron-down-outline'} color={'#9b9b9b'} size={20} />
                 </TouchableOpacity>
                 {show && (
-                <DateTimePicker
-                testID="dateTimePicker"
-                value={date}
-                mode={mode}
-                display="default"
-                onChange={onChange}
-                />
-            )}
+                    <DateTimePicker
+                        testID="dateTimePicker"
+                        value={date}
+                        mode={mode}
+                        display="default"
+                        onChange={onChange}
+                    />
+                )}
                 <View style={styles.h_three_button}>
-                    <TouchableOpacity  activeOpacity={1} style={(tabSlected== 1)?styles.h_button_active:styles.h_button} onPress={() => settabSlected(1)}>
-                        <Text style={(tabSlected== 1)?styles.h_text_clr_white:styles.h_text_clr_black}>전체</Text>
+                    <TouchableOpacity activeOpacity={1} style={(tabSlected == 1) ? styles.h_button_active : styles.h_button} onPress={() => settabSlected(1)}>
+                        <Text style={(tabSlected == 1) ? styles.h_text_clr_white : styles.h_text_clr_black}>전체</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={1} style={(tabSlected== 2)?styles.h_button_active:styles.h_button} onPress={() => settabSlected(2)}>
-                        <Text style={(tabSlected== 2)?styles.h_text_clr_white:styles.h_text_clr_black}>배송전</Text>
+                    <TouchableOpacity activeOpacity={1} style={(tabSlected == 2) ? styles.h_button_active : styles.h_button} onPress={() => settabSlected(2)}>
+                        <Text style={(tabSlected == 2) ? styles.h_text_clr_white : styles.h_text_clr_black}>배송전</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={1} style={(tabSlected== 3)?styles.h_button_active:styles.h_button} onPress={() => settabSlected(3)}>
-                        <Text style={(tabSlected== 3)?styles.h_text_clr_white:styles.h_text_clr_black}>완료</Text>
+                    <TouchableOpacity activeOpacity={1} style={(tabSlected == 3) ? styles.h_button_active : styles.h_button} onPress={() => settabSlected(3)}>
+                        <Text style={(tabSlected == 3) ? styles.h_text_clr_white : styles.h_text_clr_black}>완료</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.h_box_list}>
+                <FlatList
+                    data={DATA}
+                    renderItem={Item}
+                    keyExtractor={item => item.id}
+                    style={styles.nlList}
+                    showsVerticalScrollIndicator={false}
+                />
+                {/* <View style={styles.h_box_list}>
                     <View style={styles.h_box_list__first}>
                         <View style={styles.h_box_list__first_child1}>
-                            <Text style={styles.h_bl_f_c1_text}>2021.05.08</Text>
+                            <Text style={styles.h_bl_f_c1_text}>2022-01-02</Text>
                         </View>
                         <View style={styles.h_box_list__first_child2}>
                             <Text style={styles.h_bl_f_c2_text1}>조형래 </Text>
@@ -75,7 +143,7 @@ function User_List() {
                     </View>
                     <View style={styles.h_box_list__second}>
                         <View>
-                            <Text style={styles.h_bl_s_text1}>1-1 완모</Text>
+                            <Text style={styles.h_bl_s_text1}>1-1완모</Text>
                         </View>
                         <View>
                             <TouchableOpacity style={styles.h_button_list_purple} activeOpacity={0.8}>
@@ -87,16 +155,16 @@ function User_List() {
                 <View style={styles.h_box_list}>
                     <View style={styles.h_box_list__first}>
                         <View style={styles.h_box_list__first_child1}>
-                            <Text style={styles.h_bl_f_c1_text}>2021.05.08</Text>
+                            <Text style={styles.h_bl_f_c1_text}>2022-01-02</Text>
                         </View>
                         <View style={styles.h_box_list__first_child2}>
-                            <Text style={styles.h_bl_f_c2_text1}>조형래 </Text>
-                            <Text style={styles.h_bl_f_c2_text2}>(010-2009-7723)</Text>
+                            <Text style={styles.h_bl_f_c2_text1}>김상수 </Text>
+                            <Text style={styles.h_bl_f_c2_text2}>(010-5242-4213)</Text>
                         </View>
                     </View>
                     <View style={styles.h_box_list__second}>
                         <View>
-                            <Text style={styles.h_bl_s_text1}>1-1 완모</Text>
+                            <Text style={styles.h_bl_s_text1}>1-1완모</Text>
                         </View>
                         <View>
                             <TouchableOpacity style={styles.h_button_list_green} activeOpacity={0.8}>
@@ -104,13 +172,16 @@ function User_List() {
                             </TouchableOpacity>
                         </View>
                     </View>
-                </View>
+                </View> */}
 
             </View>
         </Screen>
     );
 }
 const styles = StyleSheet.create({
+    nlList: {
+        flex: 1
+    },
     h_box_list: {
         backgroundColor: '#fff',
         borderWidth: 0,
@@ -123,7 +194,6 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     h_box_list__first: {
-        display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingTop: 14,
@@ -131,7 +201,6 @@ const styles = StyleSheet.create({
         paddingRight: 18,
     },
     h_box_list__second: {
-        display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -141,7 +210,6 @@ const styles = StyleSheet.create({
         paddingRight: 18,
     },
     h_box_list__first_child2: {
-        display: 'flex',
         flexDirection: 'row'
     },
     h_bl_f_c1_text: {
@@ -221,7 +289,6 @@ const styles = StyleSheet.create({
         fontSize: 15,
     },
     h_three_button: {
-        display: 'flex',
         justifyContent: 'space-between',
         marginTop: 15,
         marginBottom: 15,
@@ -240,6 +307,7 @@ const styles = StyleSheet.create({
     },
     body_gray: {
         backgroundColor: 'f8f8f8',
+        flex: 1
     },
     box_calendar: {
         backgroundColor: '#fff',
