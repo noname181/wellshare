@@ -6,9 +6,8 @@ import Screen from '../components/Screen';
 //Screens
 import Main from '../screens/DeliveryMan/Main';
 import NoticeScreen from '../screens/DeliveryMan/Notice';
-import ComplainsScreen from '../screens/DeliveryMan/Complains';
-import ComplainsViewScreen from '../screens/DeliveryMan/ComplainsView';
-import ListView from '../screens/DeliveryMan/ListView';
+import DeliveryMan_ComplainStack from '../navigation/DeliveryMan_ComplainStack';
+import DeliveryMan_ListStack from '../navigation/DeliveryMan_ListStack';
 import MyProfileScreen from '../screens/DeliveryMan/MyProfile';
 import List_page from '../screens/DeliveryMan/List';
 //Images
@@ -68,26 +67,28 @@ function TabNavigation({ route, navigation }) {
 
             /> */}
             <Tab.Screen
-                name="ListView"
-                component={ListView}
+                name="ListStack"
+                component={DeliveryMan_ListStack}
                 options={{
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
                         <Notice height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
                     </View>),
-                    header: props => <Header title="명단" isBack={true} {...props} />
+                    // header: props => <Header title="명단" isBack={true} {...props} />
+                    headerShown: false
                 }}
 
             />
             <Tab.Screen
-                name="ComplainsScreen"
-                component={ComplainsScreen}
+                name="ComplainStack"
+                component={DeliveryMan_ComplainStack}
                 options={{
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
                         <Deliveryman_complain height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>민원</Text>
                     </View>),
-                    header: props => <Header title="민원" isBack={false} {...props} />
+                    // header: props => <Header title="민원" isBack={false} {...props} />
+                    headerShown: false
                 }}
 
             />
@@ -102,19 +103,19 @@ function TabNavigation({ route, navigation }) {
                     header: props => <Header title="민원" isBack={false} {...props} />
                 }}
 
-            />
+            /> */}
             <Tab.Screen
                 name="NoticeScreen"
                 component={NoticeScreen}
                 options={{
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
                         <Notice height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
-                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>공지사항</Text>
                     </View>),
                     header: props => <Header title="공지사항" isBack={false} {...props} />
                 }}
 
-            /> */}
+            />
             <Tab.Screen
                 name="MyProfile"
                 component={MyProfileScreen}
@@ -128,7 +129,7 @@ function TabNavigation({ route, navigation }) {
                 }}
 
             />
-        </Tab.Navigator> : <><Header isBack={true} title="명단"></Header><Screen>
+        </Tab.Navigator> : <><Header isBack={false} title="명단"></Header><Screen>
 
         </Screen></>
     )

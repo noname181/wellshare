@@ -47,36 +47,8 @@ const DATA = [
 
 ];
 
-const Item = ({ item }) => (
-    <View style={styles.h_box_list}>
-        <View style={styles.h_box_list__first}>
-            <View>
-                <Text style={styles.h_bl_s_text1}>{item.regdate} <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text> 8:00</Text>
-            </View>
-            <View>
-                <TouchableOpacity style={styles.h_button_list_purple} activeOpacity={0.8}>
-                    <Text style={styles.h_text_small_clr_purple}>완료</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-        <View style={styles.h_box_list__second}>
-            <View style={styles.h_box_list__first_child1}>
-                <View style={{ flexDirection: 'row' }}>
-                    <Text style={styles.h_f_c1_text}>{item.name}</Text>
-                    <Text style={styles.h_f_c1_phone}>{item.phone}</Text>
-                </View>
-                <View style={{ paddingTop: 5 }}>
-                    <Text style={styles.h_bl_f_c1_text}>1-1완모</Text>
-                </View>
-            </View>
-            <View style={styles.h_box_list__first_child2}>
-                <Text style={styles.h_bl_f_c2_text1}>1-1완모 </Text>
-            </View>
-        </View>
-    </View>
-);
 
-function List() {
+function List({ navigation }) {
     const [tabSlected, settabSlected] = useState(1);
 
     const [date, setDate] = useState(new Date());
@@ -101,6 +73,35 @@ function List() {
     const fortmatDate = () => {
         return date.getFullYear() + "/" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + date.getDate();
     }
+    const Item = ({ item }) => (
+        <TouchableOpacity style={styles.h_box_list} onPress={() => navigation.navigate('ListView')}>
+            <View style={styles.h_box_list__first}>
+                <View>
+                    <Text style={styles.h_bl_s_text1}>{item.regdate} <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text> 8:00</Text>
+                </View>
+                <View>
+                    <TouchableOpacity style={styles.h_button_list_purple} activeOpacity={0.8}>
+                        <Text style={styles.h_text_small_clr_purple}>완료</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+            <View style={styles.h_box_list__second}>
+                <View style={styles.h_box_list__first_child1}>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={styles.h_f_c1_text}>{item.name}</Text>
+                        <Text style={styles.h_f_c1_phone}>{item.phone}</Text>
+                    </View>
+                    <View style={{ paddingTop: 5 }}>
+                        <Text style={styles.h_bl_f_c1_text}>1-1완모</Text>
+                    </View>
+                </View>
+                <View style={styles.h_box_list__first_child2}>
+                    <Text style={styles.h_bl_f_c2_text1}>1-1완모 </Text>
+                </View>
+            </View>
+        </TouchableOpacity>
+    );
+
 
     return (
         <Screen style={{ backgroundColor: '#f6f7f8' }}>

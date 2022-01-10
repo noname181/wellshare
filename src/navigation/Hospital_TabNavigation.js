@@ -56,9 +56,9 @@ function TabNavigation({ route, navigation }) {
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
                         <Hospital_list height={15} width={18} color={focused ? '#7c257a' : '#d8d8d8'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#d8d8d8' }]}>명단</Text>
-                        
+
                     </View>),
-                    header: props => <Header title="명단" isBack={true} {...props} />
+                    header: props => <Header title="명단" isBack={false} {...props} />
                 }}
 
             />
@@ -101,7 +101,7 @@ function TabNavigation({ route, navigation }) {
 
             />
 
-        </Tab.Navigator> : <><Header isBack={true} title="명단"></Header><Screen>
+        </Tab.Navigator> : <><Header isBack={false} title="명단"></Header><Screen>
 
         </Screen></>
     )

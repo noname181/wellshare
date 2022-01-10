@@ -43,7 +43,7 @@ function TabNavigation({ route, navigation }) {
                         <List height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
                     </View>),
-                      header: props => <Header title="명단" isBack={false} {...props} />
+                    header: props => <Header title="명단" isBack={false} {...props} />
 
                 }}
 
@@ -72,7 +72,7 @@ function TabNavigation({ route, navigation }) {
                     header: props => <Header title="나의정보" isBack={false} {...props} />
                 }}
             />
-        </Tab.Navigator> : <><Header isBack={true} title="명단"></Header><Screen>
+        </Tab.Navigator> : <><Header isBack={false} title="명단"></Header><Screen>
 
         </Screen></>
     )

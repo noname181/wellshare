@@ -18,7 +18,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 
 
-function Complains() {
+function Complains({ navigation }) {
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
@@ -72,22 +72,22 @@ function Complains() {
                         </TouchableOpacity>
                     </View>
                 </View>
-                {/* <View style={styles.row__info}>
-                    <View style={styles.row__info__child}>
+                <View style={styles.row__info}>
+                    <TouchableOpacity style={styles.row__info__child} onPress={() => navigation.navigate('ComplainView')}>
                         <View style={styles.row__info__child__text}>
                             <View>
                                 <Text style={styles.row__info__child__text1}>비번분실했어요3</Text>
                             </View>
                             <View>
-                                <Text style={styles.row__info__child__text3}>2021.10.22 | 09:01</Text>
+                                <Text style={styles.row__info__child__text3}>2022.01.1 | 09:01</Text>
                             </View>
                         </View>
                         <View style={styles.h_circle_blue}>
                             <Text style={styles.h_circle_number}>2</Text>
                         </View>
-                    </View>
+                    </TouchableOpacity>
                 </View>
-                <View style={styles.row__info}>
+                {/* <View style={styles.row__info}>
                     <View style={styles.row__info__child}>
                         <View style={styles.row__info__child__text}>
                             <View>

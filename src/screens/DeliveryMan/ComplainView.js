@@ -5,7 +5,9 @@ import Screen from '../../components/Screen';
 //Images
 import DeleteIcon from '../../images/svg/DeleteIcon';
 import DownloadIcon from '../../images/svg/DownloadIcon';
-function ComplainsView({ navigation }) {
+
+
+function ComplainView({ navigation }) {
     const [selectedValue, setSelectedValue] = useState("java");
 
     return (
@@ -222,4 +224,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default ComplainsView
+export default ComplainView
