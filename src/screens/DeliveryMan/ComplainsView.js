@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
-import {Picker} from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
 import Screen from '../../components/Screen';
 //Images
 import DeleteIcon from '../../images/svg/DeleteIcon';
@@ -12,15 +12,15 @@ function ComplainsView({ navigation }) {
         <ScrollView>
             <Screen >
                 <View style={styles.nlCard}>
-                    <View style={[styles.nlQuestion,styles.nlCardSpace, styles.nlRow]}>
+                    <View style={[styles.nlQuestion, styles.nlCardSpace, styles.nlRow]}>
                         <View>
                             <Text style={[styles.nlIcon, styles.nlIconQ]}>Q</Text>
                         </View>
-                        <View style={{ flexGrow: 1}}>
+                        <View style={{ flexGrow: 1 }}>
                             <View style={styles.nlRelative}>
-                                <Text style={styles.nlTitle}>공지사항 1입니다</Text>
+                                <Text style={styles.nlTitle}>비밀번호를 분실했어요</Text>
                             </View>
-                            <Text style={[styles.nlMarginTop10, styles.nlFileName]} numberOfLines={1}>1. Screen_short_2021-11-06aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</Text>
+                            <Text style={[styles.nlMarginTop10, styles.nlFileName]} numberOfLines={1}>어떻게 비번을 찾을수 있죠?</Text>
                             <Text style={[styles.nlDate, styles.nlMarginTop10]}>2021.10.13</Text>
                         </View>
                     </View>
@@ -28,28 +28,28 @@ function ComplainsView({ navigation }) {
                         <View>
                             <Text style={styles.nlIcon}>A</Text>
                         </View>
-                        <View style={{ flexGrow: 1}}>
+                        <View style={{ flexGrow: 1 }}>
                             <View style={[styles.nlRow, styles.nlBetween]}>
-                                <Text style={[styles.nlText,]}>공지사항 1입니다공지사항 1입니다 공지사항 1입니다</Text>
-                                <TouchableOpacity style={{marginTop: 2}}>
-                                    <DeleteIcon width={13} height={16}/>
-                                </TouchableOpacity> 
-                                
+                                <Text style={[styles.nlText,]}>안녕하세요. 어플은 비밀번호가 아닌 OTP인증을 사용하고 있습니다. 사용법을 첨부합니다.</Text>
+                                <TouchableOpacity style={{ marginTop: 2 }}>
+                                    <DeleteIcon width={13} height={16} />
+                                </TouchableOpacity>
+
                             </View>
                             {/* File upload */}
                             <View style={[styles.nlFilePart, styles.nlRow, styles.nlBetween]}>
-                                <Text style={styles.nlFileName} numberOfLines={1}>1. Screen_short_2021-11-06bbbbbbbbbbbbbb</Text>
+                                <Text style={styles.nlFileName} numberOfLines={1}>1. Screen_short_2021-11-06</Text>
                                 <View style={styles.nlActions, styles.nlRow}>
                                     <TouchableOpacity>
-                                        <DeleteIcon width={13} height={16}/>
+                                        <DeleteIcon width={13} height={16} />
                                     </TouchableOpacity>
                                     <Text style={styles.nlLineVerticle}></Text>
-                                    <TouchableOpacity style={{paddingTop: 2}}>
-                                        <DownloadIcon width={13} height={13}/>
+                                    <TouchableOpacity style={{ paddingTop: 2 }}>
+                                        <DownloadIcon width={13} height={13} />
                                     </TouchableOpacity>
                                 </View>
                             </View>
-                            <Text style={[styles.nlDate, {marginTop: 10}]}>2021.10.13</Text>
+                            <Text style={[styles.nlDate, { marginTop: 10 }]}>2021.10.13</Text>
                         </View>
                     </View>
                 </View>
@@ -60,20 +60,20 @@ function ComplainsView({ navigation }) {
                             style={styles.nlPicker}
                             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                         >
-                            <Picker.Item label="공지사항" value="java" />
+                            <Picker.Item label="안내사항" value="java" />
                             <Picker.Item label="1입니다공지사항 " value="js" />
                         </Picker>
                     </View>
-                    
+
                     <TextInput multiline={true}
-                            numberOfLines={8} 
-                            style={styles.nlTextInput}>
+                        numberOfLines={8}
+                        style={styles.nlTextInput}>
 
                     </TextInput>
                     <TouchableOpacity >
                         <Text style={[styles.nlFont16, styles.nlBold, styles.nlButtonWhite]} >
                             Write
-                        </Text> 
+                        </Text>
                     </TouchableOpacity>
                 </View>
             </Screen>
@@ -122,17 +122,17 @@ const styles = StyleSheet.create({
         width: 24,
         height: 24,
         borderRadius: 20,
-        textAlign:'center',
+        textAlign: 'center',
         paddingTop: 1,
         marginRight: 8
     },
     nlIconQ: {
         backgroundColor: '#7c257a'
     },
-    nlTitle: { 
+    nlTitle: {
         fontSize: 18,
         fontWeight: 'bold',
-        
+
     },
     nlFilePart: {
         paddingVertical: 5,
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         width: 140,
         textAlign: 'center',
-        height: 50, 
+        height: 50,
         lineHeight: 28
     },
     nlFont16: {
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     nlPicker: {
         width: '100%',
         height: 40,
-        
+
     },
     nlTextInput: {
         marginTop: 10,
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         textAlignVertical: 'top',
         paddingHorizontal: 16,
-    }, 
+    },
     nlMarginTop10: {
         marginTop: 10
     },

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, ScrollView, Image } from 'react-native';
 import Screen from '../../components/Screen';
-import {Picker} from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
 
 
 
@@ -11,16 +11,16 @@ function List() {
     const [tabSlected, settabSlected] = useState(1);
     return (
         <View>
-          <View style={[styles.nlFixedAtTop]}>
-                <View style={[styles.h_width_select_half, {marginTop: 10},{marginBottom: 10}]}>
+            <View style={[styles.nlFixedAtTop]}>
+                <View style={[styles.h_width_select_half, { marginTop: 10 }, { marginBottom: 10 }]}>
                     <View style={styles.nlFormControl}>
                         <Picker
                             selectedValue={selectedValue}
                             style={styles.nlPicker}
                             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                         >
-                            <Picker.Item label="2021-05" value="java" />
-                            <Picker.Item label="2021-06" value="js" />
+                            <Picker.Item label="2022-01" value="java" />
+                            <Picker.Item label="2022-02" value="js" />
                         </Picker>
                     </View>
                     <View style={styles.nlFormControl}>
@@ -29,8 +29,8 @@ function List() {
                             style={styles.nlPicker}
                             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                         >
-                            <Picker.Item label="05-06" value="java" />
-                            <Picker.Item label="06-07" value="js" />
+                            <Picker.Item label="1" value="java" />
+                            <Picker.Item label="2" value="js" />
                         </Picker>
                     </View>
                 </View>
@@ -41,7 +41,7 @@ function List() {
                             style={styles.nlPicker}
                             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                         >
-                            <Picker.Item label="공지사항" value="java" />
+                            <Picker.Item label="배송종류" value="java" />
                             <Picker.Item label="1입니다공지사항 " value="js" />
                         </Picker>
                     </View>
@@ -51,146 +51,146 @@ function List() {
                             style={styles.nlPicker}
                             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                         >
-                            <Picker.Item label="공지사항" value="java" />
+                            <Picker.Item label="타입" value="java" />
                             <Picker.Item label="1입니다공지사항 " value="js" />
                         </Picker>
                     </View>
                 </View>
 
-          </View>
-        <ScrollView>
-            <Screen style={{paddingTop: 115,paddingBottom: 30}}>
-                <View style={[styles.nlRow, styles.nlBetween, styles.nlListTabTop]}>
-                    <TouchableOpacity activeOpacity={1} style={(tabSlected== 1)?styles.nlTabTopSelected:styles.nlTabTop} onPress={() => settabSlected(1)}>
-                        <Text style={(tabSlected== 1)?styles.nlTabTopTextSelected:styles.nlTabTopText}>전체</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={1} style={(tabSlected== 2)?styles.nlTabTopSelected:styles.nlTabTop} onPress={() => settabSlected(2)}>
-                        <Text style={(tabSlected== 2)?styles.nlTabTopTextSelected:styles.nlTabTopText}>대상자</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={1} style={(tabSlected== 3)?styles.nlTabTopSelected:styles.nlTabTop} onPress={() => settabSlected(3)}>
-                        <Text style={(tabSlected== 3)?styles.nlTabTopTextSelected:styles.nlTabTopText}>기사</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.h_box_list}>
-                    <View style={styles.h_box_list__first}>
-                        <View>
-                            <Text style={styles.h_bl_s_text1}>2021.05.25 <Text style={{color: '#dddddd',fontSize: 13}}> | </Text> 8:00</Text>
-                        </View>
-                        <View>
-                            <TouchableOpacity style={styles.h_button_list_purple} activeOpacity={0.8}>
-                                <Text style={styles.h_text_small_clr_purple}>완료</Text>
-                            </TouchableOpacity>
-                        </View>
+            </View>
+            <ScrollView>
+                <Screen style={{ paddingTop: 115, paddingBottom: 30 }}>
+                    <View style={[styles.nlRow, styles.nlBetween, styles.nlListTabTop]}>
+                        <TouchableOpacity activeOpacity={1} style={(tabSlected == 1) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(1)}>
+                            <Text style={(tabSlected == 1) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>전체</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity activeOpacity={1} style={(tabSlected == 2) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(2)}>
+                            <Text style={(tabSlected == 2) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>대상자</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity activeOpacity={1} style={(tabSlected == 3) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(3)}>
+                            <Text style={(tabSlected == 3) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>기사</Text>
+                        </TouchableOpacity>
                     </View>
-                    <View style={styles.h_box_list__second}>
-                        <View style={styles.h_box_list__first_child1}>
-                            <View style={{flexDirection: 'row'}}>
-                                <Text style={styles.h_f_c1_text}>조형래</Text>
-                                <Text style={styles.h_f_c1_phone}>010-2009-7723</Text>
+                    <View style={styles.h_box_list}>
+                        <View style={styles.h_box_list__first}>
+                            <View>
+                                <Text style={styles.h_bl_s_text1}>2022.01.06 <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text> 8:00</Text>
                             </View>
-                            <View style={{paddingTop: 5}}>
-                                <Text style={styles.h_bl_f_c1_text}>개포로 20길 17, 2층</Text>
+                            <View>
+                                <TouchableOpacity style={styles.h_button_list_purple} activeOpacity={0.8}>
+                                    <Text style={styles.h_text_small_clr_purple}>완료</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
-                        <View style={styles.h_box_list__first_child2}>
-                            <Text style={styles.h_bl_f_c2_text1}>1-1완모 </Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.h_box_list}>
-                    <View style={styles.h_box_list__first}>
-                        <View>
-                            <Text style={styles.h_bl_s_text1}>2021.05.25 <Text style={{color: '#dddddd',fontSize: 13}}> | </Text> 8:00</Text>
-                        </View>
-                        <View>
-                            <TouchableOpacity style={styles.h_button_list_green} activeOpacity={0.8}>
-                                <Text style={styles.h_text_small_clr_green}>배송전</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <View style={styles.h_box_list__second}>
-                        <View style={styles.h_box_list__first_child1}>
-                            <View style={{flexDirection: 'row'}}>
-                                <Text style={styles.h_f_c1_text}>조형래</Text>
-                                <Text style={styles.h_f_c1_phone}>010-2009-7723</Text>
+                        <View style={styles.h_box_list__second}>
+                            <View style={styles.h_box_list__first_child1}>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={styles.h_f_c1_text}>조형래</Text>
+                                    <Text style={styles.h_f_c1_phone}>010-2009-7723</Text>
+                                </View>
+                                <View style={{ paddingTop: 5 }}>
+                                    <Text style={styles.h_bl_f_c1_text}>개포로 20길 17, 2층</Text>
+                                </View>
                             </View>
-                            <View style={{paddingTop: 5}}>
-                                <Text style={styles.h_bl_f_c1_text}>개포로 20길 17, 2층</Text>
+                            <View style={styles.h_box_list__first_child2}>
+                                <Text style={styles.h_bl_f_c2_text1}>1-1완모 </Text>
                             </View>
                         </View>
-                        <View style={styles.h_box_list__first_child2}>
-                            <Text style={styles.h_bl_f_c2_text1}>1-1완모 </Text>
-                        </View>
                     </View>
-                </View>
-                <View style={styles.h_box_list}>
-                    <View style={styles.h_box_list__first}>
-                        <View>
-                            <Text style={styles.h_bl_s_text1}>2021.05.25 <Text style={{color: '#dddddd',fontSize: 13}}> | </Text> 8:00</Text>
-                        </View>
-                        <View>
-                            <TouchableOpacity style={styles.h_button_list_green} activeOpacity={0.8}>
-                                <Text style={styles.h_text_small_clr_green}>배송전</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <View style={styles.h_box_list__second}>
-                        <View style={styles.h_box_list__first_child1}>
-                            <View style={{flexDirection: 'row'}}>
-                                <Text style={styles.h_f_c1_text}>조형래</Text>
-                                <Text style={styles.h_f_c1_phone}>010-2009-7723</Text>
+                    {/* <View style={styles.h_box_list}>
+                        <View style={styles.h_box_list__first}>
+                            <View>
+                                <Text style={styles.h_bl_s_text1}>2021.05.25 <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text> 8:00</Text>
                             </View>
-                            <View style={{paddingTop: 5}}>
-                                <Text style={styles.h_bl_f_c1_text}>개포로 20길 17, 2층</Text>
+                            <View>
+                                <TouchableOpacity style={styles.h_button_list_green} activeOpacity={0.8}>
+                                    <Text style={styles.h_text_small_clr_green}>배송전</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
-                        <View style={styles.h_box_list__first_child2}>
-                            <Text style={styles.h_bl_f_c2_text1}>1-1완모 </Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.h_box_list}>
-                    <View style={styles.h_box_list__first}>
-                        <View>
-                            <Text style={styles.h_bl_s_text1}>2021.05.25 <Text style={{color: '#dddddd',fontSize: 13}}> | </Text> 8:00</Text>
-                        </View>
-                        <View>
-                            <TouchableOpacity style={styles.h_button_list_green} activeOpacity={0.8}>
-                                <Text style={styles.h_text_small_clr_green}>배송전</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <View style={styles.h_box_list__second}>
-                        <View style={styles.h_box_list__first_child1}>
-                            <View style={{flexDirection: 'row'}}>
-                                <Text style={styles.h_f_c1_text}>조형래</Text>
-                                <Text style={styles.h_f_c1_phone}>010-2009-7723</Text>
+                        <View style={styles.h_box_list__second}>
+                            <View style={styles.h_box_list__first_child1}>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={styles.h_f_c1_text}>조형래</Text>
+                                    <Text style={styles.h_f_c1_phone}>010-2009-7723</Text>
+                                </View>
+                                <View style={{ paddingTop: 5 }}>
+                                    <Text style={styles.h_bl_f_c1_text}>개포로 20길 17, 2층</Text>
+                                </View>
                             </View>
-                            <View style={{paddingTop: 5}}>
-                                <Text style={styles.h_bl_f_c1_text}>개포로 20길 17, 2층</Text>
+                            <View style={styles.h_box_list__first_child2}>
+                                <Text style={styles.h_bl_f_c2_text1}>1-1완모 </Text>
                             </View>
                         </View>
-                        <View style={styles.h_box_list__first_child2}>
-                            <Text style={styles.h_bl_f_c2_text1}>1-1완모 </Text>
+                    </View>
+                    <View style={styles.h_box_list}>
+                        <View style={styles.h_box_list__first}>
+                            <View>
+                                <Text style={styles.h_bl_s_text1}>2021.05.25 <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text> 8:00</Text>
+                            </View>
+                            <View>
+                                <TouchableOpacity style={styles.h_button_list_green} activeOpacity={0.8}>
+                                    <Text style={styles.h_text_small_clr_green}>배송전</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        <View style={styles.h_box_list__second}>
+                            <View style={styles.h_box_list__first_child1}>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={styles.h_f_c1_text}>조형래</Text>
+                                    <Text style={styles.h_f_c1_phone}>010-2009-7723</Text>
+                                </View>
+                                <View style={{ paddingTop: 5 }}>
+                                    <Text style={styles.h_bl_f_c1_text}>개포로 20길 17, 2층</Text>
+                                </View>
+                            </View>
+                            <View style={styles.h_box_list__first_child2}>
+                                <Text style={styles.h_bl_f_c2_text1}>1-1완모 </Text>
+                            </View>
                         </View>
                     </View>
-                </View>
+                    <View style={styles.h_box_list}>
+                        <View style={styles.h_box_list__first}>
+                            <View>
+                                <Text style={styles.h_bl_s_text1}>2021.05.25 <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text> 8:00</Text>
+                            </View>
+                            <View>
+                                <TouchableOpacity style={styles.h_button_list_green} activeOpacity={0.8}>
+                                    <Text style={styles.h_text_small_clr_green}>배송전</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        <View style={styles.h_box_list__second}>
+                            <View style={styles.h_box_list__first_child1}>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={styles.h_f_c1_text}>조형래</Text>
+                                    <Text style={styles.h_f_c1_phone}>010-2009-7723</Text>
+                                </View>
+                                <View style={{ paddingTop: 5 }}>
+                                    <Text style={styles.h_bl_f_c1_text}>개포로 20길 17, 2층</Text>
+                                </View>
+                            </View>
+                            <View style={styles.h_box_list__first_child2}>
+                                <Text style={styles.h_bl_f_c2_text1}>1-1완모 </Text>
+                            </View>
+                        </View>
+                    </View> */}
 
-            </Screen>
-        </ScrollView>
+                </Screen>
+            </ScrollView>
         </View>
     );
 }
 const styles = StyleSheet.create({
-    h_f_c1_text:{
+    h_f_c1_text: {
         color: 'black',
         fontSize: 15,
         fontWeight: 'bold',
     },
-    h_f_c1_phone:{
+    h_f_c1_phone: {
         color: 'black',
         fontSize: 15,
-        paddingLeft:10,
+        paddingLeft: 10,
     },
     h_box_list: {
         backgroundColor: '#fff',
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         elevation: 4,
         marginBottom: 10,
-        
+
     },
     h_box_list__second: {
         display: 'flex',
@@ -344,7 +344,7 @@ const styles = StyleSheet.create({
     },
     nlTabTopText: {
         textAlign: 'center'
-     },
+    },
     nlFormControl: {
         borderStyle: 'solid',
         borderWidth: 1,
@@ -355,9 +355,9 @@ const styles = StyleSheet.create({
         width: '49%',
         backgroundColor: '#f3f3f3',
         justifyContent: 'center',
-        
+
     },
-    h_width_select_half:{
+    h_width_select_half: {
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -367,7 +367,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%'
     },
-    h_pt_15:{
+    h_pt_15: {
         paddingTop: 15
     },
     nlFixedAtTop: {
@@ -390,7 +390,7 @@ const styles = StyleSheet.create({
         elevation: 3,
 
     },
-    
+
 });
 
 export default List

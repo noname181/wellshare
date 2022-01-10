@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { View, StyleSheet, Text, Switch} from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, Text, Switch } from 'react-native';
 import Screen from '../../components/Screen';
 
 //Images
@@ -15,7 +15,7 @@ function My_Profile() {
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     return (
         <Screen style={styles.nlContainer}>
-            <View style={[styles.nlCard, {backgroundColor: '#fff'}]}>
+            <View style={[styles.nlCard, { backgroundColor: '#fff' }]}>
                 {/* Item Info */}
                 <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween]}>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
@@ -23,17 +23,17 @@ function My_Profile() {
                         <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>업무시간 설정: 8:00-20:00</Text>
                     </View>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                    <Switch
-                        trackColor={{ false: "#767577", true: "#f2d4f1" }}
-                        thumbColor={isEnabled ? "#7c257a" : "#fff"}
-                        ios_backgroundColor="#3e3e3e"
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}
-                    />
+                        <Switch
+                            trackColor={{ false: "#767577", true: "#f2d4f1" }}
+                            thumbColor={isEnabled ? "#7c257a" : "#fff"}
+                            ios_backgroundColor="#3e3e3e"
+                            onValueChange={toggleSwitch}
+                            value={isEnabled}
+                        />
                     </View>
                 </View>
             </View>
-            <View style={[styles.nlCard, {backgroundColor: '#fff'}]}>
+            <View style={[styles.nlCard, { backgroundColor: '#fff' }]}>
                 {/* Item Info */}
                 <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
@@ -41,7 +41,7 @@ function My_Profile() {
                         <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>아이디</Text>
                     </View>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <Text style={styles.nlColorBlack}>aaa</Text>
+                        <Text style={styles.nlColorBlack}>km2415</Text>
                     </View>
                 </View>
                 {/* Item Info */}
@@ -51,7 +51,7 @@ function My_Profile() {
                         <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>기사명</Text>
                     </View>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <Text style={styles.nlColorBlack}>조형래</Text>
+                        <Text style={styles.nlColorBlack}>박지우</Text>
                     </View>
                 </View>
                 {/* Item Info */}
@@ -61,7 +61,7 @@ function My_Profile() {
                         <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>이메일</Text>
                     </View>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <Text style={styles.nlColorBlack}>개포로 20길 17, 2층</Text>
+                        <Text style={styles.nlColorBlack}>오류동 21-1</Text>
                     </View>
                 </View>
                 {/* Item Info */}
@@ -71,11 +71,11 @@ function My_Profile() {
                         <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>주소</Text>
                     </View>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <Text style={styles.nlColorBlack}>조형래 123@gmail.com</Text>
+                        <Text style={styles.nlColorBlack}>parkju@daum.net</Text>
                     </View>
                 </View>
             </View>
-            <View style={[styles.nlCard, {backgroundColor: '#fff'}]}>
+            <View style={[styles.nlCard, { backgroundColor: '#fff' }]}>
                 {/* Item Info */}
                 <View style={[styles.nlItemInfo, styles.nlRow]}>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
@@ -89,7 +89,7 @@ function My_Profile() {
     );
 }
 const styles = StyleSheet.create({
-    
+
     nlCard: {
         paddingHorizontal: 16,
         marginBottom: 14,
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     nlItemInfo: {
         paddingVertical: 6,
         minHeight: 46
-        
+
     },
     nlLineBottom: {
         borderStyle: 'solid',

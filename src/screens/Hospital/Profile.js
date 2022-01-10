@@ -44,7 +44,7 @@ function Profile() {
                             <Text style={styles.text_profile}>사업자등록번호</Text>
                         </View>
                         <View >
-                            <Text style={styles.text_profile_right}>45767</Text>
+                            <Text style={styles.text_profile_right}>62-62-4123221</Text>
                         </View>
                     </View>
                     <View style={styles.pf_box_information_second}>
@@ -53,7 +53,7 @@ function Profile() {
                             <Text style={styles.text_profile}>대표전화</Text>
                         </View>
                         <View>
-                            <Text style={styles.text_profile_right}>010-2009-7723</Text>
+                            <Text style={styles.text_profile_right}>010-4512-2522</Text>
                         </View>
                     </View>
                     <View style={styles.pf_box_information_second}>
@@ -62,7 +62,7 @@ function Profile() {
                             <Text style={styles.text_profile}>팩스</Text>
                         </View>
                         <View>
-                            <Text style={styles.text_profile_right}>032025225366</Text>
+                            <Text style={styles.text_profile_right}>02-1512-1235</Text>
                         </View>
                     </View>
                     <View style={styles.pf_box_information_second}>
@@ -71,7 +71,7 @@ function Profile() {
                             <Text style={styles.text_profile}>이메일</Text>
                         </View>
                         <View>
-                            <Text style={styles.text_profile_right}>조형래 123@gmail.com</Text>
+                            <Text style={styles.text_profile_right}>kim.s@knhos.com</Text>
                         </View>
                     </View>
                     <View style={styles.pf_box_information_second}>
@@ -92,7 +92,7 @@ function Profile() {
                             <Text style={styles.text_profile}>담당자명</Text>
                         </View>
                         <View>
-                            <Text style={styles.text_profile_right}>조형래</Text>
+                            <Text style={styles.text_profile_right}>박명진</Text>
                         </View>
                     </View>
                     <View style={styles.pf_box_main_hr2_2}>

@@ -27,7 +27,7 @@ function Profile() {
                         <Text style={styles.text_profile}>이름</Text>
                     </View>
                     <View >
-                        <Text style={styles.text_profile_right}>관리자</Text>
+                        <Text style={styles.text_profile_right}>김명식</Text>
                     </View>
                 </View>
                 <View style={styles.pf_box_information_second}>
@@ -36,7 +36,7 @@ function Profile() {
                         <Text style={styles.text_profile}>아이디</Text>
                     </View>
                     <View>
-                        <Text style={styles.text_profile_right}>aaaaaa</Text>
+                        <Text style={styles.text_profile_right}>kim5521@hanmail.net</Text>
                     </View>
                 </View>
                 <View style={styles.pf_box_information_second}>
@@ -45,7 +45,7 @@ function Profile() {
                         <Text style={styles.text_profile}>대표전화</Text>
                     </View>
                     <View>
-                        <Text style={styles.text_profile_right}>010-2009-7723</Text>
+                        <Text style={styles.text_profile_right}>010-1451-2134</Text>
                     </View>
                 </View>
                 <View style={styles.pf_box_information_second}>
@@ -54,7 +54,7 @@ function Profile() {
                         <Text style={styles.text_profile}>주소</Text>
                     </View>
                     <View>
-                        <Text style={styles.text_profile_right}>개포로 20길 17, 2층</Text>
+                        <Text style={styles.text_profile_right}>가산디지털 4로 6 2층</Text>
                     </View>
                 </View>
             </View>
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
         lineHeight: 22,
         color: '#404040',
     },
-    text_logout:{
+    text_logout: {
         fontSize: 16,
         marginLeft: 10,
         color: '#404040',

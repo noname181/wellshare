@@ -34,7 +34,7 @@ function User_My_Profile() {
                         <Text style={styles.text_profile}>전화번호</Text>
                     </View>
                     <View>
-                        <Text style={styles.text_profile}>010-234-5678</Text>
+                        <Text style={styles.text_profile}>010-2009-7723</Text>
                     </View>
                 </View>
             </View>

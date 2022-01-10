@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, ScrollView, Image} from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, ScrollView, Image } from 'react-native';
 import Screen from '../../components/Screen';
 //Images
 import boxImage from '../../images/deliveryman/box.png';
@@ -9,152 +9,152 @@ import PhoneIcon from '../../images/svg/PhoneIcon';
 function Complains({ navigation }) {
     return (
         <View>
-        <ScrollView style={styles.nlMarginBottom}>
-            <Screen >
-                <View style={[styles.nlCard, {backgroundColor: '#fff', padding: 20}]}>
-                    {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>수령인</Text>
+            <ScrollView style={styles.nlMarginBottom}>
+                <Screen >
+                    <View style={[styles.nlCard, { backgroundColor: '#fff', padding: 20 }]}>
+                        {/* Item Info */}
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>수령인</Text>
+                            </View>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorBlack}>진정수</Text>
+                            </View>
                         </View>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorBlack}>조조조</Text>
+                        {/* Item Info */}
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>민원내역</Text>
+                            </View>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlMarkBlue}>5</Text>
+                            </View>
                         </View>
+                        {/* Item Info */}
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>패키지</Text>
+                            </View>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorBlack}>1-1완료</Text>
+                            </View>
+                        </View>
+                        {/* Item Info */}
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>특이사항</Text>
+                            </View>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorBlack}>빠른배송 부탁드립니다.</Text>
+                            </View>
+                        </View>
+                        {/* Item Info */}
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>수령인HP</Text>
+                            </View>
+                            <View style={[styles.nlAlignCenter, styles.nlRow]}>
+                                <TouchableOpacity activeOpacity={1}>
+                                    <SMSIcon height={30} width={30} />
+                                </TouchableOpacity>
+                                <TouchableOpacity activeOpacity={1} style={{ marginLeft: 10 }}>
+                                    <PhoneIcon height={30} width={30} />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        {/* Item Info */}
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>수령인 주소.</Text>
+                            </View>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorBlack}>개포로 20길 17, 2층</Text>
+                            </View>
+                        </View>
+                        {/* Item Info */}
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>배송예정일</Text>
+                            </View>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorBlack}>2022.01.02</Text>
+                            </View>
+                        </View>
+
                     </View>
-                    {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>민원내역</Text>
+                    <View style={[styles.nlCard, { backgroundColor: '#fff', padding: 20 }]}>
+                        {/* Item Info */}
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>배송인</Text>
+                            </View>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorBlack}>조형래</Text>
+                            </View>
                         </View>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlMarkBlue}>5</Text>
+                        {/* Item Info */}
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>배송인HP</Text>
+                            </View>
+                            <View style={[styles.nlRow]}>
+                                <TouchableOpacity activeOpacity={1}>
+                                    <SMSIcon height={30} width={30} />
+                                </TouchableOpacity>
+                                <TouchableOpacity activeOpacity={1} style={{ marginLeft: 10 }}>
+                                    <PhoneIcon height={30} width={30} />
+                                </TouchableOpacity>
+                            </View>
                         </View>
-                    </View>
-                    {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>패키지</Text>
+                        {/* Item Info */}
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>배송상태</Text>
+                            </View>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorBlack}>배송중</Text>
+                            </View>
                         </View>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorBlack}>1-1완료</Text>
+                        {/* Item Info */}
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>배송완료일</Text>
+                            </View>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorBlack}>2022.01.02</Text>
+                            </View>
                         </View>
-                    </View>
-                    {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>특이사항</Text>
+                        {/* Item Info */}
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>사진</Text>
+                            </View>
+                            <View >
+                                <Image source={boxImage}></Image>
+                            </View>
                         </View>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorBlack}>빠른배송 부탁드립니다.</Text>
-                        </View>
-                    </View>
-                    {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>수령인HP</Text>
-                        </View>
-                        <View style={[styles.nlAlignCenter, styles.nlRow]}>
-                        <TouchableOpacity activeOpacity={1}>
-                                <SMSIcon height={30} width={30}/>
-                            </TouchableOpacity>
-                            <TouchableOpacity activeOpacity={1} style={{marginLeft: 10}}>
-                                <PhoneIcon height={30} width={30} />
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View  style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>수령인 주소.</Text>
-                        </View>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorBlack}>개포로 20길 17, 2층</Text>
-                        </View>
-                    </View>
-                    {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>배송예정일</Text>
-                        </View>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorBlack}>2021.11.1 09:12</Text>
-                        </View>
+
                     </View>
 
-                </View>
-                <View style={[styles.nlCard, {backgroundColor: '#fff', padding: 20}]}>
-                    {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>배송인</Text>
-                        </View>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorBlack}>조형래</Text>
-                        </View>
-                    </View>
-                    {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>배송인HP</Text>
-                        </View>
-                        <View style={[styles.nlRow]}>
-                            <TouchableOpacity activeOpacity={1}>
-                                <SMSIcon height={30} width={30}/>
-                            </TouchableOpacity>
-                            <TouchableOpacity activeOpacity={1} style={{marginLeft: 10}}>
-                                <PhoneIcon height={30} width={30} />
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>배송상태</Text>
-                        </View>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorBlack}>배송중</Text>
-                        </View>
-                    </View>
-                    {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>배송완료일</Text>
-                        </View>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorBlack}>2021.11.1 09:12</Text>
-                        </View>
-                    </View>
-                    {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, {alignItems: 'flex-start'}]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>사진</Text>
-                        </View>
-                        <View >
-                            <Image source={boxImage}></Image>
-                        </View>
-                    </View>
-
-                </View>
-            
-            </Screen>
-        </ScrollView>
-        <View style={[styles.nlFixedAtBottom,styles.nlRow,]}>
-                    <TouchableOpacity style={styles.nlButton}>
-                        <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>요청장소</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.nlButton}>
-                        <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>경비실</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.nlButton}>
-                        <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>기타</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.nlButton}>
-                        <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>문앞</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={[styles.nlButton, styles.nlMax]}>
-                        <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>요청장소</Text>
-                    </TouchableOpacity>
-          </View>
+                </Screen>
+            </ScrollView>
+            <View style={[styles.nlFixedAtBottom, styles.nlRow,]}>
+                <TouchableOpacity style={styles.nlButton}>
+                    <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>요청장소</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.nlButton}>
+                    <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>경비실</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.nlButton}>
+                    <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>기타</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.nlButton}>
+                    <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>문앞</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.nlButton, styles.nlMax]}>
+                    <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>요청장소</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 10,
         elevation: 3,
-        
+
     },
     nlRow: {
         flexDirection: 'row',
@@ -197,9 +197,9 @@ const styles = StyleSheet.create({
     nlItemInfo: {
         paddingVertical: 6,
         minHeight: 46
-        
+
     },
-   
+
     nlButton: {
         backgroundColor: '#7c257a',
         marginBottom: 10,

@@ -55,7 +55,7 @@ function TabNavigation({ route, navigation }) {
                 }}
 
             /> */}
-            <Tab.Screen
+            {/* <Tab.Screen
                 name="List"
                 component={List_page}
                 options={{
@@ -66,7 +66,7 @@ function TabNavigation({ route, navigation }) {
                     header: props => <Header title="명단" isBack={true} {...props} />
                 }}
 
-            />
+            /> */}
             <Tab.Screen
                 name="ListView"
                 component={ListView}
@@ -91,7 +91,7 @@ function TabNavigation({ route, navigation }) {
                 }}
 
             />
-            <Tab.Screen
+            {/* <Tab.Screen
                 name="ComplainsViewScreen"
                 component={ComplainsViewScreen}
                 options={{
@@ -99,7 +99,7 @@ function TabNavigation({ route, navigation }) {
                         <Notice height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>Complains</Text>
                     </View>),
-                    header: props => <Header title="공지사항" isBack={false} {...props} />
+                    header: props => <Header title="민원" isBack={false} {...props} />
                 }}
 
             />
@@ -114,7 +114,7 @@ function TabNavigation({ route, navigation }) {
                     header: props => <Header title="공지사항" isBack={false} {...props} />
                 }}
 
-            />
+            /> */}
             <Tab.Screen
                 name="MyProfile"
                 component={MyProfileScreen}

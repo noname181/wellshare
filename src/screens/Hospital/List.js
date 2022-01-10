@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {
     Text,
@@ -20,59 +20,59 @@ function List() {
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
-  
+
     const onChange = (event, selectedDate) => {
-      const currentDate = selectedDate || date;
-      setShow(Platform.OS === 'ios');
-      setDate(currentDate);
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'ios');
+        setDate(currentDate);
     };
-  
+
     const showMode = (currentMode) => {
-      setShow(true);
-      setMode(currentMode);
+        setShow(true);
+        setMode(currentMode);
     };
-  
+
     const showDatepicker = () => {
-      showMode('date');
+        showMode('date');
     };
     const fortmatDate = () => {
-        return (date.getMonth() + 1) + "/" +date.getDate() + "/" +  date.getFullYear();
+        return date.getFullYear() + "/" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + date.getDate();
     }
-    
+
     return (
-        <Screen  style={{backgroundColor: '#f6f7f8'}}>
+        <Screen style={{ backgroundColor: '#f6f7f8' }}>
             <View style={styles.body_gray}>
-                <TouchableOpacity  activeOpacity={1} style={styles.box_calendar} onPress={showDatepicker}>
+                <TouchableOpacity activeOpacity={1} style={styles.box_calendar} onPress={showDatepicker}>
                     <Calendar width={16} height={16} />
                     <Text style={styles.text_calendar}>{fortmatDate()}</Text>
                     <Icon style={styles.icon_select} name={'chevron-down-outline'} color={'#9b9b9b'} size={20} />
                 </TouchableOpacity>
                 {show && (
                     <DateTimePicker
-                    testID="dateTimePicker"
-                    value={date}
-                    mode={mode}
-                    display="default"
-                    onChange={onChange}
-                    
+                        testID="dateTimePicker"
+                        value={date}
+                        mode={mode}
+                        display="default"
+                        onChange={onChange}
+
 
                     />
                 )}
                 <View style={styles.h_three_button}>
-                    <TouchableOpacity  activeOpacity={1} style={(tabSlected== 1)?styles.h_button_active:styles.h_button} onPress={() => settabSlected(1)}>
-                        <Text style={(tabSlected== 1)?styles.h_text_clr_white:styles.h_text_clr_black}>전체</Text>
+                    <TouchableOpacity activeOpacity={1} style={(tabSlected == 1) ? styles.h_button_active : styles.h_button} onPress={() => settabSlected(1)}>
+                        <Text style={(tabSlected == 1) ? styles.h_text_clr_white : styles.h_text_clr_black}>전체</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={1} style={(tabSlected== 2)?styles.h_button_active:styles.h_button} onPress={() => settabSlected(2)}>
-                        <Text style={(tabSlected== 2)?styles.h_text_clr_white:styles.h_text_clr_black}>배송전</Text>
+                    <TouchableOpacity activeOpacity={1} style={(tabSlected == 2) ? styles.h_button_active : styles.h_button} onPress={() => settabSlected(2)}>
+                        <Text style={(tabSlected == 2) ? styles.h_text_clr_white : styles.h_text_clr_black}>배송전</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={1} style={(tabSlected== 3)?styles.h_button_active:styles.h_button} onPress={() => settabSlected(3)}>
-                        <Text style={(tabSlected== 3)?styles.h_text_clr_white:styles.h_text_clr_black}>완료</Text>
+                    <TouchableOpacity activeOpacity={1} style={(tabSlected == 3) ? styles.h_button_active : styles.h_button} onPress={() => settabSlected(3)}>
+                        <Text style={(tabSlected == 3) ? styles.h_text_clr_white : styles.h_text_clr_black}>완료</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.h_box_list}>
                     <View style={styles.h_box_list__first}>
                         <View>
-                            <Text style={styles.h_bl_s_text1}>2021.05.25 <Text style={{color: '#dddddd',fontSize: 13}}> | </Text> 8:00</Text>
+                            <Text style={styles.h_bl_s_text1}>2022.01.03 <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text> 8:00</Text>
                         </View>
                         <View>
                             <TouchableOpacity style={styles.h_button_list_purple} activeOpacity={0.8}>
@@ -82,12 +82,12 @@ function List() {
                     </View>
                     <View style={styles.h_box_list__second}>
                         <View style={styles.h_box_list__first_child1}>
-                            <View style={{flexDirection: 'row'}}>
-                                <Text style={styles.h_f_c1_text}>조형래</Text>
-                                <Text style={styles.h_f_c1_phone}>010-2009-7723</Text>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={styles.h_f_c1_text}>김상우</Text>
+                                <Text style={styles.h_f_c1_phone}>010-1251-5123</Text>
                             </View>
-                            <View style={{paddingTop: 5}}>
-                                <Text style={styles.h_bl_f_c1_text}>개포로 20길 17, 2층</Text>
+                            <View style={{ paddingTop: 5 }}>
+                                <Text style={styles.h_bl_f_c1_text}>강남구 개로포 20길 18</Text>
                             </View>
                         </View>
                         <View style={styles.h_box_list__first_child2}>
@@ -98,7 +98,7 @@ function List() {
                 <View style={styles.h_box_list}>
                     <View style={styles.h_box_list__first}>
                         <View>
-                            <Text style={styles.h_bl_s_text1}>2021.05.25 <Text style={{color: '#dddddd',fontSize: 13}}> | </Text> 8:00</Text>
+                            <Text style={styles.h_bl_s_text1}>2022.01.03 <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text> 8:00</Text>
                         </View>
                         <View>
                             <TouchableOpacity style={styles.h_button_list_green} activeOpacity={0.8}>
@@ -108,12 +108,38 @@ function List() {
                     </View>
                     <View style={styles.h_box_list__second}>
                         <View style={styles.h_box_list__first_child1}>
-                            <View style={{flexDirection: 'row'}}>
-                                <Text style={styles.h_f_c1_text}>조형래</Text>
-                                <Text style={styles.h_f_c1_phone}>010-2009-7723</Text>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={styles.h_f_c1_text}>박상진</Text>
+                                <Text style={styles.h_f_c1_phone}>010-3153-4231</Text>
                             </View>
-                            <View style={{paddingTop: 5}}>
-                                <Text style={styles.h_bl_f_c1_text}>개포로 20길 17, 2층</Text>
+                            <View style={{ paddingTop: 5 }}>
+                                <Text style={styles.h_bl_f_c1_text}>강남구 개로포 18길 07</Text>
+                            </View>
+                        </View>
+                        <View style={styles.h_box_list__first_child2}>
+                            <Text style={styles.h_bl_f_c2_text1}>1-1완모 </Text>
+                        </View>
+                    </View>
+                </View>
+                <View style={styles.h_box_list}>
+                    <View style={styles.h_box_list__first}>
+                        <View>
+                            <Text style={styles.h_bl_s_text1}>2022.01.03 <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text> 8:00</Text>
+                        </View>
+                        <View>
+                            <TouchableOpacity style={styles.h_button_list_green} activeOpacity={0.8}>
+                                <Text style={styles.h_text_small_clr_green}>배송전</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    <View style={styles.h_box_list__second}>
+                        <View style={styles.h_box_list__first_child1}>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={styles.h_f_c1_text}>우천식</Text>
+                                <Text style={styles.h_f_c1_phone}>010-5235-3452</Text>
+                            </View>
+                            <View style={{ paddingTop: 5 }}>
+                                <Text style={styles.h_bl_f_c1_text}>강남구 개로포 19길 06</Text>
                             </View>
                         </View>
                         <View style={styles.h_box_list__first_child2}>
@@ -122,21 +148,20 @@ function List() {
                     </View>
                 </View>
 
-
             </View>
         </Screen>
     );
 }
 const styles = StyleSheet.create({
-    h_f_c1_text:{
+    h_f_c1_text: {
         color: 'black',
         fontSize: 15,
         fontWeight: 'bold',
     },
-    h_f_c1_phone:{
+    h_f_c1_phone: {
         color: 'black',
         fontSize: 15,
-        paddingLeft:10,
+        paddingLeft: 10,
     },
     h_box_list: {
         backgroundColor: '#fff',
@@ -148,7 +173,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         elevation: 4,
         marginBottom: 10,
-        
+
     },
     h_box_list__second: {
         display: 'flex',

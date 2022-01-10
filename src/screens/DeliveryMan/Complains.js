@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {
     Text,
@@ -22,41 +22,41 @@ function Complains() {
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
-  
+
     const onChange = (event, selectedDate) => {
-      const currentDate = selectedDate || date;
-      setShow(Platform.OS === 'ios');
-      setDate(currentDate);
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'ios');
+        setDate(currentDate);
     };
-  
+
     const showMode = (currentMode) => {
-      setShow(true);
-      setMode(currentMode);
+        setShow(true);
+        setMode(currentMode);
     };
-  
+
     const showDatepicker = () => {
-      showMode('date');
+        showMode('date');
     };
-    
+
     const fortmatDate = () => {
-        return (date.getMonth() + 1) + "/" +date.getDate() + "/" +  date.getFullYear();
+        return date.getFullYear() + "/" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + date.getDate();
     }
 
     return (
         <Screen style={styles.body_42_1}>
             <View>
-                <TouchableOpacity  activeOpacity={1} style={styles.box_calendar} onPress={showDatepicker}>
+                <TouchableOpacity activeOpacity={1} style={styles.box_calendar} onPress={showDatepicker}>
                     <CalendarIcon width={16} height={16} />
                     <Text style={styles.text_calendar}>{fortmatDate()}</Text>
                     <Icon style={styles.icon_select} name={'chevron-down-outline'} color={'#9b9b9b'} size={20} />
                 </TouchableOpacity>
                 {show && (
                     <DateTimePicker
-                    testID="dateTimePicker"
-                    value={date}
-                    mode={mode}
-                    display="default"
-                    onChange={onChange}
+                        testID="dateTimePicker"
+                        value={date}
+                        mode={mode}
+                        display="default"
+                        onChange={onChange}
                     />
                 )}
                 <View style={styles.row__search}>
@@ -72,11 +72,11 @@ function Complains() {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={styles.row__info}>
+                {/* <View style={styles.row__info}>
                     <View style={styles.row__info__child}>
                         <View style={styles.row__info__child__text}>
                             <View>
-                                 <Text style={styles.row__info__child__text1}>비번분실했어요3</Text>
+                                <Text style={styles.row__info__child__text1}>비번분실했어요3</Text>
                             </View>
                             <View>
                                 <Text style={styles.row__info__child__text3}>2021.10.22 | 09:01</Text>
@@ -91,7 +91,7 @@ function Complains() {
                     <View style={styles.row__info__child}>
                         <View style={styles.row__info__child__text}>
                             <View>
-                                 <Text style={styles.row__info__child__text1}>비번분실했어요3</Text>
+                                <Text style={styles.row__info__child__text1}>비번분실했어요3</Text>
                             </View>
                             <View>
                                 <Text style={styles.row__info__child__text3}>2021.10.22 | 09:01</Text>
@@ -101,24 +101,24 @@ function Complains() {
                             <Text style={styles.h_circle_number}>7</Text>
                         </View>
                     </View>
-                </View>
+                </View> */}
             </View>
         </Screen>
     );
 }
 
 const styles = StyleSheet.create({
-    h_circle_number:{
+    h_circle_number: {
         color: '#fff',
-        fontWeight:'bold',
+        fontWeight: 'bold',
     },
-    h_circle_blue:{
-        width:25,
-        height:25,
-        backgroundColor:'#465CDB',
-        alignItems:'center',
-        justifyContent:'center',
-        borderRadius:25/2,
+    h_circle_blue: {
+        width: 25,
+        height: 25,
+        backgroundColor: '#465CDB',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 25 / 2,
     },
     row__info: {
         paddingBottom: 13,
@@ -176,14 +176,14 @@ const styles = StyleSheet.create({
         paddingLeft: 14,
         paddingRight: 14,
         backgroundColor: '#fff',
-        paddingTop:17,
+        paddingTop: 17,
         paddingBottom: 17,
         borderWidth: 1,
         borderColor: '#e1e1e1',
         borderRadius: 6,
         alignItems: 'center',
-        flexDirection:'row',
-        justifyContent:'space-between',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         shadowColor: '#222',
         shadowOffset: { width: 0, height: 3 },
         shadowOpacity: 0.1,

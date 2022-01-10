@@ -29,7 +29,7 @@ function Complains1() {
                 </View>
                 <View style={styles.row__search}>
                     <View style={styles.width40}>
-                        <TextInput value='010-2009-7712' style={styles.text_input} />
+                        <TextInput value='010-2009-7723' style={styles.text_input} />
                     </View>
                     <View style={styles.width40}>
                         <TextInput style={styles.text_input} value='조형래' />
@@ -52,7 +52,7 @@ function Complains1() {
                         </View>
                     </View>
                 </View>
-                <View style={styles.row__info}>
+                {/* <View style={styles.row__info}>
                     <View style={styles.row__info__child}>
                         <View style={styles.row__info__child__text}>
                             <Text style={styles.row__info__child__text1}>조형래</Text>
@@ -63,24 +63,24 @@ function Complains1() {
                             <Text style={styles.h_circle_number}>4</Text>
                         </View>
                     </View>
-                </View>
+                </View> */}
             </View>
         </Screen>
     );
 }
 
 const styles = StyleSheet.create({
-    h_circle_number:{
+    h_circle_number: {
         color: '#fff',
-        fontWeight:'bold',
+        fontWeight: 'bold',
     },
-    h_circle_blue:{
-        width:25,
-        height:25,
-        backgroundColor:'#465CDB',
-        alignItems:'center',
-        justifyContent:'center',
-        borderRadius:25/2,
+    h_circle_blue: {
+        width: 25,
+        height: 25,
+        backgroundColor: '#465CDB',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 25 / 2,
     },
     row__info: {
         display: 'flex',
@@ -144,14 +144,14 @@ const styles = StyleSheet.create({
         paddingLeft: 14,
         paddingRight: 14,
         backgroundColor: '#fff',
-        paddingTop:21,
+        paddingTop: 21,
         paddingBottom: 21,
         borderWidth: 1,
         borderColor: '#e1e1e1',
         borderRadius: 6,
         alignItems: 'center',
-        flexDirection:'row',
-        justifyContent:'space-between',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         shadowColor: '#222',
         shadowOffset: { width: 0, height: 3 },
         shadowOpacity: 0.1,
