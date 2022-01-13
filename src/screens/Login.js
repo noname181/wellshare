@@ -1,30 +1,84 @@
-import React from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert} from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert } from "react-native";
+import axios from 'axios';
 //Images
 //import Logo from '../images/logo.png';
 import LogoImage from '../images/svg/LogoImage';
+
+
 export default function Login() {
+    const [showOTP, setShowOTP] = useState(false);
+    const [countDown, setCountDown] = useState(60);
+    const [time, setTime] = useState({ h: 0, m: 0, s: 0 });
+    const [timer, setTimer] = useState(0);
+    const [hp, setHp] = useState("");
+
     const onPress = () => Alert.alert('Hello');
+
+    const secondsToTime = (secs) => {
+        let hours = Math.floor(secs / (60 * 60));
+
+        let divisor_for_minutes = secs % (60 * 60);
+        let minutes = Math.floor(divisor_for_minutes / 60);
+
+        let divisor_for_seconds = divisor_for_minutes % 60;
+        let seconds = Math.ceil(divisor_for_seconds);
+
+        let obj = {
+            h: hours,
+            m: minutes,
+            s: seconds
+        };
+        return obj;
+    }
+
+    useEffect(() => {
+        let time = secondsToTime(countDown);
+        setTime(time);
+        if (countDown == 0) {
+            clearInterval(timer);
+        }
+
+
+        return () => {
+
+        };
+    }, [countDown]);
+
+    const countDowns = () => {
+        // Remove one second, set state so a re-render happens.
+        setCountDown(seconds => seconds - 1);
+    }
+
+    const startTimer = () => {
+        axios.post(`http://scsman23.cafe24.com/api/login.php`, { hp: 1235 })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
+        // setTimer(setInterval(countDowns, 1000));
+    }
+
     return (
         <View style={styles.nlWrapper}>
             <View style={styles.nlBg1}></View>
             <View style={styles.nlBg2}>
                 <View style={styles.nlLogin}>
                     <View style={styles.nlLogo}>
-                        <LogoImage width={142} height={67}/>
+                        <LogoImage width={142} height={67} />
                     </View>
                     <View style={styles.nlRelative}>
-                        <TextInput style={styles.nlInput}  placeholder="전화번호"></TextInput>
-                        <TouchableOpacity style={styles.nlButtonOTP} activeOpacity={0.8}>
+                        <TextInput style={styles.nlInput} placeholder="전화번호"></TextInput>
+                        <TouchableOpacity style={styles.nlButtonOTP} activeOpacity={0.8} onPress={() => startTimer()}>
                             <Text style={styles.nlColorWhite}>OTP 발송</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.nlRelative}>
-                        <TextInput style={styles.nlInput}  placeholder="OTP"></TextInput>
-                        <Text style={styles.nlCountNum}>00:56</Text>
+                        <TextInput style={styles.nlInput} placeholder="OTP"></TextInput>
+                        <Text style={styles.nlCountNum}>{time.m < 10 ? '0' + time.m : time.m}:{time.s < 10 ? '0' + time.s : time.s}</Text>
                     </View>
-                    
-                    <TouchableOpacity style={styles.nlButtonLogin} activeOpacity={0.8}  onPress={onPress}>
+
+                    <TouchableOpacity style={styles.nlButtonLogin} activeOpacity={0.8} onPress={onPress}>
                         <Text style={[styles.nlColorWhite, styles.nlTextButton]}>로그인</Text>
                     </TouchableOpacity>
                 </View>
@@ -34,12 +88,12 @@ export default function Login() {
 }
 const styles = StyleSheet.create({
     nlInput: {
-      paddingHorizontal: 15,
-      fontSize: 15,
-      borderStyle: 'solid',
-      borderColor: '#f0f0f0',
-      borderBottomWidth: 1,
-      marginTop: 20
+        paddingHorizontal: 15,
+        fontSize: 15,
+        borderStyle: 'solid',
+        borderColor: '#f0f0f0',
+        borderBottomWidth: 1,
+        marginTop: 20
     },
     nlWrapper: {
         justifyContent: 'center',
@@ -99,7 +153,7 @@ const styles = StyleSheet.create({
         right: 0,
         bottom: 10
     },
-    nlCountNum : {
+    nlCountNum: {
         position: 'absolute',
         right: 0,
         bottom: 15,
