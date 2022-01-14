@@ -5,6 +5,7 @@ import {
     StyleSheet,
     Image,
 } from 'react-native';
+import { useSelector } from 'react-redux'
 import Screen from '../../components/Screen';
 import Avatar from '../../images/user/avatarPNG.png';
 import Name from '../../images/svg/ProfileName';
@@ -13,6 +14,8 @@ import Logout from '../../images/svg/ProfileLogout';
 
 
 function User_My_Profile() {
+    const user = useSelector(state => state.user_auth)
+
     return (
         <Screen>
             <View style={styles.profile_main_hero}>
@@ -34,7 +37,7 @@ function User_My_Profile() {
                         <Text style={styles.text_profile}>전화번호</Text>
                     </View>
                     <View>
-                        <Text style={styles.text_profile}>010-2009-7723</Text>
+                        <Text style={styles.text_profile}>{user.user_hp}</Text>
                     </View>
                 </View>
             </View>

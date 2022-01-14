@@ -1,11 +1,11 @@
 // Imports: Dependencies
 import { combineReducers } from 'redux'
-import loginReducer from './loginReducer'
+import user_auth from './user_auth'
 
 
 // Redux: Root Reducer
 const rootReducer = combineReducers({
-    loginReducer,
+    user_auth,
 });
 // Exports
 export default rootReducer

@@ -7,6 +7,12 @@ const login = (payload) => {
     }
 }
 
+const logout = () => {
+    return {
+        type: types.LOGOUT,
+    }
+}
+
 export default {
     login
 }

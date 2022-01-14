@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert, Keyboard } from "react-native";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert, Keyboard, ActivityIndicator } from "react-native";
 import axios from '../helpers/axiosInterceptor';
 import { useSelector, useDispatch } from 'react-redux';
 import allActions from '../redux/actions'
@@ -12,11 +12,11 @@ export default function Login({ navigation }) {
     const [showOTP, setShowOTP] = useState(false);
     const [resendOTP, setResendOTP] = useState(false);
     const [OTP, setOTP] = useState("");
-    const [countDown, setCountDown] = useState(10);
+    const [countDown, setCountDown] = useState(30);
     const [time, setTime] = useState({ h: 0, m: 0, s: 0 });
     const [timer, setTimer] = useState(0);
     const [hp, setHp] = useState("");
-
+    const [loadingOTP, setLoadingOTP] = useState(false);
     const dispatch = useDispatch()
 
     const onSubmit = () => {
@@ -55,7 +55,7 @@ export default function Login({ navigation }) {
                     clearInterval(timer);
                     setOTP("");
                     setHp("");
-                    setCountDown(10);
+                    setCountDown(30);
                     setShowOTP(false);
                     setResendOTP(false);
                     dispatch(allActions.userActions.login({ user_hp: hp }))
@@ -119,13 +119,14 @@ export default function Login({ navigation }) {
             );
             return;
         }
-        if (resendOTP) setCountDown(10);
+        if (resendOTP) setCountDown(30);
+        setLoadingOTP(true);
         setOTP("")
         setShowOTP(true);
         setResendOTP(false);
         axios.post(`/user_otp.php`, { hp })
             .then(res => {
-
+                setLoadingOTP(false);
                 setTimer(setInterval(countDowns, 1000));
                 Alert.alert(
                     "Modio",
@@ -157,10 +158,10 @@ export default function Login({ navigation }) {
                         <TextInput style={styles.nlInput} keyboardType='numeric' placeholder="전화번호" value={hp} onChangeText={(text) => setHp(text)}></TextInput>
 
                         <View style={[{ opacity: showOTP && !resendOTP ? 0.5 : 1 }]}>
-                            <TouchableOpacity style={styles.nlButtonOTP} activeOpacity={0.8} onPress={() => { showOTP && !resendOTP ? {} : sendOTP() }}>
+                            <TouchableOpacity style={[styles.nlButtonOTP, { flexDirection: 'row' }]} activeOpacity={0.8} onPress={() => { showOTP && !resendOTP ? {} : sendOTP() }}>
 
                                 <Text style={styles.nlColorWhite}>{resendOTP ? 'Resend OTP' : 'OTP 발송'}</Text>
-
+                                <ActivityIndicator size="small" color="#fff" style={{ marginLeft: 5, display: loadingOTP ? 'flex' : 'none' }} />
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -236,7 +237,7 @@ const styles = StyleSheet.create({
     nlButtonOTP: {
         backgroundColor: '#7c257a',
         height: 36,
-        width: 90,
+        width: 100,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 6,

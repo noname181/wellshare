@@ -14,37 +14,6 @@ import Screen from '../../components/Screen';
 import Calendar from '../../images/svg/CalendarIcon';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const DATA = [
-    {
-        id: '1',
-        regdate: '2022-01-02',
-        name: '조형래 ',
-        phone: '010-2009-7723',
-        active: true
-    },
-    {
-        id: '2',
-        regdate: '2022-01-02',
-        name: '김상수 ',
-        phone: '010-5242-4213',
-        active: false
-    },
-    {
-        id: '3',
-        regdate: '2022-01-02',
-        name: '강우식 ',
-        phone: '010-5213-3423',
-        active: false
-    },
-    {
-        id: '4',
-        regdate: '2022-01-02',
-        name: '이명상 ',
-        phone: '010-5324-3231',
-        active: false
-    },
-
-];
 
 const Item = ({ item }) => (
     <View style={styles.h_box_list} key={item.b_no}>
@@ -78,7 +47,7 @@ function User_List() {
     const [show, setShow] = useState(false);
     const [bookings, setBookings] = useState([]);
 
-    const user = useSelector(state => state.loginReducer)
+    const user = useSelector(state => state.user_auth)
 
     useEffect(() => {
         console.log(user)
