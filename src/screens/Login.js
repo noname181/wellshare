@@ -59,7 +59,7 @@ export default function Login({ navigation }) {
                     setShowOTP(false);
                     setResendOTP(false);
                     dispatch(allActions.userActions.login({ user_hp: hp }))
-                    navigation.navigate('User')
+                    navigation.replace('User')
                 }
             })
             .catch(err => {
