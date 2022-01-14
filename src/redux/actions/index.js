@@ -1,9 +1,8 @@
-import * as types from '../constants';
+import userActions from './userActions'
 
-export const login = (payload) => {
-    return {
-        type: types.LOGIN,
-        payload
-    }
+const allActions = {
+    userActions
 }
+
+export default allActions
 

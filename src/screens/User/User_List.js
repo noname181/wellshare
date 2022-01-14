@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Text,
     View,
@@ -7,6 +7,8 @@ import {
     TouchableOpacity,
     FlatList
 } from 'react-native';
+import axios from '../../helpers/axiosInterceptor';
+import { useSelector } from 'react-redux'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Screen from '../../components/Screen';
 import Calendar from '../../images/svg/CalendarIcon';
@@ -45,14 +47,14 @@ const DATA = [
 ];
 
 const Item = ({ item }) => (
-    <View style={styles.h_box_list}>
+    <View style={styles.h_box_list} key={item.b_no}>
         <View style={styles.h_box_list__first}>
             <View style={styles.h_box_list__first_child1}>
-                <Text style={styles.h_bl_f_c1_text}>{item.regdate}</Text>
+                <Text style={styles.h_bl_f_c1_text}>{item.b_regdate}</Text>
             </View>
             <View style={styles.h_box_list__first_child2}>
-                <Text style={styles.h_bl_f_c2_text1}>{item.name} </Text>
-                <Text style={styles.h_bl_f_c2_text2}>({item.phone})</Text>
+                <Text style={styles.h_bl_f_c2_text1}>{item.b_name} </Text>
+                <Text style={styles.h_bl_f_c2_text2}>({item.b_hp1})</Text>
             </View>
         </View>
         <View style={styles.h_box_list__second}>
@@ -74,6 +76,24 @@ function User_List() {
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
+    const [bookings, setBookings] = useState([]);
+
+    const user = useSelector(state => state.loginReducer)
+
+    useEffect(() => {
+        console.log(user)
+        axios.post(`/user_load_bookings.php`, { hp: user.user_hp })
+            .then(res => {
+                setBookings(res.data.bookings)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+        return () => {
+
+        };
+    }, []);
 
     const onChange = (event, selectedDate) => {
         console.log(selectedDate)
@@ -125,9 +145,9 @@ function User_List() {
                     </TouchableOpacity>
                 </View>
                 <FlatList
-                    data={DATA}
+                    data={bookings}
                     renderItem={Item}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => item.b_no}
                     style={styles.nlList}
                     showsVerticalScrollIndicator={false}
                 />

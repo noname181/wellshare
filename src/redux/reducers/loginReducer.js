@@ -9,9 +9,9 @@ const loginReducer = (state = initialState, action) => {
     switch (action.type) {
         case types.LOGIN: {
             let new_state = {
-                user: action.payload,
-                ...state
+                ...action.payload,
             }
+            console.log(new_state)
             return new_state;
         }
         default: {

@@ -1,19 +1,71 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert } from "react-native";
-import axios from 'axios';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert, Keyboard } from "react-native";
+import axios from '../helpers/axiosInterceptor';
+import { useSelector, useDispatch } from 'react-redux';
+import allActions from '../redux/actions'
 //Images
 //import Logo from '../images/logo.png';
 import LogoImage from '../images/svg/LogoImage';
 
 
-export default function Login() {
+export default function Login({ navigation }) {
     const [showOTP, setShowOTP] = useState(false);
-    const [countDown, setCountDown] = useState(60);
+    const [resendOTP, setResendOTP] = useState(false);
+    const [OTP, setOTP] = useState("");
+    const [countDown, setCountDown] = useState(10);
     const [time, setTime] = useState({ h: 0, m: 0, s: 0 });
     const [timer, setTimer] = useState(0);
     const [hp, setHp] = useState("");
 
-    const onPress = () => Alert.alert('Hello');
+    const dispatch = useDispatch()
+
+    const onSubmit = () => {
+        Keyboard.dismiss();
+        if (OTP == "") {
+            Alert.alert(
+                "Modio",
+                "Plese enter OTP",
+                [
+                    {
+                        text: "Yes",
+                        onPress: () => { },
+                        style: "yes",
+                    },
+                ]
+            );
+            return;
+        }
+        axios.post(`/login.php`, { otp: OTP, hp })
+            .then(res => {
+                if (res.data.msg == 'wrong_otp') {
+                    Alert.alert(
+                        "Modio",
+                        "Wrong OTP",
+                        [
+                            {
+                                text: "Yes",
+                                onPress: () => { },
+                                style: "yes",
+                            },
+                        ]
+                    );
+                }
+
+                else {
+                    clearInterval(timer);
+                    setOTP("");
+                    setHp("");
+                    setCountDown(10);
+                    setShowOTP(false);
+                    setResendOTP(false);
+                    dispatch(allActions.userActions.login({ user_hp: hp }))
+                    navigation.navigate('User')
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    };
 
     const secondsToTime = (secs) => {
         let hours = Math.floor(secs / (60 * 60));
@@ -37,6 +89,7 @@ export default function Login() {
         setTime(time);
         if (countDown == 0) {
             clearInterval(timer);
+            setResendOTP(true)
         }
 
 
@@ -50,13 +103,46 @@ export default function Login() {
         setCountDown(seconds => seconds - 1);
     }
 
-    const startTimer = () => {
-        axios.post(`http://scsman23.cafe24.com/api/login.php`, { hp: 1235 })
+    const sendOTP = () => {
+        Keyboard.dismiss();
+        if (!hp) {
+            Alert.alert(
+                "Modio",
+                "Plese enter your phone number",
+                [
+                    {
+                        text: "Yes",
+                        onPress: () => { },
+                        style: "yes",
+                    },
+                ]
+            );
+            return;
+        }
+        if (resendOTP) setCountDown(10);
+        setOTP("")
+        setShowOTP(true);
+        setResendOTP(false);
+        axios.post(`/user_otp.php`, { hp })
             .then(res => {
-                console.log(res);
-                console.log(res.data);
+
+                setTimer(setInterval(countDowns, 1000));
+                Alert.alert(
+                    "Modio",
+                    "OTP: " + res.data.otp,
+                    [
+                        {
+                            text: "Yes",
+                            onPress: () => { },
+                            style: "yes",
+                        },
+                    ]
+                );
             })
-        // setTimer(setInterval(countDowns, 1000));
+            .catch(err => {
+                console.log(err);
+            })
+
     }
 
     return (
@@ -68,22 +154,27 @@ export default function Login() {
                         <LogoImage width={142} height={67} />
                     </View>
                     <View style={styles.nlRelative}>
-                        <TextInput style={styles.nlInput} placeholder="전화번호"></TextInput>
-                        <TouchableOpacity style={styles.nlButtonOTP} activeOpacity={0.8} onPress={() => startTimer()}>
-                            <Text style={styles.nlColorWhite}>OTP 발송</Text>
-                        </TouchableOpacity>
+                        <TextInput style={styles.nlInput} keyboardType='numeric' placeholder="전화번호" value={hp} onChangeText={(text) => setHp(text)}></TextInput>
+
+                        <View style={[{ opacity: showOTP && !resendOTP ? 0.5 : 1 }]}>
+                            <TouchableOpacity style={styles.nlButtonOTP} activeOpacity={0.8} onPress={() => { showOTP && !resendOTP ? {} : sendOTP() }}>
+
+                                <Text style={styles.nlColorWhite}>{resendOTP ? 'Resend OTP' : 'OTP 발송'}</Text>
+
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                    <View style={styles.nlRelative}>
-                        <TextInput style={styles.nlInput} placeholder="OTP"></TextInput>
+                    <View style={[styles.nlRelative, { opacity: showOTP ? 1 : 0 }]}>
+                        <TextInput style={styles.nlInput} keyboardType='numeric' placeholder="OTP" value={OTP} onChangeText={(text) => setOTP(text)} ></TextInput>
                         <Text style={styles.nlCountNum}>{time.m < 10 ? '0' + time.m : time.m}:{time.s < 10 ? '0' + time.s : time.s}</Text>
                     </View>
 
-                    <TouchableOpacity style={styles.nlButtonLogin} activeOpacity={0.8} onPress={onPress}>
+                    <TouchableOpacity style={[styles.nlButtonLogin]} activeOpacity={0.8} onPress={() => onSubmit()}>
                         <Text style={[styles.nlColorWhite, styles.nlTextButton]}>로그인</Text>
                     </TouchableOpacity>
                 </View>
             </View>
-        </View>
+        </View >
     );
 }
 const styles = StyleSheet.create({
