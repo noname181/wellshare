@@ -17,6 +17,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 const Item = ({ item }) => (
     <View style={styles.h_box_list} key={item.b_no}>
+
         <View style={styles.h_box_list__first}>
             <View style={styles.h_box_list__first_child1}>
                 <Text style={styles.h_bl_f_c1_text}>{item.b_regdate}</Text>
