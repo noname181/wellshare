@@ -37,7 +37,8 @@ export default function Login({ navigation }) {
         }
         axios.post(`/login.php`, { otp: OTP, hp })
             .then(res => {
-                if (res.data.msg == 'wrong_otp') {
+                let data = res.data;
+                if (data.msg == 'wrong_otp') {
                     Alert.alert(
                         "Modio",
                         "Wrong OTP",
@@ -58,8 +59,15 @@ export default function Login({ navigation }) {
                     setCountDown(30);
                     setShowOTP(false);
                     setResendOTP(false);
-                    dispatch(allActions.userActions.login({ user_hp: hp }))
-                    navigation.replace('User')
+                    dispatch(allActions.userActions.login({ user_hp: hp, role: data.role }))
+                    if (data.role == 'admin')
+                        navigation.replace('Admin');
+                    else if (data.role == 'hospital')
+                        navigation.replace('Hospital');
+                    else if (data.role == 'delivery')
+                        navigation.replace('Delivery');
+                    else
+                        navigation.replace('User');
                 }
             })
             .catch(err => {
@@ -124,7 +132,7 @@ export default function Login({ navigation }) {
         setOTP("")
         setShowOTP(true);
         setResendOTP(false);
-        axios.post(`/user_otp.php`, { hp })
+        axios.post(`/check_otp.php`, { hp })
             .then(res => {
                 setLoadingOTP(false);
                 setTimer(setInterval(countDowns, 1000));

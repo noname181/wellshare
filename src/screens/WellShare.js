@@ -28,7 +28,7 @@ function WellShare({ navigation }) {
       </TouchableOpacity>
       <TouchableOpacity
 
-        onPress={() => navigation.navigate('Delivery_Man')}
+        onPress={() => navigation.navigate('Delivery')}
         style={styles.button}
       >
         <Text style={styles.text}>Delivery Man App</Text>

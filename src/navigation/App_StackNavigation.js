@@ -46,7 +46,7 @@ function HomeStack() {
                 options={{ headerShown: false }}
             />
             <Stack.Screen
-                name="Delivery_Man"
+                name="Delivery"
                 component={DeliveryMan_TabNavigation}
                 options={{ headerShown: false }}
             />
