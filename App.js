@@ -63,7 +63,8 @@ const App = () => {
 
     BackgroundGeolocation.on('stationary', (stationaryLocation) => {
       // handle stationary locations here
-      Actions.sendLocation(stationaryLocation);
+      console.log(stationaryLocation)
+      //Actions.sendLocation(stationaryLocation);
     });
 
     BackgroundGeolocation.on('error', (error) => {
