@@ -25,9 +25,18 @@ import Hospital_profileIcon8 from '../../images/svg/Hospital_profileIcon8';
 import Hospital_profileIcon9 from '../../images/svg/Hospital_profileIcon9';
 import Hospital_profileIcon10 from '../../images/svg/Hospital_profileIcon10';
 import Hospital_profileIcon11 from '../../images/svg/Hospital_profileIcon11';
+import { useSelector, useDispatch } from 'react-redux';
+import allActions from '../../redux/actions'
 
+function Profile({ navigation }) {
 
-function Profile() {
+    const dispatch = useDispatch();
+
+    const LogOut = () => {
+        dispatch(allActions.userActions.logout());
+        navigation.navigate('Login');
+    }
+
     return (
         <Screen style={{ backgroundColor: '#f6f7f8' }}>
             <ScrollView showsVerticalScrollIndicator={false} style={{ overflow: 'visible' }}>
@@ -133,10 +142,10 @@ function Profile() {
                     </View>
                 </View>
                 <View style={styles.profile_main_logout}>
-                    <View style={styles.h_row_logout}>
+                    <TouchableOpacity style={styles.h_row_logout} onPress={() => LogOut()}>
                         <Logout height={16} width={16} />
                         <Text style={styles.text_logout}>로그아웃</Text>
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
         </Screen>

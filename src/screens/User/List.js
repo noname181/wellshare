@@ -15,32 +15,9 @@ import Calendar from '../../images/svg/CalendarIcon';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
-const Item = ({ item }) => (
-    <View style={styles.h_box_list} key={item.b_no}>
 
-        <View style={styles.h_box_list__first}>
-            <View style={styles.h_box_list__first_child1}>
-                <Text style={styles.h_bl_f_c1_text}>{item.b_regdate}</Text>
-            </View>
-            <View style={styles.h_box_list__first_child2}>
-                <Text style={styles.h_bl_f_c2_text1}>{item.b_name} </Text>
-                <Text style={styles.h_bl_f_c2_text2}>({item.b_hp1})</Text>
-            </View>
-        </View>
-        <View style={styles.h_box_list__second}>
-            <View>
-                <Text style={styles.h_bl_s_text1}>1-1완모</Text>
-            </View>
-            <View>
-                <TouchableOpacity style={item.active ? styles.h_button_list_purple : styles.h_button_list_green} activeOpacity={0.8}>
-                    <Text style={item.active ? styles.h_text_small_clr_purple : styles.h_text_small_clr_green}>완료</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    </View>
-);
 
-function User_List() {
+function User_List({ navigation }) {
     const [tabSlected, settabSlected] = useState(1);
 
     const [date, setDate] = useState(new Date());
@@ -48,11 +25,11 @@ function User_List() {
     const [show, setShow] = useState(false);
     const [bookings, setBookings] = useState([]);
 
-    const user = useSelector(state => state.user_auth)
+    const user = useSelector(state => state.auth.user)
 
     useEffect(() => {
         console.log(user)
-        axios.post(`/user_load_bookings.php`, { hp: user.user_hp })
+        axios.post(`/user_load_bookings.php`, { hp: user.user_hp, role: 'receiver' })
             .then(res => {
                 setBookings(res.data.bookings)
             })
@@ -84,7 +61,32 @@ function User_List() {
         return date.getFullYear() + "/" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + date.getDate();
     }
 
+    const Item = ({ item }) => (
+        <TouchableOpacity style={styles.h_box_list} onPress={() => navigation.navigate('ListView', {
+            b_no: item.b_no,
+        })}>
 
+            <View style={styles.h_box_list__first}>
+                <View style={styles.h_box_list__first_child1}>
+                    <Text style={styles.h_bl_f_c1_text}>{item.b_regdate}</Text>
+                </View>
+                <View style={styles.h_box_list__first_child2}>
+                    <Text style={styles.h_bl_f_c2_text1}>{item.b_name} </Text>
+                    <Text style={styles.h_bl_f_c2_text2}>({item.b_hp1})</Text>
+                </View>
+            </View>
+            <View style={styles.h_box_list__second}>
+                <View>
+                    <Text style={styles.h_bl_s_text1}>{item.b_package}</Text>
+                </View>
+                <View>
+                    <TouchableOpacity style={item.active ? styles.h_button_list_purple : styles.h_button_list_green} activeOpacity={0.8}>
+                        <Text style={item.active ? styles.h_text_small_clr_purple : styles.h_text_small_clr_green}>완료</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        </TouchableOpacity>
+    );
 
     return (
         <Screen>
@@ -201,6 +203,9 @@ const styles = StyleSheet.create({
     },
     h_box_list__first_child2: {
         flexDirection: 'row'
+    },
+    h_box_list__first_child1: {
+        flex: 1
     },
     h_bl_f_c1_text: {
         color: '#a8a8a8',

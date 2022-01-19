@@ -14,5 +14,6 @@ const logout = () => {
 }
 
 export default {
-    login
+    login,
+    logout
 }

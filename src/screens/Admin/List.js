@@ -1,16 +1,70 @@
-import React, { useState } from 'react'
-import { View, StyleSheet, Text, TouchableOpacity, ScrollView, Image } from 'react-native';
+import React, { useState, useEffect } from 'react'
+import { View, StyleSheet, Text, TouchableOpacity, ScrollView, Image, FlatList } from 'react-native';
 import Screen from '../../components/Screen';
 import { Picker } from '@react-native-picker/picker';
+import { useSelector } from 'react-redux'
+import axios from '../../helpers/axiosInterceptor';
 
 
 
 
-function List() {
+function List({ navigation }) {
     const [selectedValue, setSelectedValue] = useState("java");
     const [tabSlected, settabSlected] = useState(1);
+    const [bookings, setBookings] = useState([]);
+
+    const user = useSelector(state => state.auth.user)
+
+    useEffect(() => {
+        console.log(user)
+        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin' })
+            .then(res => {
+                setBookings(res.data.bookings)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+        return () => {
+
+        };
+    }, []);
+
+    const Item = ({ item }) => (
+        <TouchableOpacity style={styles.h_box_list} onPress={() => navigation.navigate('ListView', {
+            b_no: item.b_no,
+        })}>
+            <View style={styles.h_box_list__first}>
+                <View>
+                    <Text style={styles.h_bl_s_text1}>{item.b_date} <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text> 8:00</Text>
+                </View>
+                <View>
+                    <TouchableOpacity style={styles.h_button_list_purple} activeOpacity={0.8}>
+                        <Text style={styles.h_text_small_clr_purple}>완료</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+            <View style={styles.h_box_list__second}>
+                <View style={styles.h_box_list__first_child1}>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={styles.h_f_c1_text}>{item.b_name}</Text>
+                        <Text style={styles.h_f_c1_phone}>{item.b_hp1}</Text>
+                    </View>
+                    <View style={{ paddingTop: 5 }}>
+                        <Text style={styles.h_bl_f_c1_text}>{item.b_address}</Text>
+                    </View>
+                </View>
+                <View style={styles.h_box_list__first_child2}>
+                    <Text style={styles.h_bl_f_c2_text1}>{item.b_package}</Text>
+                </View>
+            </View>
+        </TouchableOpacity>
+
+    );
+
+
     return (
-        <View>
+        <View style={{ flex: 1 }}>
             <View style={[styles.nlFixedAtTop]}>
                 <View style={[styles.h_width_select_half, { marginTop: 10 }, { marginBottom: 10 }]}>
                     <View style={styles.nlFormControl}>
@@ -58,46 +112,52 @@ function List() {
                 </View>
 
             </View>
-            <ScrollView>
-                <Screen style={{ paddingTop: 115, paddingBottom: 30 }}>
-                    <View style={[styles.nlRow, styles.nlBetween, styles.nlListTabTop]}>
-                        <TouchableOpacity activeOpacity={1} style={(tabSlected == 1) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(1)}>
-                            <Text style={(tabSlected == 1) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>전체</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity activeOpacity={1} style={(tabSlected == 2) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(2)}>
-                            <Text style={(tabSlected == 2) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>대상자</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity activeOpacity={1} style={(tabSlected == 3) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(3)}>
-                            <Text style={(tabSlected == 3) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>기사</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.h_box_list}>
-                        <View style={styles.h_box_list__first}>
-                            <View>
-                                <Text style={styles.h_bl_s_text1}>2022.01.06 <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text> 8:00</Text>
-                            </View>
-                            <View>
-                                <TouchableOpacity style={styles.h_button_list_purple} activeOpacity={0.8}>
-                                    <Text style={styles.h_text_small_clr_purple}>완료</Text>
-                                </TouchableOpacity>
-                            </View>
+            <Screen style={{ paddingTop: 115 }}>
+                <View style={[styles.nlRow, styles.nlBetween, styles.nlListTabTop]}>
+                    <TouchableOpacity activeOpacity={1} style={(tabSlected == 1) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(1)}>
+                        <Text style={(tabSlected == 1) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>전체</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity activeOpacity={1} style={(tabSlected == 2) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(2)}>
+                        <Text style={(tabSlected == 2) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>대상자</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity activeOpacity={1} style={(tabSlected == 3) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(3)}>
+                        <Text style={(tabSlected == 3) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>기사</Text>
+                    </TouchableOpacity>
+                </View>
+                <FlatList
+                    data={bookings}
+                    renderItem={Item}
+                    keyExtractor={item => item.b_no}
+                    style={styles.nlList}
+                    showsVerticalScrollIndicator={false}
+                />
+                {/* <View style={styles.h_box_list}>
+                    <View style={styles.h_box_list__first}>
+                        <View>
+                            <Text style={styles.h_bl_s_text1}>2022.01.06 <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text> 8:00</Text>
                         </View>
-                        <View style={styles.h_box_list__second}>
-                            <View style={styles.h_box_list__first_child1}>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text style={styles.h_f_c1_text}>조형래</Text>
-                                    <Text style={styles.h_f_c1_phone}>010-2009-7723</Text>
-                                </View>
-                                <View style={{ paddingTop: 5 }}>
-                                    <Text style={styles.h_bl_f_c1_text}>개포로 20길 17, 2층</Text>
-                                </View>
-                            </View>
-                            <View style={styles.h_box_list__first_child2}>
-                                <Text style={styles.h_bl_f_c2_text1}>1-1완모 </Text>
-                            </View>
+                        <View>
+                            <TouchableOpacity style={styles.h_button_list_purple} activeOpacity={0.8}>
+                                <Text style={styles.h_text_small_clr_purple}>완료</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
-                    {/* <View style={styles.h_box_list}>
+                    <View style={styles.h_box_list__second}>
+                        <View style={styles.h_box_list__first_child1}>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={styles.h_f_c1_text}>조형래</Text>
+                                <Text style={styles.h_f_c1_phone}>010-2009-7723</Text>
+                            </View>
+                            <View style={{ paddingTop: 5 }}>
+                                <Text style={styles.h_bl_f_c1_text}>개포로 20길 17, 2층</Text>
+                            </View>
+                        </View>
+                        <View style={styles.h_box_list__first_child2}>
+                            <Text style={styles.h_bl_f_c2_text1}>1-1완모 </Text>
+                        </View>
+                    </View>
+                </View> */}
+                {/* <View style={styles.h_box_list}>
                         <View style={styles.h_box_list__first}>
                             <View>
                                 <Text style={styles.h_bl_s_text1}>2021.05.25 <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text> 8:00</Text>
@@ -176,12 +236,14 @@ function List() {
                         </View>
                     </View> */}
 
-                </Screen>
-            </ScrollView>
-        </View>
+            </Screen>
+        </View >
     );
 }
 const styles = StyleSheet.create({
+    nlList: {
+        flex: 1
+    },
     h_f_c1_text: {
         color: 'black',
         fontSize: 15,
@@ -226,8 +288,10 @@ const styles = StyleSheet.create({
         borderBottomColor: '#eeeeee',
     },
     h_box_list__first_child2: {
-        display: 'flex',
         flexDirection: 'row'
+    },
+    h_box_list__first_child1: {
+        flex: 1
     },
     h_bl_f_c1_text: {
         color: '#a4a4a4',

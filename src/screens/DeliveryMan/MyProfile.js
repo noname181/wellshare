@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, Switch } from 'react-native';
+import { View, StyleSheet, Text, Switch, TouchableOpacity } from 'react-native';
 import Screen from '../../components/Screen';
-
+import { useSelector, useDispatch } from 'react-redux';
+import allActions from '../../redux/actions'
 //Images
 import DeliveryMyProfile1 from '../../images/svg/DeliveryMyProfile1';
 import DeliveryMyProfile2 from '../../images/svg/DeliveryMyProfile2';
@@ -10,9 +11,17 @@ import DeliveryMyProfile4 from '../../images/svg/DeliveryMyProfile4';
 import DeliveryMyProfile5 from '../../images/svg/DeliveryMyProfile5';
 import DeliveryMyProfile6 from '../../images/svg/DeliveryMyProfile6';
 
-function My_Profile() {
+function My_Profile({ navigation }) {
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    const user = useSelector(state => state.auth.user)
+    const dispatch = useDispatch();
+
+    const LogOut = () => {
+        navigation.navigate('Login');
+        dispatch(allActions.userActions.logout());
+
+    }
     return (
         <Screen style={styles.nlContainer}>
             <View style={[styles.nlCard, { backgroundColor: '#fff' }]}>
@@ -77,12 +86,12 @@ function My_Profile() {
             </View>
             <View style={[styles.nlCard, { backgroundColor: '#fff' }]}>
                 {/* Item Info */}
-                <View style={[styles.nlItemInfo, styles.nlRow]}>
+                <TouchableOpacity style={[styles.nlItemInfo, styles.nlRow]} onPress={() => LogOut()}>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
                         <DeliveryMyProfile6 height={18} width={18} />
                         <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>로그아웃</Text>
                     </View>
-                </View>
+                </TouchableOpacity>
 
             </View>
         </Screen>

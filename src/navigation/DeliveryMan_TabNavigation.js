@@ -4,7 +4,6 @@ import { View, StyleSheet, Text, InteractionManager } from 'react-native';
 import Header from '../components/Header';
 import Screen from '../components/Screen';
 //Screens
-import Main from '../screens/DeliveryMan/Main';
 import NoticeScreen from '../screens/DeliveryMan/Notice';
 import DeliveryMan_ComplainStack from '../navigation/DeliveryMan_ComplainStack';
 import DeliveryMan_ListStack from '../navigation/DeliveryMan_ListStack';

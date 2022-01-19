@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
         alignContent: 'center'
     },
     nlMax: {
-        width: '100%',
+        width: '98%',
     },
     nlItemInfo: {
         paddingVertical: 6,

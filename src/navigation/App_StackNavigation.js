@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import User_TabNavigation from '../navigation/User_TabNavigation'
 import Hospital_TabNavigation from '../navigation/Hospital_TabNavigation'
@@ -7,15 +7,18 @@ import DeliveryMan_TabNavigation from '../navigation/DeliveryMan_TabNavigation'
 import WellShare from '../screens/WellShare';
 import Login from '../screens/Login';
 
+
 const Stack = createStackNavigator();
 
 function HomeStack() {
+
+
     return (
         <Stack.Navigator
             screenOptions={{
                 ...TransitionPresets.BottomSheetAndroid
             }}
-            initialRouteName="WellShare"
+            initialRouteName="Login"
         >
             <Stack.Screen
                 name="WellShare"

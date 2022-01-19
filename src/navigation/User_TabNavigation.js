@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import Home from '../screens/User/Home'
 import Setting from '../screens/User/Setting'
 import Profile from '../screens/User/User_My_Profile'
 import { View, StyleSheet, Text, InteractionManager, ActivityIndicator } from 'react-native'
@@ -9,7 +8,7 @@ import List from '../images/svg/List'
 import Notice from '../images/svg/Notice'
 import Profile_Icon from '../images/svg/Profile'
 import Screen from '../components/Screen';
-import List_page from '../screens/User/User_List'
+import User_ListStack from '../navigation/User_ListStack'
 
 const Tab = createBottomTabNavigator();
 
@@ -35,16 +34,16 @@ function TabNavigation({ route, navigation }) {
             }}
         >
             <Tab.Screen
-                name="List_page"
-                component={List_page}
+                name="List_Stack"
+                component={User_ListStack}
                 options={{
                     headerShown: true,
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
                         <List height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
                     </View>),
-                    header: props => <Header title="명단" isBack={false} {...props} />
-
+                    header: props => <Header title="명단" isBack={false} {...props} />,
+                    headerShown: false
                 }}
 
             />

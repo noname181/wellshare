@@ -4,7 +4,6 @@ import { View, StyleSheet, Text, InteractionManager } from 'react-native';
 import Header from '../components/Header';
 import Screen from '../components/Screen';
 //Screen
-import Main from '../screens/Admin/Main';
 import NoticeScreen from '../screens/Admin/Notice';
 import ListViewScreen from '../screens/Admin/ListView';
 import ProfileScreen from '../screens/Admin/Profile';
@@ -16,7 +15,7 @@ import Notice from '../images/svg/Notice';
 import Profile_Icon from '../images/svg/Profile';
 import Deliveryman_list from '../images/svg/Deliveryman_list';
 import Admin_map from '../images/svg/Admin_map'
-
+import Admin_ListStack from '../navigation/Admin_ListStack';
 
 
 
@@ -35,17 +34,18 @@ function TabNavigation({ route, navigation }) {
             }}
         >
             <Tab.Screen
-                name="List"
-                component={ListScreen}
+                name="ListStack"
+                component={Admin_ListStack}
                 options={{
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
                         <Deliveryman_list height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
                     </View>),
-                    header: props => <Header title="명단" isBack={false} {...props} />
+                    header: props => <Header title="명단" isBack={false} {...props} />,
+                    headerShown: false
                 }}
             />
-            <Tab.Screen
+            {/* <Tab.Screen
                 name="ListView"
                 component={ListViewScreen}
                 options={{
@@ -55,7 +55,7 @@ function TabNavigation({ route, navigation }) {
                     </View>),
                     header: props => <Header title="명단" isBack={false} {...props} />
                 }}
-            />
+            /> */}
             <Tab.Screen
                 name="VehicleLocationView"
                 component={VehicleLocationViewScreen}
@@ -64,7 +64,7 @@ function TabNavigation({ route, navigation }) {
                         <Admin_map height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>차량위치</Text>
                     </View>),
-                     header: props => <Header title="차량위치" isBack={false} {...props} />
+                    header: props => <Header title="차량위치" isBack={false} {...props} />
                 }}
 
             />
@@ -90,8 +90,8 @@ function TabNavigation({ route, navigation }) {
                         <Profile_Icon height={19} width={25} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>나의정보</Text>
                     </View>),
-                    header: props => <Header title="나의정보" isBack={true} {...props} />
-                    
+                    header: props => <Header title="나의정보" isBack={false} {...props} />
+
                 }}
 
             />

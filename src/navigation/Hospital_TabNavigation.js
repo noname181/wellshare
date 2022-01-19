@@ -6,15 +6,13 @@ import List from '../images/svg/List'
 import Notice from '../images/svg/Notice'
 import Profile_Icon from '../images/svg/Profile'
 import Screen from '../components/Screen';
-import Home from '../screens/Hospital/Home';
-import Main from '../screens/Hospital/Main';
 import NoticeScreen from '../screens/Hospital/Notice';
 import Complain1Screen from '../screens/Hospital/Complains1';
 import Hospital_list from '../images/svg/Hospital_list';
 import Hospital_complain from '../images/svg/Hospital_complain';
 import Hospital_notice from '../images/svg/Hospital_notice';
 import Hospital_profile from '../images/svg/Hospital_profile';
-import Hospital_list_page from '../screens/Hospital/List';
+import Hospital_ListStack from '../navigation/Hospital_ListStack';
 import Hospital_profile_page from '../screens/Hospital/Profile'
 
 
@@ -49,8 +47,8 @@ function TabNavigation({ route, navigation }) {
             }}
         >
             <Tab.Screen
-                name="Hospital_list_page"
-                component={Hospital_list_page}
+                name="ListStack"
+                component={Hospital_ListStack}
                 options={{
                     headerShown: true,
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
@@ -58,7 +56,8 @@ function TabNavigation({ route, navigation }) {
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#d8d8d8' }]}>명단</Text>
 
                     </View>),
-                    header: props => <Header title="명단" isBack={false} {...props} />
+                    header: props => <Header title="명단" isBack={false} {...props} />,
+                    headerShown: false
                 }}
 
             />
@@ -96,7 +95,7 @@ function TabNavigation({ route, navigation }) {
                         <Hospital_profile height={19} width={19} color={focused ? '#7c257a' : '#d8d8d8'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#d8d8d8' }]}>나의정보</Text>
                     </View>),
-                    header: props => <Header title="나의정보" isBack={true} {...props} />
+                    header: props => <Header title="나의정보" isBack={false} {...props} />
                 }}
 
             />

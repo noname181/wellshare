@@ -10,10 +10,12 @@ const loginReducer = (state = initialState, action) => {
         case types.LOGIN: {
             let new_state = {
                 ...action.payload,
-                
+
             }
-            console.log(new_state)
             return new_state;
+        }
+        case types.LOGOUT: {
+            return {};
         }
         default: {
             return state;

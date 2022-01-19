@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {
     Text,
@@ -7,19 +7,39 @@ import {
     Image,
     TextInput,
     Button,
-    TouchableOpacity
-
+    TouchableOpacity,
+    FlatList
 } from 'react-native';
-
+import { useSelector } from 'react-redux'
+import axios from '../../helpers/axiosInterceptor';
 import Screen from '../../components/Screen';
 import Calendar from '../../images/svg/CalendarIcon';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-function List() {
+
+function List({ navigation }) {
     const [tabSlected, settabSlected] = useState(1);
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
+    const [bookings, setBookings] = useState([]);
+
+    const user = useSelector(state => state.auth.user)
+
+    useEffect(() => {
+        console.log(user)
+        axios.post(`/user_load_bookings.php`, { h_no: user.h_no, role: 'hospital' })
+            .then(res => {
+                setBookings(res.data.bookings)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+        return () => {
+
+        };
+    }, []);
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -38,6 +58,39 @@ function List() {
     const fortmatDate = () => {
         return date.getFullYear() + "/" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + date.getDate();
     }
+
+    const Item = ({ item }) => (
+        <TouchableOpacity style={styles.h_box_list} onPress={() => navigation.navigate('ListView', {
+            b_no: item.b_no,
+        })}>
+            <View style={styles.h_box_list__first}>
+                <View>
+                    <Text style={styles.h_bl_s_text1}>{item.b_date} <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text> 8:00</Text>
+                </View>
+                <View>
+                    <TouchableOpacity style={styles.h_button_list_purple} activeOpacity={0.8}>
+                        <Text style={styles.h_text_small_clr_purple}>완료</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+            <View style={styles.h_box_list__second}>
+                <View style={styles.h_box_list__first_child1}>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={styles.h_f_c1_text}>{item.b_name}</Text>
+                        <Text style={styles.h_f_c1_phone}>{item.b_hp1}</Text>
+                    </View>
+                    <View style={{ paddingTop: 5 }}>
+                        <Text style={styles.h_bl_f_c1_text}>{item.b_address}</Text>
+                    </View>
+                </View>
+                <View style={styles.h_box_list__first_child2}>
+                    <Text style={styles.h_bl_f_c2_text1}>{item.b_package}</Text>
+                </View>
+            </View>
+        </TouchableOpacity>
+
+    );
+
 
     return (
         <Screen style={{ backgroundColor: '#f6f7f8' }}>
@@ -58,6 +111,7 @@ function List() {
 
                     />
                 )}
+
                 <View style={styles.h_three_button}>
                     <TouchableOpacity activeOpacity={1} style={(tabSlected == 1) ? styles.h_button_active : styles.h_button} onPress={() => settabSlected(1)}>
                         <Text style={(tabSlected == 1) ? styles.h_text_clr_white : styles.h_text_clr_black}>전체</Text>
@@ -69,7 +123,15 @@ function List() {
                         <Text style={(tabSlected == 3) ? styles.h_text_clr_white : styles.h_text_clr_black}>완료</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.h_box_list}>
+
+                <FlatList
+                    data={bookings}
+                    renderItem={Item}
+                    keyExtractor={item => item.b_no}
+                    style={styles.nlList}
+                    showsVerticalScrollIndicator={false}
+                />
+                {/* <View style={styles.h_box_list}>
                     <View style={styles.h_box_list__first}>
                         <View>
                             <Text style={styles.h_bl_s_text1}>2022.01.03 <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text> 8:00</Text>
@@ -146,13 +208,16 @@ function List() {
                             <Text style={styles.h_bl_f_c2_text1}>1-1완모 </Text>
                         </View>
                     </View>
-                </View>
+                </View> */}
 
             </View>
         </Screen>
     );
 }
 const styles = StyleSheet.create({
+    nlList: {
+        flex: 1
+    },
     h_f_c1_text: {
         color: 'black',
         fontSize: 15,
@@ -199,6 +264,9 @@ const styles = StyleSheet.create({
     h_box_list__first_child2: {
         display: 'flex',
         flexDirection: 'row'
+    },
+    h_box_list__first_child1: {
+        flex: 1
     },
     h_bl_f_c1_text: {
         color: '#a4a4a4',
@@ -294,6 +362,7 @@ const styles = StyleSheet.create({
     },
     body_gray: {
         backgroundColor: 'f8f8f8',
+        flex: 1
     },
     box_calendar: {
         backgroundColor: '#fff',

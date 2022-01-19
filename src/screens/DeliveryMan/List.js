@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {
     Text,
@@ -14,6 +14,8 @@ import {
 import Screen from '../../components/Screen';
 import Calendar from '../../images/svg/CalendarIcon';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useSelector } from 'react-redux'
+import axios from '../../helpers/axiosInterceptor';
 
 const DATA = [
     {
@@ -48,12 +50,32 @@ const DATA = [
 ];
 
 
+
+
 function List({ navigation }) {
     const [tabSlected, settabSlected] = useState(1);
 
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
+    const [bookings, setBookings] = useState([]);
+
+    const user = useSelector(state => state.auth.user)
+
+    useEffect(() => {
+        console.log(user)
+        axios.post(`/user_load_bookings.php`, { d_no: user.d_no, role: 'delivery' })
+            .then(res => {
+                setBookings(res.data.bookings)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+        return () => {
+
+        };
+    }, []);
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -73,11 +95,12 @@ function List({ navigation }) {
     const fortmatDate = () => {
         return date.getFullYear() + "/" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + date.getDate();
     }
+
     const Item = ({ item }) => (
         <TouchableOpacity style={styles.h_box_list} onPress={() => navigation.navigate('ListView')}>
             <View style={styles.h_box_list__first}>
                 <View>
-                    <Text style={styles.h_bl_s_text1}>{item.regdate} <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text> 8:00</Text>
+                    <Text style={styles.h_bl_s_text1}>{item.b_date} <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text> 8:00</Text>
                 </View>
                 <View>
                     <TouchableOpacity style={styles.h_button_list_purple} activeOpacity={0.8}>
@@ -88,18 +111,19 @@ function List({ navigation }) {
             <View style={styles.h_box_list__second}>
                 <View style={styles.h_box_list__first_child1}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Text style={styles.h_f_c1_text}>{item.name}</Text>
-                        <Text style={styles.h_f_c1_phone}>{item.phone}</Text>
+                        <Text style={styles.h_f_c1_text}>{item.b_name}</Text>
+                        <Text style={styles.h_f_c1_phone}>{item.b_hp1}</Text>
                     </View>
                     <View style={{ paddingTop: 5 }}>
-                        <Text style={styles.h_bl_f_c1_text}>1-1완모</Text>
+                        <Text style={styles.h_bl_f_c1_text}>{item.b_address}</Text>
                     </View>
                 </View>
                 <View style={styles.h_box_list__first_child2}>
-                    <Text style={styles.h_bl_f_c2_text1}>1-1완모 </Text>
+                    <Text style={styles.h_bl_f_c2_text1}>{item.b_package}</Text>
                 </View>
             </View>
         </TouchableOpacity>
+
     );
 
 
@@ -132,9 +156,9 @@ function List({ navigation }) {
                     </TouchableOpacity>
                 </View>
                 <FlatList
-                    data={DATA}
+                    data={bookings}
                     renderItem={Item}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => item.b_no}
                     style={styles.nlList}
                     showsVerticalScrollIndicator={false}
                 />
@@ -243,6 +267,9 @@ const styles = StyleSheet.create({
     h_box_list__first_child2: {
         display: 'flex',
         flexDirection: 'row'
+    },
+    h_box_list__first_child1: {
+        flex: 1
     },
     h_bl_f_c1_text: {
         color: '#a4a4a4',

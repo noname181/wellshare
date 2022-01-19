@@ -6,22 +6,25 @@
  * @flow strict-local
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import App_StackNavigation from './src/navigation/App_StackNavigation';
 import { Provider } from 'react-redux';
-import store from './src/redux/store';
+import { store, persistor } from './src/redux/store';
+import { PersistGate } from 'redux-persist/integration/react'
 import { enableScreens, enableFreeze } from 'react-native-screens';
-import SplashScreen from 'react-native-splash-screen';
+
 import BackgroundGeolocation from '@mauron85/react-native-background-geolocation';
+import { ActivityIndicator } from "react-native";
 
 enableFreeze(true);
 enableScreens(true);
 
 const App = () => {
 
-  useEffect(() => {
-    SplashScreen.hide();
+  const [isLoadedPersist, setIsLoadedPersist] = useState(false);
+
+  const TrackingInit = () => {
     BackgroundGeolocation.configure({
       desiredAccuracy: BackgroundGeolocation.HIGH_ACCURACY,
       stationaryRadius: 50,
@@ -39,7 +42,8 @@ const App = () => {
       startForeground: true,
       url: 'https://scsman23.cafe24.com/api/tracking_delivery.php',
       httpHeaders: {
-        'X-FOO': 'bar'
+        'X-FOO': 'bar',
+        'Content-Type': 'application/json'
       },
       // customize post properties
       postTemplate: {
@@ -122,20 +126,26 @@ const App = () => {
         BackgroundGeolocation.start(); //triggers start on start event
       }
     });
+  }
 
-    // you can also just start without checking for status
-    // BackgroundGeolocation.start();
+  useEffect(() => {
+
     return () => {
-      // unregister all event listeners
-      //BackgroundGeolocation.removeAllListeners();
+
     }
   }, [])
 
+  const onBeforeLift = () => {
+    setIsLoadedPersist(true)
+  }
+
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <App_StackNavigation></App_StackNavigation>
-      </NavigationContainer>
+      <PersistGate loading={null} persistor={persistor} onBeforeLift={() => onBeforeLift()}>
+        {isLoadedPersist ? <NavigationContainer>
+          <App_StackNavigation></App_StackNavigation>
+        </NavigationContainer> : null}
+      </PersistGate>
     </Provider>
   );
 };

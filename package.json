@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@mauron85/react-native-background-geolocation": "^0.6.3",
+    "@react-native-async-storage/async-storage": "^1.15.15",
     "@react-native-community/datetimepicker": "^4.0.0",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-picker/picker": "^2.2.1",
@@ -31,6 +32,7 @@
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
     "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.0"
   },
   "devDependencies": {

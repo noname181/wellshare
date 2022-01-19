@@ -6,7 +6,8 @@ import allActions from '../redux/actions'
 //Images
 //import Logo from '../images/logo.png';
 import LogoImage from '../images/svg/LogoImage';
-
+import Screen from '../components/Screen';
+import SplashScreen from 'react-native-splash-screen';
 
 export default function Login({ navigation }) {
     const [showOTP, setShowOTP] = useState(false);
@@ -19,12 +20,57 @@ export default function Login({ navigation }) {
     const [loadingOTP, setLoadingOTP] = useState(false);
     const dispatch = useDispatch()
 
+    const role = useSelector(state => state.auth.role)
+
+    useEffect(() => {
+        if (role == 'admin') navigation.navigate('Admin');
+        else if (role == 'hospital') navigation.navigate('Hospital');
+        else if (role == 'delivery') navigation.navigate('Delivery');
+        else if (role == 'receiver') navigation.navigate('User');
+
+        setTimeout(() => {
+            SplashScreen.hide();
+        }, 500)
+
+
+        return () => {
+        };
+    }, []);
+
     const onSubmit = () => {
         Keyboard.dismiss();
+        if (hp == "") {
+            Alert.alert(
+                "Modio",
+                "Plese enter HP",
+                [
+                    {
+                        text: "Yes",
+                        onPress: () => { },
+                        style: "yes",
+                    },
+                ]
+            );
+            return;
+        }
         if (OTP == "") {
             Alert.alert(
                 "Modio",
-                "Plese enter OTP",
+                "Plese get and enter OTP",
+                [
+                    {
+                        text: "Yes",
+                        onPress: () => { },
+                        style: "yes",
+                    },
+                ]
+            );
+            return;
+        }
+        if (countDown == 0) {
+            Alert.alert(
+                "Modio",
+                "OTP is expired",
                 [
                     {
                         text: "Yes",
@@ -59,7 +105,7 @@ export default function Login({ navigation }) {
                     setCountDown(30);
                     setShowOTP(false);
                     setResendOTP(false);
-                    dispatch(allActions.userActions.login({ user_hp: hp, role: data.role }))
+                    dispatch(allActions.userActions.login({ user: data.user, role: data.role }))
                     if (data.role == 'admin')
                         navigation.replace('Admin');
                     else if (data.role == 'hospital')
@@ -91,6 +137,8 @@ export default function Login({ navigation }) {
         };
         return obj;
     }
+
+
 
     useEffect(() => {
         let time = secondsToTime(countDown);
@@ -155,35 +203,37 @@ export default function Login({ navigation }) {
     }
 
     return (
-        <View style={styles.nlWrapper}>
-            <View style={styles.nlBg1}></View>
-            <View style={styles.nlBg2}>
-                <View style={styles.nlLogin}>
-                    <View style={styles.nlLogo}>
-                        <LogoImage width={142} height={67} />
-                    </View>
-                    <View style={styles.nlRelative}>
-                        <TextInput style={styles.nlInput} keyboardType='numeric' placeholder="전화번호" value={hp} onChangeText={(text) => setHp(text)}></TextInput>
-
-                        <View style={[{ opacity: showOTP && !resendOTP ? 0.5 : 1 }]}>
-                            <TouchableOpacity style={[styles.nlButtonOTP, { flexDirection: 'row' }]} activeOpacity={0.8} onPress={() => { showOTP && !resendOTP ? {} : sendOTP() }}>
-
-                                <Text style={styles.nlColorWhite}>{resendOTP ? 'Resend OTP' : 'OTP 발송'}</Text>
-                                <ActivityIndicator size="small" color="#fff" style={{ marginLeft: 5, display: loadingOTP ? 'flex' : 'none' }} />
-                            </TouchableOpacity>
+        <Screen style={{ padding: 0 }} keyboard={true}>
+            <View style={styles.nlWrapper}>
+                <View style={styles.nlBg1}></View>
+                <View style={styles.nlBg2}>
+                    <View style={styles.nlLogin}>
+                        <View style={styles.nlLogo}>
+                            <LogoImage width={142} height={67} />
                         </View>
-                    </View>
-                    <View style={[styles.nlRelative, { opacity: showOTP ? 1 : 0 }]}>
-                        <TextInput style={styles.nlInput} keyboardType='numeric' placeholder="OTP" value={OTP} onChangeText={(text) => setOTP(text)} ></TextInput>
-                        <Text style={styles.nlCountNum}>{time.m < 10 ? '0' + time.m : time.m}:{time.s < 10 ? '0' + time.s : time.s}</Text>
-                    </View>
+                        <View style={styles.nlRelative}>
+                            <TextInput style={styles.nlInput} keyboardType='numeric' placeholder="전화번호" value={hp} onChangeText={(text) => setHp(text)}></TextInput>
 
-                    <TouchableOpacity style={[styles.nlButtonLogin]} activeOpacity={0.8} onPress={() => onSubmit()}>
-                        <Text style={[styles.nlColorWhite, styles.nlTextButton]}>로그인</Text>
-                    </TouchableOpacity>
+                            <View style={[{ opacity: showOTP && !resendOTP ? 0.5 : 1 }]}>
+                                <TouchableOpacity style={[styles.nlButtonOTP, { flexDirection: 'row' }]} activeOpacity={0.8} onPress={() => { showOTP && !resendOTP ? {} : sendOTP() }}>
+
+                                    <Text style={styles.nlColorWhite}>{resendOTP ? 'Resend OTP' : 'OTP 발송'}</Text>
+                                    <ActivityIndicator size="small" color="#fff" style={{ marginLeft: 5, display: loadingOTP ? 'flex' : 'none' }} />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        <View style={[styles.nlRelative, { opacity: showOTP ? 1 : 0 }]}>
+                            <TextInput style={styles.nlInput} keyboardType='numeric' placeholder="OTP" value={OTP} onChangeText={(text) => setOTP(text)} ></TextInput>
+                            <Text style={styles.nlCountNum}>{time.m < 10 ? '0' + time.m : time.m}:{time.s < 10 ? '0' + time.s : time.s}</Text>
+                        </View>
+
+                        <TouchableOpacity style={[styles.nlButtonLogin]} activeOpacity={0.8} onPress={() => onSubmit()}>
+                            <Text style={[styles.nlColorWhite, styles.nlTextButton]}>로그인</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
-        </View >
+        </Screen>
     );
 }
 const styles = StyleSheet.create({

@@ -4,17 +4,25 @@ import {
     View,
     StyleSheet,
     Image,
+    TouchableOpacity
 } from 'react-native';
-import { useSelector } from 'react-redux'
 import Screen from '../../components/Screen';
 import Avatar from '../../images/user/avatarPNG.png';
 import Name from '../../images/svg/ProfileName';
 import Phone from '../../images/svg/ProfilePhone';
 import Logout from '../../images/svg/ProfileLogout';
+import { useSelector, useDispatch } from 'react-redux';
+import allActions from '../../redux/actions'
 
+function User_My_Profile({ navigation }) {
+    const user = useSelector(state => state.auth.user)
+    const dispatch = useDispatch();
 
-function User_My_Profile() {
-    const user = useSelector(state => state.user_auth)
+    const LogOut = () => {
+        navigation.navigate('Login');
+        dispatch(allActions.userActions.logout());
+
+    }
 
     return (
         <Screen>
@@ -37,15 +45,15 @@ function User_My_Profile() {
                         <Text style={styles.text_profile}>전화번호</Text>
                     </View>
                     <View>
-                        <Text style={styles.text_profile}>{user.user_hp}</Text>
+                        <Text style={styles.text_profile}>{user?.user_hp}</Text>
                     </View>
                 </View>
             </View>
             <View style={styles.profile_main_logout}>
-                <View style={styles.h_row_logout}>
+                <TouchableOpacity style={styles.h_row_logout} onPress={() => LogOut()}>
                     <Logout height={16} width={16} />
                     <Text style={styles.text_profile}>로그아웃</Text>
-                </View>
+                </TouchableOpacity>
             </View>
         </Screen>
     );
