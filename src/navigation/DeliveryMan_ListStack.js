@@ -3,7 +3,7 @@ import { createStackNavigator, TransitionPresets } from '@react-navigation/stack
 import Header from '../components/Header';
 import List from '../screens/DeliveryMan/List';
 import ListView from '../screens/DeliveryMan/ListView';
-import ListEdit from '../screens/DeliveryMan/ListEdit';
+import Signature from '../screens/DeliveryMan/Signature';
 
 const Stack = createStackNavigator();
 
@@ -25,8 +25,8 @@ function HomeStack() {
                 options={{ header: props => <Header title="명단" isBack={true} {...props} /> }}
             />
             <Stack.Screen
-                name="ListEdit"
-                component={ListEdit}
+                name="Signature"
+                component={Signature}
                 options={{ header: props => <Header title="명단" isBack={true} {...props} /> }}
             />
         </Stack.Navigator>

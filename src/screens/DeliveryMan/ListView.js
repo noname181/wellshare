@@ -11,6 +11,7 @@ import axios from '../../helpers/axiosInterceptor';
 
 const actionSheetRefPhoto = createRef();
 const actionSheetRefText = createRef();
+const actionSheetRefSign = createRef();
 
 const createFormData = (photo, body = {}) => {
     const data = new FormData();
@@ -31,10 +32,11 @@ const createFormData = (photo, body = {}) => {
 
 function ListView({ navigation, route }) {
     const [photo, setPhoto] = useState(null);
+    const [sign, setSign] = useState(null);
     const [booking, setBooking] = useState({});
     const [completedText, setCompletedText] = useState("");
     const [isType, setIsType] = useState(false);
-    const { b_no } = route.params;
+    const { b_no, backFromSign } = route.params;
 
     useEffect(() => {
         loadBooking();
@@ -44,11 +46,25 @@ function ListView({ navigation, route }) {
     }, []);
 
     useEffect(() => {
+        backFromSign && actionSheetRefSign.current?.show();
+        return () => {
+
+        };
+    }, [backFromSign]);
+
+    useEffect(() => {
         if (photo) onSubmit();
         return () => {
 
         };
     }, [photo]);
+
+    useEffect(() => {
+        if (sign) onSubmitSign();
+        return () => {
+
+        };
+    }, [sign]);
 
     const loadBooking = () => {
         axios.post(`/booking_detail.php`, { b_no })
@@ -64,12 +80,13 @@ function ListView({ navigation, route }) {
 
     }
 
-    const openLibrary = () => {
+    const openLibrary = (sign) => {
         launchImageLibrary({ noData: true, }, (response) => {
             console.log(response);
-            if (response.assets[0]) {
+            if (!response.didCancel) {
                 actionSheetRefPhoto.current?.hide();
-                setPhoto(response.assets[0]);
+                if (sign) setSign(response.assets[0])
+                else setPhoto(response.assets[0]);
 
             }
         });
@@ -78,13 +95,39 @@ function ListView({ navigation, route }) {
     const openCamera = () => {
         launchCamera({ noData: true }, (response) => {
             console.log(response);
-            if (response.assets[0]) {
+            if (!response.didCancel) {
                 actionSheetRefPhoto.current?.hide();
                 setPhoto(response.assets[0]);
 
             }
         });
     }
+    const handleUploadSign = () => {
+        axios.post(`/upload_sign.php`, createFormData(sign, { b_no }), {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        })
+
+            .then((res) => {
+                console.log('response', res);
+                setPhoto(null)
+                Alert.alert("Modio", "Success", [
+
+                    {
+                        text: "Yes",
+                        onPress: () => {
+                            actionSheetRefSign.current?.hide();
+                        },
+                        style: "yes",
+                    },
+                ])
+                loadBooking();
+            })
+            .catch((error) => {
+                console.log('error', error);
+            });
+    };
 
     const handleUploadPhoto = () => {
         axios.post(`/update_booking.php`, createFormData(photo, { b_no, text: completedText }), {
@@ -112,6 +155,27 @@ function ListView({ navigation, route }) {
                 console.log('error', error);
             });
     };
+
+    const onSubmitSign = () => {
+        Alert.alert(
+            "Modio",
+            "Upload Sign?",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => { },
+                    style: "cancel",
+                },
+                {
+                    text: "OK",
+                    onPress: () => {
+                        handleUploadSign();
+                    },
+                    style: "ok",
+                },
+            ]
+        );
+    }
 
     const onSubmit = () => {
         Alert.alert(
@@ -252,13 +316,23 @@ function ListView({ navigation, route }) {
                             </View>
                         </View>
                         {/* Item Info */}
-                        {(photo || booking.image) && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }]}>
+                        {(photo || booking.image) && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }, , (sign || booking.sign) && styles.nlLineBottom]}>
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
                                 <Text style={styles.nlColorGrey}>사진</Text>
                             </View>
                             <View >
                                 <Image resizeMode="contain" style={{ height: 100, width: 100 }} source={photo ? { uri: photo?.uri } : { uri: booking.image }}></Image>
                             </View>
+
+                        </View>}
+                        {(sign || booking.sign) && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>Signature</Text>
+                            </View>
+                            <View >
+                                <Image resizeMode="contain" style={{ height: 100, width: 100 }} source={sign ? { uri: sign?.uri } : { uri: booking.sign }}></Image>
+                            </View>
+
                         </View>}
 
 
@@ -268,7 +342,9 @@ function ListView({ navigation, route }) {
                 </Screen>
             </ScrollView>
             <View style={[styles.nlFixedAtBottom, styles.nlRow,]}>
-                <TouchableOpacity style={styles.nlButton} onPress={() => navigation.navigate('ListEdit')}>
+                <TouchableOpacity style={styles.nlButton} onPress={() => {
+                    actionSheetRefSign.current?.setModalVisible();
+                }}>
                     <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>직접수령</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.nlButton} onPress={() => {
@@ -307,6 +383,20 @@ function ListView({ navigation, route }) {
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.actionsheet_row} onPress={() => openCamera()}>
                         <Text style={styles.actionsheet_row_txt}>Open Camera</Text>
+                    </TouchableOpacity>
+                </View>
+            </ActionSheet>
+            <ActionSheet ref={actionSheetRefSign} headerAlwaysVisible={true} gestureEnabled={true} containerStyle={styles.container_actionsheet} onClose={() => !isType && setCompletedText(null)}>
+                <View style={styles.actionsheet}>
+                    <TouchableOpacity style={styles.actionsheet_row} onPress={() => {
+                        actionSheetRefSign.current?.hide();
+                        navigation.navigate('Signature')
+                    }
+                    }>
+                        <Text style={styles.actionsheet_row_txt}>Sign</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.actionsheet_row} onPress={() => openLibrary('sign')}>
+                        <Text style={styles.actionsheet_row_txt}>Upload your sign</Text>
                     </TouchableOpacity>
                 </View>
             </ActionSheet>
