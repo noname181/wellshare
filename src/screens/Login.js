@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert, Keyboard, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert, Keyboard, ActivityIndicator, ScrollView } from "react-native";
 import axios from '../helpers/axiosInterceptor';
 import { useSelector, useDispatch } from 'react-redux';
 import allActions from '../redux/actions'
@@ -88,6 +88,23 @@ export default function Login({ navigation }) {
                     Alert.alert(
                         "Modio",
                         "Wrong OTP",
+                        [
+                            {
+                                text: "Yes",
+                                onPress: () => { },
+                                style: "yes",
+                            },
+                        ]
+                    );
+                } else if (data.msg == 'nonmember') {
+                    clearInterval(timer);
+                    setOTP("");
+                    setCountDown(30);
+                    setShowOTP(false);
+                    setResendOTP(false);
+                    Alert.alert(
+                        "Modio",
+                        "대상자가 아니거나 전화번호를 잘못 입력하였습니다.",
                         [
                             {
                                 text: "Yes",
@@ -234,6 +251,7 @@ export default function Login({ navigation }) {
                 </View>
             </View>
         </Screen>
+
     );
 }
 const styles = StyleSheet.create({

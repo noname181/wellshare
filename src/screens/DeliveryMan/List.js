@@ -97,7 +97,9 @@ function List({ navigation }) {
     }
 
     const Item = ({ item }) => (
-        <TouchableOpacity style={styles.h_box_list} onPress={() => navigation.navigate('ListView')}>
+        <TouchableOpacity style={styles.h_box_list} onPress={() => navigation.navigate('ListView', {
+            b_no: item.b_no,
+        })}>
             <View style={styles.h_box_list__first}>
                 <View>
                     <Text style={styles.h_bl_s_text1}>{item.b_date} <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text> 8:00</Text>

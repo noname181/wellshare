@@ -19,7 +19,10 @@ function My_Profile({ navigation }) {
 
     const LogOut = () => {
         navigation.navigate('Login');
-        dispatch(allActions.userActions.logout());
+        setTimeout(() => {
+            dispatch(allActions.userActions.logout());
+        }, 0)
+
 
     }
     return (
@@ -50,7 +53,7 @@ function My_Profile({ navigation }) {
                         <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>아이디</Text>
                     </View>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <Text style={styles.nlColorBlack}>km2415</Text>
+                        <Text style={styles.nlColorBlack}>{user?.d_name}</Text>
                     </View>
                 </View>
                 {/* Item Info */}
@@ -66,21 +69,21 @@ function My_Profile({ navigation }) {
                 {/* Item Info */}
                 <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <DeliveryMyProfile4 height={18} width={18} />
+                        <DeliveryMyProfile5 height={18} width={18} />
                         <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>이메일</Text>
                     </View>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <Text style={styles.nlColorBlack}>오류동 21-1</Text>
+                        <Text style={styles.nlColorBlack}>{user?.d_email}</Text>
                     </View>
                 </View>
                 {/* Item Info */}
-                <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween]}>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <DeliveryMyProfile5 height={18} width={18} />
+                        <DeliveryMyProfile4 height={18} width={18} />
                         <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>주소</Text>
                     </View>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <Text style={styles.nlColorBlack}>parkju@daum.net</Text>
+                        <Text style={styles.nlColorBlack}>{user?.d_address}</Text>
                     </View>
                 </View>
             </View>

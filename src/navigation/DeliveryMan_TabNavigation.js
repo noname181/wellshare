@@ -7,7 +7,7 @@ import Screen from '../components/Screen';
 import NoticeScreen from '../screens/DeliveryMan/Notice';
 import DeliveryMan_ComplainStack from '../navigation/DeliveryMan_ComplainStack';
 import DeliveryMan_ListStack from '../navigation/DeliveryMan_ListStack';
-import MyProfileScreen from '../screens/DeliveryMan/MyProfile';
+import MyProfileScreen from '../screens/DeliveryMan/Profile';
 import List_page from '../screens/DeliveryMan/List';
 //Images
 import List from '../images/svg/List';
