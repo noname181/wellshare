@@ -21,7 +21,6 @@ function My_Profile({ navigation }) {
     let tempDateEnd = new Date();
     tempDateEnd.setHours(user?.d_working_end.split(":")[0])
     tempDateEnd.setMinutes(user?.d_working_end.split(":")[1])
-    console.log(tempDateEnd.getTime())
     const [isEnabled, setIsEnabled] = useState(user?.d_is_active == 1 ? true : false);
     const [dateStart, setDateStart] = useState(tempDateStart);
     const [dateEnd, setDateEnd] = useState(tempDateEnd);
@@ -42,7 +41,6 @@ function My_Profile({ navigation }) {
             active: value ? 1 : 0
         }).then(res => {
             dispatch(actions.authActions.update_auth({ d_is_active: value ? 1 : 0 }));
-            console.log(res.data)
         }).catch(err => {
             console.log(err)
         })
@@ -83,7 +81,6 @@ function My_Profile({ navigation }) {
                 dispatch(actions.authActions.update_auth({ d_working_start: converTime(currentDate) }));
             else if (timeType == 'end')
                 dispatch(actions.authActions.update_auth({ d_working_end: converTime(currentDate) }));
-            console.log(res.data)
         }).catch(err => {
             console.log(err)
         })
