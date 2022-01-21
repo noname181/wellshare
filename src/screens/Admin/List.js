@@ -16,7 +16,6 @@ function List({ navigation }) {
     const user = useSelector(state => state.auth.user)
 
     useEffect(() => {
-        console.log(user)
         axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin' })
             .then(res => {
                 setBookings(res.data.bookings)
@@ -28,7 +27,7 @@ function List({ navigation }) {
         return () => {
 
         };
-    }, []);
+    });
 
     const Item = ({ item }) => (
         <TouchableOpacity style={styles.h_box_list} onPress={() => navigation.navigate('ListView', {

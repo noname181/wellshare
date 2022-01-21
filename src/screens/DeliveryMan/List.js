@@ -43,7 +43,7 @@ function List({ navigation }) {
         return () => {
 
         };
-    }, []);
+    });
 
     const TrackingInit = () => {
         BackgroundGeolocation.configure({

@@ -27,7 +27,6 @@ function List({ navigation }) {
     const user = useSelector(state => state.auth.user)
 
     useEffect(() => {
-        console.log(user)
         axios.post(`/user_load_bookings.php`, { h_no: user.h_no, role: 'hospital' })
             .then(res => {
                 setBookings(res.data.bookings)
@@ -39,7 +38,7 @@ function List({ navigation }) {
         return () => {
 
         };
-    }, []);
+    });
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;

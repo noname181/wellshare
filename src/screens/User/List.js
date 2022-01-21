@@ -28,7 +28,6 @@ function User_List({ navigation }) {
     const user = useSelector(state => state.auth.user)
 
     useEffect(() => {
-        console.log(user)
         axios.post(`/user_load_bookings.php`, { hp: user.user_hp, role: 'receiver' })
             .then(res => {
                 setBookings(res.data.bookings)
@@ -40,7 +39,7 @@ function User_List({ navigation }) {
         return () => {
 
         };
-    }, []);
+    });
 
     const onChange = (event, selectedDate) => {
         console.log(selectedDate)
