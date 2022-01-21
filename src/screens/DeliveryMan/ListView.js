@@ -309,7 +309,7 @@ function ListView({ navigation, route }) {
                             </View>
                         </View>
                         {/* Item Info */}
-                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, (photo || booking.image) || (sign || booking.sign) && styles.nlLineBottom]}>
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, (photo || booking.image || sign || booking.sign) && styles.nlLineBottom]}>
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
                                 <Text style={styles.nlColorGrey}>배송완료일</Text>
                             </View>
