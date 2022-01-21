@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     Text,
     View,
     StyleSheet,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    Modal,
+    Alert,
+    Pressable
 } from 'react-native';
 import Screen from '../../components/Screen';
 import Avatar from '../../images/user/avatarPNG.png';
@@ -13,8 +16,10 @@ import Phone from '../../images/svg/ProfilePhone';
 import Logout from '../../images/svg/ProfileLogout';
 import { useSelector, useDispatch } from 'react-redux';
 import actions from '../../redux/actions'
+import axios from '../../helpers/axiosInterceptor';
 
 function User_My_Profile({ navigation }) {
+    const [modalChangeModeVisible, setModalChangeModeVisible] = useState(false);
     const user = useSelector(state => state.auth.user)
     const dispatch = useDispatch();
 
@@ -23,6 +28,34 @@ function User_My_Profile({ navigation }) {
         setTimeout(() => {
             navigation.replace('Login');
         }, 0)
+    }
+
+    const changeMode = (mode) => {
+        setModalChangeModeVisible(false)
+        axios.post(`/change_mode.php`, {
+            mode,
+            hp: user?.user_hp
+        }).then(res => {
+
+            let data = res.data;
+            if (data.msg == 'non_registered') {
+                Alert.alert("Modio", "You don't have an account in this mode! ")
+                return;
+            }
+
+            dispatch(actions.authActions.logout());
+            dispatch(actions.authActions.login({ user: data.user, role: data.role }))
+            if (data.role == 'admin')
+                navigation.replace('Admin');
+            else if (data.role == 'hospital')
+                navigation.replace('Hospital');
+            else if (data.role == 'delivery')
+                navigation.replace('Delivery');
+            else
+                navigation.replace('User');
+        }).catch(err => {
+            console.log(err)
+        })
     }
 
     return (
@@ -51,11 +84,48 @@ function User_My_Profile({ navigation }) {
                 </View>
             </View>
             <View style={styles.profile_main_logout}>
+                <TouchableOpacity style={[styles.h_row_logout, styles.nlLineBottom]} onPress={() => setModalChangeModeVisible(true)}>
+                    <Logout height={16} width={16} />
+                    <Text style={styles.text_profile}>모드변경</Text>
+                </TouchableOpacity>
                 <TouchableOpacity style={styles.h_row_logout} onPress={() => LogOut()}>
                     <Logout height={16} width={16} />
                     <Text style={styles.text_profile}>로그아웃</Text>
                 </TouchableOpacity>
             </View>
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={modalChangeModeVisible}
+                onRequestClose={() => {
+                    Alert.alert("Modal has been closed.");
+                    setModalVisible(!modalChangeModeVisible);
+                }}
+            >
+                <Pressable style={styles.centeredView} onPress={() => setModalChangeModeVisible(false)}>
+                    <View style={styles.modalView}>
+                        <TouchableOpacity
+                            style={[styles.modal_button, { marginBottom: 10 }]}
+                            onPress={() => changeMode('admin')}
+                        >
+                            <Text style={styles.textModalStyle}>Admin</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.modal_button, { marginBottom: 10 }]}
+                            onPress={() => changeMode('hospital')}
+                        >
+                            <Text style={styles.textModalStyle}>Hospital</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={[styles.modal_button]}
+                            onPress={() => changeMode('delivery')}
+                        >
+                            <Text style={styles.textModalStyle}>Delivery</Text>
+                        </TouchableOpacity>
+                    </View>
+                </Pressable>
+            </Modal>
         </Screen>
     );
 }
@@ -66,7 +136,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: 18,
         paddingBottom: 18,
-        paddingLeft: 12,
     },
     h_row: {
         display: 'flex',
@@ -117,6 +186,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 1, height: 3 },
         shadowOpacity: 0.1,
         elevation: 3,
+        paddingHorizontal: 14
     },
 
     pf_box_information_first: {
@@ -137,7 +207,44 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         marginLeft: 12,
         marginRight: 12,
-    }
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(0,0,0,0.5)"
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 10,
+        paddingHorizontal: 15,
+        paddingVertical: 30,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
+    modal_button: {
+        backgroundColor: "#7c257a",
+        borderRadius: 5,
+        width: 200,
+        paddingVertical: 6,
+        alignItems: 'center'
+    },
+    textModalStyle: {
+        color: "#fff"
+    },
+    nlLineBottom: {
+        borderStyle: 'solid',
+        borderBottomWidth: 1,
+        borderBottomColor: '#e1e1e1',
+    },
 });
 
 export default User_My_Profile

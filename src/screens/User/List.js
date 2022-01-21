@@ -39,7 +39,7 @@ function User_List({ navigation }) {
         return () => {
 
         };
-    });
+    }, []);
 
     const onChange = (event, selectedDate) => {
         console.log(selectedDate)

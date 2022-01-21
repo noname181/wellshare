@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, Switch, TouchableOpacity, Platform, Button } from 'react-native';
+import { View, StyleSheet, Text, Switch, TouchableOpacity, Platform, Pressable, Modal, Alert } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Screen from '../../components/Screen';
 import { useSelector, useDispatch } from 'react-redux';
@@ -16,11 +16,11 @@ import axios from '../../helpers/axiosInterceptor';
 function My_Profile({ navigation }) {
     const user = useSelector(state => state.auth.user)
     let tempDateStart = new Date();
-    tempDateStart.setHours(user?.d_working_start.split(":")[0])
-    tempDateStart.setMinutes(user?.d_working_start.split(":")[1])
+    tempDateStart.setHours(user?.d_working_start?.split(":")[0])
+    tempDateStart.setMinutes(user?.d_working_start?.split(":")[1])
     let tempDateEnd = new Date();
-    tempDateEnd.setHours(user?.d_working_end.split(":")[0])
-    tempDateEnd.setMinutes(user?.d_working_end.split(":")[1])
+    tempDateEnd.setHours(user?.d_working_end?.split(":")[0])
+    tempDateEnd.setMinutes(user?.d_working_end?.split(":")[1])
     const [isEnabled, setIsEnabled] = useState(user?.d_is_active == 1 ? true : false);
     const [dateStart, setDateStart] = useState(tempDateStart);
     const [dateEnd, setDateEnd] = useState(tempDateEnd);
@@ -30,6 +30,7 @@ function My_Profile({ navigation }) {
     const [workingStart, setWorkingStart] = useState(user?.d_working_start);
     const [workingEnd, setWorkingEnd] = useState(user?.d_working_end);
     const [timeType, setTimeType] = useState('start');
+    const [modalChangeModeVisible, setModalChangeModeVisible] = useState(false);
     const dispatch = useDispatch();
 
 
@@ -95,6 +96,35 @@ function My_Profile({ navigation }) {
     const showTimepicker = (type) => {
         showMode('time', type);
     };
+
+    const changeMode = (mode) => {
+        setModalChangeModeVisible(false)
+        axios.post(`/change_mode.php`, {
+            mode,
+            hp: user?.d_hp
+        }).then(res => {
+
+            let data = res.data;
+            if (data.msg == 'non_registered') {
+                Alert.alert("Modio", "You don't have an account in this mode! ")
+                return;
+            }
+
+            dispatch(actions.authActions.logout());
+            dispatch(actions.authActions.login({ user: data.user, role: data.role }))
+            if (data.role == 'admin')
+                navigation.replace('Admin');
+            else if (data.role == 'hospital')
+                navigation.replace('Hospital');
+            else if (data.role == 'delivery')
+                navigation.replace('Delivery');
+            else
+                navigation.replace('User');
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
 
     return (
         <Screen style={styles.nlContainer}>
@@ -173,6 +203,13 @@ function My_Profile({ navigation }) {
             </View>
             <View style={[styles.nlCard, { backgroundColor: '#fff' }]}>
                 {/* Item Info */}
+                <TouchableOpacity style={[styles.nlItemInfo, styles.nlRow, styles.nlLineBottom]} onPress={() => setModalChangeModeVisible(true)}>
+                    <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                        <DeliveryMyProfile6 height={18} width={18} />
+                        <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>모드변경</Text>
+                    </View>
+                </TouchableOpacity>
+                {/* Item Info */}
                 <TouchableOpacity style={[styles.nlItemInfo, styles.nlRow]} onPress={() => LogOut()}>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
                         <DeliveryMyProfile6 height={18} width={18} />
@@ -203,6 +240,39 @@ function My_Profile({ navigation }) {
                     minuteInterval={5}
                 />
             )}
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={modalChangeModeVisible}
+                onRequestClose={() => {
+                    Alert.alert("Modal has been closed.");
+                    setModalVisible(!modalChangeModeVisible);
+                }}
+            >
+                <Pressable style={styles.centeredView} onPress={() => setModalChangeModeVisible(false)}>
+                    <View style={styles.modalView}>
+                        <TouchableOpacity
+                            style={[styles.modal_button, { marginBottom: 10 }]}
+                            onPress={() => changeMode('admin')}
+                        >
+                            <Text style={styles.textModalStyle}>Admin</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.modal_button, { marginBottom: 10 }]}
+                            onPress={() => changeMode('hospital')}
+                        >
+                            <Text style={styles.textModalStyle}>Hospital</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={[styles.modal_button]}
+                            onPress={() => changeMode('receiver')}
+                        >
+                            <Text style={styles.textModalStyle}>Receiver</Text>
+                        </TouchableOpacity>
+                    </View>
+                </Pressable>
+            </Modal>
         </Screen>
     );
 }
@@ -260,6 +330,38 @@ const styles = StyleSheet.create({
     },
     nlMarginLeft10: {
         marginLeft: 10
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(0,0,0,0.5)"
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 10,
+        paddingHorizontal: 15,
+        paddingVertical: 30,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
+    modal_button: {
+        backgroundColor: "#7c257a",
+        borderRadius: 5,
+        width: 200,
+        paddingVertical: 6,
+        alignItems: 'center'
+    },
+    textModalStyle: {
+        color: "#fff"
     }
 });
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, Text, TouchableOpacity, ScrollView, Image, FlatList } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, ActivityIndicator, Image, FlatList } from 'react-native';
 import Screen from '../../components/Screen';
 import { Picker } from '@react-native-picker/picker';
 import { useSelector } from 'react-redux'
@@ -12,22 +12,44 @@ function List({ navigation }) {
     const [selectedValue, setSelectedValue] = useState("java");
     const [tabSlected, settabSlected] = useState(1);
     const [bookings, setBookings] = useState([]);
+    const [loadMore, setLoadMore] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [page, setPage] = useState(0);
 
     const user = useSelector(state => state.auth.user)
 
     useEffect(() => {
-        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin' })
+
+        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: bookings.length })
             .then(res => {
-                setBookings(res.data.bookings)
+                setBookings(bookings.concat(res.data.bookings))
+                if (res.data.bookings.length == 0) {
+                    setTimeout(() => setLoadMore(false), 1000)
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        return () => {
+
+        };
+    }, []);
+
+
+    const onLoadMore = () => {
+        setLoadMore(true);
+        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: bookings.length })
+            .then(res => {
+                setBookings(bookings.concat(res.data.bookings))
+                if (res.data.bookings.length == 0) {
+                    setTimeout(() => setLoadMore(false), 1000)
+                }
             })
             .catch(err => {
                 console.log(err);
             })
 
-        return () => {
-
-        };
-    });
+    }
 
     const Item = ({ item }) => (
         <TouchableOpacity style={styles.h_box_list} onPress={() => navigation.navigate('ListView', {
@@ -124,11 +146,27 @@ function List({ navigation }) {
                     </TouchableOpacity>
                 </View>
                 <FlatList
+                    refreshing={false}
                     data={bookings}
                     renderItem={Item}
-                    keyExtractor={item => item.b_no}
+                    keyExtractor={(item, index) => String(index)}
                     style={styles.nlList}
                     showsVerticalScrollIndicator={false}
+                    scrollEventThrottle={16}
+                    onEndReachedThreshold={0.5}
+                    onEndReached={({ distanceFromEnd }) => {
+                        console.log(distanceFromEnd)
+                        distanceFromEnd > 0 && onLoadMore();
+                    }}
+
+                    ListFooterComponent={loadMore ? <View
+                        style={{
+                            paddingBottom: 15,
+
+                        }}
+                    >
+                        <ActivityIndicator animating size="large" color="#7c257a" />
+                    </View> : null}
                 />
                 {/* <View style={styles.h_box_list}>
                     <View style={styles.h_box_list__first}>

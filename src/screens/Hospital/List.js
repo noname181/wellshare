@@ -38,7 +38,7 @@ function List({ navigation }) {
         return () => {
 
         };
-    });
+    }, []);
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;

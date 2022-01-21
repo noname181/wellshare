@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     Text,
     View,
@@ -7,7 +7,10 @@ import {
     TextInput,
     Button,
     TouchableOpacity,
-    ScrollView
+    ScrollView,
+    Modal,
+    Alert,
+    Pressable
 
 } from 'react-native';
 import Screen from '../../components/Screen';
@@ -27,9 +30,11 @@ import Hospital_profileIcon10 from '../../images/svg/Hospital_profileIcon10';
 import Hospital_profileIcon11 from '../../images/svg/Hospital_profileIcon11';
 import { useSelector, useDispatch } from 'react-redux';
 import actions from '../../redux/actions'
+import axios from '../../helpers/axiosInterceptor';
 
 function Profile({ navigation }) {
-
+    const [modalChangeModeVisible, setModalChangeModeVisible] = useState(false);
+    const user = useSelector(state => state.auth.user)
     const dispatch = useDispatch();
 
     const LogOut = () => {
@@ -37,6 +42,34 @@ function Profile({ navigation }) {
         setTimeout(() => {
             navigation.replace('Login');
         }, 0)
+    }
+
+    const changeMode = (mode) => {
+        setModalChangeModeVisible(false)
+        axios.post(`/change_mode.php`, {
+            mode,
+            hp: user?.hm_hp
+        }).then(res => {
+
+            let data = res.data;
+            if (data.msg == 'non_registered') {
+                Alert.alert("Modio", "You don't have an account in this mode! ")
+                return;
+            }
+
+            dispatch(actions.authActions.logout());
+            dispatch(actions.authActions.login({ user: data.user, role: data.role }))
+            if (data.role == 'admin')
+                navigation.replace('Admin');
+            else if (data.role == 'hospital')
+                navigation.replace('Hospital');
+            else if (data.role == 'delivery')
+                navigation.replace('Delivery');
+            else
+                navigation.replace('User');
+        }).catch(err => {
+            console.log(err)
+        })
     }
 
     return (
@@ -144,12 +177,49 @@ function Profile({ navigation }) {
                     </View>
                 </View>
                 <View style={styles.profile_main_logout}>
+                    <TouchableOpacity style={[styles.h_row_logout, styles.nlLineBottom]} onPress={() => setModalChangeModeVisible(true)}>
+                        <Logout height={16} width={16} />
+                        <Text style={styles.text_logout}>모드변경</Text>
+                    </TouchableOpacity>
                     <TouchableOpacity style={styles.h_row_logout} onPress={() => LogOut()}>
                         <Logout height={16} width={16} />
                         <Text style={styles.text_logout}>로그아웃</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={modalChangeModeVisible}
+                onRequestClose={() => {
+                    Alert.alert("Modal has been closed.");
+                    setModalVisible(!modalChangeModeVisible);
+                }}
+            >
+                <Pressable style={styles.centeredView} onPress={() => setModalChangeModeVisible(false)}>
+                    <View style={styles.modalView}>
+                        <TouchableOpacity
+                            style={[styles.modal_button, { marginBottom: 10 }]}
+                            onPress={() => changeMode('admin')}
+                        >
+                            <Text style={styles.textModalStyle}>Admin</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.modal_button, { marginBottom: 10 }]}
+                            onPress={() => changeMode('delivery')}
+                        >
+                            <Text style={styles.textModalStyle}>Delivery</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={[styles.modal_button]}
+                            onPress={() => changeMode('receiver')}
+                        >
+                            <Text style={styles.textModalStyle}>Receiver</Text>
+                        </TouchableOpacity>
+                    </View>
+                </Pressable>
+            </Modal>
         </Screen>
     );
 }
@@ -160,7 +230,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: 18,
         paddingBottom: 18,
-        paddingLeft: 16,
     },
     h_row: {
         flexDirection: 'row',
@@ -253,6 +322,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         elevation: 3,
         marginBottom: 50,
+        paddingHorizontal: 14
     },
 
     pf_box_information_first: {
@@ -294,7 +364,43 @@ const styles = StyleSheet.create({
         marginRight: 16,
         borderTopColor: '#e1e1e1',
         borderTopWidth: 1,
-    }
+    }, centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(0,0,0,0.5)"
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 10,
+        paddingHorizontal: 15,
+        paddingVertical: 30,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
+    modal_button: {
+        backgroundColor: "#7c257a",
+        borderRadius: 5,
+        width: 200,
+        paddingVertical: 6,
+        alignItems: 'center'
+    },
+    textModalStyle: {
+        color: "#fff"
+    },
+    nlLineBottom: {
+        borderStyle: 'solid',
+        borderBottomWidth: 1,
+        borderBottomColor: '#e1e1e1',
+    },
 
 });
 

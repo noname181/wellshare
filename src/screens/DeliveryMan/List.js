@@ -30,7 +30,6 @@ function List({ navigation }) {
     const user = useSelector(state => state.auth.user)
 
     useEffect(() => {
-        console.log(user)
         TrackingInit();
         axios.post(`/user_load_bookings.php`, { d_no: user.d_no, role: 'delivery' })
             .then(res => {
@@ -43,7 +42,7 @@ function List({ navigation }) {
         return () => {
 
         };
-    });
+    }, []);
 
     const TrackingInit = () => {
         BackgroundGeolocation.configure({
