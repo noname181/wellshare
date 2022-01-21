@@ -12,14 +12,14 @@ import Name from '../../images/svg/ProfileName';
 import Phone from '../../images/svg/ProfilePhone';
 import Logout from '../../images/svg/ProfileLogout';
 import { useSelector, useDispatch } from 'react-redux';
-import allActions from '../../redux/actions'
+import actions from '../../redux/actions'
 
 function User_My_Profile({ navigation }) {
     const user = useSelector(state => state.auth.user)
     const dispatch = useDispatch();
 
     const LogOut = () => {
-        dispatch(allActions.userActions.logout());
+        dispatch(actions.authActions.logout());
         setTimeout(() => {
             navigation.navigate('Login');
         }, 0)

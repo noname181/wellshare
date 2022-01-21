@@ -26,14 +26,14 @@ import Hospital_profileIcon9 from '../../images/svg/Hospital_profileIcon9';
 import Hospital_profileIcon10 from '../../images/svg/Hospital_profileIcon10';
 import Hospital_profileIcon11 from '../../images/svg/Hospital_profileIcon11';
 import { useSelector, useDispatch } from 'react-redux';
-import allActions from '../../redux/actions'
+import actions from '../../redux/actions'
 
 function Profile({ navigation }) {
 
     const dispatch = useDispatch();
 
     const LogOut = () => {
-        dispatch(allActions.userActions.logout());
+        dispatch(actions.authActions.logout());
         setTimeout(() => {
             navigation.navigate('Login');
         }, 0)

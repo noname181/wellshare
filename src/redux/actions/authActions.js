@@ -13,7 +13,15 @@ const logout = () => {
     }
 }
 
+const update_auth = (payload) => {
+    return {
+        type: types.UPDATE_AUTH,
+        payload
+    }
+}
+
 export default {
     login,
-    logout
+    logout,
+    update_auth
 }

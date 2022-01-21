@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, Switch, TouchableOpacity, Platform, Button } fr
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Screen from '../../components/Screen';
 import { useSelector, useDispatch } from 'react-redux';
-import allActions from '../../redux/actions'
+import actions from '../../redux/actions'
 //Images
 import DeliveryMyProfile1 from '../../images/svg/DeliveryMyProfile1';
 import DeliveryMyProfile2 from '../../images/svg/DeliveryMyProfile2';
@@ -16,38 +16,40 @@ import axios from '../../helpers/axiosInterceptor';
 function My_Profile({ navigation }) {
     const user = useSelector(state => state.auth.user)
     let tempDateStart = new Date();
-    tempDateStart.setHours(user.d_working_start.split(":")[0])
-    tempDateStart.setMinutes(user.d_working_start.split(":")[1])
+    tempDateStart.setHours(user?.d_working_start.split(":")[0])
+    tempDateStart.setMinutes(user?.d_working_start.split(":")[1])
     let tempDateEnd = new Date();
-    tempDateEnd.setHours(user.d_working_end.split(":")[0])
-    tempDateEnd.setMinutes(user.d_working_end.split(":")[1])
+    tempDateEnd.setHours(user?.d_working_end.split(":")[0])
+    tempDateEnd.setMinutes(user?.d_working_end.split(":")[1])
     console.log(tempDateEnd.getTime())
-    const [isEnabled, setIsEnabled] = useState(user.d_is_active == 1 ? true : false);
+    const [isEnabled, setIsEnabled] = useState(user?.d_is_active == 1 ? true : false);
     const [dateStart, setDateStart] = useState(tempDateStart);
     const [dateEnd, setDateEnd] = useState(tempDateEnd);
     const [mode, setMode] = useState('date');
     const [showStart, setShowStart] = useState(false);
     const [showEnd, setShowEnd] = useState(false);
-    const [workingStart, setWorkingStart] = useState(user.d_working_start);
-    const [workingEnd, setWorkingEnd] = useState(user.d_working_end);
+    const [workingStart, setWorkingStart] = useState(user?.d_working_start);
+    const [workingEnd, setWorkingEnd] = useState(user?.d_working_end);
     const [timeType, setTimeType] = useState('start');
+    const dispatch = useDispatch();
+
+
     const toggleSwitch = (value) => {
         setIsEnabled(previousState => !previousState);
         axios.post(`/change_delivery_working_time.php`, {
             type: 'active',
-            d_no: user.d_no,
+            d_no: user?.d_no,
             active: value ? 1 : 0
         }).then(res => {
+            dispatch(actions.authActions.update_auth({ d_is_active: value ? 1 : 0 }));
             console.log(res.data)
         }).catch(err => {
             console.log(err)
         })
     }
 
-    const dispatch = useDispatch();
-
     const LogOut = () => {
-        dispatch(allActions.userActions.logout());
+        dispatch(actions.authActions.logout());
         setTimeout(() => {
             navigation.navigate('Login');
         }, 0)
@@ -75,8 +77,12 @@ function My_Profile({ navigation }) {
         axios.post(`/change_delivery_working_time.php`, {
             type: timeType,
             time: converTime(currentDate),
-            d_no: user.d_no
+            d_no: user?.d_no
         }).then(res => {
+            if (timeType == 'start')
+                dispatch(actions.authActions.update_auth({ d_working_start: converTime(currentDate) }));
+            else if (timeType == 'end')
+                dispatch(actions.authActions.update_auth({ d_working_end: converTime(currentDate) }));
             console.log(res.data)
         }).catch(err => {
             console.log(err)

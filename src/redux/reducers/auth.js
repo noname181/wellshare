@@ -17,6 +17,16 @@ const loginReducer = (state = initialState, action) => {
         case types.LOGOUT: {
             return {};
         }
+        case types.UPDATE_AUTH: {
+            let new_state = {
+                user: {
+                    ...state.user,
+                    ...action.payload
+                }
+
+            }
+            return new_state;
+        }
         default: {
             return state;
         }

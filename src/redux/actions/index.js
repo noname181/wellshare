@@ -1,8 +1,8 @@
-import userActions from './userActions'
+import authActions from './authActions'
 
-const allActions = {
-    userActions
+const actions = {
+    authActions
 }
 
-export default allActions
+export default actions
 

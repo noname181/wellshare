@@ -13,7 +13,7 @@ import Phone from '../../images/svg/ProfilePhone';
 import Logout from '../../images/svg/ProfileLogout';
 import Address from '../../images/svg/Hospital_profileIcon5';
 import { useSelector, useDispatch } from 'react-redux';
-import allActions from '../../redux/actions'
+import actions from '../../redux/actions'
 
 function Profile({ navigation }) {
 
@@ -21,7 +21,7 @@ function Profile({ navigation }) {
     const dispatch = useDispatch();
 
     const LogOut = () => {
-        dispatch(allActions.userActions.logout());
+        dispatch(actions.authActions.logout());
         setTimeout(() => {
             navigation.navigate('Login');
         }, 0)

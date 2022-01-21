@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert, Keyboard, ActivityIndicator, ScrollView } from "react-native";
 import axios from '../helpers/axiosInterceptor';
 import { useSelector, useDispatch } from 'react-redux';
-import allActions from '../redux/actions'
+import actions from '../redux/actions'
 //Images
 //import Logo from '../images/logo.png';
 import LogoImage from '../images/svg/LogoImage';
@@ -122,7 +122,7 @@ export default function Login({ navigation }) {
                     setCountDown(30);
                     setShowOTP(false);
                     setResendOTP(false);
-                    dispatch(allActions.userActions.login({ user: data.user, role: data.role }))
+                    dispatch(actions.authActions.login({ user: data.user, role: data.role }))
                     if (data.role == 'admin')
                         navigation.replace('Admin');
                     else if (data.role == 'hospital')
