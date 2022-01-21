@@ -50,7 +50,7 @@ function ListView({ navigation, route }) {
         return () => {
 
         };
-    }, [backFromSign]);
+    });
 
     useEffect(() => {
         if (photo) onSubmit();
@@ -69,7 +69,7 @@ function ListView({ navigation, route }) {
     const loadBooking = () => {
         axios.post(`/booking_detail.php`, { b_no })
             .then(res => {
-                console.log(res);
+                console.log(res.data);
                 setBooking(res.data.booking)
 
 
@@ -85,7 +85,9 @@ function ListView({ navigation, route }) {
             console.log(response);
             if (!response.didCancel) {
                 actionSheetRefPhoto.current?.hide();
-                if (sign) setSign(response.assets[0])
+                if (sign) {
+                    setSign(response.assets[0]);
+                }
                 else setPhoto(response.assets[0]);
 
             }
@@ -307,7 +309,7 @@ function ListView({ navigation, route }) {
                             </View>
                         </View>
                         {/* Item Info */}
-                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, (photo || booking.image) && styles.nlLineBottom]}>
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, (photo || booking.image) || (sign || booking.sign) && styles.nlLineBottom]}>
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
                                 <Text style={styles.nlColorGrey}>배송완료일</Text>
                             </View>
@@ -390,7 +392,7 @@ function ListView({ navigation, route }) {
                 <View style={styles.actionsheet}>
                     <TouchableOpacity style={styles.actionsheet_row} onPress={() => {
                         actionSheetRefSign.current?.hide();
-                        navigation.navigate('Signature')
+                        navigation.navigate('Signature', { b_no })
                     }
                     }>
                         <Text style={styles.actionsheet_row_txt}>Sign</Text>

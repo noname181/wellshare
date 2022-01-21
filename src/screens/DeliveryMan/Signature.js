@@ -2,7 +2,7 @@
 import React, { useRef, useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity, PermissionsAndroid, Alert, Platform } from "react-native";
 import CameraRoll from '@react-native-community/cameraroll';
-import Signature from "react-native-signature-canvas";
+import SignatureScreen from "react-native-signature-canvas";
 import Screen from '../../components/Screen';
 import RNFS from "react-native-fs";
 import RNFetchBlob from 'rn-fetch-blob';
@@ -32,34 +32,45 @@ const save_base64 = (base64Img, success, fail) => {
         }
         try {
             CameraRoll.save(downloadDest, 'photo').then((e1) => {
-                console.log('suc', e1)
+                console.log('sucess', e1)
                 console.log(downloadDest)
                 success && success()
             }).catch((e2) => {
-                console.log('fai', e2)
-                Alert.alert('[]-[]-[]')
+                console.log('fail', e2)
+                Alert.alert('Save fail')
             })
         } catch (e3) {
             // Alert.alert(JSON.stringify(e3))
             console.log('catch', e3)
-            fail && fail()
+            fail && fail(e3)
         }
     });
 }
 
-function ListEdit({ navigation }) {
-    const [signature, setSign] = useState(null);
+function Signature({ navigation, route }) {
+    const [sign, setSign] = useState(null);
     const ref = useRef();
+    const { b_no } = route.params;
 
     const handleOK = (signature) => {
         console.log(signature);
         // onOK(signature);
         setSign(signature);
 
-        save_base64(signature, (success) => {
-            navigation.navigate('ListView', {
-                backFromSign: true
-            })
+        save_base64(signature, () => {
+            Alert.alert("Modio", "Saved your sign to library", [
+                {
+                    text: "Yes",
+                    onPress: () => {
+                        navigation.navigate('ListView', {
+                            backFromSign: true,
+                            b_no
+                        })
+                    },
+                    style: "yes",
+                },
+            ]);
+
         }, (err) => {
             console.log(err)
         })
@@ -84,7 +95,7 @@ function ListEdit({ navigation }) {
     return (
         <Screen>
 
-            <Signature ref={ref} onOK={handleOK} webStyle={style} backgroundColor="rgba(255,255,255,1)" />
+            <SignatureScreen ref={ref} onOK={handleOK} webStyle={style} backgroundColor="rgba(255,255,255,1)" />
 
 
 
@@ -144,4 +155,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ListEdit;
+export default Signature;
