@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, Switch, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, Switch, TouchableOpacity, Platform, Button } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import Screen from '../../components/Screen';
 import { useSelector, useDispatch } from 'react-redux';
 import allActions from '../../redux/actions'
@@ -10,11 +11,39 @@ import DeliveryMyProfile3 from '../../images/svg/DeliveryMyProfile3';
 import DeliveryMyProfile4 from '../../images/svg/DeliveryMyProfile4';
 import DeliveryMyProfile5 from '../../images/svg/DeliveryMyProfile5';
 import DeliveryMyProfile6 from '../../images/svg/DeliveryMyProfile6';
+import axios from '../../helpers/axiosInterceptor';
 
 function My_Profile({ navigation }) {
-    const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     const user = useSelector(state => state.auth.user)
+    let tempDateStart = new Date();
+    tempDateStart.setHours(user.d_working_start.split(":")[0])
+    tempDateStart.setMinutes(user.d_working_start.split(":")[1])
+    let tempDateEnd = new Date();
+    tempDateEnd.setHours(user.d_working_end.split(":")[0])
+    tempDateEnd.setMinutes(user.d_working_end.split(":")[1])
+    console.log(tempDateEnd.getTime())
+    const [isEnabled, setIsEnabled] = useState(user.d_is_active == 1 ? true : false);
+    const [dateStart, setDateStart] = useState(tempDateStart);
+    const [dateEnd, setDateEnd] = useState(tempDateEnd);
+    const [mode, setMode] = useState('date');
+    const [showStart, setShowStart] = useState(false);
+    const [showEnd, setShowEnd] = useState(false);
+    const [workingStart, setWorkingStart] = useState(user.d_working_start);
+    const [workingEnd, setWorkingEnd] = useState(user.d_working_end);
+    const [timeType, setTimeType] = useState('start');
+    const toggleSwitch = (value) => {
+        setIsEnabled(previousState => !previousState);
+        axios.post(`/change_delivery_working_time.php`, {
+            type: 'active',
+            d_no: user.d_no,
+            active: value ? 1 : 0
+        }).then(res => {
+            console.log(res.data)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
     const dispatch = useDispatch();
 
     const LogOut = () => {
@@ -24,6 +53,46 @@ function My_Profile({ navigation }) {
         }, 0)
 
     }
+
+    const converTime = (date) => {
+        return (date.getHours() < 10 ? "0" + date.getHours() : date.getHours()) + ":" + (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes());
+    }
+
+    const onChange = (event, selectedDate) => {
+        setShowStart(false)
+        setShowEnd(false)
+        const currentDate = new Date(selectedDate || date);
+        if (timeType == 'start') {
+            setWorkingStart(converTime(currentDate))
+            setDateStart(currentDate)
+
+        }
+        else if (timeType == 'end') {
+            setWorkingEnd(converTime(currentDate))
+            setDateEnd(currentDate)
+
+        }
+        axios.post(`/change_delivery_working_time.php`, {
+            type: timeType,
+            time: converTime(currentDate),
+            d_no: user.d_no
+        }).then(res => {
+            console.log(res.data)
+        }).catch(err => {
+            console.log(err)
+        })
+    };
+
+    const showMode = (currentMode, type) => {
+        type == 'start' ? setShowStart(true) : setShowEnd(true);
+        setMode(currentMode);
+    };
+
+
+    const showTimepicker = (type) => {
+        showMode('time', type);
+    };
+
     return (
         <Screen style={styles.nlContainer}>
             <View style={[styles.nlCard, { backgroundColor: '#fff' }]}>
@@ -31,14 +100,27 @@ function My_Profile({ navigation }) {
                 <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween]}>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
                         <DeliveryMyProfile1 height={18} width={18} />
-                        <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>업무시간 설정: 8:00-20:00</Text>
+                        <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>업무시간 설정:  </Text>
+                        <TouchableOpacity onPress={() => {
+                            setTimeType('start');
+                            showTimepicker('start');
+                        }}>
+                            <Text>{workingStart}</Text>
+                        </TouchableOpacity>
+                        <Text>  -  </Text>
+                        <TouchableOpacity onPress={() => {
+                            setTimeType('end');
+                            showTimepicker('end');
+                        }}>
+                            <Text>{workingEnd}</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
                         <Switch
                             trackColor={{ false: "#767577", true: "#f2d4f1" }}
                             thumbColor={isEnabled ? "#7c257a" : "#fff"}
                             ios_backgroundColor="#3e3e3e"
-                            onValueChange={toggleSwitch}
+                            onValueChange={value => toggleSwitch(value)}
                             value={isEnabled}
                         />
                     </View>
@@ -96,6 +178,28 @@ function My_Profile({ navigation }) {
                 </TouchableOpacity>
 
             </View>
+            {showStart && (
+                <DateTimePicker
+                    testID="dateTimePicker"
+                    value={dateStart}
+                    mode={mode}
+                    is24Hour={true}
+                    display="default"
+                    onChange={onChange}
+                    minuteInterval={5}
+                />
+            )}
+            {showEnd && (
+                <DateTimePicker
+                    testID="dateTimePicker"
+                    value={dateEnd}
+                    mode={mode}
+                    is24Hour={true}
+                    display="default"
+                    onChange={onChange}
+                    minuteInterval={5}
+                />
+            )}
         </Screen>
     );
 }
