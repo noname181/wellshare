@@ -18,11 +18,10 @@ function My_Profile({ navigation }) {
     const dispatch = useDispatch();
 
     const LogOut = () => {
-        navigation.navigate('Login');
+        dispatch(allActions.userActions.logout());
         setTimeout(() => {
-            dispatch(allActions.userActions.logout());
+            navigation.navigate('Login');
         }, 0)
-
 
     }
     return (

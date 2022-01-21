@@ -19,9 +19,10 @@ function User_My_Profile({ navigation }) {
     const dispatch = useDispatch();
 
     const LogOut = () => {
-        navigation.navigate('Login');
         dispatch(allActions.userActions.logout());
-
+        setTimeout(() => {
+            navigation.navigate('Login');
+        }, 0)
     }
 
     return (
