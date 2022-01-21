@@ -33,9 +33,10 @@ const createFormData = (photo, body = {}) => {
 function ListView({ navigation, route }) {
     const [photo, setPhoto] = useState(null);
     const [sign, setSign] = useState(null);
-    const [booking, setBooking] = useState({});
+    const [booking, setBooking] = useState(null);
     const [completedText, setCompletedText] = useState("");
     const [isType, setIsType] = useState(false);
+    const [isCompleted, setIsCompleted] = useState(false);
     const { b_no, backFromSign } = route.params;
 
     useEffect(() => {
@@ -120,6 +121,7 @@ function ListView({ navigation, route }) {
                         text: "Yes",
                         onPress: () => {
                             actionSheetRefSign.current?.hide();
+                            setIsCompleted(true);
                         },
                         style: "yes",
                     },
@@ -146,7 +148,7 @@ function ListView({ navigation, route }) {
                     {
                         text: "Yes",
                         onPress: () => {
-
+                            setIsCompleted(true);
                         },
                         style: "yes",
                     },
@@ -200,242 +202,241 @@ function ListView({ navigation, route }) {
         );
     }
 
-    return (
-        <View>
-            <ScrollView style={styles.nlMarginBottom}>
-                <Screen >
-                    <View style={[styles.nlCard, { backgroundColor: '#fff', padding: 20 }]}>
-                        {/* Item Info */}
-                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorGrey}>수령인</Text>
-                            </View>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking.b_name}</Text>
-                            </View>
+    return (<View>
+        <ScrollView style={booking != null && booking?.b_status != 'completed' ? styles.nlMarginBottom : null}>
+            <Screen >
+                <View style={[styles.nlCard, { backgroundColor: '#fff', padding: 20 }]}>
+                    {/* Item Info */}
+                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorGrey}>수령인</Text>
                         </View>
-                        {/* Item Info */}
-                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorGrey}>민원내역</Text>
-                            </View>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlMarkBlue}>0</Text>
-                            </View>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorBlack}>{booking?.b_name}</Text>
                         </View>
-                        {/* Item Info */}
-                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorGrey}>패키지</Text>
-                            </View>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking.b_package}</Text>
-                            </View>
-                        </View>
-                        {/* Item Info */}
-                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorGrey}>특이사항</Text>
-                            </View>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking.b_memo}</Text>
-                            </View>
-                        </View>
-                        {/* Item Info */}
-                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorGrey}>수령인HP</Text>
-                            </View>
-                            <View style={[styles.nlAlignCenter, styles.nlRow]}>
-                                <TouchableOpacity activeOpacity={1} onPress={() => Linking.openURL(`sms:${booking.b_hp1}`)}>
-                                    <SMSIcon height={30} width={30} />
-                                </TouchableOpacity>
-                                <TouchableOpacity activeOpacity={1} style={{ marginLeft: 10 }} onPress={() => Linking.openURL(`tel:${booking.b_hp1}`)}>
-                                    <PhoneIcon height={30} width={30} />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                        {/* Item Info */}
-                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorGrey}>수령인 주소.</Text>
-                            </View>
-                            <View style={[styles.nlRow, styles.nlAlignCenter, { maxWidth: '70%' }]}>
-                                <Text style={styles.nlColorBlack}>{booking.b_address}</Text>
-                            </View>
-                        </View>
-                        {/* Item Info */}
-                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorGrey}>배송예정일</Text>
-                            </View>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking.b_date}</Text>
-                            </View>
-                        </View>
-
                     </View>
-                    <View style={[styles.nlCard, { backgroundColor: '#fff', padding: 20 }]}>
-                        {/* Item Info */}
-                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorGrey}>배송인</Text>
-                            </View>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking.b_name}</Text>
-                            </View>
+                    {/* Item Info */}
+                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorGrey}>민원내역</Text>
                         </View>
-                        {/* Item Info */}
-                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorGrey}>배송인HP</Text>
-                            </View>
-                            <View style={[styles.nlRow]}>
-                                <TouchableOpacity activeOpacity={1} onPress={() => Linking.openURL(`sms:${booking.b_hp1}`)}>
-                                    <SMSIcon height={30} width={30} />
-                                </TouchableOpacity>
-                                <TouchableOpacity activeOpacity={1} style={{ marginLeft: 10 }} onPress={() => Linking.openURL(`tel:${booking.b_hp1}`)}>
-                                    <PhoneIcon height={30} width={30} />
-                                </TouchableOpacity>
-                            </View>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlMarkBlue}>0</Text>
                         </View>
-                        {/* Item Info */}
-                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorGrey}>배송상태</Text>
-                            </View>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking.b_status}</Text>
-                            </View>
+                    </View>
+                    {/* Item Info */}
+                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorGrey}>패키지</Text>
                         </View>
-                        {/* Item Info */}
-                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, (photo || booking.image || sign || booking.sign) && styles.nlLineBottom]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorGrey}>배송완료일</Text>
-                            </View>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking.b_completed_date}</Text>
-                            </View>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorBlack}>{booking?.b_package}</Text>
                         </View>
-                        {/* Item Info */}
-                        {(photo || booking.image) && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }, , (sign || booking.sign) && styles.nlLineBottom]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorGrey}>사진</Text>
-                            </View>
-                            <View >
-                                <Image resizeMode="contain" style={{ height: 100, width: 100 }} source={photo ? { uri: photo?.uri } : { uri: booking.image }}></Image>
-                            </View>
-
-                        </View>}
-                        {(sign || booking.sign) && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorGrey}>Signature</Text>
-                            </View>
-                            <View >
-                                <Image resizeMode="contain" style={{ height: 100, width: 100 }} source={sign ? { uri: sign?.uri } : { uri: booking.sign }}></Image>
-                            </View>
-
-                        </View>}
-
-
-
+                    </View>
+                    {/* Item Info */}
+                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorGrey}>특이사항</Text>
+                        </View>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorBlack}>{booking?.b_memo}</Text>
+                        </View>
+                    </View>
+                    {/* Item Info */}
+                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorGrey}>수령인HP</Text>
+                        </View>
+                        <View style={[styles.nlAlignCenter, styles.nlRow]}>
+                            <TouchableOpacity activeOpacity={1} onPress={() => Linking.openURL(`sms:${booking?.b_hp1}`)}>
+                                <SMSIcon height={30} width={30} />
+                            </TouchableOpacity>
+                            <TouchableOpacity activeOpacity={1} style={{ marginLeft: 10 }} onPress={() => Linking.openURL(`tel:${booking?.b_hp1}`)}>
+                                <PhoneIcon height={30} width={30} />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    {/* Item Info */}
+                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorGrey}>수령인 주소.</Text>
+                        </View>
+                        <View style={[styles.nlRow, styles.nlAlignCenter, { maxWidth: '70%' }]}>
+                            <Text style={styles.nlColorBlack}>{booking?.b_address}</Text>
+                        </View>
+                    </View>
+                    {/* Item Info */}
+                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween]}>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorGrey}>배송예정일</Text>
+                        </View>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorBlack}>{booking?.b_date}</Text>
+                        </View>
                     </View>
 
-                </Screen>
-            </ScrollView>
-            <View style={[styles.nlFixedAtBottom, styles.nlRow,]}>
-                <TouchableOpacity style={styles.nlButton} onPress={() => {
-                    actionSheetRefSign.current?.setModalVisible();
-                }}>
-                    <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>직접수령</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.nlButton} onPress={() => {
-                    actionSheetRefPhoto.current?.setModalVisible();
-                    setIsType(false);
-                    setCompletedText("경비실")
-                }}>
-                    <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>경비실</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.nlButton} onPress={() => {
-                    setIsType(true);
-                    actionSheetRefText.current?.setModalVisible();
-                }}>
-                    <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>기타</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.nlButton} onPress={() => {
-                    actionSheetRefPhoto.current?.setModalVisible();
-                    setIsType(false);
-                    setCompletedText("문앞")
-                }}>
-                    <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>문앞</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.nlButton, styles.nlMax]} onPress={() => {
-                    actionSheetRefPhoto.current?.setModalVisible();
-                    setIsType(false);
-                    setCompletedText("요청장소")
-                }}>
-                    <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>요청장소</Text>
-                </TouchableOpacity>
-
-            </View>
-            <ActionSheet ref={actionSheetRefPhoto} headerAlwaysVisible={true} gestureEnabled={true} containerStyle={styles.container_actionsheet} onClose={() => !isType && setCompletedText(null)}>
-                <View style={styles.actionsheet}>
-                    <TouchableOpacity style={styles.actionsheet_row} onPress={() => openLibrary()}>
-                        <Text style={styles.actionsheet_row_txt}>Choose from library</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.actionsheet_row} onPress={() => openCamera()}>
-                        <Text style={styles.actionsheet_row_txt}>Open Camera</Text>
-                    </TouchableOpacity>
                 </View>
-            </ActionSheet>
-            <ActionSheet ref={actionSheetRefSign} headerAlwaysVisible={true} gestureEnabled={true} containerStyle={styles.container_actionsheet} onClose={() => !isType && setCompletedText(null)}>
-                <View style={styles.actionsheet}>
-                    <TouchableOpacity style={styles.actionsheet_row} onPress={() => {
-                        actionSheetRefSign.current?.hide();
-                        navigation.navigate('Signature', { b_no })
-                    }
-                    }>
-                        <Text style={styles.actionsheet_row_txt}>Sign</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.actionsheet_row} onPress={() => openLibrary('sign')}>
-                        <Text style={styles.actionsheet_row_txt}>Upload your sign</Text>
-                    </TouchableOpacity>
-                </View>
-            </ActionSheet>
-            <ActionSheet keyboardShouldPersistTaps="always" ref={actionSheetRefText} headerAlwaysVisible={true} gestureEnabled={true} containerStyle={styles.container_actionsheet} >
-                <View style={styles.actionsheet_text}>
-                    <TextInput
-                        placeholder='Completed text'
-                        multiline
-                        onChangeText={(text) => setCompletedText(text)}
-                        value={completedText}
-                    ></TextInput>
-                    <View>
-                        <TouchableOpacity style={styles.actionsheet_next} onPress={() => {
-                            if (!completedText) {
-                                Alert.alert("Modio", "Please enter completed text", [
-
-                                    {
-                                        text: "Yes",
-                                        onPress: () => {
-
-                                        },
-                                        style: "yes",
-                                    },
-                                ])
-                                return;
-                            }
-                            actionSheetRefText.current?.setModalVisible(false);
-                            actionSheetRefPhoto.current?.setModalVisible();
-                        }}>
-                            <Text style={styles.actionsheet_row_txt}>Next</Text>
-                        </TouchableOpacity>
-
+                <View style={[styles.nlCard, { backgroundColor: '#fff', padding: 20 }]}>
+                    {/* Item Info */}
+                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorGrey}>배송인</Text>
+                        </View>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorBlack}>{booking?.b_name}</Text>
+                        </View>
                     </View>
+                    {/* Item Info */}
+                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorGrey}>배송인HP</Text>
+                        </View>
+                        <View style={[styles.nlRow]}>
+                            <TouchableOpacity activeOpacity={1} onPress={() => Linking.openURL(`sms:${booking?.b_hp1}`)}>
+                                <SMSIcon height={30} width={30} />
+                            </TouchableOpacity>
+                            <TouchableOpacity activeOpacity={1} style={{ marginLeft: 10 }} onPress={() => Linking.openURL(`tel:${booking?.b_hp1}`)}>
+                                <PhoneIcon height={30} width={30} />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    {/* Item Info */}
+                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorGrey}>배송상태</Text>
+                        </View>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorBlack}>{booking?.b_status}</Text>
+                        </View>
+                    </View>
+                    {/* Item Info */}
+                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, (photo || booking?.image || sign || booking?.sign) && styles.nlLineBottom]}>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorGrey}>배송완료일</Text>
+                        </View>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorBlack}>{booking?.b_completed_date}</Text>
+                        </View>
+                    </View>
+                    {/* Item Info */}
+                    {(photo || booking?.image) && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }, , (sign || booking?.sign) && styles.nlLineBottom]}>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorGrey}>사진</Text>
+                        </View>
+                        <View >
+                            <Image resizeMode="contain" style={{ height: 100, width: 100 }} source={photo ? { uri: photo?.uri } : { uri: booking?.image }}></Image>
+                        </View>
+
+                    </View>}
+                    {(sign || booking?.sign) && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }]}>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorGrey}>Signature</Text>
+                        </View>
+                        <View >
+                            <Image resizeMode="contain" style={{ height: 100, width: 100 }} source={sign ? { uri: sign?.uri } : { uri: booking?.sign }}></Image>
+                        </View>
+
+                    </View>}
+
+
+
                 </View>
-            </ActionSheet>
+
+            </Screen>
+        </ScrollView>
+        <View style={[styles.nlFixedAtBottom, styles.nlRow, { display: 'none' }, booking != null && booking?.b_status != 'completed' ? { display: 'flex' } : {}]}>
+            <TouchableOpacity style={styles.nlButton} onPress={() => {
+                actionSheetRefSign.current?.setModalVisible();
+            }}>
+                <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>직접수령</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.nlButton} onPress={() => {
+                actionSheetRefPhoto.current?.setModalVisible();
+                setIsType(false);
+                setCompletedText("경비실")
+            }}>
+                <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>경비실</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.nlButton} onPress={() => {
+                setIsType(true);
+                actionSheetRefText.current?.setModalVisible();
+            }}>
+                <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>기타</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.nlButton} onPress={() => {
+                actionSheetRefPhoto.current?.setModalVisible();
+                setIsType(false);
+                setCompletedText("문앞")
+            }}>
+                <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>문앞</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.nlButton, styles.nlMax]} onPress={() => {
+                actionSheetRefPhoto.current?.setModalVisible();
+                setIsType(false);
+                setCompletedText("요청장소")
+            }}>
+                <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>요청장소</Text>
+            </TouchableOpacity>
 
         </View>
+        <ActionSheet ref={actionSheetRefPhoto} headerAlwaysVisible={true} gestureEnabled={true} containerStyle={styles.container_actionsheet} onClose={() => !isType && setCompletedText(null)}>
+            <View style={styles.actionsheet}>
+                <TouchableOpacity style={styles.actionsheet_row} onPress={() => openLibrary()}>
+                    <Text style={styles.actionsheet_row_txt}>Choose from library</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.actionsheet_row} onPress={() => openCamera()}>
+                    <Text style={styles.actionsheet_row_txt}>Open Camera</Text>
+                </TouchableOpacity>
+            </View>
+        </ActionSheet>
+        <ActionSheet ref={actionSheetRefSign} headerAlwaysVisible={true} gestureEnabled={true} containerStyle={styles.container_actionsheet} onClose={() => !isType && setCompletedText(null)}>
+            <View style={styles.actionsheet}>
+                <TouchableOpacity style={styles.actionsheet_row} onPress={() => {
+                    actionSheetRefSign.current?.hide();
+                    navigation.navigate('Signature', { b_no })
+                }
+                }>
+                    <Text style={styles.actionsheet_row_txt}>Sign</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.actionsheet_row} onPress={() => openLibrary('sign')}>
+                    <Text style={styles.actionsheet_row_txt}>Upload your sign</Text>
+                </TouchableOpacity>
+            </View>
+        </ActionSheet>
+        <ActionSheet keyboardShouldPersistTaps="always" ref={actionSheetRefText} headerAlwaysVisible={true} gestureEnabled={true} containerStyle={styles.container_actionsheet} >
+            <View style={styles.actionsheet_text}>
+                <TextInput
+                    placeholder='Completed text'
+                    multiline
+                    onChangeText={(text) => setCompletedText(text)}
+                    value={completedText}
+                ></TextInput>
+                <View>
+                    <TouchableOpacity style={styles.actionsheet_next} onPress={() => {
+                        if (!completedText) {
+                            Alert.alert("Modio", "Please enter completed text", [
+
+                                {
+                                    text: "Yes",
+                                    onPress: () => {
+
+                                    },
+                                    style: "yes",
+                                },
+                            ])
+                            return;
+                        }
+                        actionSheetRefText.current?.setModalVisible(false);
+                        actionSheetRefPhoto.current?.setModalVisible();
+                    }}>
+                        <Text style={styles.actionsheet_row_txt}>Next</Text>
+                    </TouchableOpacity>
+
+                </View>
+            </View>
+        </ActionSheet>
+
+    </View>
     );
 
 }

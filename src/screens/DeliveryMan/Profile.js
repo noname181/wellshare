@@ -49,7 +49,7 @@ function My_Profile({ navigation }) {
     const LogOut = () => {
         dispatch(actions.authActions.logout());
         setTimeout(() => {
-            navigation.navigate('Login');
+            navigation.replace('Login');
         }, 0)
 
     }
@@ -108,14 +108,14 @@ function My_Profile({ navigation }) {
                             setTimeType('start');
                             showTimepicker('start');
                         }}>
-                            <Text>{workingStart}</Text>
+                            <Text style={{ color: "#000" }}>{workingStart}</Text>
                         </TouchableOpacity>
-                        <Text>  -  </Text>
+                        <Text style={{ color: "#000" }}>  -  </Text>
                         <TouchableOpacity onPress={() => {
                             setTimeType('end');
                             showTimepicker('end');
                         }}>
-                            <Text>{workingEnd}</Text>
+                            <Text style={{ color: "#000" }}>{workingEnd}</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>

@@ -35,7 +35,7 @@ function Profile({ navigation }) {
     const LogOut = () => {
         dispatch(actions.authActions.logout());
         setTimeout(() => {
-            navigation.navigate('Login');
+            navigation.replace('Login');
         }, 0)
     }
 
