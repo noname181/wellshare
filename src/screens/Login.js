@@ -11,6 +11,7 @@ import SplashScreen from 'react-native-splash-screen';
 
 export default function Login({ navigation }) {
     const [showOTP, setShowOTP] = useState(false);
+    const [canSendOTP, setCanSendOTP] = useState(true);
     const [resendOTP, setResendOTP] = useState(false);
     const [OTP, setOTP] = useState("");
     const [countDown, setCountDown] = useState(30);
@@ -96,23 +97,6 @@ export default function Login({ navigation }) {
                             },
                         ]
                     );
-                } else if (data.msg == 'nonmember') {
-                    clearInterval(timer);
-                    setOTP("");
-                    setCountDown(30);
-                    setShowOTP(false);
-                    setResendOTP(false);
-                    Alert.alert(
-                        "Modio",
-                        "대상자가 아니거나 전화번호를 잘못 입력하였습니다.",
-                        [
-                            {
-                                text: "Yes",
-                                onPress: () => { },
-                                style: "yes",
-                            },
-                        ]
-                    );
                 }
 
                 else {
@@ -122,6 +106,7 @@ export default function Login({ navigation }) {
                     setCountDown(30);
                     setShowOTP(false);
                     setResendOTP(false);
+                    setCanSendOTP(true);
                     dispatch(actions.authActions.login({ user: data.user, role: data.role }))
                     if (data.role == 'admin')
                         navigation.replace('Admin');
@@ -163,6 +148,7 @@ export default function Login({ navigation }) {
         if (countDown == 0) {
             clearInterval(timer);
             setResendOTP(true)
+            setCanSendOTP(true);
         }
 
 
@@ -173,7 +159,7 @@ export default function Login({ navigation }) {
 
     const countDowns = () => {
         // Remove one second, set state so a re-render happens.
-        setCountDown(seconds => seconds - 1);
+        setCountDown(countDown => countDown - 1);
     }
 
     const sendOTP = () => {
@@ -195,23 +181,43 @@ export default function Login({ navigation }) {
         if (resendOTP) setCountDown(30);
         setLoadingOTP(true);
         setOTP("")
-        setShowOTP(true);
-        setResendOTP(false);
-        axios.post(`/check_otp.php`, { hp })
+
+        axios.post(`/send_otp.php`, { hp })
             .then(res => {
                 setLoadingOTP(false);
-                setTimer(setInterval(countDowns, 1000));
-                Alert.alert(
-                    "Modio",
-                    "OTP: " + res.data.otp,
-                    [
-                        {
-                            text: "Yes",
-                            onPress: () => { },
-                            style: "yes",
-                        },
-                    ]
-                );
+                if (res.data.msg == 'nonmember') {
+                    setCountDown(30);
+                    setShowOTP(false);
+                    setResendOTP(false);
+                    setCanSendOTP(true);
+                    Alert.alert(
+                        "Modio",
+                        "대상자가 아니거나 전화번호를 잘못 입력하였습니다.",
+                        [
+                            {
+                                text: "Yes",
+                                onPress: () => { },
+                                style: "yes",
+                            },
+                        ]
+                    );
+                } else {
+                    setTimer(setInterval(countDowns, 1000));
+                    setShowOTP(true);
+                    setCanSendOTP(false);
+                    Alert.alert(
+                        "Modio",
+                        "OTP: " + res.data.otp,
+                        [
+                            {
+                                text: "Yes",
+                                onPress: () => { },
+                                style: "yes",
+                            },
+                        ]
+                    );
+                }
+
             })
             .catch(err => {
                 console.log(err);
@@ -231,8 +237,8 @@ export default function Login({ navigation }) {
                         <View style={styles.nlRelative}>
                             <TextInput style={styles.nlInput} keyboardType='numeric' placeholder="전화번호" value={hp} onChangeText={(text) => setHp(text)}></TextInput>
 
-                            <View style={[{ opacity: showOTP && !resendOTP ? 0.5 : 1 }]}>
-                                <TouchableOpacity style={[styles.nlButtonOTP, { flexDirection: 'row' }]} activeOpacity={0.8} onPress={() => { showOTP && !resendOTP ? {} : sendOTP() }}>
+                            <View style={[{ opacity: canSendOTP ? 1 : 0.5 }]}>
+                                <TouchableOpacity style={[styles.nlButtonOTP, { flexDirection: 'row' }]} activeOpacity={0.8} onPress={() => { !canSendOTP ? {} : sendOTP() }}>
 
                                     <Text style={styles.nlColorWhite}>{resendOTP ? 'Resend OTP' : 'OTP 발송'}</Text>
                                     <ActivityIndicator size="small" color="#fff" style={{ marginLeft: 5, display: loadingOTP ? 'flex' : 'none' }} />
