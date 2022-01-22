@@ -18,6 +18,8 @@ import Avatar from '../../images/hospital/avatar.png';
 import Name from '../../images/svg/ProfileName';
 import Phone from '../../images/svg/ProfilePhone';
 import Logout from '../../images/svg/ProfileLogout';
+import { CommonActions } from '@react-navigation/native';
+
 import Hospital_profileIcon1 from '../../images/svg/Hospital_profileIcon1';
 import Hospital_profileIcon3 from '../../images/svg/Hospital_profileIcon3';
 import Hospital_profileIcon4 from '../../images/svg/Hospital_profileIcon4';
@@ -61,14 +63,51 @@ function Profile({ navigation }) {
 
             dispatch(actions.authActions.logout());
             dispatch(actions.authActions.login({ user: data.user, role: data.role }))
-            if (data.role == 'admin')
-                navigation.replace('Admin');
-            else if (data.role == 'hospital')
-                navigation.replace('Hospital');
-            else if (data.role == 'delivery')
-                navigation.replace('Delivery');
-            else
-                navigation.replace('User');
+            if (data.role == 'admin') {
+                navigation.dispatch(
+                    CommonActions.reset({
+                        index: 0,
+                        routes: [
+                            { name: 'Admin' }
+
+                        ],
+                    })
+                );
+            }
+            else if (data.role == 'hospital') {
+                navigation.dispatch(
+                    CommonActions.reset({
+                        index: 0,
+                        routes: [
+                            { name: 'Hospital' }
+
+                        ],
+                    })
+                );
+            }
+
+            else if (data.role == 'delivery') {
+                navigation.dispatch(
+                    CommonActions.reset({
+                        index: 0,
+                        routes: [
+                            { name: 'Delivery' }
+
+                        ],
+                    })
+                );
+            }
+            else {
+                navigation.dispatch(
+                    CommonActions.reset({
+                        index: 0,
+                        routes: [
+                            { name: 'User' }
+
+                        ],
+                    })
+                );
+            }
         }).catch(err => {
             console.log(err)
         })

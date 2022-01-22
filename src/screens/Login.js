@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert, Keyboard, ActivityIndicator, ScrollView } from "react-native";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert, Keyboard, ActivityIndicator, BackHandler } from "react-native";
 import axios from '../helpers/axiosInterceptor';
 import { useSelector, useDispatch } from 'react-redux';
 import actions from '../redux/actions'
@@ -24,10 +24,10 @@ export default function Login({ navigation }) {
     const role = useSelector(state => state.auth.role)
 
     useEffect(() => {
-        if (role == 'admin') navigation.navigate('Admin');
-        else if (role == 'hospital') navigation.navigate('Hospital');
-        else if (role == 'delivery') navigation.navigate('Delivery');
-        else if (role == 'receiver') navigation.navigate('User');
+        if (role == 'admin') navigation.replace('Admin');
+        else if (role == 'hospital') navigation.replace('Hospital');
+        else if (role == 'delivery') navigation.replace('Delivery');
+        else if (role == 'receiver') navigation.replace('User');
 
         setTimeout(() => {
             SplashScreen.hide();

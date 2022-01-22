@@ -19,6 +19,7 @@ import Address from '../../images/svg/Hospital_profileIcon5';
 import { useSelector, useDispatch } from 'react-redux';
 import actions from '../../redux/actions'
 import axios from '../../helpers/axiosInterceptor';
+import { CommonActions } from '@react-navigation/native';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -49,14 +50,51 @@ function Profile({ navigation }) {
 
             dispatch(actions.authActions.logout());
             dispatch(actions.authActions.login({ user: data.user, role: data.role }))
-            if (data.role == 'admin')
-                navigation.replace('Admin');
-            else if (data.role == 'hospital')
-                navigation.replace('Hospital');
-            else if (data.role == 'delivery')
-                navigation.replace('Delivery');
-            else
-                navigation.replace('User');
+            if (data.role == 'admin') {
+                navigation.dispatch(
+                    CommonActions.reset({
+                        index: 0,
+                        routes: [
+                            { name: 'Admin' }
+
+                        ],
+                    })
+                );
+            }
+            else if (data.role == 'hospital') {
+                navigation.dispatch(
+                    CommonActions.reset({
+                        index: 0,
+                        routes: [
+                            { name: 'Hospital' }
+
+                        ],
+                    })
+                );
+            }
+
+            else if (data.role == 'delivery') {
+                navigation.dispatch(
+                    CommonActions.reset({
+                        index: 0,
+                        routes: [
+                            { name: 'Delivery' }
+
+                        ],
+                    })
+                );
+            }
+            else {
+                navigation.dispatch(
+                    CommonActions.reset({
+                        index: 0,
+                        routes: [
+                            { name: 'User' }
+
+                        ],
+                    })
+                );
+            }
         }).catch(err => {
             console.log(err)
         })
