@@ -7,7 +7,8 @@ import {
     TouchableOpacity,
     Modal,
     Pressable,
-    Alert
+    Alert,
+    Dimensions
 } from 'react-native';
 import Screen from '../../components/Screen';
 import Avatar from '../../images/user/avatarPNG.png';
@@ -18,6 +19,8 @@ import Address from '../../images/svg/Hospital_profileIcon5';
 import { useSelector, useDispatch } from 'react-redux';
 import actions from '../../redux/actions'
 import axios from '../../helpers/axiosInterceptor';
+
+const windowWidth = Dimensions.get('window').width;
 
 function Profile({ navigation }) {
     const [modalChangeModeVisible, setModalChangeModeVisible] = useState(false);
@@ -268,8 +271,8 @@ const styles = StyleSheet.create({
     modal_button: {
         backgroundColor: "#7c257a",
         borderRadius: 5,
-        width: 200,
-        paddingVertical: 6,
+        width: windowWidth * 0.7,
+        paddingVertical: 10,
         alignItems: 'center'
     },
     textModalStyle: {

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, Switch, TouchableOpacity, Platform, Pressable, Modal, Alert } from 'react-native';
+import { View, StyleSheet, Text, Switch, TouchableOpacity, Platform, Pressable, Modal, Alert, Dimensions } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Screen from '../../components/Screen';
 import { useSelector, useDispatch } from 'react-redux';
 import actions from '../../redux/actions'
+import axios from '../../helpers/axiosInterceptor';
 //Images
 import DeliveryMyProfile1 from '../../images/svg/DeliveryMyProfile1';
 import DeliveryMyProfile2 from '../../images/svg/DeliveryMyProfile2';
@@ -11,7 +12,9 @@ import DeliveryMyProfile3 from '../../images/svg/DeliveryMyProfile3';
 import DeliveryMyProfile4 from '../../images/svg/DeliveryMyProfile4';
 import DeliveryMyProfile5 from '../../images/svg/DeliveryMyProfile5';
 import DeliveryMyProfile6 from '../../images/svg/DeliveryMyProfile6';
-import axios from '../../helpers/axiosInterceptor';
+
+
+const windowWidth = Dimensions.get('window').width;
 
 function My_Profile({ navigation }) {
     const user = useSelector(state => state.auth.user)
@@ -356,8 +359,8 @@ const styles = StyleSheet.create({
     modal_button: {
         backgroundColor: "#7c257a",
         borderRadius: 5,
-        width: 200,
-        paddingVertical: 6,
+        width: windowWidth * 0.7,
+        paddingVertical: 10,
         alignItems: 'center'
     },
     textModalStyle: {
