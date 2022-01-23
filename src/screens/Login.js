@@ -24,6 +24,30 @@ export default function Login({ navigation }) {
     const role = useSelector(state => state.auth.role)
 
     useEffect(() => {
+        BackHandler.addEventListener('hardwareBackPress', function () {
+
+            if (navigation.getState().routes.length == 1) {
+                Alert.alert("Modio", "Are you sure you want to exit?", [
+                    {
+                        text: 'No',
+                        onPress: () => {
+
+                        }
+                    },
+                    {
+                        text: 'Yes',
+                        onPress: () => {
+                            BackHandler.exitApp();
+                        }
+                    }
+                ])
+                return true;
+            } else {
+                navigation.goBack();
+                return true;
+            }
+
+        });
         if (role == 'admin') navigation.replace('Admin');
         else if (role == 'hospital') navigation.replace('Hospital');
         else if (role == 'delivery') navigation.replace('Delivery');
