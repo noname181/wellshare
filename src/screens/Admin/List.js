@@ -117,7 +117,7 @@ function List({ navigation }) {
                             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                         >
                             <Picker.Item label="배송종류" value="java" />
-                            <Picker.Item label="1입니다공지사항 " value="js" />
+                            <Picker.Item label="1입니다공지사항" value="js" />
                         </Picker>
                     </View>
                     <View style={styles.nlFormControl}>
