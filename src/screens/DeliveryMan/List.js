@@ -26,11 +26,14 @@ function List({ navigation }) {
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
     const [bookings, setBookings] = useState([]);
+    const [timerTracking, setTimerTracking] = useState(0);
 
     const user = useSelector(state => state.auth.user)
 
+
     useEffect(() => {
         TrackingInit();
+
         axios.post(`/user_load_bookings.php`, { d_no: user.d_no, role: 'delivery' })
             .then(res => {
                 setBookings(res.data.bookings)
@@ -40,9 +43,34 @@ function List({ navigation }) {
             })
 
         return () => {
-
+            BackgroundGeolocation.stop();
+            clearInterval(timerTracking);
         };
     }, []);
+
+    const checkWorkingTime = () => {
+        axios.post(`/check_delivery_working_time.php`, { d_no: user.d_no })
+            .then(res => {
+                let data = res.data;
+                if (data.is_working_time) {
+                    BackgroundGeolocation.checkStatus(status => {
+                        if (!status.isRunning) {
+                            BackgroundGeolocation.start(); //triggers start on start event
+                        }
+                    });
+                } else {
+                    BackgroundGeolocation.checkStatus(status => {
+                        if (status.isRunning) {
+                            BackgroundGeolocation.stop(); //triggers start on start event
+                        }
+                    });
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+    }
 
     const TrackingInit = () => {
         BackgroundGeolocation.configure({
@@ -150,10 +178,12 @@ function List({ navigation }) {
             console.log('[INFO] BackgroundGeolocation auth status: ' + status.authorization);
 
             // you don't need to check status before start (this is just the example)
-            if (!status.isRunning) {
-                BackgroundGeolocation.start(); //triggers start on start event
-            }
+            // if (!status.isRunning) {
+            //     BackgroundGeolocation.start(); //triggers start on start event
+            // }
         });
+        checkWorkingTime();
+        setTimerTracking(setInterval(checkWorkingTime, 600000));
     }
 
     const onChange = (event, selectedDate) => {

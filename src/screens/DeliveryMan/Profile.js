@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, Switch, TouchableOpacity, Platform, Pressable, Modal, Alert, Dimensions } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Screen from '../../components/Screen';
@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import actions from '../../redux/actions'
 import axios from '../../helpers/axiosInterceptor';
 import { CommonActions } from '@react-navigation/native';
+import BackgroundGeolocation from '@mauron85/react-native-background-geolocation';
 
 //Images
 import DeliveryMyProfile1 from '../../images/svg/DeliveryMyProfile1';
@@ -37,6 +38,54 @@ function My_Profile({ navigation }) {
     const [timeType, setTimeType] = useState('start');
     const [modalChangeModeVisible, setModalChangeModeVisible] = useState(false);
     const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        console.log(user?.d_is_active)
+        if (!user?.d_is_active) BackgroundGeolocation.stop();
+        BackgroundGeolocation.checkStatus(status => {
+            console.log('[INFO] BackgroundGeolocation service is running', status.isRunning);
+            console.log('[INFO] BackgroundGeolocation services enabled', status.locationServicesEnabled);
+            console.log('[INFO] BackgroundGeolocation auth status: ' + status.authorization);
+
+            // you don't need to check status before start (this is just the example)
+            if (!status.isRunning) {
+                BackgroundGeolocation.start(); //triggers start on start event
+            }
+        });
+        return () => {
+        };
+    }, [user?.d_is_active]);
+
+    useEffect(() => {
+        checkWorkingTime();
+        return () => {
+        };
+    }, [user?.d_working_start, user?.d_working_end]);
+
+    const checkWorkingTime = () => {
+        axios.post(`/check_delivery_working_time.php`, { d_no: user.d_no })
+            .then(res => {
+                let data = res.data;
+                if (data.is_working_time) {
+                    BackgroundGeolocation.checkStatus(status => {
+                        if (!status.isRunning) {
+                            BackgroundGeolocation.start(); //triggers start on start event
+                        }
+                    });
+                } else {
+                    BackgroundGeolocation.checkStatus(status => {
+                        if (status.isRunning) {
+                            BackgroundGeolocation.stop(); //triggers start on start event
+                        }
+                    });
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+    }
 
 
     const toggleSwitch = (value) => {
