@@ -56,7 +56,7 @@ function User_List({ navigation }) {
     const showDatepicker = () => {
         showMode('date');
     };
-    const fortmatDate = () => {
+    const formatDate = () => {
         return date.getFullYear() + "/" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + date.getDate();
     }
 
@@ -92,7 +92,7 @@ function User_List({ navigation }) {
             <View style={styles.body_gray}>
                 <TouchableOpacity activeOpacity={1} style={styles.box_calendar} onPress={showDatepicker}>
                     <Calendar width={16} height={16} />
-                    <Text style={styles.text_calendar}>{fortmatDate()}</Text>
+                    <Text style={styles.text_calendar}>{formatDate()}</Text>
                     <Icon style={styles.icon_select} name={'chevron-down-outline'} color={'#9b9b9b'} size={20} />
                 </TouchableOpacity>
                 {show && (
