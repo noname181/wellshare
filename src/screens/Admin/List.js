@@ -122,21 +122,20 @@ function List({ navigation }) {
     );
 
     const onSearch = () => {
-        let length = tabSlected == 1 ? bookingsAll.length : tabSlected == 2 ? bookingsDelivering.length : bookingsCompleted.length;
-        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length, type: tabSlected, week: selectedValue, b_name: nameSearch, hp: phoneSearch, b_season: formatDate(date) })
+        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: tabSlected, week: selectedValue, b_name: nameSearch, hp: phoneSearch, b_season: formatDate(date) })
             .then(res => {
                 if (tabSlected == 1) {
-                    setBookingsAll(bookingsAll.concat(res.data.bookings))
+                    setBookingsAll(res.data.bookings)
                     if (res.data.bookings.length == 0) {
                         setTimeout(() => setLoadMore(false), 1000)
                     }
                 } else if (tabSlected == 2) {
-                    setBookingsAll(bookingsDelivering.concat(res.data.bookings))
+                    setBookingsDelivering(res.data.bookings)
                     if (res.data.bookings.length == 0) {
                         setTimeout(() => setLoadMore(false), 1000)
                     }
                 } else if (tabSlected == 3) {
-                    setBookingsAll(bookingsCompleted.concat(res.data.bookings))
+                    setBookingsCompleted(res.data.bookings)
                     if (res.data.bookings.length == 0) {
                         setTimeout(() => setLoadMore(false), 1000)
                     }
