@@ -39,29 +39,11 @@ function My_Profile({ navigation }) {
     const [modalChangeModeVisible, setModalChangeModeVisible] = useState(false);
     const dispatch = useDispatch();
 
-
-    useEffect(() => {
-        console.log(user?.d_is_active)
-        if (!user?.d_is_active) BackgroundGeolocation.stop();
-        BackgroundGeolocation.checkStatus(status => {
-            console.log('[INFO] BackgroundGeolocation service is running', status.isRunning);
-            console.log('[INFO] BackgroundGeolocation services enabled', status.locationServicesEnabled);
-            console.log('[INFO] BackgroundGeolocation auth status: ' + status.authorization);
-
-            // you don't need to check status before start (this is just the example)
-            if (!status.isRunning) {
-                BackgroundGeolocation.start(); //triggers start on start event
-            }
-        });
-        return () => {
-        };
-    }, [user?.d_is_active]);
-
     useEffect(() => {
         if (user?.d_no) checkWorkingTime();
         return () => {
         };
-    }, [user?.d_working_start, user?.d_working_end]);
+    }, [user?.d_working_start, user?.d_working_end, user?.d_is_active]);
 
     const checkWorkingTime = () => {
         axios.post(`/check_delivery_working_time.php`, { d_no: user.d_no })
