@@ -112,7 +112,7 @@ function User_My_Profile({ navigation }) {
                         <Text style={styles.text_profile}>이름</Text>
                     </View>
                     <View >
-                        <Text style={styles.text_profile}>조형래</Text>
+                        <Text style={styles.text_profile}>{user?.user_name}</Text>
                     </View>
                 </View>
                 <View style={styles.pf_box_information_second}>

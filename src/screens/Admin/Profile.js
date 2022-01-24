@@ -133,7 +133,7 @@ function Profile({ navigation }) {
                         <Text style={styles.text_profile_right}>{user?.m_hp}</Text>
                     </View>
                 </View>
-                <View style={styles.pf_box_information_second}>
+                {/* <View style={styles.pf_box_information_second}>
                     <View style={styles.h_row}>
                         <Address height={16} width={16} />
                         <Text style={styles.text_profile}>주소</Text>
@@ -141,7 +141,7 @@ function Profile({ navigation }) {
                     <View>
                         <Text style={styles.text_profile_right}>가산디지털 4로 6 2층</Text>
                     </View>
-                </View>
+                </View> */}
             </View>
             <View style={styles.profile_main_logout}>
                 <TouchableOpacity style={[styles.h_row_logout, styles.nlLineBottom]} onPress={() => setModalChangeModeVisible(true)}>

@@ -58,7 +58,7 @@ function My_Profile({ navigation }) {
     }, [user?.d_is_active]);
 
     useEffect(() => {
-        checkWorkingTime();
+        if (user?.d_no) checkWorkingTime();
         return () => {
         };
     }, [user?.d_working_start, user?.d_working_end]);
@@ -258,7 +258,7 @@ function My_Profile({ navigation }) {
                         <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>아이디</Text>
                     </View>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <Text style={styles.nlColorBlack}>{user?.d_name}</Text>
+                        <Text style={styles.nlColorBlack}>{user?.d_hp}</Text>
                     </View>
                 </View>
                 {/* Item Info */}
@@ -268,7 +268,7 @@ function My_Profile({ navigation }) {
                         <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>기사명</Text>
                     </View>
                     <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                        <Text style={styles.nlColorBlack}>박지우</Text>
+                        <Text style={styles.nlColorBlack}>{user?.d_name}</Text>
                     </View>
                 </View>
                 {/* Item Info */}
