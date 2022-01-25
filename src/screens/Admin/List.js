@@ -25,8 +25,12 @@ function List({ navigation }) {
 
     useEffect(() => {
         loadBookings();
+        const unsubscribe = navigation.addListener('focus', () => {
+            // do something
+            loadBookings();
+        });
         return () => {
-
+            unsubscribe
         };
     }, []);
 

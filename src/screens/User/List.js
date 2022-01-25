@@ -36,8 +36,12 @@ function User_List({ navigation }) {
 
     useEffect(() => {
         loadBookings();
+        const unsubscribe = navigation.addListener('focus', () => {
+            // do something
+            loadBookings();
+        });
         return () => {
-
+            unsubscribe
         };
     }, [date, selectedValue]);
 

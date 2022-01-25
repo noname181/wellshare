@@ -42,10 +42,14 @@ function List({ navigation }) {
     useEffect(() => {
         TrackingInit();
         loadBookings();
-
+        const unsubscribe = navigation.addListener('focus', () => {
+            // do something
+            loadBookings();
+        });
         return () => {
             BackgroundGeolocation.stop();
             clearInterval(timerTracking);
+            unsubscribe;
         };
     }, [date, selectedValue]);
 
