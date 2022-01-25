@@ -36,6 +36,7 @@ function ListView({ navigation, route }) {
     const [booking, setBooking] = useState(null);
     const [completedText, setCompletedText] = useState("");
     const [isType, setIsType] = useState(false);
+    const [isSign, setIsSign] = useState(false);
     const [isCompleted, setIsCompleted] = useState(false);
     const { b_no, backFromSign } = route.params;
 
@@ -47,7 +48,10 @@ function ListView({ navigation, route }) {
     }, []);
 
     useEffect(() => {
-        backFromSign && actionSheetRefSign.current?.show();
+        if (backFromSign && isSign) {
+            actionSheetRefSign.current?.show();
+            setIsSign(false);
+        }
         return () => {
 
         };
@@ -346,6 +350,7 @@ function ListView({ navigation, route }) {
         </ScrollView>
         <View style={[styles.nlFixedAtBottom, styles.nlRow, { display: 'none' }, booking != null && booking?.b_status != 'completed' ? { display: 'flex' } : {}]}>
             <TouchableOpacity style={styles.nlButton} onPress={() => {
+                setIsSign(true);
                 actionSheetRefSign.current?.setModalVisible();
             }}>
                 <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>직접수령</Text>

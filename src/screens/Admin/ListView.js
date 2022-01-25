@@ -30,7 +30,8 @@ function Complains({ navigation, route }) {
 
     return (
         <View>
-            <ScrollView style={booking != null && booking?.b_status != 'completed' ? styles.nlMarginBottom : null}>
+            <ScrollView>
+                {/* <ScrollView style={booking != null && booking?.b_status != 'completed' ? styles.nlMarginBottom : null}> */}
                 <Screen >
                     <View style={[styles.nlCard, { backgroundColor: '#fff', padding: 20 }]}>
                         {/* Item Info */}
@@ -167,7 +168,7 @@ function Complains({ navigation, route }) {
 
                 </Screen>
             </ScrollView>
-            <View style={[styles.nlFixedAtBottom, styles.nlRow, { display: 'none' }, booking != null && booking?.b_status != 'completed' ? { display: 'flex' } : {}]}>
+            {/* <View style={[styles.nlFixedAtBottom, styles.nlRow, { display: 'none' }, booking != null && booking?.b_status != 'completed' ? { display: 'flex' } : {}]}>
                 <TouchableOpacity style={styles.nlButton}>
                     <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>요청장소</Text>
                 </TouchableOpacity>
@@ -183,7 +184,7 @@ function Complains({ navigation, route }) {
                 <TouchableOpacity style={[styles.nlButton, styles.nlMax]}>
                     <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>요청장소</Text>
                 </TouchableOpacity>
-            </View>
+            </View> */}
         </View>
     );
 
