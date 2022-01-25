@@ -138,7 +138,7 @@ function User_List({ navigation }) {
 
             <View style={styles.h_box_list__first}>
                 <View style={styles.h_box_list__first_child1}>
-                    <Text style={styles.h_bl_f_c1_text}>{item.b_regdate}</Text>
+                    <Text style={styles.h_bl_f_c1_text}>{item.b_date}</Text>
                 </View>
                 <View style={styles.h_box_list__first_child2}>
                     <Text style={styles.h_bl_f_c2_text1}>{item.b_name} </Text>
@@ -162,8 +162,9 @@ function User_List({ navigation }) {
         <Screen>
             <View style={styles.body_gray}>
                 <View style={[styles.h_width_select_half]}>
-                    <TouchableOpacity style={styles.nlFormControl} onPress={() => showPicker(true)}>
-                        <Text style={{ color: "#000", paddingLeft: 15 }}>{formatDate()}</Text>
+                    <TouchableOpacity style={[styles.nlFormControl, { paddingLeft: 15 }]} onPress={() => showPicker(true)}>
+                        <Calendar width={16} height={16} />
+                        <Text style={{ color: "#000", paddingLeft: 10 }}>{formatDate()}</Text>
                     </TouchableOpacity>
                     <View style={styles.nlFormControl}>
                         <Picker
@@ -483,8 +484,12 @@ const styles = StyleSheet.create({
         height: 40,
         width: '49%',
         backgroundColor: '#fff',
-        justifyContent: 'center',
-
+        alignItems: 'center',
+        flexDirection: 'row',
+    },
+    nlPicker: {
+        width: '100%',
+        height: '100%',
     },
 });
 

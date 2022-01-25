@@ -165,8 +165,9 @@ function List({ navigation }) {
                     <Icon style={styles.icon_select} name={'chevron-down-outline'} color={'#9b9b9b'} size={20} />
                 </TouchableOpacity> */}
                 <View style={[styles.h_width_select_half]}>
-                    <TouchableOpacity style={styles.nlFormControl} onPress={() => showPicker(true)}>
-                        <Text style={{ color: "#000", paddingLeft: 15 }}>{formatDate()}</Text>
+                    <TouchableOpacity style={[styles.nlFormControl, { paddingLeft: 15 }]} onPress={() => showPicker(true)}>
+                        <Calendar width={16} height={16} />
+                        <Text style={{ color: "#000", paddingLeft: 10 }}>{formatDate()}</Text>
                     </TouchableOpacity>
                     <View style={styles.nlFormControl}>
                         <Picker
@@ -539,8 +540,12 @@ const styles = StyleSheet.create({
         height: 40,
         width: '49%',
         backgroundColor: '#fff',
-        justifyContent: 'center',
-
+        alignItems: 'center',
+        flexDirection: 'row',
+    },
+    nlPicker: {
+        width: '100%',
+        height: '100%',
     },
 });
 
