@@ -5,7 +5,7 @@ import { Picker } from '@react-native-picker/picker';
 import { useSelector } from 'react-redux'
 import axios from '../../helpers/axiosInterceptor';
 import MonthPicker from 'react-native-month-year-picker';
-
+import Calendar from '../../images/svg/CalendarIcon';
 
 
 function List({ navigation }) {
@@ -166,8 +166,9 @@ function List({ navigation }) {
         <View style={{ flex: 1 }}>
             <View style={[styles.nlFixedAtTop]}>
                 <View style={[styles.h_width_select_half, { marginTop: 10 }, { marginBottom: 10 }]}>
-                    <TouchableOpacity style={styles.nlFormControl} onPress={() => showPicker(true)}>
-                        <Text style={{ color: "#000", paddingLeft: 15 }}>{formatDate()}</Text>
+                    <TouchableOpacity style={[styles.nlFormControl, { paddingLeft: 15 }]} onPress={() => showPicker(true)}>
+                        <Calendar width={16} height={16} />
+                        <Text style={{ color: "#000", paddingLeft: 10 }}>{formatDate()}</Text>
                     </TouchableOpacity>
                     <View style={styles.nlFormControl}>
                         <Picker
@@ -191,7 +192,7 @@ function List({ navigation }) {
                         >
                         </TextInput>
                     </View>
-                    <View style={styles.nlFormControl}>
+                    <View style={[styles.nlFormControl]}>
                         <TextInput
                             placeholder='수령인 전화번호'
                             keyboardType='numeric'
@@ -201,7 +202,7 @@ function List({ navigation }) {
                         </TextInput>
                     </View>
                 </View>
-                <TouchableOpacity style={[styles.nlFormControl, { width: '100%', marginTop: 10, alignItems: 'center', backgroundColor: '#7c257a' }]} onPress={() => onSearch()}>
+                <TouchableOpacity style={[styles.nlFormControl, { width: '100%', marginTop: 10, justifyContent: 'center', backgroundColor: '#7c257a' }]} onPress={() => onSearch()}>
                     <Text style={{ color: "#fff" }}>Search</Text>
                 </TouchableOpacity>
 
@@ -582,9 +583,13 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         height: 40,
         width: '49%',
-        backgroundColor: '#f3f3f3',
-        justifyContent: 'center',
-
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        flexDirection: 'row',
+    },
+    nlPicker: {
+        width: '100%',
+        height: '100%',
     },
     h_width_select_half: {
         width: '100%',
