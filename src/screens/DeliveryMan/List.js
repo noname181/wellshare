@@ -130,7 +130,7 @@ function List({ navigation }) {
             notificationText: 'Enabled',
             debug: false,
             startOnBoot: false,
-            stopOnTerminate: false,
+            stopOnTerminate: true,
             locationProvider: BackgroundGeolocation.ACTIVITY_PROVIDER,
             interval: 3600000,
             fastestInterval: 3600000,
