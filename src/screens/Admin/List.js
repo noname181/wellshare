@@ -623,7 +623,7 @@ const styles = StyleSheet.create({
     },
     nlPicker: {
         width: '100%',
-        height: '100%'
+        height: '100%',
     },
     h_pt_15: {
         paddingTop: 15

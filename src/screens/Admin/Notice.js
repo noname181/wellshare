@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Screen from '../../components/Screen';
 import axios from '../../helpers/axiosInterceptor';
 import { useSelector } from 'react-redux'
-
+import Empty from '../../images/svg/Empty';
 
 const Item = ({ item, onPress, typeDisplay, nameIcon }) => (
     <Pressable style={styles.nlItem} onPress={onPress}>
@@ -106,6 +106,10 @@ function Notice({ navigation }) {
                 showsVerticalScrollIndicator={false}
                 onRefresh={() => setIsRefresh(true)}
                 refreshing={false}
+                contentContainerStyle={{ flexGrow: 1 }}
+                ListEmptyComponent={noticesAll != null && <View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
+                    <Empty height={100} width={100}></Empty>
+                </View>}
             />}
             {tabSlected == 2 && <FlatList
                 data={noticesDelivery}
@@ -116,6 +120,10 @@ function Notice({ navigation }) {
                 showsVerticalScrollIndicator={false}
                 onRefresh={() => setIsRefresh(true)}
                 refreshing={false}
+                contentContainerStyle={{ flexGrow: 1 }}
+                ListEmptyComponent={noticesDelivery != null && <View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
+                    <Empty height={100} width={100}></Empty>
+                </View>}
             />}
             {tabSlected == 3 && <FlatList
                 data={noticesReceiver}
@@ -126,6 +134,10 @@ function Notice({ navigation }) {
                 showsVerticalScrollIndicator={false}
                 onRefresh={() => setIsRefresh(true)}
                 refreshing={false}
+                contentContainerStyle={{ flexGrow: 1 }}
+                ListEmptyComponent={noticesReceiver != null && <View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
+                    <Empty height={100} width={100}></Empty>
+                </View>}
             />}
             {tabSlected == 4 && <FlatList
                 data={noticesHospital}
@@ -136,6 +148,10 @@ function Notice({ navigation }) {
                 showsVerticalScrollIndicator={false}
                 onRefresh={() => setIsRefresh(true)}
                 refreshing={false}
+                contentContainerStyle={{ flexGrow: 1 }}
+                ListEmptyComponent={noticesHospital != null && <View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
+                    <Empty height={100} width={100}></Empty>
+                </View>}
             />}
         </Screen>
     );
