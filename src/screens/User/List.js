@@ -25,7 +25,7 @@ function User_List({ navigation }) {
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
     const [bookings, setBookings] = useState([]);
-    const [bookingsAll, setBookingsAll] = useState([]);
+    const [bookingsAll, setBookingsAll] = useState(null);
     const [bookingsDelivering, setBookingsDelivering] = useState([]);
     const [bookingsCompleted, setBookingsCompleted] = useState([]);
     const [loadMore, setLoadMore] = useState(false);
@@ -235,7 +235,7 @@ function User_List({ navigation }) {
                         <ActivityIndicator animating size="large" color="#7c257a" />
                     </View> : null}
                     contentContainerStyle={{ flexGrow: 1 }}
-                    ListEmptyComponent={<View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
+                    ListEmptyComponent={bookingsAll != null && <View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
                         <Empty height={100} width={100}></Empty>
                     </View>}
                 />}

@@ -28,9 +28,9 @@ function List({ navigation }) {
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
     const [bookings, setBookings] = useState([]);
-    const [bookingsAll, setBookingsAll] = useState([]);
-    const [bookingsDelivering, setBookingsDelivering] = useState([]);
-    const [bookingsCompleted, setBookingsCompleted] = useState([]);
+    const [bookingsAll, setBookingsAll] = useState(null);
+    const [bookingsDelivering, setBookingsDelivering] = useState(null);
+    const [bookingsCompleted, setBookingsCompleted] = useState(null);
     const [timerTracking, setTimerTracking] = useState(0);
     const [loadMore, setLoadMore] = useState(false);
     const [selectedValue, setSelectedValue] = useState(1);
@@ -397,7 +397,7 @@ function List({ navigation }) {
                         <ActivityIndicator animating size="large" color="#7c257a" />
                     </View> : null}
                     contentContainerStyle={{ flexGrow: 1 }}
-                    ListEmptyComponent={<View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
+                    ListEmptyComponent={bookingsAll != null && <View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
                         <Empty height={100} width={100}></Empty>
                     </View>}
                 />}

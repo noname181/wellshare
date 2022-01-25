@@ -11,9 +11,9 @@ import Empty from '../../images/svg/Empty';
 function List({ navigation }) {
     const [selectedValue, setSelectedValue] = useState(1);
     const [tabSlected, settabSlected] = useState(1);
-    const [bookingsAll, setBookingsAll] = useState([]);
-    const [bookingsDelivering, setBookingsDelivering] = useState([]);
-    const [bookingsCompleted, setBookingsCompleted] = useState([]);
+    const [bookingsAll, setBookingsAll] = useState(null);
+    const [bookingsDelivering, setBookingsDelivering] = useState(null);
+    const [bookingsCompleted, setBookingsCompleted] = useState(null);
     const [loadMore, setLoadMore] = useState(false);
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
@@ -254,7 +254,7 @@ function List({ navigation }) {
                         <ActivityIndicator animating size="large" color="#7c257a" />
                     </View> : null}
                     contentContainerStyle={{ flexGrow: 1 }}
-                    ListEmptyComponent={<View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
+                    ListEmptyComponent={bookingsAll != null && <View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
                         <Empty height={100} width={100}></Empty>
                     </View>}
                 />}

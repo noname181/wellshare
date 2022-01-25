@@ -343,7 +343,7 @@ const styles = StyleSheet.create({
     nlButtonOTP: {
         backgroundColor: '#7c257a',
         height: 36,
-        width: 100,
+        paddingHorizontal: 15,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 6,
