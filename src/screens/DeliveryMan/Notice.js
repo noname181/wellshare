@@ -1,76 +1,71 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, Text, Pressable, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Screen from '../../components/Screen';
-const DATA = [
-    {
-        id: '1',
-        regdate: '2022.10.13',
-        title: '어플이 런칭되었습니다.',
-        content: '- 배송이 늦어지는 경우 어플 마이페이지에 있는 전화번호로 연락을 주시면 빠르게 응답해 드리겠습니다.'
-    },
-    {
-        id: '2',
-        title: '배송이 늦어지면 연락주세요.',
-        regdate: '2021.10.13',
-        content: '- 배송이 늦어지는 경우 어플 마이페이지에 있는 전화번호로 연락을 주시면 빠르게 응답해 드리겠습니다.'
-    },
-    // {
-    //     id: '3',
-    //     title: '공지사항 1입니다.',
-    //     regdate: '2021.10.13',
-    //     content: '- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위',
-    // },
-    // {
-    //     id: '4',
-    //     title: '공지사항 1입니다.',
-    //     regdate: '2021.10.13',
-    //     content: '- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위',
-    // },
-    // {
-    //     id: '5',
-    //     title: '공지사항 1입니다.',
-    //     regdate: '2021.10.13',
-    //     content: '- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위',
-    // },
-    // {
-    //     id: '6',
-    //     title: '공지사항 1입니다.',
-    //     regdate: '2021.10.13',
-    //     content: '- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위',
-    // },
-    // {
-    //     id: '7',
-    //     title: '공지사항 1입니다.',
-    //     regdate: '2021.10.13',
-    //     content: '- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위',
-    // },
-];
+import axios from '../../helpers/axiosInterceptor';
+import { useSelector } from 'react-redux'
+
 
 const Item = ({ item, onPress, typeDisplay, nameIcon }) => (
     <Pressable style={styles.nlItem} onPress={onPress}>
         <View style={styles.nlHead}>
             <View style={styles.nlRow}>
-                <Text style={styles.nlNo}>{item.id}.</Text>
-                <Text style={styles.nlTitle}>{item.title}</Text>
+                <Text style={styles.nlNo}>{item.n_no}.</Text>
+                <Text style={styles.nlTitle}>{item.n_title}</Text>
             </View>
-            <Text style={styles.nlDate}>{item.regdate}</Text>
+            <Text style={styles.nlDate}>{item.n_regdate}</Text>
             <Icon style={[styles.nlArrow]} name={nameIcon} color={'#9b9b9b'} size={20} />
         </View>
         <View style={styles.nlContent} display={typeDisplay}>
-            <Text style={{ color: '#000' }}>{item.content}</Text>
+            <Text style={{ color: '#000' }}>{item.n_content}</Text>
         </View>
     </Pressable>
 );
 
 function Notice({ navigation }) {
     const [selectedId, setSelectedId] = useState(null);
+    const [noticesDelivery, setNoticesDelivery] = useState(null);
+    const [isRefresh, setIsRefresh] = useState(false);
+
+    const user = useSelector(state => state.auth.user)
+
+    useEffect(() => {
+        loadNotices();
+        return () => {
+
+        };
+    }, []);
+
+    useEffect(() => {
+        if (isRefresh) {
+            loadNotices();
+            setIsRefresh(false);
+        }
+        return () => {
+
+        };
+    }, [isRefresh]);
+
+    const loadNotices = () => {
+        axios.post(`/user_load_notices.php`, { d_no: user.d_no, role: 'delivery' })
+            .then(res => {
+
+                setNoticesDelivery(res.data.notices.filter(v => {
+                    return v.n_driver_yn == 'y';
+                }))
+
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
     const renderItem = ({ item }) => {
-        const itemActive = item.id === selectedId ? 'flex' : 'none';
-        const arrow = item.id === selectedId ? 'chevron-up-outline' : 'chevron-down-outline';
+        const itemActive = item.n_no === selectedId ? 'flex' : 'none';
+        const arrow = item.n_no === selectedId ? 'chevron-up-outline' : 'chevron-down-outline';
         return (
             <Item item={item}
-                onPress={() => setSelectedId(item.id)}
+                onPress={() => setSelectedId(item.n_no)}
                 nameIcon={arrow}
                 typeDisplay={itemActive}
             />
@@ -79,12 +74,14 @@ function Notice({ navigation }) {
     return (
         <Screen style={{ paddingVertical: 0, paddingHorizontal: 10 }}>
             <FlatList
-                data={DATA}
+                data={noticesDelivery}
                 renderItem={renderItem}
-                keyExtractor={item => item.id}
+                keyExtractor={(item, index) => String(index)}
                 style={styles.nlList}
                 extraData={selectedId}
                 showsVerticalScrollIndicator={false}
+                onRefresh={() => setIsRefresh(true)}
+                refreshing={false}
             />
         </Screen>
     );
