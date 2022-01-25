@@ -269,8 +269,8 @@ function List({ navigation }) {
                     <Text style={styles.h_bl_s_text1}>{item.b_date} <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text> 8:00</Text>
                 </View>
                 <View>
-                    <TouchableOpacity style={styles.h_button_list_purple} activeOpacity={0.8}>
-                        <Text style={styles.h_text_small_clr_purple}>완료</Text>
+                    <TouchableOpacity style={item.b_status == 'completed' ? styles.h_button_list_purple : styles.h_button_list_green} activeOpacity={0.8}>
+                        <Text style={item.b_status == 'completed' ? styles.h_text_small_clr_purple : styles.h_text_small_clr_green}>{item.b_status == 'completed' ? '완료' : '배송전'}</Text>
                     </TouchableOpacity>
                 </View>
             </View>
