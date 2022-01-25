@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, SafeAreaView, NativeModules, StatusBar, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
-function Screen({ children, style, keyboard, showHeader = true }) {
+function Screen({ children, style, keyboard = false, showHeader = true }) {
     const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
     useEffect(() => {

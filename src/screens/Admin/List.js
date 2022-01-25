@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import axios from '../../helpers/axiosInterceptor';
 import MonthPicker from 'react-native-month-year-picker';
 import Calendar from '../../images/svg/CalendarIcon';
-
+import Empty from '../../images/svg/Empty';
 
 function List({ navigation }) {
     const [selectedValue, setSelectedValue] = useState(1);
@@ -19,46 +19,58 @@ function List({ navigation }) {
     const [show, setShow] = useState(false);
     const [nameSearch, setNameSearch] = useState(null);
     const [phoneSearch, setPhoneSearch] = useState(null);
+    const [isRefresh, setIsRefresh] = useState(false);
 
     const user = useSelector(state => state.auth.user)
 
     useEffect(() => {
-
-        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: bookingsAll.length, type: 1, week: selectedValue, b_name: nameSearch, hp: phoneSearch, b_season: formatDate(date) })
-            .then(res => {
-                setBookingsAll(bookingsAll.concat(res.data.bookings))
-                if (res.data.bookings.length == 0) {
-                    setTimeout(() => setLoadMore(false), 1000)
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            })
-        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: bookingsDelivering.length, type: 2, week: selectedValue, b_name: nameSearch, hp: phoneSearch, b_season: formatDate(date) })
-            .then(res => {
-                setBookingsDelivering(bookingsDelivering.concat(res.data.bookings))
-                if (res.data.bookings.length == 0) {
-                    setTimeout(() => setLoadMore(false), 1000)
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            })
-        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: bookingsCompleted.length, type: 3, week: selectedValue, b_name: nameSearch, hp: phoneSearch, b_season: formatDate(date) })
-            .then(res => {
-                setBookingsCompleted(bookingsCompleted.concat(res.data.bookings))
-                if (res.data.bookings.length == 0) {
-                    setTimeout(() => setLoadMore(false), 1000)
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        loadBookings();
         return () => {
 
         };
     }, []);
 
+    useEffect(() => {
+        if (isRefresh) {
+            loadBookings();
+            setIsRefresh(false)
+        }
+        return () => {
+        };
+    }, [isRefresh]);
+
+    const loadBookings = () => {
+        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: 1, week: selectedValue, b_name: nameSearch, hp: phoneSearch, b_season: formatDate(date) })
+            .then(res => {
+                setBookingsAll(res.data.bookings)
+                if (res.data.bookings.length == 0) {
+                    setTimeout(() => setLoadMore(false), 300)
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: 2, week: selectedValue, b_name: nameSearch, hp: phoneSearch, b_season: formatDate(date) })
+            .then(res => {
+                setBookingsDelivering(res.data.bookings)
+                if (res.data.bookings.length == 0) {
+                    setTimeout(() => setLoadMore(false), 300)
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: 3, week: selectedValue, b_name: nameSearch, hp: phoneSearch, b_season: formatDate(date) })
+            .then(res => {
+                setBookingsCompleted(res.data.bookings)
+                if (res.data.bookings.length == 0) {
+                    setTimeout(() => setLoadMore(false), 300)
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
     const onLoadMore = () => {
         setLoadMore(true);
@@ -68,17 +80,17 @@ function List({ navigation }) {
                 if (tabSlected == 1) {
                     setBookingsAll(bookingsAll.concat(res.data.bookings))
                     if (res.data.bookings.length == 0) {
-                        setTimeout(() => setLoadMore(false), 1000)
+                        setTimeout(() => setLoadMore(false), 300)
                     }
                 } else if (tabSlected == 2) {
                     setBookingsAll(bookingsDelivering.concat(res.data.bookings))
                     if (res.data.bookings.length == 0) {
-                        setTimeout(() => setLoadMore(false), 1000)
+                        setTimeout(() => setLoadMore(false), 300)
                     }
                 } else if (tabSlected == 3) {
                     setBookingsAll(bookingsCompleted.concat(res.data.bookings))
                     if (res.data.bookings.length == 0) {
-                        setTimeout(() => setLoadMore(false), 1000)
+                        setTimeout(() => setLoadMore(false), 300)
                     }
                 }
 
@@ -127,17 +139,17 @@ function List({ navigation }) {
                 if (tabSlected == 1) {
                     setBookingsAll(res.data.bookings)
                     if (res.data.bookings.length == 0) {
-                        setTimeout(() => setLoadMore(false), 1000)
+                        setTimeout(() => setLoadMore(false), 300)
                     }
                 } else if (tabSlected == 2) {
                     setBookingsDelivering(res.data.bookings)
                     if (res.data.bookings.length == 0) {
-                        setTimeout(() => setLoadMore(false), 1000)
+                        setTimeout(() => setLoadMore(false), 300)
                     }
                 } else if (tabSlected == 3) {
                     setBookingsCompleted(res.data.bookings)
                     if (res.data.bookings.length == 0) {
-                        setTimeout(() => setLoadMore(false), 1000)
+                        setTimeout(() => setLoadMore(false), 300)
                     }
                 }
 
@@ -208,14 +220,14 @@ function List({ navigation }) {
 
             </View>
             <Screen style={{ paddingTop: 160 }}>
-                <View style={[styles.nlRow, styles.nlBetween, styles.nlListTabTop]}>
-                    <TouchableOpacity activeOpacity={1} style={(tabSlected == 1) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(1)}>
+                <View style={[styles.nlRow, styles.nlBetween, styles.nlListTabTop, { zIndex: 1 }]}>
+                    <TouchableOpacity style={(tabSlected == 1) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(1)}>
                         <Text style={(tabSlected == 1) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>전체</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={1} style={(tabSlected == 2) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(2)}>
+                    <TouchableOpacity style={(tabSlected == 2) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(2)}>
                         <Text style={(tabSlected == 2) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>배송전</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={1} style={(tabSlected == 3) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(3)}>
+                    <TouchableOpacity style={(tabSlected == 3) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(3)}>
                         <Text style={(tabSlected == 3) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>배송완료</Text>
                     </TouchableOpacity>
                 </View>
@@ -229,10 +241,10 @@ function List({ navigation }) {
                     scrollEventThrottle={16}
                     onEndReachedThreshold={0.1}
                     onEndReached={({ distanceFromEnd }) => {
-                        console.log(distanceFromEnd)
-                        distanceFromEnd > 0 && onLoadMore();
+                        console.log(distanceFromEnd);
+                        (distanceFromEnd > 0 && !loadMore) && onLoadMore();
                     }}
-
+                    onRefresh={() => setIsRefresh(true)}
                     ListFooterComponent={loadMore ? <View
                         style={{
                             paddingBottom: 15,
@@ -241,6 +253,10 @@ function List({ navigation }) {
                     >
                         <ActivityIndicator animating size="large" color="#7c257a" />
                     </View> : null}
+                    contentContainerStyle={{ flexGrow: 1 }}
+                    ListEmptyComponent={<View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
+                        <Empty height={100} width={100}></Empty>
+                    </View>}
                 />}
                 {tabSlected == 2 && <FlatList
                     refreshing={false}
@@ -252,10 +268,10 @@ function List({ navigation }) {
                     scrollEventThrottle={16}
                     onEndReachedThreshold={0.1}
                     onEndReached={({ distanceFromEnd }) => {
-                        console.log(distanceFromEnd)
-                        distanceFromEnd > 0 && onLoadMore();
+                        console.log(distanceFromEnd);
+                        (distanceFromEnd > 0 && !loadMore) && onLoadMore();
                     }}
-
+                    onRefresh={() => setIsRefresh(true)}
                     ListFooterComponent={loadMore ? <View
                         style={{
                             paddingBottom: 15,
@@ -264,6 +280,10 @@ function List({ navigation }) {
                     >
                         <ActivityIndicator animating size="large" color="#7c257a" />
                     </View> : null}
+                    contentContainerStyle={{ flexGrow: 1 }}
+                    ListEmptyComponent={<View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
+                        <Empty height={100} width={100}></Empty>
+                    </View>}
                 />}
                 {tabSlected == 3 && <FlatList
                     refreshing={false}
@@ -275,10 +295,10 @@ function List({ navigation }) {
                     scrollEventThrottle={16}
                     onEndReachedThreshold={0.1}
                     onEndReached={({ distanceFromEnd }) => {
-                        console.log(distanceFromEnd)
-                        distanceFromEnd > 0 && onLoadMore();
+                        console.log(distanceFromEnd);
+                        (distanceFromEnd > 0 && !loadMore) && onLoadMore();
                     }}
-
+                    onRefresh={() => setIsRefresh(true)}
                     ListFooterComponent={loadMore ? <View
                         style={{
                             paddingBottom: 15,
@@ -287,6 +307,10 @@ function List({ navigation }) {
                     >
                         <ActivityIndicator animating size="large" color="#7c257a" />
                     </View> : null}
+                    contentContainerStyle={{ flexGrow: 1 }}
+                    ListEmptyComponent={<View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
+                        <Empty height={100} width={100}></Empty>
+                    </View>}
                 />}
                 {show && (
                     <MonthPicker

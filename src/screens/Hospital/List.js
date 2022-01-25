@@ -18,6 +18,7 @@ import Calendar from '../../images/svg/CalendarIcon';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MonthPicker from 'react-native-month-year-picker';
 import { Picker } from '@react-native-picker/picker';
+import Empty from '../../images/svg/Empty';
 
 function List({ navigation }) {
     const [tabSlected, settabSlected] = useState(1);
@@ -30,45 +31,59 @@ function List({ navigation }) {
     const [bookingsCompleted, setBookingsCompleted] = useState([]);
     const [loadMore, setLoadMore] = useState(false);
     const [selectedValue, setSelectedValue] = useState(1);
+    const [isRefresh, setIsRefresh] = useState(false);
 
     const user = useSelector(state => state.auth.user)
 
     useEffect(() => {
-        axios.post(`/user_load_bookings.php`, { h_no: user.h_no, role: 'hospital', length: bookingsAll.length, type: 1, week: selectedValue, b_season: formatDate(date) })
-            .then(res => {
-                setBookingsAll(res.data.bookings)
-                if (res.data.bookings.length == 0) {
-                    setTimeout(() => setLoadMore(false), 1000)
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            })
-        axios.post(`/user_load_bookings.php`, { h_no: user.h_no, role: 'hospital', length: bookingsDelivering.length, type: 2, week: selectedValue, b_season: formatDate(date) })
-            .then(res => {
-                setBookingsDelivering(res.data.bookings)
-                if (res.data.bookings.length == 0) {
-                    setTimeout(() => setLoadMore(false), 1000)
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            })
-        axios.post(`/user_load_bookings.php`, { h_no: user.h_no, role: 'hospital', length: bookingsCompleted.length, type: 3, week: selectedValue, b_season: formatDate(date) })
-            .then(res => {
-                setBookingsCompleted(res.data.bookings)
-                if (res.data.bookings.length == 0) {
-                    setTimeout(() => setLoadMore(false), 1000)
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            })
 
+        loadBookings();
         return () => {
 
         };
     }, [date, selectedValue]);
+
+    useEffect(() => {
+        if (isRefresh) {
+            loadBookings();
+            setIsRefresh(false)
+        }
+        return () => {
+        };
+    }, [isRefresh]);
+
+    const loadBookings = () => {
+        axios.post(`/user_load_bookings.php`, { h_no: user.h_no, role: 'hospital', length: 0, type: 1, week: selectedValue, b_season: formatDate(date) })
+            .then(res => {
+                setBookingsAll(res.data.bookings)
+                if (res.data.bookings.length == 0) {
+                    setTimeout(() => setLoadMore(false), 300)
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        axios.post(`/user_load_bookings.php`, { h_no: user.h_no, role: 'hospital', length: 0, type: 2, week: selectedValue, b_season: formatDate(date) })
+            .then(res => {
+                setBookingsDelivering(res.data.bookings)
+                if (res.data.bookings.length == 0) {
+                    setTimeout(() => setLoadMore(false), 300)
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        axios.post(`/user_load_bookings.php`, { h_no: user.h_no, role: 'hospital', length: 0, type: 3, week: selectedValue, b_season: formatDate(date) })
+            .then(res => {
+                setBookingsCompleted(res.data.bookings)
+                if (res.data.bookings.length == 0) {
+                    setTimeout(() => setLoadMore(false), 300)
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
     const showPicker = useCallback((value) => setShow(value), []);
 
@@ -102,17 +117,17 @@ function List({ navigation }) {
                 if (tabSlected == 1) {
                     setBookingsAll(bookingsAll.concat(res.data.bookings))
                     if (res.data.bookings.length == 0) {
-                        setTimeout(() => setLoadMore(false), 1000)
+                        setTimeout(() => setLoadMore(false), 300)
                     }
                 } else if (tabSlected == 2) {
                     setBookingsAll(bookingsDelivering.concat(res.data.bookings))
                     if (res.data.bookings.length == 0) {
-                        setTimeout(() => setLoadMore(false), 1000)
+                        setTimeout(() => setLoadMore(false), 300)
                     }
                 } else if (tabSlected == 3) {
                     setBookingsAll(bookingsCompleted.concat(res.data.bookings))
                     if (res.data.bookings.length == 0) {
-                        setTimeout(() => setLoadMore(false), 1000)
+                        setTimeout(() => setLoadMore(false), 300)
                     }
                 }
 
@@ -192,7 +207,7 @@ function List({ navigation }) {
                     />
                 )}
 
-                <View style={styles.h_three_button}>
+                <View style={[styles.h_three_button, { zIndex: 1 }]}>
                     <TouchableOpacity activeOpacity={1} style={(tabSlected == 1) ? styles.h_button_active : styles.h_button} onPress={() => settabSlected(1)}>
                         <Text style={(tabSlected == 1) ? styles.h_text_clr_white : styles.h_text_clr_black}>전체</Text>
                     </TouchableOpacity>
@@ -214,10 +229,10 @@ function List({ navigation }) {
                     scrollEventThrottle={16}
                     onEndReachedThreshold={0.1}
                     onEndReached={({ distanceFromEnd }) => {
-                        console.log(distanceFromEnd)
-                        distanceFromEnd > 0 && onLoadMore();
+                        console.log(distanceFromEnd);
+                        (distanceFromEnd > 0 && !loadMore) && onLoadMore();
                     }}
-
+                    onRefresh={() => setIsRefresh(true)}
                     ListFooterComponent={loadMore ? <View
                         style={{
                             paddingBottom: 15,
@@ -226,6 +241,10 @@ function List({ navigation }) {
                     >
                         <ActivityIndicator animating size="large" color="#7c257a" />
                     </View> : null}
+                    contentContainerStyle={{ flexGrow: 1 }}
+                    ListEmptyComponent={<View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
+                        <Empty height={100} width={100}></Empty>
+                    </View>}
                 />}
                 {tabSlected == 2 && <FlatList
                     refreshing={false}
@@ -237,10 +256,10 @@ function List({ navigation }) {
                     scrollEventThrottle={16}
                     onEndReachedThreshold={0.1}
                     onEndReached={({ distanceFromEnd }) => {
-                        console.log(distanceFromEnd)
-                        distanceFromEnd > 0 && onLoadMore();
+                        console.log(distanceFromEnd);
+                        (distanceFromEnd > 0 && !loadMore) && onLoadMore();
                     }}
-
+                    onRefresh={() => setIsRefresh(true)}
                     ListFooterComponent={loadMore ? <View
                         style={{
                             paddingBottom: 15,
@@ -249,6 +268,10 @@ function List({ navigation }) {
                     >
                         <ActivityIndicator animating size="large" color="#7c257a" />
                     </View> : null}
+                    contentContainerStyle={{ flexGrow: 1 }}
+                    ListEmptyComponent={<View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
+                        <Empty height={100} width={100}></Empty>
+                    </View>}
                 />}
                 {tabSlected == 3 && <FlatList
                     refreshing={false}
@@ -260,10 +283,10 @@ function List({ navigation }) {
                     scrollEventThrottle={16}
                     onEndReachedThreshold={0.1}
                     onEndReached={({ distanceFromEnd }) => {
-                        console.log(distanceFromEnd)
-                        distanceFromEnd > 0 && onLoadMore();
+                        console.log(distanceFromEnd);
+                        (distanceFromEnd > 0 && !loadMore) && onLoadMore();
                     }}
-
+                    onRefresh={() => setIsRefresh(true)}
                     ListFooterComponent={loadMore ? <View
                         style={{
                             paddingBottom: 15,
@@ -272,6 +295,10 @@ function List({ navigation }) {
                     >
                         <ActivityIndicator animating size="large" color="#7c257a" />
                     </View> : null}
+                    contentContainerStyle={{ flexGrow: 1 }}
+                    ListEmptyComponent={<View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
+                        <Empty height={100} width={100}></Empty>
+                    </View>}
                 />}
                 {/* <View style={styles.h_box_list}>
                     <View style={styles.h_box_list__first}>

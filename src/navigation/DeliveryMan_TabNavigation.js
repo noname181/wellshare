@@ -70,7 +70,7 @@ function TabNavigation({ route, navigation }) {
                 component={DeliveryMan_ListStack}
                 options={{
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        <Notice height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
+                        <Deliveryman_list height={20} width={18} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>명단</Text>
                     </View>),
                     // header: props => <Header title="명단" isBack={true} {...props} />
@@ -108,7 +108,7 @@ function TabNavigation({ route, navigation }) {
                 component={NoticeScreen}
                 options={{
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        <Notice height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
+                        <Notice height={20} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>공지사항</Text>
                     </View>),
                     header: props => <Header title="공지사항" isBack={false} {...props} />
@@ -120,7 +120,7 @@ function TabNavigation({ route, navigation }) {
                 component={MyProfileScreen}
                 options={{
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
-                        <Profile_Icon height={19} width={25} color={focused ? '#7c257a' : '#b2b2b2'} />
+                        <Profile_Icon height={20} width={26} color={focused ? '#7c257a' : '#b2b2b2'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>나의정보</Text>
                     </View>),
                     header: props => <Header title="나의정보" isBack={false} {...props} />

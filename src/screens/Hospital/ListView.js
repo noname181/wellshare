@@ -117,7 +117,7 @@ function ListView({ navigation, route }) {
                         </View>
                     </View>
                     {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, (booking?.image || booking?.sign) && styles.nlLineBottom]}>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>배송완료일</Text>
                         </View>
@@ -126,14 +126,23 @@ function ListView({ navigation, route }) {
                         </View>
                     </View>
                     {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }]}>
+                    {booking?.image && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }]}>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>사진</Text>
                         </View>
                         <View >
-                            <Image source={boxImage}></Image>
+                            <Image resizeMode="contain" style={{ height: 100, width: 100 }} source={{ uri: booking?.image }}></Image>
                         </View>
-                    </View>
+                    </View>}
+                    {booking?.sign && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }]}>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorGrey}>Signature</Text>
+                        </View>
+                        <View >
+                            <Image resizeMode="contain" style={{ height: 100, width: 100 }} source={{ uri: booking?.sign }}></Image>
+                        </View>
+
+                    </View>}
 
                 </View>
 

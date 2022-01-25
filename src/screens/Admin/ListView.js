@@ -8,7 +8,7 @@ import PhoneIcon from '../../images/svg/PhoneIcon';
 import axios from '../../helpers/axiosInterceptor';
 
 function Complains({ navigation, route }) {
-    const [booking, setBooking] = useState({});
+    const [booking, setBooking] = useState(null);
     const { b_no } = route.params;
 
     useEffect(() => {
@@ -30,7 +30,7 @@ function Complains({ navigation, route }) {
 
     return (
         <View>
-            <ScrollView style={styles.nlMarginBottom}>
+            <ScrollView style={booking != null && booking?.b_status != 'completed' ? styles.nlMarginBottom : null}>
                 <Screen >
                     <View style={[styles.nlCard, { backgroundColor: '#fff', padding: 20 }]}>
                         {/* Item Info */}
@@ -39,7 +39,7 @@ function Complains({ navigation, route }) {
                                 <Text style={styles.nlColorGrey}>수령인</Text>
                             </View>
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking.b_name}</Text>
+                                <Text style={styles.nlColorBlack}>{booking?.b_name}</Text>
                             </View>
                         </View>
                         {/* Item Info */}
@@ -57,7 +57,7 @@ function Complains({ navigation, route }) {
                                 <Text style={styles.nlColorGrey}>패키지</Text>
                             </View>
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking.b_package}</Text>
+                                <Text style={styles.nlColorBlack}>{booking?.b_package}</Text>
                             </View>
                         </View>
                         {/* Item Info */}
@@ -66,7 +66,7 @@ function Complains({ navigation, route }) {
                                 <Text style={styles.nlColorGrey}>특이사항</Text>
                             </View>
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking.b_memo}</Text>
+                                <Text style={styles.nlColorBlack}>{booking?.b_memo}</Text>
                             </View>
                         </View>
                         {/* Item Info */}
@@ -75,10 +75,10 @@ function Complains({ navigation, route }) {
                                 <Text style={styles.nlColorGrey}>수령인HP</Text>
                             </View>
                             <View style={[styles.nlAlignCenter, styles.nlRow]}>
-                                <TouchableOpacity activeOpacity={1} onPress={() => Linking.openURL(`sms:${booking.b_hp1}`)}>
+                                <TouchableOpacity activeOpacity={1} onPress={() => Linking.openURL(`sms:${booking?.b_hp1}`)}>
                                     <SMSIcon height={30} width={30} />
                                 </TouchableOpacity>
-                                <TouchableOpacity activeOpacity={1} style={{ marginLeft: 10 }} onPress={() => Linking.openURL(`tel:${booking.b_hp1}`)}>
+                                <TouchableOpacity activeOpacity={1} style={{ marginLeft: 10 }} onPress={() => Linking.openURL(`tel:${booking?.b_hp1}`)}>
                                     <PhoneIcon height={30} width={30} />
                                 </TouchableOpacity>
                             </View>
@@ -89,7 +89,7 @@ function Complains({ navigation, route }) {
                                 <Text style={styles.nlColorGrey}>수령인 주소</Text>
                             </View>
                             <View style={[styles.nlRow, styles.nlAlignCenter, { maxWidth: '70%' }]}>
-                                <Text style={styles.nlColorBlack}>{booking.b_address}</Text>
+                                <Text style={styles.nlColorBlack}>{booking?.b_address}</Text>
                             </View>
                         </View>
                         {/* Item Info */}
@@ -98,7 +98,7 @@ function Complains({ navigation, route }) {
                                 <Text style={styles.nlColorGrey}>배송예정일</Text>
                             </View>
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking.b_date}</Text>
+                                <Text style={styles.nlColorBlack}>{booking?.b_date}</Text>
                             </View>
                         </View>
 
@@ -110,7 +110,7 @@ function Complains({ navigation, route }) {
                                 <Text style={styles.nlColorGrey}>배송인</Text>
                             </View>
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking.b_name}</Text>
+                                <Text style={styles.nlColorBlack}>{booking?.b_name}</Text>
                             </View>
                         </View>
                         {/* Item Info */}
@@ -119,10 +119,10 @@ function Complains({ navigation, route }) {
                                 <Text style={styles.nlColorGrey}>배송인HP</Text>
                             </View>
                             <View style={[styles.nlRow]}>
-                                <TouchableOpacity activeOpacity={1} onPress={() => Linking.openURL(`sms:${booking.b_hp1}`)}>
+                                <TouchableOpacity activeOpacity={1} onPress={() => Linking.openURL(`sms:${booking?.b_hp1}`)}>
                                     <SMSIcon height={30} width={30} />
                                 </TouchableOpacity>
-                                <TouchableOpacity activeOpacity={1} style={{ marginLeft: 10 }} onPress={() => Linking.openURL(`tel:${booking.b_hp1}`)}>
+                                <TouchableOpacity activeOpacity={1} style={{ marginLeft: 10 }} onPress={() => Linking.openURL(`tel:${booking?.b_hp1}`)}>
                                     <PhoneIcon height={30} width={30} />
                                 </TouchableOpacity>
                             </View>
@@ -133,16 +133,16 @@ function Complains({ navigation, route }) {
                                 <Text style={styles.nlColorGrey}>배송상태</Text>
                             </View>
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking.b_status}</Text>
+                                <Text style={styles.nlColorBlack}>{booking?.b_status}</Text>
                             </View>
                         </View>
                         {/* Item Info */}
-                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, (booking?.image || booking?.sign) && styles.nlLineBottom]}>
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
                                 <Text style={styles.nlColorGrey}>배송완료일</Text>
                             </View>
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking.b_completed_date}</Text>
+                                <Text style={styles.nlColorBlack}>{booking?.b_completed_date}</Text>
                             </View>
                         </View>
                         {/* Item Info */}
@@ -151,15 +151,23 @@ function Complains({ navigation, route }) {
                                 <Text style={styles.nlColorGrey}>사진</Text>
                             </View>
                             <View >
-                                <Image source={boxImage}></Image>
+                                <Image resizeMode="contain" style={{ height: 100, width: 100 }} source={{ uri: booking?.image }}></Image>
                             </View>
                         </View>
+                        {booking?.sign && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>Signature</Text>
+                            </View>
+                            <View >
+                                <Image resizeMode="contain" style={{ height: 100, width: 100 }} source={{ uri: booking?.sign }}></Image>
+                            </View>
 
+                        </View>}
                     </View>
 
                 </Screen>
             </ScrollView>
-            <View style={[styles.nlFixedAtBottom, styles.nlRow,]}>
+            <View style={[styles.nlFixedAtBottom, styles.nlRow, { display: 'none' }, booking != null && booking?.b_status != 'completed' ? { display: 'flex' } : {}]}>
                 <TouchableOpacity style={styles.nlButton}>
                     <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>요청장소</Text>
                 </TouchableOpacity>
