@@ -27,7 +27,6 @@ function List({ navigation }) {
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
-    const [bookings, setBookings] = useState([]);
     const [bookingsAll, setBookingsAll] = useState(null);
     const [bookingsDelivering, setBookingsDelivering] = useState(null);
     const [bookingsCompleted, setBookingsCompleted] = useState(null);
@@ -96,15 +95,6 @@ function List({ navigation }) {
             .catch(err => {
                 console.log(err);
             })
-
-
-        axios.post(`/user_load_bookings.php`, { d_no: user.d_no, role: 'delivery' })
-            .then(res => {
-                setBookings(res.data.bookings)
-            })
-            .catch(err => {
-                console.log(err);
-            })
     }
 
     const checkWorkingTime = () => {
@@ -140,7 +130,7 @@ function List({ navigation }) {
             notificationText: 'Enabled',
             debug: false,
             startOnBoot: false,
-            stopOnTerminate: true,
+            stopOnTerminate: false,
             locationProvider: BackgroundGeolocation.ACTIVITY_PROVIDER,
             interval: 3600000,
             fastestInterval: 3600000,
