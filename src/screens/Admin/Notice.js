@@ -1,82 +1,79 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, Text, Pressable, FlatList, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Screen from '../../components/Screen';
-const DATA = [
-    {
-        id: '1',
-        regdate: '2021.10.13',
-        title: '공지사항 1입니다.',
-        content: 
-`- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위
-- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위
-- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위
-- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위
-        `
-    },
-    {
-        id: '2',
-        title: '공지사항 1입니다.',
-        regdate: '2021.10.13',
-        content: '- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위'
-    },
-    {
-        id: '3',
-        title: '공지사항 1입니다.',
-        regdate: '2021.10.13',
-        content: '- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위',
-    },
-    {
-        id: '4',
-        title: '공지사항 1입니다.',
-        regdate: '2021.10.13',
-        content: '- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위',
-    },
-    {
-        id: '5',
-        title: '공지사항 1입니다.',
-        regdate: '2021.10.13',
-        content: '- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위',
-    },
-    {
-        id: '6',
-        title: '공지사항 1입니다.',
-        regdate: '2021.10.13',
-        content: '- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위',
-    },
-    {
-        id: '7',
-        title: '공지사항 1입니다.',
-        regdate: '2021.10.13',
-        content: '- 디자인을 함에 있어 시각적 연출이 필요한 빈공간을 위',
-    },
-];
+import axios from '../../helpers/axiosInterceptor';
+import { useSelector } from 'react-redux'
+
 
 const Item = ({ item, onPress, typeDisplay, nameIcon }) => (
     <Pressable style={styles.nlItem} onPress={onPress}>
         <View style={styles.nlHead}>
             <View style={styles.nlRow}>
-                <Text style={styles.nlNo}>{item.id}.</Text>
-                <Text style={styles.nlTitle}>{item.title}</Text>
+                <Text style={styles.nlNo}>{item.n_no}.</Text>
+                <Text style={styles.nlTitle}>{item.n_title}</Text>
             </View>
-            <Text style={styles.nlDate}>{item.regdate}</Text>
+            <Text style={styles.nlDate}>{item.n_regdate}</Text>
             <Icon style={[styles.nlArrow]} name={nameIcon} color={'#9b9b9b'} size={20} />
         </View>
         <View style={styles.nlContent} display={typeDisplay}>
-            <Text style={{ color: '#000' }}>{item.content}</Text>
+            <Text style={{ color: '#000' }}>{item.n_content}</Text>
         </View>
     </Pressable>
 );
 
 function Notice({ navigation }) {
     const [selectedId, setSelectedId] = useState(null);
+    const [noticesAll, setNoticesAll] = useState(null);
+    const [noticesHospital, setNoticesHospital] = useState(null);
+    const [noticesDelivery, setNoticesDelivery] = useState(null);
+    const [noticesReceiver, setNoticesReceiver] = useState(null);
+    const [isRefresh, setIsRefresh] = useState(false);
+
+    const user = useSelector(state => state.auth.user)
+
+    useEffect(() => {
+        loadNotices();
+        return () => {
+
+        };
+    }, []);
+
+    useEffect(() => {
+        if (isRefresh) {
+            loadNotices();
+            setIsRefresh(false);
+        }
+        return () => {
+
+        };
+    }, [isRefresh]);
+
+    const loadNotices = () => {
+        axios.post(`/user_load_notices.php`, { m_no: user.m_no, role: 'admin' })
+            .then(res => {
+                setNoticesAll(res.data.notices);
+                setNoticesHospital(res.data.notices.filter(v => {
+                    return v.n_hospital_yn == 'y';
+                }))
+                setNoticesDelivery(res.data.notices.filter(v => {
+                    return v.n_driver_yn == 'y';
+                }))
+                setNoticesReceiver(res.data.notices.filter(v => {
+                    return v.n_user_yn == 'y';
+                }))
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
     const renderItem = ({ item }) => {
-        const itemActive = item.id === selectedId ? 'flex' : 'none';
-        const arrow = item.id === selectedId ? 'chevron-up-outline' : 'chevron-down-outline';
+        const itemActive = item.n_no === selectedId ? 'flex' : 'none';
+        const arrow = item.n_no === selectedId ? 'chevron-up-outline' : 'chevron-down-outline';
         return (
             <Item item={item}
-                onPress={() => setSelectedId(item.id)}
+                onPress={() => setSelectedId(item.n_no)}
                 nameIcon={arrow}
                 typeDisplay={itemActive}
             />
@@ -87,32 +84,64 @@ function Notice({ navigation }) {
     return (
         <Screen style={{ paddingVertical: 0, paddingHorizontal: 10 }}>
             <View style={[styles.nlRow, styles.nlBetween, styles.nlListTabTop]}>
-                <TouchableOpacity activeOpacity={1} style={(tabSlected== 1)?styles.nlTabTopSelected:styles.nlTabTop} onPress={() => settabSlected(1)}>
-                    <Text style={(tabSlected== 1)?styles.nlTabTopTextSelected:styles.nlTabTopText}>전체</Text>
+                <TouchableOpacity activeOpacity={1} style={(tabSlected == 1) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(1)}>
+                    <Text style={(tabSlected == 1) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>전체</Text>
                 </TouchableOpacity>
-                <TouchableOpacity activeOpacity={1} style={(tabSlected== 2)?styles.nlTabTopSelected:styles.nlTabTop} onPress={() => settabSlected(2)}>
-                    <Text style={(tabSlected== 2)?styles.nlTabTopTextSelected:styles.nlTabTopText}>대상자</Text>
+                <TouchableOpacity activeOpacity={1} style={(tabSlected == 2) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(2)}>
+                    <Text style={(tabSlected == 2) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>기사님 </Text>
                 </TouchableOpacity>
-                <TouchableOpacity activeOpacity={1} style={(tabSlected== 3)?styles.nlTabTopSelected:styles.nlTabTop} onPress={() => settabSlected(3)}>
-                    <Text style={(tabSlected== 3)?styles.nlTabTopTextSelected:styles.nlTabTopText}>기사</Text>
+                <TouchableOpacity activeOpacity={1} style={(tabSlected == 3) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(3)}>
+                    <Text style={(tabSlected == 3) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>대상자</Text>
                 </TouchableOpacity>
-                <TouchableOpacity activeOpacity={1} style={(tabSlected== 4)?styles.nlTabTopSelected:styles.nlTabTop} onPress={() => settabSlected(4)}>
-                    <Text style={(tabSlected== 4)?styles.nlTabTopTextSelected:styles.nlTabTopText}>보건소</Text>
+                <TouchableOpacity activeOpacity={1} style={(tabSlected == 4) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(4)}>
+                    <Text style={(tabSlected == 4) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>보건소</Text>
                 </TouchableOpacity>
             </View>
-            <FlatList
-                data={DATA}
+            {tabSlected == 1 && <FlatList
+                data={noticesAll}
                 renderItem={renderItem}
-                keyExtractor={item => item.id}
+                keyExtractor={(item, index) => String(index)}
                 style={styles.nlList}
                 extraData={selectedId}
                 showsVerticalScrollIndicator={false}
-            />
+                onRefresh={() => setIsRefresh(true)}
+                refreshing={false}
+            />}
+            {tabSlected == 2 && <FlatList
+                data={noticesDelivery}
+                renderItem={renderItem}
+                keyExtractor={(item, index) => String(index)}
+                style={styles.nlList}
+                extraData={selectedId}
+                showsVerticalScrollIndicator={false}
+                onRefresh={() => setIsRefresh(true)}
+                refreshing={false}
+            />}
+            {tabSlected == 3 && <FlatList
+                data={noticesReceiver}
+                renderItem={renderItem}
+                keyExtractor={(item, index) => String(index)}
+                style={styles.nlList}
+                extraData={selectedId}
+                showsVerticalScrollIndicator={false}
+                onRefresh={() => setIsRefresh(true)}
+                refreshing={false}
+            />}
+            {tabSlected == 4 && <FlatList
+                data={noticesHospital}
+                renderItem={renderItem}
+                keyExtractor={(item, index) => String(index)}
+                style={styles.nlList}
+                extraData={selectedId}
+                showsVerticalScrollIndicator={false}
+                onRefresh={() => setIsRefresh(true)}
+                refreshing={false}
+            />}
         </Screen>
     );
 }
 const styles = StyleSheet.create({
-    
+
     nlList: {
         flex: 1
     },
@@ -218,7 +247,7 @@ const styles = StyleSheet.create({
         elevation: 3,
     },
     nlTabTopText: {
-       textAlign: 'center'
+        textAlign: 'center'
     },
     nlTabTopTextSelected: {
         textAlign: 'center',
