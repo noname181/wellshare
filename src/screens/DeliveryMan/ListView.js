@@ -122,7 +122,7 @@ function ListView({ navigation, route }) {
                 Alert.alert('웰쉐어', "Success", [
 
                     {
-                        text: "Yes",
+                        text: '예',
                         onPress: () => {
                             actionSheetRefSign.current?.hide();
                             setIsCompleted(true);
@@ -150,7 +150,7 @@ function ListView({ navigation, route }) {
                 Alert.alert('웰쉐어', "Success", [
 
                     {
-                        text: "Yes",
+                        text: '예',
                         onPress: () => {
                             setIsCompleted(true);
                         },
@@ -422,7 +422,7 @@ function ListView({ navigation, route }) {
                             Alert.alert('웰쉐어', "Please enter completed text", [
 
                                 {
-                                    text: "Yes",
+                                    text: '예',
                                     onPress: () => {
 
                                     },

@@ -194,8 +194,8 @@ function List({ navigation }) {
                 // we need to set delay or otherwise alert may not be shown
                 setTimeout(() =>
                     Alert.alert('App requires location tracking permission', 'Would you like to open app settings?', [
-                        { text: 'Yes', onPress: () => BackgroundGeolocation.showAppSettings() },
-                        { text: 'No', onPress: () => console.log('No Pressed'), style: 'cancel' }
+                        { text: '예', onPress: () => BackgroundGeolocation.showAppSettings() },
+                        { text: '아니요', onPress: () => console.log('No Pressed'), style: 'cancel' }
                     ]), 1000);
             }
         });

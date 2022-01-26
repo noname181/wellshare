@@ -70,7 +70,7 @@ export default function Login({ navigation }) {
                 "Plese enter HP",
                 [
                     {
-                        text: "Yes",
+                        text: "예",
                         onPress: () => { },
                         style: "yes",
                     },
@@ -84,7 +84,7 @@ export default function Login({ navigation }) {
                 "Plese get and enter OTP",
                 [
                     {
-                        text: "Yes",
+                        text: "예",
                         onPress: () => { },
                         style: "yes",
                     },
@@ -98,7 +98,7 @@ export default function Login({ navigation }) {
                 "OTP is expired",
                 [
                     {
-                        text: "Yes",
+                        text: "예",
                         onPress: () => { },
                         style: "yes",
                     },
@@ -115,7 +115,7 @@ export default function Login({ navigation }) {
                         "Wrong OTP",
                         [
                             {
-                                text: "Yes",
+                                text: "예",
                                 onPress: () => { },
                                 style: "yes",
                             },
@@ -194,7 +194,7 @@ export default function Login({ navigation }) {
                 "Plese enter your phone number",
                 [
                     {
-                        text: "Yes",
+                        text: "예",
                         onPress: () => { },
                         style: "yes",
                     },
@@ -219,7 +219,7 @@ export default function Login({ navigation }) {
                         "대상자가 아니거나 전화번호를 잘못 입력하였습니다.",
                         [
                             {
-                                text: "Yes",
+                                text: "예",
                                 onPress: () => { },
                                 style: "yes",
                             },
@@ -234,7 +234,7 @@ export default function Login({ navigation }) {
                         "OTP: " + res.data.otp,
                         [
                             {
-                                text: "Yes",
+                                text: "예",
                                 onPress: () => { },
                                 style: "yes",
                             },

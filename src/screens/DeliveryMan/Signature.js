@@ -60,7 +60,7 @@ function Signature({ navigation, route }) {
         save_base64(signature, () => {
             Alert.alert('웰쉐어', "Saved your sign to library", [
                 {
-                    text: "Yes",
+                    text: '예',
                     onPress: () => {
                         navigation.navigate('ListView', {
                             backFromSign: true,
