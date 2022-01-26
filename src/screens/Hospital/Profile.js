@@ -212,7 +212,7 @@ function Profile({ navigation }) {
                             <Hospital_profileIcon10 height={16} width={16} />
                             <Text style={styles.text_profile}>청구서 도착 주소</Text>
                         </View>
-                        <View style={{ width: 180 }}>
+                        <View style={{ width: 180, flexWrap: 'nowrap' }}>
                             <Text style={styles.text_profile_right}>{user?.hm_address}</Text>
                         </View>
                     </View>

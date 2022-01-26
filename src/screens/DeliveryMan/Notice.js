@@ -6,11 +6,11 @@ import axios from '../../helpers/axiosInterceptor';
 import { useSelector } from 'react-redux'
 import Empty from '../../images/svg/Empty';
 
-const Item = ({ item, onPress, typeDisplay, nameIcon, index }) => (
+const Item = ({ item, onPress, typeDisplay, nameIcon, index, length }) => (
     <Pressable style={styles.nlItem} onPress={onPress}>
         <View style={styles.nlHead}>
             <View style={styles.nlRow}>
-                <Text style={styles.nlNo}>{index + 1}.</Text>
+                <Text style={styles.nlNo}>{length - index}.</Text>
                 <Text style={styles.nlTitle}>{item.n_title}</Text>
             </View>
             <Text style={styles.nlDate}>{item.n_regdate}</Text>
@@ -69,6 +69,7 @@ function Notice({ navigation }) {
                 nameIcon={arrow}
                 typeDisplay={itemActive}
                 index={index}
+                length={noticesDelivery.length}
             />
         );
     }
