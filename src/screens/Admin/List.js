@@ -203,7 +203,7 @@ function List({ navigation }) {
                     <View style={styles.nlFormControl}>
                         <TextInput
                             placeholder='수령인 이름'
-                            style={{ paddingHorizontal: 15 }}
+                            style={{ paddingHorizontal: 15, width: '100%' }}
                             value={nameSearch} onChangeText={(text) => setNameSearch(text)}
                         >
                         </TextInput>
@@ -212,7 +212,7 @@ function List({ navigation }) {
                         <TextInput
                             placeholder='수령인 전화번호'
                             keyboardType='numeric'
-                            style={{ paddingHorizontal: 15 }}
+                            style={{ paddingHorizontal: 15, width: '100%' }}
                             value={phoneSearch} onChangeText={(text) => setPhoneSearch(text)}
                         >
                         </TextInput>
