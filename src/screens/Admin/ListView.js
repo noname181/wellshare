@@ -134,7 +134,7 @@ function Complains({ navigation, route }) {
                                 <Text style={styles.nlColorGrey}>배송상태</Text>
                             </View>
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking?.b_status}</Text>
+                                <Text style={styles.nlColorBlack}>{booking?.b_status == 'delivering' ? '배송중' : '완료'}</Text>
                             </View>
                         </View>
                         {/* Item Info */}
@@ -147,14 +147,14 @@ function Complains({ navigation, route }) {
                             </View>
                         </View>
                         {/* Item Info */}
-                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }]}>
+                        {booking?.image && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }]}>
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
                                 <Text style={styles.nlColorGrey}>사진</Text>
                             </View>
                             <View >
                                 <Image resizeMode="contain" style={{ height: 100, width: 100 }} source={{ uri: booking?.image }}></Image>
                             </View>
-                        </View>
+                        </View>}
                         {booking?.sign && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }]}>
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
                                 <Text style={styles.nlColorGrey}>Signature</Text>
