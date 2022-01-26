@@ -154,7 +154,7 @@ function List({ navigation }) {
             // handle your locations here
             // to perform long running operation on iOS
             // you need to create background task
-            // Alert.alert("Modio", location);
+            // Alert.alert('웰쉐어', location);
             BackgroundGeolocation.startTask(taskKey => {
                 // execute long running task
                 // eg. ajax post location

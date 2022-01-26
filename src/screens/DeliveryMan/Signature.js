@@ -58,7 +58,7 @@ function Signature({ navigation, route }) {
         setSign(signature);
 
         save_base64(signature, () => {
-            Alert.alert("Modio", "Saved your sign to library", [
+            Alert.alert('웰쉐어', "Saved your sign to library", [
                 {
                     text: "Yes",
                     onPress: () => {

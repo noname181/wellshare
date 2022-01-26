@@ -6,11 +6,11 @@ import axios from '../../helpers/axiosInterceptor';
 import { useSelector } from 'react-redux'
 import Empty from '../../images/svg/Empty';
 
-const Item = ({ item, onPress, typeDisplay, nameIcon }) => (
+const Item = ({ item, onPress, typeDisplay, nameIcon, index }) => (
     <Pressable style={styles.nlItem} onPress={onPress}>
         <View style={styles.nlHead}>
             <View style={styles.nlRow}>
-                <Text style={styles.nlNo}>{item.n_no}.</Text>
+                <Text style={styles.nlNo}>{index + 1}.</Text>
                 <Text style={styles.nlTitle}>{item.n_title}</Text>
             </View>
             <Text style={styles.nlDate}>{item.n_regdate}</Text>
@@ -68,7 +68,7 @@ function Notice({ navigation }) {
             })
     }
 
-    const renderItem = ({ item }) => {
+    const renderItem = ({ item, index }) => {
         const itemActive = item.n_no === selectedId ? 'flex' : 'none';
         const arrow = item.n_no === selectedId ? 'chevron-up-outline' : 'chevron-down-outline';
         return (
@@ -76,6 +76,7 @@ function Notice({ navigation }) {
                 onPress={() => setSelectedId(item.n_no)}
                 nameIcon={arrow}
                 typeDisplay={itemActive}
+                index={index}
             />
         );
     }

@@ -41,7 +41,7 @@ function ListView({ navigation, route }) {
                             <Text style={styles.nlColorGrey}>수령인</Text>
                         </View>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorBlack}>{booking.b_name}</Text>
+                            <Text style={styles.nlColorBlack}>{booking?.b_name}</Text>
                         </View>
                     </View>
                     {/* Item Info */}
@@ -59,7 +59,7 @@ function ListView({ navigation, route }) {
                             <Text style={styles.nlColorGrey}>패키지</Text>
                         </View>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorBlack}>{booking.b_package}</Text>
+                            <Text style={styles.nlColorBlack}>{booking?.b_package}</Text>
                         </View>
                     </View>
                     {/* Item Info */}
@@ -68,7 +68,7 @@ function ListView({ navigation, route }) {
                             <Text style={styles.nlColorGrey}>특이사항</Text>
                         </View>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorBlack}>{booking.b_memo}</Text>
+                            <Text style={styles.nlColorBlack}>{booking?.b_memo}</Text>
                         </View>
                     </View>
                     {/* Item Info */}
@@ -77,10 +77,10 @@ function ListView({ navigation, route }) {
                             <Text style={styles.nlColorGrey}>수령인HP</Text>
                         </View>
                         <View style={[styles.nlAlignCenter, styles.nlRow]}>
-                            <TouchableOpacity activeOpacity={1} onPress={() => Linking.openURL(`sms:${booking.b_hp1}`)}>
+                            <TouchableOpacity activeOpacity={1} onPress={() => Linking.openURL(`sms:${booking?.b_hp1}`)}>
                                 <SMSIcon height={30} width={30} />
                             </TouchableOpacity>
-                            <TouchableOpacity activeOpacity={1} style={{ marginLeft: 10 }} onPress={() => Linking.openURL(`tel:${booking.b_hp1}`)}>
+                            <TouchableOpacity activeOpacity={1} style={{ marginLeft: 10 }} onPress={() => Linking.openURL(`tel:${booking?.b_hp1}`)}>
                                 <PhoneIcon height={30} width={30} />
                             </TouchableOpacity>
                         </View>
@@ -90,10 +90,10 @@ function ListView({ navigation, route }) {
                             <Text style={styles.nlColorGrey}>배송인HP</Text>
                         </View>
                         <View style={[styles.nlRow]}>
-                            <TouchableOpacity activeOpacity={1} onPress={() => Linking.openURL(`sms:${booking.b_hp1}`)}>
+                            <TouchableOpacity activeOpacity={1} onPress={() => Linking.openURL(`sms:${booking?.b_hp1}`)}>
                                 <SMSIcon height={30} width={30} />
                             </TouchableOpacity>
-                            <TouchableOpacity activeOpacity={1} style={{ marginLeft: 10 }} onPress={() => Linking.openURL(`tel:${booking.b_hp1}`)}>
+                            <TouchableOpacity activeOpacity={1} style={{ marginLeft: 10 }} onPress={() => Linking.openURL(`tel:${booking?.b_hp1}`)}>
                                 <PhoneIcon height={30} width={30} />
                             </TouchableOpacity>
                         </View>
@@ -104,7 +104,7 @@ function ListView({ navigation, route }) {
                             <Text style={styles.nlColorGrey}>수령인 주소</Text>
                         </View>
                         <View style={[styles.nlRow, styles.nlAlignCenter, { maxWidth: '70%' }]}>
-                            <Text style={styles.nlColorBlack}>{booking.b_address}</Text>
+                            <Text style={styles.nlColorBlack}>{booking?.b_address}</Text>
                         </View>
                     </View>
                     {/* Item Info */}
@@ -113,7 +113,7 @@ function ListView({ navigation, route }) {
                             <Text style={styles.nlColorGrey}>배송상태</Text>
                         </View>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorBlack}>{booking.b_status}</Text>
+                            <Text style={styles.nlColorBlack}>{booking?.b_status == 'delivering' ? '배송중' : '완료'}</Text>
                         </View>
                     </View>
                     {/* Item Info */}
@@ -122,7 +122,7 @@ function ListView({ navigation, route }) {
                             <Text style={styles.nlColorGrey}>배송완료일</Text>
                         </View>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorBlack}>{booking.b_completed_date}</Text>
+                            <Text style={styles.nlColorBlack}>{booking?.b_completed_date}</Text>
                         </View>
                     </View>
                     {/* Item Info */}

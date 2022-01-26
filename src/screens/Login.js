@@ -27,15 +27,15 @@ export default function Login({ navigation }) {
         BackHandler.addEventListener('hardwareBackPress', function () {
 
             if (navigation.getState().routes.length == 1) {
-                Alert.alert("Modio", "Are you sure you want to exit?", [
+                Alert.alert("웰쉐어", "어플을 종료할까요?", [
                     {
-                        text: 'No',
+                        text: '아니요',
                         onPress: () => {
 
                         }
                     },
                     {
-                        text: 'Yes',
+                        text: '예',
                         onPress: () => {
                             BackHandler.exitApp();
                         }
@@ -66,7 +66,7 @@ export default function Login({ navigation }) {
         Keyboard.dismiss();
         if (hp == "") {
             Alert.alert(
-                "Modio",
+                '웰쉐어',
                 "Plese enter HP",
                 [
                     {
@@ -80,7 +80,7 @@ export default function Login({ navigation }) {
         }
         if (OTP == "") {
             Alert.alert(
-                "Modio",
+                '웰쉐어',
                 "Plese get and enter OTP",
                 [
                     {
@@ -94,7 +94,7 @@ export default function Login({ navigation }) {
         }
         if (countDown == 0) {
             Alert.alert(
-                "Modio",
+                '웰쉐어',
                 "OTP is expired",
                 [
                     {
@@ -111,7 +111,7 @@ export default function Login({ navigation }) {
                 let data = res.data;
                 if (data.msg == 'wrong_otp') {
                     Alert.alert(
-                        "Modio",
+                        '웰쉐어',
                         "Wrong OTP",
                         [
                             {
@@ -190,7 +190,7 @@ export default function Login({ navigation }) {
         Keyboard.dismiss();
         if (!hp) {
             Alert.alert(
-                "Modio",
+                '웰쉐어',
                 "Plese enter your phone number",
                 [
                     {
@@ -215,7 +215,7 @@ export default function Login({ navigation }) {
                     setResendOTP(false);
                     setCanSendOTP(true);
                     Alert.alert(
-                        "Modio",
+                        '웰쉐어',
                         "대상자가 아니거나 전화번호를 잘못 입력하였습니다.",
                         [
                             {
@@ -230,7 +230,7 @@ export default function Login({ navigation }) {
                     setShowOTP(true);
                     setCanSendOTP(false);
                     Alert.alert(
-                        "Modio",
+                        '웰쉐어',
                         "OTP: " + res.data.otp,
                         [
                             {

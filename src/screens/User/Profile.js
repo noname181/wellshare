@@ -44,7 +44,7 @@ function User_My_Profile({ navigation }) {
 
             let data = res.data;
             if (data.msg == 'non_registered') {
-                Alert.alert("Modio", "You don't have an account in this mode! ")
+                Alert.alert('웰쉐어', "You don't have an account in this mode! ")
                 return;
             }
 
@@ -150,20 +150,20 @@ function User_My_Profile({ navigation }) {
                             style={[styles.modal_button, { marginBottom: 10 }]}
                             onPress={() => changeMode('admin')}
                         >
-                            <Text style={styles.textModalStyle}>Admin</Text>
+                            <Text style={styles.textModalStyle}>관리자</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={[styles.modal_button, { marginBottom: 10 }]}
                             onPress={() => changeMode('hospital')}
                         >
-                            <Text style={styles.textModalStyle}>Hospital</Text>
+                            <Text style={styles.textModalStyle}>보건소</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity
                             style={[styles.modal_button]}
                             onPress={() => changeMode('delivery')}
                         >
-                            <Text style={styles.textModalStyle}>Delivery</Text>
+                            <Text style={styles.textModalStyle}>배송인</Text>
                         </TouchableOpacity>
                     </View>
                 </Pressable>

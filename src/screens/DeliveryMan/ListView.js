@@ -119,7 +119,7 @@ function ListView({ navigation, route }) {
             .then((res) => {
                 console.log('response', res);
                 setPhoto(null)
-                Alert.alert("Modio", "Success", [
+                Alert.alert('웰쉐어', "Success", [
 
                     {
                         text: "Yes",
@@ -147,7 +147,7 @@ function ListView({ navigation, route }) {
             .then((res) => {
                 console.log('response', res);
                 setPhoto(null)
-                Alert.alert("Modio", "Success", [
+                Alert.alert('웰쉐어', "Success", [
 
                     {
                         text: "Yes",
@@ -166,7 +166,7 @@ function ListView({ navigation, route }) {
 
     const onSubmitSign = () => {
         Alert.alert(
-            "Modio",
+            '웰쉐어',
             "Upload Sign?",
             [
                 {
@@ -187,7 +187,7 @@ function ListView({ navigation, route }) {
 
     const onSubmit = () => {
         Alert.alert(
-            "Modio",
+            '웰쉐어',
             "Completed booking?",
             [
                 {
@@ -310,7 +310,7 @@ function ListView({ navigation, route }) {
                             <Text style={styles.nlColorGrey}>배송상태</Text>
                         </View>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorBlack}>{booking?.b_status}</Text>
+                            <Text style={styles.nlColorBlack}>{booking?.b_status == 'delivering' ? '배송중' : '완료'}</Text>
                         </View>
                     </View>
                     {/* Item Info */}
@@ -419,7 +419,7 @@ function ListView({ navigation, route }) {
                 <View>
                     <TouchableOpacity style={styles.actionsheet_next} onPress={() => {
                         if (!completedText) {
-                            Alert.alert("Modio", "Please enter completed text", [
+                            Alert.alert('웰쉐어', "Please enter completed text", [
 
                                 {
                                     text: "Yes",
