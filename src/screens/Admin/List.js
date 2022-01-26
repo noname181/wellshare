@@ -47,9 +47,9 @@ function List({ navigation }) {
         axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: 1, week: selectedValue, b_name: nameSearch, hp: phoneSearch, b_season: formatDate(date) })
             .then(res => {
                 setBookingsAll(res.data.bookings)
-                if (res.data.bookings.length == 0) {
-                    setTimeout(() => setLoadMore(false), 300)
-                }
+
+                setTimeout(() => setLoadMore(false), 300)
+
             })
             .catch(err => {
                 console.log(err);
@@ -57,9 +57,9 @@ function List({ navigation }) {
         axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: 2, week: selectedValue, b_name: nameSearch, hp: phoneSearch, b_season: formatDate(date) })
             .then(res => {
                 setBookingsDelivering(res.data.bookings)
-                if (res.data.bookings.length == 0) {
-                    setTimeout(() => setLoadMore(false), 300)
-                }
+
+                setTimeout(() => setLoadMore(false), 300)
+
             })
             .catch(err => {
                 console.log(err);
@@ -67,9 +67,9 @@ function List({ navigation }) {
         axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: 3, week: selectedValue, b_name: nameSearch, hp: phoneSearch, b_season: formatDate(date) })
             .then(res => {
                 setBookingsCompleted(res.data.bookings)
-                if (res.data.bookings.length == 0) {
-                    setTimeout(() => setLoadMore(false), 300)
-                }
+
+                setTimeout(() => setLoadMore(false), 300)
+
             })
             .catch(err => {
                 console.log(err);
@@ -83,19 +83,19 @@ function List({ navigation }) {
             .then(res => {
                 if (tabSlected == 1) {
                     setBookingsAll(bookingsAll.concat(res.data.bookings))
-                    if (res.data.bookings.length == 0) {
-                        setTimeout(() => setLoadMore(false), 300)
-                    }
+
+                    setTimeout(() => setLoadMore(false), 300)
+
                 } else if (tabSlected == 2) {
                     setBookingsAll(bookingsDelivering.concat(res.data.bookings))
-                    if (res.data.bookings.length == 0) {
-                        setTimeout(() => setLoadMore(false), 300)
-                    }
+
+                    setTimeout(() => setLoadMore(false), 300)
+
                 } else if (tabSlected == 3) {
                     setBookingsAll(bookingsCompleted.concat(res.data.bookings))
-                    if (res.data.bookings.length == 0) {
-                        setTimeout(() => setLoadMore(false), 300)
-                    }
+
+                    setTimeout(() => setLoadMore(false), 300)
+
                 }
 
             })
@@ -246,6 +246,7 @@ function List({ navigation }) {
                     onEndReachedThreshold={0.1}
                     onEndReached={({ distanceFromEnd }) => {
                         console.log(distanceFromEnd);
+                        console.log(loadMore);
                         (distanceFromEnd > 0 && !loadMore) && onLoadMore();
                     }}
                     onRefresh={() => setIsRefresh(true)}

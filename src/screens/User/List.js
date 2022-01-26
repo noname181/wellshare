@@ -24,7 +24,6 @@ function User_List({ navigation }) {
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
-    const [bookings, setBookings] = useState([]);
     const [bookingsAll, setBookingsAll] = useState(null);
     const [bookingsDelivering, setBookingsDelivering] = useState([]);
     const [bookingsCompleted, setBookingsCompleted] = useState([]);
@@ -58,9 +57,7 @@ function User_List({ navigation }) {
         axios.post(`/user_load_bookings.php`, { hp: user.user_hp, role: 'receiver', length: 0, type: 1, week: selectedValue, b_season: formatDate(date) })
             .then(res => {
                 setBookingsAll(res.data.bookings)
-                if (res.data.bookings.length == 0) {
-                    setTimeout(() => setLoadMore(false), 300)
-                }
+                setTimeout(() => setLoadMore(false), 300)
             })
             .catch(err => {
                 console.log(err);
@@ -68,9 +65,7 @@ function User_List({ navigation }) {
         axios.post(`/user_load_bookings.php`, { hp: user.user_hp, role: 'receiver', length: 0, type: 2, week: selectedValue, b_season: formatDate(date) })
             .then(res => {
                 setBookingsDelivering(res.data.bookings)
-                if (res.data.bookings.length == 0) {
-                    setTimeout(() => setLoadMore(false), 300)
-                }
+                setTimeout(() => setLoadMore(false), 300)
             })
             .catch(err => {
                 console.log(err);
@@ -78,9 +73,7 @@ function User_List({ navigation }) {
         axios.post(`/user_load_bookings.php`, { hp: user.user_hp, role: 'receiver', length: 0, type: 3, week: selectedValue, b_season: formatDate(date) })
             .then(res => {
                 setBookingsCompleted(res.data.bookings)
-                if (res.data.bookings.length == 0) {
-                    setTimeout(() => setLoadMore(false), 300)
-                }
+                setTimeout(() => setLoadMore(false), 300)
             })
             .catch(err => {
                 console.log(err);
@@ -125,19 +118,13 @@ function User_List({ navigation }) {
             .then(res => {
                 if (tabSlected == 1) {
                     setBookingsAll(bookingsAll.concat(res.data.bookings))
-                    if (res.data.bookings.length == 0) {
-                        setTimeout(() => setLoadMore(false), 300)
-                    }
+                    setTimeout(() => setLoadMore(false), 300)
                 } else if (tabSlected == 2) {
                     setBookingsAll(bookingsDelivering.concat(res.data.bookings))
-                    if (res.data.bookings.length == 0) {
-                        setTimeout(() => setLoadMore(false), 300)
-                    }
+                    setTimeout(() => setLoadMore(false), 300)
                 } else if (tabSlected == 3) {
                     setBookingsAll(bookingsCompleted.concat(res.data.bookings))
-                    if (res.data.bookings.length == 0) {
-                        setTimeout(() => setLoadMore(false), 300)
-                    }
+                    setTimeout(() => setLoadMore(false), 300)
                 }
 
             })
