@@ -22,8 +22,48 @@ export default function Login({ navigation }) {
     const dispatch = useDispatch()
 
     const role = useSelector(state => state.auth.role)
+    const user = useSelector(state => state.auth.user)
 
     useEffect(() => {
+        axios.interceptors.request.use(
+            function (config) {
+                if (user?.jwt) {
+                    config.headers["Authorization"] = "Bearer " + user.jwt;
+
+                }
+                return config;
+
+            },
+            function (error) {
+
+                return Promise.reject(error);
+            }
+        );
+        axios.interceptors.response.use(
+            function (response) {
+                // Any status code range of 2xx
+                if (response.data.msg == 'auth_fail') {
+                    dispatch(actions.authActions.logout());
+                    setTimeout(() => {
+                        navigation.replace('Login');
+                    }, 0)
+                    return;
+                } else
+                    return response;
+            },
+            function (error) {
+                console.log(error)
+            }
+        )
+        return () => {
+
+        };
+    }, [user?.jwt]);
+
+    useEffect(() => {
+
+
+
         BackHandler.addEventListener('hardwareBackPress', function () {
 
             if (navigation.getState().routes.length == 1) {

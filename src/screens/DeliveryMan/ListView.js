@@ -310,7 +310,7 @@ function ListView({ navigation, route }) {
                             <Text style={styles.nlColorGrey}>배송상태</Text>
                         </View>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorBlack}>{booking?.b_status == 'delivering' ? '배송중' : '완료'}</Text>
+                            <Text style={styles.nlColorBlack}>{booking?.b_status == 'completed' ? '완료' : '배송중'}</Text>
                         </View>
                     </View>
                     {/* Item Info */}

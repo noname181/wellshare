@@ -24,7 +24,6 @@ function List({ navigation }) {
     const user = useSelector(state => state.auth.user)
 
     useEffect(() => {
-        loadBookings();
         const unsubscribe = navigation.addListener('focus', () => {
             // do something
             loadBookings();
