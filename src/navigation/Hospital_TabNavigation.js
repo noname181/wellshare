@@ -8,6 +8,7 @@ import Profile_Icon from '../images/svg/Profile'
 import Screen from '../components/Screen';
 import NoticeScreen from '../screens/Hospital/Notice';
 import Complain1Screen from '../screens/Hospital/Complains1';
+import Complain2Screen from '../screens/Hospital/Complains2';
 import Hospital_list from '../images/svg/Hospital_list';
 import Hospital_complain from '../images/svg/Hospital_complain';
 import Hospital_notice from '../images/svg/Hospital_notice';

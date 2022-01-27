@@ -188,15 +188,15 @@ function ListView({ navigation, route }) {
     const onSubmit = () => {
         Alert.alert(
             '웰쉐어',
-            "Completed booking?",
+            "배송이 완료되었습니까?",
             [
                 {
-                    text: "Cancel",
+                    text: "취소",
                     onPress: () => { },
                     style: "cancel",
                 },
                 {
-                    text: "OK",
+                    text: "저장",
                     onPress: () => {
                         handleUploadPhoto();
                     },
@@ -387,10 +387,10 @@ function ListView({ navigation, route }) {
         <ActionSheet ref={actionSheetRefPhoto} headerAlwaysVisible={true} gestureEnabled={true} containerStyle={styles.container_actionsheet} onClose={() => !isType && setCompletedText(null)}>
             <View style={styles.actionsheet}>
                 <TouchableOpacity style={styles.actionsheet_row} onPress={() => openLibrary()}>
-                    <Text style={styles.actionsheet_row_txt}>Choose from library</Text>
+                    <Text style={styles.actionsheet_row_txt}>앨범에서 선택</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.actionsheet_row} onPress={() => openCamera()}>
-                    <Text style={styles.actionsheet_row_txt}>Open Camera</Text>
+                    <Text style={styles.actionsheet_row_txt}>사진촬영</Text>
                 </TouchableOpacity>
             </View>
         </ActionSheet>
@@ -401,17 +401,17 @@ function ListView({ navigation, route }) {
                     navigation.navigate('Signature', { b_no })
                 }
                 }>
-                    <Text style={styles.actionsheet_row_txt}>Sign</Text>
+                    <Text style={styles.actionsheet_row_txt}>서명받기</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.actionsheet_row} onPress={() => openLibrary('sign')}>
-                    <Text style={styles.actionsheet_row_txt}>Upload your sign</Text>
+                    <Text style={styles.actionsheet_row_txt}>앨범에서 선택</Text>
                 </TouchableOpacity>
             </View>
         </ActionSheet>
         <ActionSheet keyboardShouldPersistTaps="always" ref={actionSheetRefText} headerAlwaysVisible={true} gestureEnabled={true} containerStyle={styles.container_actionsheet} >
             <View style={styles.actionsheet_text}>
                 <TextInput
-                    placeholder='Completed text'
+                    placeholder='수령장소를 입력하세요'
                     multiline
                     onChangeText={(text) => setCompletedText(text)}
                     value={completedText}
@@ -434,7 +434,7 @@ function ListView({ navigation, route }) {
                         actionSheetRefText.current?.setModalVisible(false);
                         actionSheetRefPhoto.current?.setModalVisible();
                     }}>
-                        <Text style={styles.actionsheet_row_txt}>Next</Text>
+                        <Text style={styles.actionsheet_row_txt}>저장</Text>
                     </TouchableOpacity>
 
                 </View>

@@ -105,10 +105,10 @@ function Signature({ navigation, route }) {
             >
                 <View style={styles.row}>
                     <TouchableOpacity style={[styles.nlButton]} onPress={handleClear}>
-                        <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>Clear</Text>
+                        <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>삭제</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.nlButton]} onPress={handleConfirm}>
-                        <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>Save</Text>
+                        <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>저장</Text>
                     </TouchableOpacity>
 
                 </View>
