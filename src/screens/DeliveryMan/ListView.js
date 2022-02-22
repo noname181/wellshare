@@ -1,5 +1,5 @@
 import React, { createRef, useState, useEffect } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, ScrollView, Image, Alert, Linking, TextInput } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, ScrollView, Image, Alert, Linking, TextInput, Modal, TouchableWithoutFeedback } from 'react-native';
 import Screen from '../../components/Screen';
 import ImagePicker, { launchImageLibrary, launchCamera } from 'react-native-image-picker';
 import ActionSheet from "react-native-actions-sheet";
@@ -38,6 +38,7 @@ function ListView({ navigation, route }) {
     const [isType, setIsType] = useState(false);
     const [isSign, setIsSign] = useState(false);
     const [isCompleted, setIsCompleted] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
     const { b_no, backFromSign } = route.params;
 
     useEffect(() => {
@@ -327,8 +328,10 @@ function ListView({ navigation, route }) {
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>사진</Text>
                         </View>
-                        <View >
-                            <Image resizeMode="contain" style={{ height: 100, width: 100 }} source={photo ? { uri: photo?.uri } : { uri: booking?.image }}></Image>
+                        <View>
+                            <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+                                <Image resizeMode="contain" style={{ height: 200, width: 200 }} source={photo ? { uri: photo?.uri } : { uri: booking?.image }}></Image>
+                            </TouchableOpacity>
                         </View>
 
                     </View>}
@@ -440,6 +443,26 @@ function ListView({ navigation, route }) {
                 </View>
             </View>
         </ActionSheet>
+
+        <Modal
+            animationType="fade"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+                setModalVisible(!modalVisible);
+            }}
+        >
+
+            <View style={styles.centeredView}>
+                <TouchableOpacity style={{ position: 'absolute', top: 0, right: 5, padding: 10 }} onPress={() => setModalVisible(!modalVisible)}>
+                    <Text style={{ fontSize: 26, color: "#fff" }}>X</Text>
+                </TouchableOpacity>
+
+                <Image resizeMode="contain" style={{ height: '80%', width: '100%' }} source={photo ? { uri: photo?.uri } : { uri: booking?.image }}></Image>
+
+            </View>
+
+        </Modal>
 
     </View>
     );
@@ -561,6 +584,47 @@ const styles = StyleSheet.create({
         width: 50,
         alignSelf: 'flex-end',
     },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: 'rgba(52, 52, 52, 0.8)'
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
+    button: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2
+    },
+    buttonOpen: {
+        backgroundColor: "#F194FF",
+    },
+    buttonClose: {
+        backgroundColor: "#2196F3",
+    },
+    textStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: "center"
+    }
 })
 
 export default ListView;

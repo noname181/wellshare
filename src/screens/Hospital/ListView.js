@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, ScrollView, Image, Linking } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, ScrollView, Image, Linking, Modal } from 'react-native';
 import Screen from '../../components/Screen';
 //Images
 import boxImage from '../../images/deliveryman/box.png';
@@ -9,6 +9,7 @@ import axios from '../../helpers/axiosInterceptor';
 
 function ListView({ navigation, route }) {
     const [booking, setBooking] = useState({});
+    const [modalVisible, setModalVisible] = useState(false);
     const { b_no } = route.params;
 
     useEffect(() => {
@@ -131,7 +132,9 @@ function ListView({ navigation, route }) {
                             <Text style={styles.nlColorGrey}>사진</Text>
                         </View>
                         <View >
-                            <Image resizeMode="contain" style={{ height: 100, width: 100 }} source={{ uri: booking?.image }}></Image>
+                            <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+                                <Image resizeMode="contain" style={{ height: 200, width: 200 }} source={{ uri: booking?.image }}></Image>
+                            </TouchableOpacity>
                         </View>
                     </View>}
                     {booking?.sign && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }]}>
@@ -148,6 +151,25 @@ function ListView({ navigation, route }) {
 
 
             </Screen>
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    setModalVisible(!modalVisible);
+                }}
+            >
+
+                <View style={styles.centeredView}>
+                    <TouchableOpacity style={{ position: 'absolute', top: 0, right: 5, padding: 10 }} onPress={() => setModalVisible(!modalVisible)}>
+                        <Text style={{ fontSize: 26, color: "#fff" }}>X</Text>
+                    </TouchableOpacity>
+
+                    <Image resizeMode="contain" style={{ height: '80%', width: '100%' }} source={{ uri: booking?.image }}></Image>
+
+                </View>
+
+            </Modal>
         </ScrollView>
     );
 
@@ -239,6 +261,47 @@ const styles = StyleSheet.create({
     },
     nlMarginBottom: {
         marginBottom: 160
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: 'rgba(52, 52, 52, 0.8)'
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
+    button: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2
+    },
+    buttonOpen: {
+        backgroundColor: "#F194FF",
+    },
+    buttonClose: {
+        backgroundColor: "#2196F3",
+    },
+    textStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: "center"
     }
 })
 
