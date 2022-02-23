@@ -1,23 +1,60 @@
-import React, {useState} from 'react'
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
-import {Picker} from '@react-native-picker/picker';
+import React, { useState, useEffect, useCallback } from 'react'
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import Screen from '../../components/Screen';
 import Calendar from '../../images/svg/CalendarIcon';
-import Icon from 'react-native-vector-icons/Ionicons';
+import MonthPicker from 'react-native-month-year-picker';
 
 function VehicleLocationView() {
     const [selectedValue, setSelectedValue] = useState("1");
+    const [date, setDate] = useState(new Date());
+    const [show, setShow] = useState(false);
+
+    const showPicker = useCallback((value) => setShow(value), []);
+
+    const onValueChange = useCallback(
+        (event, newDate) => {
+            const selectedDate = newDate || date;
+
+            showPicker(false);
+            setDate(selectedDate);
+        },
+        [date, showPicker],
+    );
+
+
+    const formatDate = () => {
+        return date.getFullYear() + "-" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1));
+    }
     return (
-        <Screen  style={{backgroundColor: '#f6f7f8', paddingBottom: 90}}>
+        <Screen style={{ backgroundColor: '#f6f7f8', paddingBottom: 130 }}>
             <View style={[styles.nlRow, styles.nlBetween]}>
+                <View style={[styles.h_width_select_half, { marginTop: 10 }, { marginBottom: 10 }]}>
+                    <TouchableOpacity style={[styles.nlFormControl, { paddingLeft: 15 }]} onPress={() => showPicker(true)}>
+                        <Calendar width={16} height={16} />
+                        <Text style={{ color: "#000", paddingLeft: 10 }}>{formatDate()}</Text>
+                    </TouchableOpacity>
+                    <View style={styles.nlFormControl}>
+                        <Picker
+                            selectedValue={selectedValue}
+                            style={styles.nlPicker}
+                            onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                        >
+                            <Picker.Item label="1" value="1" />
+                            <Picker.Item label="2" value="2" />
+                            <Picker.Item label="3" value="3" />
+                            <Picker.Item label="4" value="4" />
+                        </Picker>
+                    </View>
+                </View>
                 <View style={styles.nlFormControl}>
                     <Picker
                         selectedValue={selectedValue}
                         style={styles.nlPicker}
                         onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                     >
-                        <Picker.Item label="공지사항" value="1"/>
-                        <Picker.Item label="1입니다공지사항 " value="2"/>
+                        <Picker.Item label="공지사항" value="1" />
+                        <Picker.Item label="1입니다공지사항 " value="2" />
                     </Picker>
                 </View>
                 <View style={styles.nlFormControl}>
@@ -26,14 +63,22 @@ function VehicleLocationView() {
                         style={styles.nlPicker}
                         onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                     >
-                        <Picker.Item label="공지사항" value="1"/>
-                        <Picker.Item label="1입니다공지사항 " value="2"/>
+                        <Picker.Item label="공지사항" value="1" />
+                        <Picker.Item label="1입니다공지사항 " value="2" />
                     </Picker>
                 </View>
             </View>
             <View style={[styles.nlCard]}>
 
             </View>
+            {show && (
+                <MonthPicker
+                    onChange={onValueChange}
+                    value={date}
+
+                    locale="ko"
+                />
+            )}
         </Screen>
     );
 }
@@ -54,14 +99,16 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     nlFormControl: {
-        marginTop: 10,
         borderStyle: 'solid',
         borderWidth: 1,
         borderColor: '#e1e1e1',
-        borderRadius: 5,
+        borderRadius: 8,
         overflow: 'hidden',
-        width: '48%',
-        
+        height: 40,
+        width: '49%',
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        flexDirection: 'row',
     },
     nlPicker: {
         width: '100%',
@@ -89,9 +136,14 @@ const styles = StyleSheet.create({
         shadowRadius: 10,
         elevation: 3,
         height: '100%'
-        
-    },
 
+    },
+    h_width_select_half: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+
+    },
 
 });
 
