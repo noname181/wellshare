@@ -88,7 +88,7 @@ function VehicleLocationView({ navigation }) {
                     <Picker
                         selectedValue={selectedHospital}
                         style={styles.nlPicker}
-                        onValueChange={(itemValue, itemIndex) => setSelectedHospital(itemValue)}
+                        onValueChange={(itemValue, itemIndex) => { setSelectedHospital(itemValue); setSelectedCar(0) }}
                     >
                         <Picker.Item label="공지사항" value="0" />
                         {hospitals?.map((v, i) => <Picker.Item key={i} label={v.h_name} value={v.h_no} />)}
