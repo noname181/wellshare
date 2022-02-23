@@ -1,14 +1,49 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import Screen from '../../components/Screen';
 import Calendar from '../../images/svg/CalendarIcon';
 import MonthPicker from 'react-native-month-year-picker';
+import axios from '../../helpers/axiosInterceptor';
+import { WebView } from 'react-native-webview';
 
-function VehicleLocationView() {
-    const [selectedValue, setSelectedValue] = useState("1");
+function VehicleLocationView({ navigation }) {
+    const [selectedValue, setSelectedValue] = useState(1);
+    const [selectedHospital, setSelectedHospital] = useState(0);
+    const [selectedCar, setSelectedCar] = useState(0);
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
+    const [hospitals, setHospitals] = useState(null);
+    const [cars, setCars] = useState(null);
+
+    const webViewRef = useRef();
+
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            axios.post(`/admin_load_hospital.php`, { type: 'hospital', week: selectedValue, b_season: formatDate(date) })
+                .then(res => {
+                    setHospitals(res.data.hospitals)
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        })
+        return () => {
+            unsubscribe
+        };
+    }, []);
+
+    useEffect(() => {
+        axios.post(`/admin_load_hospital.php`, { type: 'car', week: selectedValue, b_season: formatDate(date), h_no: selectedHospital })
+            .then(res => {
+                setCars(res.data.cars)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        return () => {
+        };
+    }, [selectedHospital]);
 
     const showPicker = useCallback((value) => setShow(value), []);
 
@@ -26,6 +61,8 @@ function VehicleLocationView() {
     const formatDate = () => {
         return date.getFullYear() + "-" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1));
     }
+
+
     return (
         <Screen style={{ backgroundColor: '#f6f7f8', paddingBottom: 130 }}>
             <View style={[styles.nlRow, styles.nlBetween]}>
@@ -36,7 +73,7 @@ function VehicleLocationView() {
                     </TouchableOpacity>
                     <View style={styles.nlFormControl}>
                         <Picker
-                            selectedValue={selectedValue}
+                            selectedValue={selectedHospital}
                             style={styles.nlPicker}
                             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                         >
@@ -49,27 +86,31 @@ function VehicleLocationView() {
                 </View>
                 <View style={styles.nlFormControl}>
                     <Picker
-                        selectedValue={selectedValue}
+                        selectedValue={selectedHospital}
                         style={styles.nlPicker}
-                        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                        onValueChange={(itemValue, itemIndex) => setSelectedHospital(itemValue)}
                     >
-                        <Picker.Item label="공지사항" value="1" />
-                        <Picker.Item label="1입니다공지사항 " value="2" />
+                        <Picker.Item label="공지사항" value="0" />
+                        {hospitals?.map((v, i) => <Picker.Item key={i} label={v.h_name} value={v.h_no} />)}
                     </Picker>
                 </View>
                 <View style={styles.nlFormControl}>
                     <Picker
-                        selectedValue={selectedValue}
+                        selectedValue={selectedCar}
                         style={styles.nlPicker}
-                        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                        onValueChange={(itemValue, itemIndex) => setSelectedCar(itemValue)}
                     >
-                        <Picker.Item label="공지사항" value="1" />
-                        <Picker.Item label="1입니다공지사항 " value="2" />
+                        <Picker.Item label="공지사항" value="0" />
+                        {cars?.map((v, i) => <Picker.Item key={i} label={v.car_number} value={v.car_no} />)}
                     </Picker>
                 </View>
             </View>
             <View style={[styles.nlCard]}>
-
+                <WebView
+                    ref={(ref) => webViewRef.current = ref}
+                    source={{ uri: `http://scsman23.cafe24.com/admin/webview/car_location.php?car_no=${selectedCar}` }}
+                    style={{}}
+                />
             </View>
             {show && (
                 <MonthPicker
@@ -119,7 +160,6 @@ const styles = StyleSheet.create({
     nlCard: {
         marginVertical: 20,
         backgroundColor: '#fff',
-        padding: 16,
         borderStyle: 'solid',
         borderWidth: 1,
         borderColor: '#e1e1e1',
