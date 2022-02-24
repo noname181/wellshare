@@ -108,7 +108,7 @@ function VehicleLocationView({ navigation }) {
             <View style={[styles.nlCard]}>
                 <WebView
                     ref={(ref) => webViewRef.current = ref}
-                    source={{ uri: `http://scsman23.cafe24.com/admin/webview/car_location.php?car_no=${selectedCar}` }}
+                    source={{ uri: `https://scsman23.cafe24.com/admin/webview/car_location.php?car_no=${selectedCar}` }}
                     style={{}}
                 />
             </View>
