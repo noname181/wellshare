@@ -246,7 +246,7 @@ export default function Login({ navigation }) {
         setLoadingOTP(true);
         setOTP("")
 
-        axios.post(`/send_otp.php`, { hp })
+        axios.post(`/send_otp.php`, { hp: hp.replace('-', '') })
             .then(res => {
                 setLoadingOTP(false);
                 if (res.data.msg == 'nonmember') {
