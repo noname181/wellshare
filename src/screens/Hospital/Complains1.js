@@ -21,7 +21,7 @@ import Empty from '../../images/svg/Empty';
 
 
 
-function Complains1() {
+function Complains1({ navigation }) {
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
@@ -74,7 +74,10 @@ function Complains1() {
 
     const Item = ({ item, index }) => (
         <View style={styles.row__info}>
-            <View style={styles.row__info__child}>
+            <TouchableOpacity style={styles.row__info__child} onPress={() => navigation.navigate('ComplainView', {
+                com_no: item.com_no,
+                complaint: item
+            })}>
                 <View style={styles.row__info__child__text}>
                     <Text style={styles.row__info__child__text1}>{item.com_text}</Text>
                     <Text style={styles.row__info__child__text2}>|</Text>
@@ -83,7 +86,7 @@ function Complains1() {
                 <View style={styles.h_circle_blue}>
                     <Text style={styles.h_circle_number}>0</Text>
                 </View>
-            </View>
+            </TouchableOpacity>
         </View>
     );
 

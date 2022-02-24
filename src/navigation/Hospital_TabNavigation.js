@@ -15,7 +15,7 @@ import Hospital_notice from '../images/svg/Hospital_notice';
 import Hospital_profile from '../images/svg/Hospital_profile';
 import Hospital_ListStack from '../navigation/Hospital_ListStack';
 import Hospital_profile_page from '../screens/Hospital/Profile'
-
+import HospitalComplainStack from '../navigation/Hospital_ComplainStack';
 
 
 
@@ -63,14 +63,15 @@ function TabNavigation({ route, navigation }) {
 
             />
             <Tab.Screen
-                name="Complain1Screen"
-                component={Complain1Screen}
+                name="ComplainStack"
+                component={HospitalComplainStack}
                 options={{
                     tabBarIcon: ({ focused }) => (<View style={styles.tab}>
                         <Hospital_complain height={18} width={17} color={focused ? '#7c257a' : '#d8d8d8'} />
                         <Text style={[styles.text, { color: focused ? '#7c257a' : '#d8d8d8' }]}>민원</Text>
                     </View>),
-                    header: props => <Header title="민원" isBack={false} {...props} />
+                    header: props => <Header title="민원" isBack={false} {...props} />,
+                    headerShown: false
 
                 }}
 
