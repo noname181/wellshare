@@ -165,7 +165,7 @@ function Profile({ navigation }) {
                             <Text style={styles.text_profile}>주소</Text>
                         </View>
                         <View style={{ width: 180 }}>
-                            <Text style={styles.text_profile_right}>{user?.h_address + (user?.h_address_detail ? ' - ' + user?.h_address_detail : '')}</Text>
+                            <Text style={styles.text_profile_right}>{user?.h_address ? (user?.h_address + (user?.h_address_detail ? ' - ' + user?.h_address_detail : '')) : ''}</Text>
                         </View>
                     </View>
 
@@ -213,7 +213,7 @@ function Profile({ navigation }) {
                             <Text style={styles.text_profile}>청구서 도착 주소</Text>
                         </View>
                         <View style={{ width: 180, flexWrap: 'nowrap', flex: 1 }}>
-                            <Text style={styles.text_profile_right}>{user?.hm_address + (user?.hm_address_detail ? (' - ' + user?.hm_address_detail) : '')}</Text>
+                            <Text style={styles.text_profile_right}>{user?.hm_address ? (user?.hm_address + (user?.hm_address_detail ? (' - ' + user?.hm_address_detail) : '')) : ''}</Text>
                         </View>
                     </View>
                 </View>

@@ -40,6 +40,12 @@ function My_Profile({ navigation }) {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        return () => {
+            BackgroundGeolocation.stop();
+        };
+    }, []);
+
+    useEffect(() => {
         if (user?.d_no) checkWorkingTime();
         return () => {
         };
@@ -270,7 +276,7 @@ function My_Profile({ navigation }) {
                         <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>주소</Text>
                     </View>
                     <View style={[styles.nlRow, styles.nlAlignCenter], { flex: 1, alignItems: 'flex-end' }}>
-                        <Text style={[styles.nlColorBlack, { textAlign: 'right' }]}>{user?.d_address + (user?.d_address_detail ? ' - ' + user?.d_address_detail : '')}</Text>
+                        <Text style={[styles.nlColorBlack, { textAlign: 'right' }]}>{user?.d_address ? (user?.d_address + (user?.d_address_detail ? ' - ' + user?.d_address_detail : '')) : ''}</Text>
                     </View>
                 </View>
             </View>

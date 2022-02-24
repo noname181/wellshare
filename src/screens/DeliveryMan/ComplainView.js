@@ -7,8 +7,10 @@ import DeleteIcon from '../../images/svg/DeleteIcon';
 import DownloadIcon from '../../images/svg/DownloadIcon';
 
 
-function ComplainView({ navigation }) {
+function ComplainView({ route, navigation }) {
     const [selectedValue, setSelectedValue] = useState("java");
+
+    const { complaint } = route.params;
 
     return (
         <ScrollView>
@@ -20,13 +22,13 @@ function ComplainView({ navigation }) {
                         </View>
                         <View style={{ flexGrow: 1 }}>
                             <View style={styles.nlRelative}>
-                                <Text style={styles.nlTitle}>비밀번호를 분실했어요</Text>
+                                <Text style={styles.nlTitle}>{complaint.com_text}</Text>
                             </View>
-                            <Text style={[styles.nlMarginTop10, styles.nlFileName]} numberOfLines={1}>어떻게 비번을 찾을수 있죠?</Text>
-                            <Text style={[styles.nlDate, styles.nlMarginTop10]}>2021.10.13</Text>
+                            <Text style={[styles.nlMarginTop10, styles.nlFileName]}>{complaint.content}</Text>
+                            <Text style={[styles.nlDate, styles.nlMarginTop10]}>{complaint.com_regdate}</Text>
                         </View>
                     </View>
-                    <View style={[styles.nlAnswer, styles.nlCardSpace, styles.nlRow]}>
+                    {/* <View style={[styles.nlAnswer, styles.nlCardSpace, styles.nlRow]}>
                         <View>
                             <Text style={styles.nlIcon}>A</Text>
                         </View>
@@ -38,7 +40,7 @@ function ComplainView({ navigation }) {
                                 </TouchableOpacity>
 
                             </View>
-                            {/* File upload */}
+                    
                             <View style={[styles.nlFilePart, styles.nlRow, styles.nlBetween]}>
                                 <Text style={styles.nlFileName} numberOfLines={1}>1. Screen_short_2021-11-06</Text>
                                 <View style={styles.nlActions, styles.nlRow}>
@@ -53,7 +55,7 @@ function ComplainView({ navigation }) {
                             </View>
                             <Text style={[styles.nlDate, { marginTop: 10 }]}>2021.10.13</Text>
                         </View>
-                    </View>
+                    </View> */}
                 </View>
                 <View style={[styles.nlCard, styles.nlWritePart]}>
                     <View style={styles.nlFormControl}>

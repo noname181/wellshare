@@ -146,7 +146,7 @@ export default function Login({ navigation }) {
             );
             return;
         }
-        axios.post(`/login.php`, { otp: OTP, hp })
+        axios.post(`/login.php`, { otp: OTP, hp: hp.replace('-', '') })
             .then(res => {
                 let data = res.data;
                 if (data.msg == 'wrong_otp') {

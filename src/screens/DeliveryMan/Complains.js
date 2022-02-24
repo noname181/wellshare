@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {
     Text,
@@ -7,21 +7,49 @@ import {
     Image,
     TextInput,
     Button,
-    TouchableOpacity
-
+    TouchableOpacity,
+    FlatList
 } from 'react-native';
 // import { Screen } from '../../components';
 import CalendarIcon from '../../images/svg/CalendarIcon';
 import SearchIcon from '../../images/svg/SearchIcon';
 import Screen from '../../components/Screen';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import axios from '../../helpers/axiosInterceptor';
+import { useSelector } from 'react-redux'
+import Empty from '../../images/svg/Empty';
 
 
 function Complains({ navigation }) {
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
+    const [searchValue1, setSearchValue1] = useState('');
+    const [searchValue2, setSearchValue2] = useState('');
+    const [complaints, setComplaints] = useState(null);
+
+    const user = useSelector(state => state.auth.user)
+
+    useEffect(() => {
+        loadComplaints();
+        return () => {
+
+        };
+    }, []);
+
+    const loadComplaints = () => {
+        axios.post(`/user_load_complaint.php`, { d_no: user.d_no, role: 'delivery' })
+            .then(res => {
+                console.log(res)
+                setComplaints(res.data.complaints.filter(v => {
+                    return v.com_confirm_yn == 'y';
+                }))
+
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -42,6 +70,27 @@ function Complains({ navigation }) {
         return date.getFullYear() + "/" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + date.getDate();
     }
 
+    const Item = ({ item, index }) => (
+        <View style={styles.row__info}>
+            <TouchableOpacity style={styles.row__info__child} onPress={() => navigation.navigate('ComplainView', {
+                com_no: item.com_no,
+                complaint: item
+            })}>
+                <View style={styles.row__info__child__text}>
+                    <View>
+                        <Text style={styles.row__info__child__text1}>{item.com_text}</Text>
+                    </View>
+                    <View>
+                        <Text style={styles.row__info__child__text3}>{item.com_regdate}</Text>
+                    </View>
+                </View>
+                <View style={styles.h_circle_blue}>
+                    <Text style={styles.h_circle_number}>0</Text>
+                </View>
+            </TouchableOpacity>
+        </View>
+    );
+
     return (
         <Screen style={styles.body_42_1}>
             <View>
@@ -61,10 +110,14 @@ function Complains({ navigation }) {
                 )}
                 <View style={styles.row__search}>
                     <View style={styles.width40}>
-                        <TextInput value='010-2009-7712' style={styles.text_input} />
+                        <TextInput value={searchValue1} style={styles.text_input} placeholder='전화번호'
+                            keyboardType='numeric'
+                            onChangeText={(text) => setSearchValue1(text)} />
                     </View>
                     <View style={styles.width40}>
-                        <TextInput style={styles.text_input} value='조형래' />
+                        <TextInput style={styles.text_input} value={searchValue2} placeholder='정보'
+                            keyboardType='numeric'
+                            onChangeText={(text) => setSearchValue2(text)} />
                     </View>
                     <View style={styles.width20}>
                         <TouchableOpacity activeOpacity={0.8} style={styles.button_search}>
@@ -72,21 +125,20 @@ function Complains({ navigation }) {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={styles.row__info}>
-                    <TouchableOpacity style={styles.row__info__child} onPress={() => navigation.navigate('ComplainView')}>
-                        <View style={styles.row__info__child__text}>
-                            <View>
-                                <Text style={styles.row__info__child__text1}>비번분실했어요</Text>
-                            </View>
-                            <View>
-                                <Text style={styles.row__info__child__text3}>2022.01.1 | 09:01</Text>
-                            </View>
-                        </View>
-                        <View style={styles.h_circle_blue}>
-                            <Text style={styles.h_circle_number}>2</Text>
-                        </View>
-                    </TouchableOpacity>
-                </View>
+                <FlatList
+                    data={complaints}
+                    renderItem={Item}
+                    keyExtractor={(item, index) => String(index)}
+                    style={styles.nlList}
+                    showsVerticalScrollIndicator={false}
+                    onRefresh={() => setIsRefresh(true)}
+                    refreshing={false}
+                    contentContainerStyle={{ flexGrow: 1 }}
+                    ListEmptyComponent={complaints != null && <View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
+                        <Empty height={100} width={100}></Empty>
+                    </View>}
+                />
+
                 {/* <View style={styles.row__info}>
                     <View style={styles.row__info__child}>
                         <View style={styles.row__info__child__text}>
