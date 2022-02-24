@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Text,
     View,
@@ -6,33 +6,114 @@ import {
     Image,
     TextInput,
     Button,
-    TouchableOpacity
-
+    TouchableOpacity,
+    FlatList
 } from 'react-native';
 // import { Screen } from '../../components';
 import CalendarIcon from '../../images/svg/CalendarIcon';
 import SearchIcon from '../../images/svg/SearchIcon';
 import Screen from '../../components/Screen';
 import Icon from 'react-native-vector-icons/Ionicons';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import axios from '../../helpers/axiosInterceptor';
+import { useSelector } from 'react-redux'
+import Empty from '../../images/svg/Empty';
 
 
 
 function Complains1() {
+    const [date, setDate] = useState(new Date());
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
+    const [searchValue1, setSearchValue1] = useState('');
+    const [searchValue2, setSearchValue2] = useState('');
+    const [complaints, setComplaints] = useState(null);
+
+    const user = useSelector(state => state.auth.user)
+
+
+    useEffect(() => {
+        loadComplaints();
+        return () => {
+
+        };
+    }, []);
+
+    const loadComplaints = () => {
+        axios.post(`/user_load_complaint.php`, { h_no: user.h_no, role: 'hospital' })
+            .then(res => {
+                console.log(res)
+                setComplaints(res.data.complaints.filter(v => {
+                    return v.com_confirm_yn == 'y';
+                }))
+
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    const showMode = (currentMode) => {
+        setShow(true);
+        setMode(currentMode);
+    };
+
+    const showDatepicker = () => {
+        showMode('date');
+    };
+
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'ios');
+        setDate(currentDate);
+    };
+
+    const fortmatDate = () => {
+        return date.getFullYear() + "/" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + date.getDate();
+    }
+
+    const Item = ({ item, index }) => (
+        <View style={styles.row__info}>
+            <View style={styles.row__info__child}>
+                <View style={styles.row__info__child__text}>
+                    <Text style={styles.row__info__child__text1}>{item.com_text}</Text>
+                    <Text style={styles.row__info__child__text2}>|</Text>
+                    <Text style={styles.row__info__child__text3}>{item.com_hp}</Text>
+                </View>
+                <View style={styles.h_circle_blue}>
+                    <Text style={styles.h_circle_number}>0</Text>
+                </View>
+            </View>
+        </View>
+    );
 
     return (
         <Screen style={styles.body_42_1}>
             <View>
-                <View style={styles.box_calendar}>
+                <TouchableOpacity activeOpacity={1} style={styles.box_calendar} onPress={showDatepicker}>
                     <CalendarIcon width={16} height={16} />
-                    <Text style={styles.text_calendar}>2021-05-01</Text>
+                    <Text style={styles.text_calendar}>{fortmatDate()}</Text>
                     <Icon style={styles.icon_select} name={'chevron-down-outline'} color={'#9b9b9b'} size={20} />
-                </View>
+                </TouchableOpacity>
+                {show && (
+                    <DateTimePicker
+                        testID="dateTimePicker"
+                        value={date}
+                        mode={mode}
+                        display="default"
+                        onChange={onChange}
+                    />
+                )}
                 <View style={styles.row__search}>
                     <View style={styles.width40}>
-                        <TextInput value='010-2009-7723' style={styles.text_input} />
+                        <TextInput value={searchValue1} style={styles.text_input} placeholder='전화번호'
+                            keyboardType='numeric'
+                            onChangeText={(text) => setSearchValue1(text)} />
                     </View>
                     <View style={styles.width40}>
-                        <TextInput style={styles.text_input} value='조형래' />
+                        <TextInput style={styles.text_input} value={searchValue2} placeholder='정보'
+                            keyboardType='numeric'
+                            onChangeText={(text) => setSearchValue2(text)} />
                     </View>
                     <View style={styles.width20}>
                         <TouchableOpacity activeOpacity={0.8} style={styles.button_search}>
@@ -40,18 +121,20 @@ function Complains1() {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={styles.row__info}>
-                    <View style={styles.row__info__child}>
-                        <View style={styles.row__info__child__text}>
-                            <Text style={styles.row__info__child__text1}>조형래</Text>
-                            <Text style={styles.row__info__child__text2}>|</Text>
-                            <Text style={styles.row__info__child__text3}>010-2009-7723</Text>
-                        </View>
-                        <View style={styles.h_circle_blue}>
-                            <Text style={styles.h_circle_number}>2</Text>
-                        </View>
-                    </View>
-                </View>
+                <FlatList
+                    data={complaints}
+                    renderItem={Item}
+                    keyExtractor={(item, index) => String(index)}
+                    style={styles.nlList}
+                    showsVerticalScrollIndicator={false}
+                    onRefresh={() => setIsRefresh(true)}
+                    refreshing={false}
+                    contentContainerStyle={{ flexGrow: 1 }}
+                    ListEmptyComponent={complaints != null && <View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
+                        <Empty height={100} width={100}></Empty>
+                    </View>}
+                />
+
                 {/* <View style={styles.row__info}>
                     <View style={styles.row__info__child}>
                         <View style={styles.row__info__child__text}>
