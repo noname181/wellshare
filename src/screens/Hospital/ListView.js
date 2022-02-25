@@ -10,7 +10,7 @@ import axios from '../../helpers/axiosInterceptor';
 function ListView({ navigation, route }) {
     const [booking, setBooking] = useState({});
     const [modalVisible, setModalVisible] = useState(false);
-    const { b_no } = route.params;
+    const { b_no, is_writed } = route.params;
 
     useEffect(() => {
         axios.post(`/booking_detail.php`, { b_no })
@@ -30,147 +30,158 @@ function ListView({ navigation, route }) {
     }, []);
 
     return (
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={{ flex: 1 }}>
+            <ScrollView showsVerticalScrollIndicator={false}>
 
-            <Screen >
+                <Screen >
 
 
-                <View style={[styles.nlCard, { backgroundColor: '#fff', padding: 20 }]}>
-                    {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>수령인</Text>
+                    <View style={[styles.nlCard, { backgroundColor: '#fff', padding: 20 }]}>
+                        {/* Item Info */}
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>수령인</Text>
+                            </View>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorBlack}>{booking?.b_name}</Text>
+                            </View>
                         </View>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorBlack}>{booking?.b_name}</Text>
+                        {/* Item Info */}
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>민원내역</Text>
+                            </View>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlMarkBlue}>0</Text>
+                            </View>
                         </View>
+                        {/* Item Info */}
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>패키지</Text>
+                            </View>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorBlack}>{booking?.b_package}</Text>
+                            </View>
+                        </View>
+                        {/* Item Info */}
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>특이사항</Text>
+                            </View>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorBlack}>{booking?.b_memo}</Text>
+                            </View>
+                        </View>
+                        {/* Item Info */}
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>수령인HP</Text>
+                            </View>
+                            <View style={[styles.nlAlignCenter, styles.nlRow]}>
+                                <TouchableOpacity activeOpacity={1} onPress={() => Linking.openURL(`sms:${booking?.b_hp1}`)}>
+                                    <SMSIcon height={30} width={30} />
+                                </TouchableOpacity>
+                                <TouchableOpacity activeOpacity={1} style={{ marginLeft: 10 }} onPress={() => Linking.openURL(`tel:${booking?.b_hp1}`)}>
+                                    <PhoneIcon height={30} width={30} />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>배송인HP</Text>
+                            </View>
+                            <View style={[styles.nlRow]}>
+                                <TouchableOpacity activeOpacity={1} onPress={() => Linking.openURL(`sms:${booking?.b_hp1}`)}>
+                                    <SMSIcon height={30} width={30} />
+                                </TouchableOpacity>
+                                <TouchableOpacity activeOpacity={1} style={{ marginLeft: 10 }} onPress={() => Linking.openURL(`tel:${booking?.b_hp1}`)}>
+                                    <PhoneIcon height={30} width={30} />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        {/* Item Info */}
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>수령인 주소</Text>
+                            </View>
+                            <View style={[styles.nlRow, styles.nlAlignCenter, { maxWidth: '70%' }]}>
+                                <Text style={styles.nlColorBlack}>{booking?.b_address}</Text>
+                            </View>
+                        </View>
+                        {/* Item Info */}
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>배송상태</Text>
+                            </View>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorBlack}>{booking?.b_status == 'completed' ? '완료' : '배송중'}</Text>
+                            </View>
+                        </View>
+                        {/* Item Info */}
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, (booking?.image || booking?.sign) && styles.nlLineBottom]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>배송완료일</Text>
+                            </View>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorBlack}>{booking?.b_completed_date}</Text>
+                            </View>
+                        </View>
+                        {/* Item Info */}
+                        {booking?.image && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>사진</Text>
+                            </View>
+                            <View >
+                                <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+                                    <Image resizeMode="contain" style={{ height: 200, width: 200 }} source={{ uri: booking?.image }}></Image>
+                                </TouchableOpacity>
+                            </View>
+                        </View>}
+                        {booking?.sign && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>Signature</Text>
+                            </View>
+                            <View >
+                                <Image resizeMode="contain" style={{ height: 100, width: 100 }} source={{ uri: booking?.sign }}></Image>
+                            </View>
+
+                        </View>}
+
                     </View>
-                    {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>민원내역</Text>
-                        </View>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlMarkBlue}>0</Text>
-                        </View>
-                    </View>
-                    {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>패키지</Text>
-                        </View>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorBlack}>{booking?.b_package}</Text>
-                        </View>
-                    </View>
-                    {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>특이사항</Text>
-                        </View>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorBlack}>{booking?.b_memo}</Text>
-                        </View>
-                    </View>
-                    {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>수령인HP</Text>
-                        </View>
-                        <View style={[styles.nlAlignCenter, styles.nlRow]}>
-                            <TouchableOpacity activeOpacity={1} onPress={() => Linking.openURL(`sms:${booking?.b_hp1}`)}>
-                                <SMSIcon height={30} width={30} />
-                            </TouchableOpacity>
-                            <TouchableOpacity activeOpacity={1} style={{ marginLeft: 10 }} onPress={() => Linking.openURL(`tel:${booking?.b_hp1}`)}>
-                                <PhoneIcon height={30} width={30} />
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>배송인HP</Text>
-                        </View>
-                        <View style={[styles.nlRow]}>
-                            <TouchableOpacity activeOpacity={1} onPress={() => Linking.openURL(`sms:${booking?.b_hp1}`)}>
-                                <SMSIcon height={30} width={30} />
-                            </TouchableOpacity>
-                            <TouchableOpacity activeOpacity={1} style={{ marginLeft: 10 }} onPress={() => Linking.openURL(`tel:${booking?.b_hp1}`)}>
-                                <PhoneIcon height={30} width={30} />
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>수령인 주소</Text>
-                        </View>
-                        <View style={[styles.nlRow, styles.nlAlignCenter, { maxWidth: '70%' }]}>
-                            <Text style={styles.nlColorBlack}>{booking?.b_address}</Text>
-                        </View>
-                    </View>
-                    {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>배송상태</Text>
-                        </View>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorBlack}>{booking?.b_status == 'completed' ? '완료' : '배송중'}</Text>
-                        </View>
-                    </View>
-                    {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, (booking?.image || booking?.sign) && styles.nlLineBottom]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>배송완료일</Text>
-                        </View>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorBlack}>{booking?.b_completed_date}</Text>
-                        </View>
-                    </View>
-                    {/* Item Info */}
-                    {booking?.image && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>사진</Text>
-                        </View>
-                        <View >
-                            <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-                                <Image resizeMode="contain" style={{ height: 200, width: 200 }} source={{ uri: booking?.image }}></Image>
-                            </TouchableOpacity>
-                        </View>
-                    </View>}
-                    {booking?.sign && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>Signature</Text>
-                        </View>
-                        <View >
-                            <Image resizeMode="contain" style={{ height: 100, width: 100 }} source={{ uri: booking?.sign }}></Image>
-                        </View>
-
-                    </View>}
-
-                </View>
 
 
-            </Screen>
-            <Modal
-                animationType="fade"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                    setModalVisible(!modalVisible);
-                }}
-            >
+                </Screen>
+                <Modal
+                    animationType="fade"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        setModalVisible(!modalVisible);
+                    }}
+                >
 
-                <View style={styles.centeredView}>
-                    <TouchableOpacity style={{ position: 'absolute', top: 0, right: 5, padding: 10 }} onPress={() => setModalVisible(!modalVisible)}>
-                        <Text style={{ fontSize: 26, color: "#fff" }}>X</Text>
-                    </TouchableOpacity>
+                    <View style={styles.centeredView}>
+                        <TouchableOpacity style={{ position: 'absolute', top: 0, right: 5, padding: 10 }} onPress={() => setModalVisible(!modalVisible)}>
+                            <Text style={{ fontSize: 26, color: "#fff" }}>X</Text>
+                        </TouchableOpacity>
 
-                    <Image resizeMode="contain" style={{ height: '80%', width: '100%' }} source={{ uri: booking?.image }}></Image>
+                        <Image resizeMode="contain" style={{ height: '80%', width: '100%' }} source={{ uri: booking?.image }}></Image>
 
-                </View>
+                    </View>
 
-            </Modal>
-        </ScrollView>
+                </Modal>
+
+            </ScrollView>
+            {is_writed || booking.com_no ? null : <View style={[styles.nlFixedAtBottom, styles.nlRow, booking.b_no ? {} : { display: 'none' }]}>
+                <TouchableOpacity style={[styles.nlButton, styles.nlMax]} onPress={() => navigation.navigate('WriteComplaint', {
+                    b_no
+                })}>
+                    <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>Write complaint</Text>
+                </TouchableOpacity>
+
+            </View>}
+        </View>
     );
 
 }

@@ -1,16 +1,60 @@
-import React, { useState } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, View, Text, TouchableOpacity, Image, TextInput, ScrollView, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import Screen from '../../components/Screen';
 //Images
+import axios from '../../helpers/axiosInterceptor';
+import { useSelector } from 'react-redux'
 import DeleteIcon from '../../images/svg/DeleteIcon';
 import DownloadIcon from '../../images/svg/DownloadIcon';
 
-
 function ComplainView({ route, navigation }) {
-    const [selectedValue, setSelectedValue] = useState("java");
+    const [answer, setAnswer] = useState("");
+    const [complaint, setComplaint] = useState({})
 
-    const { complaint } = route.params;
+    const user = useSelector(state => state.auth.user)
+    const { com_no } = route.params;
+
+    useEffect(() => {
+
+        const unsubscribe = navigation.addListener('focus', () => {
+            // do something
+            loadComplaint();
+        });
+        return () => {
+            unsubscribe
+        };
+    }, []);
+
+    const loadComplaint = () => {
+        axios.post(`/complaint_detail.php`, { com_no })
+            .then(res => {
+                setComplaint(res.data.complaint)
+            })
+            .catch(err => {
+
+            })
+
+    }
+
+    const submit = () => {
+        axios.post(`/user_answer_complaint.php`, { com_no: complaint.com_no, content_no: complaint.content_no, answer })
+            .then(res => {
+                Alert.alert('웰쉐어', "Success", [
+
+                    {
+                        text: '예',
+                        onPress: () => {
+                            loadComplaint();
+                        },
+                        style: "yes",
+                    },
+                ])
+            })
+            .catch(err => {
+
+            })
+    }
 
     return (
         <ScrollView>
@@ -22,26 +66,26 @@ function ComplainView({ route, navigation }) {
                         </View>
                         <View style={{ flexGrow: 1 }}>
                             <View style={styles.nlRelative}>
-                                <Text style={styles.nlTitle}>{complaint.com_text}</Text>
+                                <Text style={styles.nlTitle}>{complaint?.content}</Text>
                             </View>
-                            <Text style={[styles.nlMarginTop10, styles.nlFileName]}>{complaint.content}</Text>
-                            <Text style={[styles.nlDate, styles.nlMarginTop10]}>{complaint.com_regdate}</Text>
+                            {/* <Text style={[styles.nlMarginTop10, styles.nlFileName]}>{complaint.content}</Text> */}
+                            <Text style={[styles.nlDate, styles.nlMarginTop10]}>{complaint?.com_regdate}</Text>
                         </View>
                     </View>
-                    {/* <View style={[styles.nlAnswer, styles.nlCardSpace, styles.nlRow]}>
+                    {complaint?.feedback ? <View style={[styles.nlAnswer, styles.nlCardSpace, styles.nlRow]}>
                         <View>
                             <Text style={styles.nlIcon}>A</Text>
                         </View>
                         <View style={{ flexGrow: 1 }}>
                             <View style={[styles.nlRow, styles.nlBetween]}>
-                                <Text style={[styles.nlText,]}>안녕하세요. 어플은 비밀번호가 아닌 OTP인증을 사용하고 있습니다. 사용법을 첨부합니다.</Text>
-                                <TouchableOpacity style={{ marginTop: 2 }}>
+                                <Text style={[styles.nlText,]}>{complaint?.feedback}</Text>
+                                {/* <TouchableOpacity style={{ marginTop: 2 }}>
                                     <DeleteIcon width={13} height={16} />
-                                </TouchableOpacity>
+                                </TouchableOpacity> */}
 
                             </View>
-                    
-                            <View style={[styles.nlFilePart, styles.nlRow, styles.nlBetween]}>
+
+                            {/* <View style={[styles.nlFilePart, styles.nlRow, styles.nlBetween]}>
                                 <Text style={styles.nlFileName} numberOfLines={1}>1. Screen_short_2021-11-06</Text>
                                 <View style={styles.nlActions, styles.nlRow}>
                                     <TouchableOpacity>
@@ -52,13 +96,13 @@ function ComplainView({ route, navigation }) {
                                         <DownloadIcon width={13} height={13} />
                                     </TouchableOpacity>
                                 </View>
-                            </View>
-                            <Text style={[styles.nlDate, { marginTop: 10 }]}>2021.10.13</Text>
+                            </View> */}
+                            <Text style={[styles.nlDate, { marginTop: 10 }]}>{complaint?.date_feedback}</Text>
                         </View>
-                    </View> */}
+                    </View> : null}
                 </View>
-                <View style={[styles.nlCard, styles.nlWritePart]}>
-                    <View style={styles.nlFormControl}>
+                {complaint?.feedback ? null : <View style={[styles.nlCard, styles.nlWritePart, complaint?.com_no ? { display: 'flex' } : { display: 'none' }]}>
+                    {/* <View style={styles.nlFormControl}>
                         <Picker
                             selectedValue={selectedValue}
                             style={styles.nlPicker}
@@ -67,19 +111,26 @@ function ComplainView({ route, navigation }) {
                             <Picker.Item label="안내사항" value="java" />
                             <Picker.Item label="1입니다공지사항 " value="js" />
                         </Picker>
+                    </View> */}
+                    <View style={[styles.nlTextInput]}>
+                        <TextInput multiline={true}
+                            numberOfLines={8}
+                            style={{ textAlignVertical: 'top' }}
+                            placeholder={"Write your answer"}
+                            value={answer}
+                            onChangeText={(text) => setAnswer(text)}
+                        >
+
+                        </TextInput>
                     </View>
 
-                    <TextInput multiline={true}
-                        numberOfLines={8}
-                        style={styles.nlTextInput}>
 
-                    </TextInput>
-                    <TouchableOpacity >
+                    <TouchableOpacity onPress={submit}>
                         <Text style={[styles.nlFont16, styles.nlBold, styles.nlButtonWhite]} >
-                            Write
+                            Answer
                         </Text>
                     </TouchableOpacity>
-                </View>
+                </View>}
             </Screen>
         </ScrollView>
     );
@@ -213,8 +264,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#e1e1e1',
         borderRadius: 5,
-        textAlignVertical: 'top',
-        paddingHorizontal: 16,
+        paddingHorizontal: 10,
+        paddingVertical: 5
     },
     nlMarginTop10: {
         marginTop: 10
