@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, Image, TextInput, ScrollView, Alert } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import Screen from '../../components/Screen';
 //Images
-import axios from '../../helpers/axiosInterceptor';
-import { useSelector } from 'react-redux'
 import DeleteIcon from '../../images/svg/DeleteIcon';
 import DownloadIcon from '../../images/svg/DownloadIcon';
+import { useSelector } from 'react-redux'
+import axios from '../../helpers/axiosInterceptor';
+
 
 function ComplainView({ route, navigation }) {
     const [answer, setAnswer] = useState("");
@@ -38,7 +39,7 @@ function ComplainView({ route, navigation }) {
     }
 
     const submit = () => {
-        axios.post(`/user_answer_complaint.php`, { com_no: complaint.com_no, content_no: complaint.content_no, answer })
+        axios.post(`/user_answer_complaint.php`, { com_no: complaint?.com_no, content_no: complaint?.content_no, answer })
             .then(res => {
                 Alert.alert('웰쉐어', "Success", [
 
@@ -55,25 +56,19 @@ function ComplainView({ route, navigation }) {
 
             })
     }
-
     return (
         <ScrollView>
             <Screen >
                 <View style={styles.nlCard}>
-
-                    <View style={[styles.nlQuestion, styles.nlCardSpace, styles.nlRow, { flexWrap: 'wrap' }]}>
-                        {/* <View style={{ width: '100%', marginBottom: 10 }}>
-                            <Text>#{complaint.b_no}</Text>
-                        </View> */}
+                    <View style={[styles.nlQuestion, styles.nlCardSpace, styles.nlRow]}>
                         <View>
-
                             <Text style={[styles.nlIcon, styles.nlIconQ]}>Q</Text>
                         </View>
                         <View style={{ flexGrow: 1 }}>
                             <View style={styles.nlRelative}>
                                 <Text style={styles.nlTitle}>{complaint?.content}</Text>
                             </View>
-                            {/* <Text style={[styles.nlMarginTop10, styles.nlFileName]}>{complaint.content}</Text> */}
+                            {/* <Text style={[styles.nlMarginTop10, styles.nlFileName]}>{complaint?.content}</Text> */}
                             <Text style={[styles.nlDate, styles.nlMarginTop10]}>{complaint?.com_regdate}</Text>
                         </View>
                     </View>

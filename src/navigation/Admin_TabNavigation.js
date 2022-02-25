@@ -16,6 +16,8 @@ import Profile_Icon from '../images/svg/Profile';
 import Deliveryman_list from '../images/svg/Deliveryman_list';
 import Admin_map from '../images/svg/Admin_map'
 import Admin_ListStack from '../navigation/Admin_ListStack';
+import Admin_ComplaintStack from '../navigation/Admin_ComplaintStack';
+import Deliveryman_complain from '../images/svg/Deliveryman_complain';
 
 
 
@@ -44,6 +46,19 @@ function TabNavigation({ route, navigation }) {
                     header: props => <Header title="명단" isBack={false} {...props} />,
                     headerShown: false
                 }}
+            />
+            <Tab.Screen
+                name="ComplaintStack"
+                component={Admin_ComplaintStack}
+                options={{
+                    tabBarIcon: ({ focused }) => (<View style={styles.tab}>
+                        <Deliveryman_complain height={19} width={19} color={focused ? '#7c257a' : '#b2b2b2'} />
+                        <Text style={[styles.text, { color: focused ? '#7c257a' : '#b2b2b2' }]}>민원</Text>
+                    </View>),
+                    // header: props => <Header title="민원" isBack={false} {...props} />
+                    headerShown: false
+                }}
+
             />
             {/* <Tab.Screen
                 name="ListView"
