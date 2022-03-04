@@ -3,6 +3,7 @@ import { createStackNavigator, TransitionPresets } from '@react-navigation/stack
 import Header from '../components/Header';
 import List from '../screens/Admin/List';
 import ListView from '../screens/Admin/ListView';
+import WriteComplaint from '../screens/Admin/WriteComplaint';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,11 @@ function Admin_ListStack() {
             <Stack.Screen
                 name="ListView"
                 component={ListView}
+                options={{ header: props => <Header title="명단" isBack={true} {...props} /> }}
+            />
+            <Stack.Screen
+                name="WriteComplaint"
+                component={WriteComplaint}
                 options={{ header: props => <Header title="명단" isBack={true} {...props} /> }}
             />
         </Stack.Navigator>

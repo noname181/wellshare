@@ -6,31 +6,50 @@ import boxImage from '../../images/deliveryman/box.png';
 import SMSIcon from '../../images/svg/SMSIcon';
 import PhoneIcon from '../../images/svg/PhoneIcon';
 import axios from '../../helpers/axiosInterceptor';
+import { useSelector, useDispatch } from 'react-redux';
+
 
 function Complains({ navigation, route }) {
     const [booking, setBooking] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
-    const { b_no } = route.params;
+    const [complaints, setComplaints] = useState(null);
+
+    const { b_no, is_writed } = route.params;
+    const user = useSelector(state => state.auth.user)
 
     useEffect(() => {
         axios.post(`/booking_detail.php`, { b_no })
             .then(res => {
                 console.log(res);
                 setBooking(res.data.booking)
-
+                setComplaints(res.data.complaints)
 
             })
             .catch(err => {
                 console.log(err);
             })
 
-        return () => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            // do something
+            axios.post(`/booking_detail.php`, { b_no })
+                .then(res => {
+                    console.log(res);
+                    setBooking(res.data.booking)
+                    setComplaints(res.data.complaints)
 
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        });
+
+        return () => {
+            unsubscribe
         };
     }, []);
 
     return (
-        <View>
+        <View style={{ flex: 1 }}>
             <ScrollView>
                 {/* <ScrollView style={booking != null && booking?.b_status != 'completed' ? styles.nlMarginBottom : null}> */}
                 <Screen >
@@ -50,7 +69,7 @@ function Complains({ navigation, route }) {
                                 <Text style={styles.nlColorGrey}>민원내역</Text>
                             </View>
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlMarkBlue}>0</Text>
+                                <Text style={styles.nlMarkBlue}>{complaints?.length}</Text>
                             </View>
                         </View>
                         {/* Item Info */}
@@ -171,6 +190,14 @@ function Complains({ navigation, route }) {
 
                 </Screen>
             </ScrollView>
+            {is_writed || complaints?.length > 0 ? null : <View style={[styles.nlFixedAtBottom, styles.nlRow, booking?.b_no ? {} : { display: 'none' }]}>
+                <TouchableOpacity style={[styles.nlButton, styles.nlMax]} onPress={() => navigation.navigate('WriteComplaint', {
+                    b_no, h_no: booking.h_no
+                })}>
+                    <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>Write complaint</Text>
+                </TouchableOpacity>
+
+            </View>}
             <Modal
                 animationType="fade"
                 transparent={true}

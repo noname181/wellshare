@@ -9,10 +9,10 @@ function WriteComplain({ route, navigation }) {
     const [complaint, setComplaint] = useState('');
 
     const user = useSelector(state => state.auth.user)
-    const { b_no } = route.params;
+    const { b_no, h_no } = route.params;
 
     const submit = () => {
-        axios.post(`/user_write_complaint.php`, { hm_no: user.hm_no, b_no, complaint, h_no: user.h_no, role: 'hospital', name: user?.hm_name })
+        axios.post(`/user_write_complaint.php`, { m_no: user.m_no, b_no, complaint, h_no, role: 'manager', name: user?.m_name })
             .then(res => {
                 Alert.alert('웰쉐어', "Success", [
 

@@ -80,14 +80,14 @@ function Complains({ navigation }) {
             })}>
                 <View style={styles.row__info__child__text}>
                     <View>
-                        <Text style={styles.row__info__child__text1}>{item.content}</Text>
+                        <Text style={styles.row__info__child__text1}>#{item.b_no} - {item.com_text}</Text>
                     </View>
                     <View>
                         <Text style={styles.row__info__child__text3}>{item.com_regdate}</Text>
                     </View>
                 </View>
                 <View style={styles.h_circle_blue}>
-                    <Text style={styles.h_circle_number}>0</Text>
+                    <Text style={styles.h_circle_number}>{item.answers}</Text>
                 </View>
             </TouchableOpacity>
         </View>

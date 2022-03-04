@@ -6,26 +6,45 @@ import boxImage from '../../images/deliveryman/box.png';
 import SMSIcon from '../../images/svg/SMSIcon';
 import PhoneIcon from '../../images/svg/PhoneIcon';
 import axios from '../../helpers/axiosInterceptor';
+import { useSelector, useDispatch } from 'react-redux';
+
 
 function ListView({ navigation, route }) {
     const [booking, setBooking] = useState({});
+    const [complaints, setComplaints] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
+
     const { b_no, is_writed } = route.params;
+    const user = useSelector(state => state.auth.user)
 
     useEffect(() => {
-        axios.post(`/booking_detail.php`, { b_no })
+        axios.post(`/booking_detail.php`, { b_no, hm_no: user?.hm_no })
             .then(res => {
                 console.log(res);
                 setBooking(res.data.booking)
-
+                setComplaints(res.data.complaints)
 
             })
             .catch(err => {
                 console.log(err);
             })
 
-        return () => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            // do something
+            axios.post(`/booking_detail.php`, { b_no, hm_no: user?.hm_no })
+                .then(res => {
+                    console.log(res);
+                    setBooking(res.data.booking)
+                    setComplaints(res.data.complaints)
 
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        });
+
+        return () => {
+            unsubscribe
         };
     }, []);
 
@@ -52,7 +71,7 @@ function ListView({ navigation, route }) {
                                 <Text style={styles.nlColorGrey}>민원내역</Text>
                             </View>
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlMarkBlue}>0</Text>
+                                <Text style={styles.nlMarkBlue}>{complaints?.length}</Text>
                             </View>
                         </View>
                         {/* Item Info */}
@@ -173,7 +192,7 @@ function ListView({ navigation, route }) {
                 </Modal>
 
             </ScrollView>
-            {is_writed || booking.com_no ? null : <View style={[styles.nlFixedAtBottom, styles.nlRow, booking.b_no ? {} : { display: 'none' }]}>
+            {is_writed || complaints?.length > 0 ? null : <View style={[styles.nlFixedAtBottom, styles.nlRow, booking.b_no ? {} : { display: 'none' }]}>
                 <TouchableOpacity style={[styles.nlButton, styles.nlMax]} onPress={() => navigation.navigate('WriteComplaint', {
                     b_no
                 })}>

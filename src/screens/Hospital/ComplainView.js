@@ -10,7 +10,7 @@ import DownloadIcon from '../../images/svg/DownloadIcon';
 
 function ComplainView({ route, navigation }) {
     const [answer, setAnswer] = useState("");
-    const [complaint, setComplaint] = useState({})
+    const [complaint, setComplaint] = useState(null)
 
     const user = useSelector(state => state.auth.user)
     const { com_no } = route.params;
@@ -38,13 +38,14 @@ function ComplainView({ route, navigation }) {
     }
 
     const submit = () => {
-        axios.post(`/user_answer_complaint.php`, { com_no: complaint.com_no, content_no: complaint.content_no, answer })
+        axios.post(`/user_answer_complaint.php`, { com_no: complaint.com_no, content_no: complaint.content_no, answer, hm_no: user?.hm_no, role: 'hospital', name: user?.hm_name })
             .then(res => {
                 Alert.alert('웰쉐어', "Success", [
 
                     {
                         text: '예',
                         onPress: () => {
+                            setAnswer("")
                             loadComplaint();
                         },
                         style: "yes",
@@ -61,7 +62,7 @@ function ComplainView({ route, navigation }) {
             <Screen >
                 <View style={styles.nlCard}>
 
-                    <View style={[styles.nlQuestion, styles.nlCardSpace, styles.nlRow, { flexWrap: 'wrap' }]}>
+                    {complaint ? <View style={[styles.nlQuestion, styles.nlCardSpace, styles.nlRow, { flexWrap: 'wrap' }]}>
                         {/* <View style={{ width: '100%', marginBottom: 10 }}>
                             <Text>#{complaint.b_no}</Text>
                         </View> */}
@@ -71,19 +72,19 @@ function ComplainView({ route, navigation }) {
                         </View>
                         <View style={{ flexGrow: 1 }}>
                             <View style={styles.nlRelative}>
-                                <Text style={styles.nlTitle}>{complaint?.content}</Text>
+                                <Text style={styles.nlTitle}>#{complaint.b_no} - {complaint?.com_text}</Text>
                             </View>
                             {/* <Text style={[styles.nlMarginTop10, styles.nlFileName]}>{complaint.content}</Text> */}
                             <Text style={[styles.nlDate, styles.nlMarginTop10]}>{complaint?.com_regdate}</Text>
                         </View>
-                    </View>
-                    {complaint?.feedback ? <View style={[styles.nlAnswer, styles.nlCardSpace, styles.nlRow]}>
+                    </View> : null}
+                    {complaint?.answers?.length > 0 ? complaint?.answers?.map((v, i) => <View key={i} style={[styles.nlAnswer, styles.nlCardSpace, styles.nlRow]}>
                         <View>
                             <Text style={styles.nlIcon}>A</Text>
                         </View>
                         <View style={{ flexGrow: 1 }}>
                             <View style={[styles.nlRow, styles.nlBetween]}>
-                                <Text style={[styles.nlText,]}>{complaint?.feedback}</Text>
+                                <Text style={[styles.nlText,]}>{v.writter_name}: {v?.ca_content}</Text>
                                 {/* <TouchableOpacity style={{ marginTop: 2 }}>
                                     <DeleteIcon width={13} height={16} />
                                 </TouchableOpacity> */}
@@ -102,11 +103,11 @@ function ComplainView({ route, navigation }) {
                                     </TouchableOpacity>
                                 </View>
                             </View> */}
-                            <Text style={[styles.nlDate, { marginTop: 10 }]}>{complaint?.date_feedback}</Text>
+                            <Text style={[styles.nlDate, { marginTop: 10 }]}>{v?.ca_regdate}</Text>
                         </View>
-                    </View> : null}
+                    </View>) : null}
                 </View>
-                {complaint?.feedback ? null : <View style={[styles.nlCard, styles.nlWritePart, complaint?.com_no ? { display: 'flex' } : { display: 'none' }]}>
+                <View style={[styles.nlCard, styles.nlWritePart]}>
                     {/* <View style={styles.nlFormControl}>
                         <Picker
                             selectedValue={selectedValue}
@@ -135,7 +136,7 @@ function ComplainView({ route, navigation }) {
                             Answer
                         </Text>
                     </TouchableOpacity>
-                </View>}
+                </View>
             </Screen>
         </ScrollView>
     );

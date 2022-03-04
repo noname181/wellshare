@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {
     Text,
@@ -25,7 +25,6 @@ function List({ navigation }) {
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
-    const [bookings, setBookings] = useState([]);
     const [bookingsAll, setBookingsAll] = useState(null);
     const [bookingsDelivering, setBookingsDelivering] = useState([]);
     const [bookingsCompleted, setBookingsCompleted] = useState([]);
@@ -33,19 +32,38 @@ function List({ navigation }) {
     const [selectedValue, setSelectedValue] = useState(1);
     const [isRefresh, setIsRefresh] = useState(false);
 
+    const dateRef = useRef(date);
+    const valueRef = useRef(selectedValue);
+    const _setDate = newText => {
+        dateRef.current = newText;
+    };
+    const _setSelectedValue = newText => {
+        valueRef.current = newText;
+    };
+
     const user = useSelector(state => state.auth.user)
 
     useEffect(() => {
-
+        _setDate(date)
+        _setSelectedValue(selectedValue);
         loadBookings();
+        return () => {
+        };
+    }, [date, selectedValue]);
+
+    useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
             // do something
             loadBookings();
         });
+
         return () => {
+
             unsubscribe
         };
-    }, [date, selectedValue]);
+    }, []);
+
+
 
     useEffect(() => {
         if (isRefresh) {
@@ -57,7 +75,7 @@ function List({ navigation }) {
     }, [isRefresh]);
 
     const loadBookings = () => {
-        axios.post(`/user_load_bookings.php`, { h_no: user.h_no, role: 'hospital', length: 0, type: 1, week: selectedValue, b_season: formatDate(date) })
+        axios.post(`/user_load_bookings.php`, { h_no: user.h_no, role: 'hospital', length: 0, type: 1, week: valueRef.current, b_season: formatDate() })
             .then(res => {
                 setBookingsAll(res.data.bookings)
                 setTimeout(() => setLoadMore(false), 300)
@@ -65,7 +83,7 @@ function List({ navigation }) {
             .catch(err => {
                 console.log(err);
             })
-        axios.post(`/user_load_bookings.php`, { h_no: user.h_no, role: 'hospital', length: 0, type: 2, week: selectedValue, b_season: formatDate(date) })
+        axios.post(`/user_load_bookings.php`, { h_no: user.h_no, role: 'hospital', length: 0, type: 2, week: valueRef.current, b_season: formatDate() })
             .then(res => {
                 setBookingsDelivering(res.data.bookings)
                 setTimeout(() => setLoadMore(false), 300)
@@ -73,7 +91,7 @@ function List({ navigation }) {
             .catch(err => {
                 console.log(err);
             })
-        axios.post(`/user_load_bookings.php`, { h_no: user.h_no, role: 'hospital', length: 0, type: 3, week: selectedValue, b_season: formatDate(date) })
+        axios.post(`/user_load_bookings.php`, { h_no: user.h_no, role: 'hospital', length: 0, type: 3, week: valueRef.current, b_season: formatDate() })
             .then(res => {
                 setBookingsCompleted(res.data.bookings)
                 setTimeout(() => setLoadMore(false), 300)
@@ -104,7 +122,7 @@ function List({ navigation }) {
         showMode('date');
     };
     const formatDate = () => {
-        return date.getFullYear() + "-" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1));
+        return dateRef.current.getFullYear() + "-" + ((dateRef.current.getMonth() + 1) < 10 ? "0" + (dateRef.current.getMonth() + 1) : (dateRef.current.getMonth() + 1));
     }
 
     const onLoadMore = () => {
