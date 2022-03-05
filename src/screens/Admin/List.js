@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, ActivityIndicator, Image, FlatList, TextInput } from 'react-native';
 import Screen from '../../components/Screen';
 import { Picker } from '@react-native-picker/picker';
@@ -23,6 +23,37 @@ function List({ navigation }) {
 
     const user = useSelector(state => state.auth.user)
 
+    const dateRef = useRef(date);
+    const valueRef = useRef(selectedValue);
+    const nameRef = useRef(nameSearch);
+    const phoneRef = useRef(phoneSearch);
+    const _setDate = newText => {
+        dateRef.current = newText;
+
+    };
+    const _setSelectedValue = newText => {
+        valueRef.current = newText;
+
+    };
+    const _setNameSearch = newText => {
+        nameRef.current = newText;
+
+    };
+    const _setPhoneSearch = newText => {
+        phoneRef.current = newText;
+
+    };
+
+    useEffect(() => {
+        _setDate(date)
+        _setSelectedValue(selectedValue)
+        _setNameSearch(nameSearch)
+        _setPhoneSearch(phoneSearch)
+        return () => {
+
+        };
+    }, [date, selectedValue, nameSearch, phoneSearch]);
+
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
             // do something
@@ -43,7 +74,7 @@ function List({ navigation }) {
     }, [isRefresh]);
 
     const loadBookings = () => {
-        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: 1, week: selectedValue, b_name: nameSearch, hp: phoneSearch, b_season: formatDate(date) })
+        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: 1, week: valueRef.current, b_name: nameRef.current, hp: phoneRef.current, b_season: formatDate(date) })
             .then(res => {
                 setBookingsAll(res.data.bookings)
 
@@ -53,7 +84,7 @@ function List({ navigation }) {
             .catch(err => {
                 console.log(err);
             })
-        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: 2, week: selectedValue, b_name: nameSearch, hp: phoneSearch, b_season: formatDate(date) })
+        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: 2, week: valueRef.current, b_name: nameRef.current, hp: phoneRef.current, b_season: formatDate(date) })
             .then(res => {
                 setBookingsDelivering(res.data.bookings)
 
@@ -63,7 +94,7 @@ function List({ navigation }) {
             .catch(err => {
                 console.log(err);
             })
-        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: 3, week: selectedValue, b_name: nameSearch, hp: phoneSearch, b_season: formatDate(date) })
+        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: 3, week: valueRef.current, b_name: nameRef.current, hp: phoneRef.current, b_season: formatDate(date) })
             .then(res => {
                 setBookingsCompleted(res.data.bookings)
 
@@ -137,7 +168,7 @@ function List({ navigation }) {
     );
 
     const onSearch = () => {
-        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: tabSlected, week: selectedValue, b_name: nameSearch, hp: phoneSearch, b_season: formatDate(date) })
+        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: tabSlected, week: selectedValue, b_name: nameSearch, hp: phoneSearch, b_season: formatDate(dateRef.current) })
             .then(res => {
                 if (tabSlected == 1) {
                     setBookingsAll(res.data.bookings)
@@ -166,6 +197,7 @@ function List({ navigation }) {
 
     const onValueChange = useCallback(
         (event, newDate) => {
+            console.log(newDate)
             const selectedDate = newDate || date;
 
             showPicker(false);
@@ -175,6 +207,9 @@ function List({ navigation }) {
     );
 
     const formatDate = () => {
+        return dateRef.current.getFullYear() + "-" + ((dateRef.current.getMonth() + 1) < 10 ? "0" + (dateRef.current.getMonth() + 1) : (dateRef.current.getMonth() + 1));
+    }
+    const formatDate2 = () => {
         return date.getFullYear() + "-" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1));
     }
     return (
@@ -183,7 +218,7 @@ function List({ navigation }) {
                 <View style={[styles.h_width_select_half, { marginTop: 10 }, { marginBottom: 10 }]}>
                     <TouchableOpacity style={[styles.nlFormControl, { paddingLeft: 15 }]} onPress={() => showPicker(true)}>
                         <Calendar width={16} height={16} />
-                        <Text style={{ color: "#000", paddingLeft: 10 }}>{formatDate()}</Text>
+                        <Text style={{ color: "#000", paddingLeft: 10 }}>{formatDate2()}</Text>
                     </TouchableOpacity>
                     <View style={styles.nlFormControl}>
                         <Picker

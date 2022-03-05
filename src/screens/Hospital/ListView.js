@@ -18,16 +18,6 @@ function ListView({ navigation, route }) {
     const user = useSelector(state => state.auth.user)
 
     useEffect(() => {
-        axios.post(`/booking_detail.php`, { b_no, hm_no: user?.hm_no })
-            .then(res => {
-                console.log(res);
-                setBooking(res.data.booking)
-                setComplaints(res.data.complaints)
-
-            })
-            .catch(err => {
-                console.log(err);
-            })
 
         const unsubscribe = navigation.addListener('focus', () => {
             // do something
@@ -194,7 +184,7 @@ function ListView({ navigation, route }) {
             </ScrollView>
             {is_writed || complaints?.length > 0 ? null : <View style={[styles.nlFixedAtBottom, styles.nlRow, booking.b_no ? {} : { display: 'none' }]}>
                 <TouchableOpacity style={[styles.nlButton, styles.nlMax]} onPress={() => navigation.navigate('WriteComplaint', {
-                    b_no
+                    b_no, d_no: booking.d_no, h_no: booking.h_no
                 })}>
                     <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>Write complaint</Text>
                 </TouchableOpacity>
