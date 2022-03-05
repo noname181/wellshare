@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {
     Text,
@@ -27,8 +27,25 @@ function Complains({ navigation }) {
     const [searchValue1, setSearchValue1] = useState('');
     const [searchValue2, setSearchValue2] = useState('');
     const [complaints, setComplaints] = useState(null);
+    const [hpSearch, setHpSearch] = useState('');
+    const [contentSearct, setContentSearch] = useState('');
 
     const user = useSelector(state => state.auth.user)
+    const dateRef = useRef(date);
+    const hpRef = useRef(hpSearch);
+    const contentRef = useRef(contentSearct);
+    const _setDate = newText => {
+        dateRef.current = newText;
+
+    };
+    const _setHpSearch = newText => {
+        hpRef.current = newText;
+
+    };
+    const _setContentSearch = newText => {
+        contentRef.current = newText;
+
+    };
 
     useEffect(() => {
 
@@ -41,8 +58,26 @@ function Complains({ navigation }) {
         };
     }, []);
 
+    useEffect(() => {
+        _setHpSearch(hpSearch)
+        _setContentSearch(contentSearct)
+        return () => {
+
+        };
+
+    }, [hpSearch, contentSearct]);
+
+    useEffect(() => {
+        _setDate(date)
+        loadComplaints()
+        return () => {
+
+        };
+
+    }, [date]);
+
     const loadComplaints = () => {
-        axios.post(`/user_load_complaint.php`, { d_no: user.d_no, role: 'delivery' })
+        axios.post(`/user_load_complaint.php`, { d_no: user.d_no, role: 'delivery', date: fortmatDate(), hp: hpRef.current.replace('-', ''), content: contentRef.current })
             .then(res => {
                 console.log(res)
                 setComplaints(res.data.complaints.filter(v => {
@@ -71,7 +106,10 @@ function Complains({ navigation }) {
     };
 
     const fortmatDate = () => {
-        return date.getFullYear() + "/" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + date.getDate();
+        return dateRef.current.getFullYear() + "-" + ((dateRef.current.getMonth() + 1) < 10 ? "0" + (dateRef.current.getMonth() + 1) : (dateRef.current.getMonth() + 1)) + "-" + (dateRef.current.getDate() < 10 ? "0" + dateRef.current.getDate() : dateRef.current.getDate());
+    }
+    const fortmatDate2 = () => {
+        return date.getFullYear() + "-" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "-" + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate());
     }
 
     const Item = ({ item, index }) => (
@@ -93,13 +131,16 @@ function Complains({ navigation }) {
             </TouchableOpacity>
         </View>
     );
+    const onSearch = () => {
+        loadComplaints();
+    }
 
     return (
         <Screen style={styles.body_42_1}>
             <View style={{ flex: 1 }}>
                 <TouchableOpacity activeOpacity={1} style={styles.box_calendar} onPress={showDatepicker}>
                     <CalendarIcon width={16} height={16} />
-                    <Text style={styles.text_calendar}>{fortmatDate()}</Text>
+                    <Text style={styles.text_calendar}>{fortmatDate2()}</Text>
                     <Icon style={styles.icon_select} name={'chevron-down-outline'} color={'#9b9b9b'} size={20} />
                 </TouchableOpacity>
                 {show && (
@@ -113,17 +154,17 @@ function Complains({ navigation }) {
                 )}
                 <View style={styles.row__search}>
                     <View style={styles.width40}>
-                        <TextInput value={searchValue1} style={styles.text_input} placeholder='전화번호'
+                        <TextInput value={hpSearch} style={styles.text_input} placeholder='전화번호'
                             keyboardType='numeric'
-                            onChangeText={(text) => setSearchValue1(text)} />
+                            onChangeText={(text) => setHpSearch(text)} />
                     </View>
                     <View style={styles.width40}>
-                        <TextInput style={styles.text_input} value={searchValue2} placeholder='정보'
-                            keyboardType='numeric'
-                            onChangeText={(text) => setSearchValue2(text)} />
+                        <TextInput style={styles.text_input} value={contentSearct} placeholder='정보'
+                            keyboardType='default'
+                            onChangeText={(text) => setContentSearch(text)} />
                     </View>
                     <View style={styles.width20}>
-                        <TouchableOpacity activeOpacity={0.8} style={styles.button_search}>
+                        <TouchableOpacity activeOpacity={0.8} style={styles.button_search} onPress={() => onSearch()}>
                             <SearchIcon width={23} height={23} />
                         </TouchableOpacity>
                     </View>
@@ -158,7 +199,7 @@ function Complains({ navigation }) {
                     </View>
                 </View> */}
             </View>
-        </Screen>
+        </Screen >
     );
 }
 

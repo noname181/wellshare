@@ -12,7 +12,7 @@ function WriteComplain({ route, navigation }) {
     const { b_no, d_no } = route.params;
 
     const submit = () => {
-        axios.post(`/user_write_complaint.php`, { hm_no: user.hm_no, b_no, complaint, h_no: user.h_no, d_no, role: 'hospital', name: user?.hm_name })
+        axios.post(`/user_write_complaint.php`, { hm_no: user.hm_no, b_no, complaint, h_no: user.h_no, d_no, role: 'hospital', name: user?.hm_name, hp: user.hm_hp })
             .then(res => {
                 Alert.alert('웰쉐어', "Success", [
 
