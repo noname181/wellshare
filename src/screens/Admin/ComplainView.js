@@ -41,7 +41,7 @@ function ComplainView({ route, navigation }) {
     const submit = () => {
         axios.post(`/user_answer_complaint.php`, { com_no: complaint.com_no, content_no: complaint.content_no, answer, m_no: user?.m_no, role: 'manager', name: user?.m_name })
             .then(res => {
-                Alert.alert('웰쉐어', "Success", [
+                Alert.alert('웰쉐어', "성공적인", [
 
                     {
                         text: '예',

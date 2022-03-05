@@ -120,7 +120,7 @@ function ListView({ navigation, route }) {
             .then((res) => {
                 console.log('response', res);
                 setPhoto(null)
-                Alert.alert('웰쉐어', "Success", [
+                Alert.alert('웰쉐어', "성공적인", [
 
                     {
                         text: '예',
@@ -148,7 +148,7 @@ function ListView({ navigation, route }) {
             .then((res) => {
                 console.log('response', res);
                 setPhoto(null)
-                Alert.alert('웰쉐어', "Success", [
+                Alert.alert('웰쉐어', "성공적인", [
 
                     {
                         text: '예',
@@ -221,14 +221,14 @@ function ListView({ navigation, route }) {
                         </View>
                     </View>
                     {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                    {complaints?.length > 0 ? <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>민원내역</Text>
                         </View>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlMarkBlue}>0</Text>
+                            <Text style={styles.nlMarkBlue}>{complaints?.length}</Text>
                         </View>
-                    </View>
+                    </View> : null}
                     {/* Item Info */}
                     <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>

@@ -14,7 +14,7 @@ function WriteComplain({ route, navigation }) {
     const submit = () => {
         axios.post(`/user_write_complaint.php`, { m_no: user.m_no, b_no, complaint, h_no, role: 'manager', name: user?.m_name, hp: user.m_hp })
             .then(res => {
-                Alert.alert('웰쉐어', "Success", [
+                Alert.alert('웰쉐어', "성공적인", [
 
                     {
                         text: '예',

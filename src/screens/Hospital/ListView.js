@@ -56,14 +56,14 @@ function ListView({ navigation, route }) {
                             </View>
                         </View>
                         {/* Item Info */}
-                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                        {complaints?.length > 0 ? <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
                                 <Text style={styles.nlColorGrey}>민원내역</Text>
                             </View>
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
                                 <Text style={styles.nlMarkBlue}>{complaints?.length}</Text>
                             </View>
-                        </View>
+                        </View> : null}
                         {/* Item Info */}
                         <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
