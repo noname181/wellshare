@@ -19,7 +19,7 @@ function WriteComplain({ route, navigation }) {
                     {
                         text: '예',
                         onPress: () => {
-                            navigation.navigate('ListView', {
+                            navigation.navigate('ComplainStack', {
                                 is_writed: true,
                                 b_no
                             });
