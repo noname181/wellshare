@@ -57,7 +57,7 @@ function Profile({ navigation }) {
 
             let data = res.data;
             if (data.msg == 'non_registered') {
-                Alert.alert('웰쉐어', "You don't have an account in this mode! ")
+                Alert.alert('웰쉐어', "당모드로 변경할수 없습니다. ")
                 return;
             }
 
