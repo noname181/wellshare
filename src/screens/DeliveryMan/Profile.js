@@ -241,41 +241,41 @@ function My_Profile({ navigation }) {
             <View style={[styles.nlCard, { backgroundColor: '#fff' }]}>
                 {/* Item Info */}
                 <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                    <View style={[styles.nlRow, styles.nlAlignCenter], { paddingRight: 30, flexDirection: 'row' }}>
+                    <View style={[styles.nlRow, styles.nlAlignCenter, { paddingRight: 30, flexDirection: 'row' }]}>
                         <DeliveryMyProfile2 height={18} width={18} />
                         <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>아이디</Text>
                     </View>
-                    <View style={[styles.nlRow, styles.nlAlignCenter], { flex: 1, alignItems: 'flex-end' }}>
+                    <View style={[styles.nlRow, styles.nlAlignCenter, { flex: 1, alignItems: 'flex-end' }]}>
                         <Text style={styles.nlColorBlack}>{user?.d_hp}</Text>
                     </View>
                 </View>
                 {/* Item Info */}
                 <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                    <View style={[styles.nlRow, styles.nlAlignCenter], { paddingRight: 30, flexDirection: 'row' }}>
+                    <View style={[styles.nlRow, styles.nlAlignCenter, { paddingRight: 30, flexDirection: 'row' }]}>
                         <DeliveryMyProfile3 height={18} width={18} />
                         <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>기사명</Text>
                     </View>
-                    <View style={[styles.nlRow, styles.nlAlignCenter], { flex: 1, alignItems: 'flex-end' }}>
+                    <View style={[styles.nlRow, styles.nlAlignCenter, { flex: 1, alignItems: 'flex-end' }]}>
                         <Text style={styles.nlColorBlack}>{user?.d_name}</Text>
                     </View>
                 </View>
                 {/* Item Info */}
                 <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                    <View style={[styles.nlRow, styles.nlAlignCenter], { paddingRight: 30, flexDirection: 'row' }}>
+                    <View style={[styles.nlRow, styles.nlAlignCenter, { paddingRight: 30, flexDirection: 'row' }]}>
                         <DeliveryMyProfile5 height={18} width={18} />
                         <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>이메일</Text>
                     </View>
-                    <View style={[styles.nlRow, styles.nlAlignCenter], { flex: 1, alignItems: 'flex-end' }}>
+                    <View style={[styles.nlRow, styles.nlAlignCenter, { flex: 1, alignItems: 'flex-end' }]}>
                         <Text style={styles.nlColorBlack}>{user?.d_email}</Text>
                     </View>
                 </View>
                 {/* Item Info */}
                 <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween]}>
-                    <View style={[styles.nlRow, styles.nlAlignCenter], { paddingRight: 30, flexDirection: 'row' }}>
+                    <View style={[styles.nlRow, styles.nlAlignCenter, { paddingRight: 30, flexDirection: 'row' }]}>
                         <DeliveryMyProfile4 height={18} width={18} />
                         <Text style={[styles.nlColorGrey, styles.nlMarginLeft10]}>주소</Text>
                     </View>
-                    <View style={[styles.nlRow, styles.nlAlignCenter], { flex: 1, alignItems: 'flex-end' }}>
+                    <View style={[styles.nlRow, styles.nlAlignCenter, { flex: 1, alignItems: 'flex-end' }]}>
                         <Text style={[styles.nlColorBlack, { textAlign: 'right' }]}>{user?.d_address ? (user?.d_address + (user?.d_address_detail ? ' - ' + user?.d_address_detail : '')) : ''}</Text>
                     </View>
                 </View>
