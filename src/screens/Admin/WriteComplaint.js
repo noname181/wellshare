@@ -15,6 +15,10 @@ function WriteComplain({ route, navigation }) {
         axios.post(`/user_write_complaint.php`, { m_no: user.m_no, b_no, complaint, h_no, role: 'manager', name: user?.m_name, hp: user.m_hp })
             .then(res => {
                 setComplaint('');
+                navigation.navigate('ListView', {
+                    is_writed: true,
+                    b_no
+                });
                 Alert.alert('웰쉐어', "성공적인", [
 
                     {
