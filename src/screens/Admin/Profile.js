@@ -44,7 +44,14 @@ function Profile({ navigation }) {
 
             let data = res.data;
             if (data.msg == 'non_registered') {
-                Alert.alert('웰쉐어', "당모드로 변경할수 없습니다. ")
+                Alert.alert('웰쉐어', "당모드로 변경할수 없습니다. ",
+                    [
+                        {
+                            text: "예",
+                            onPress: () => { },
+                            style: "yes",
+                        },
+                    ])
                 return;
             }
 
