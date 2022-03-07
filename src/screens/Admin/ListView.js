@@ -38,7 +38,7 @@ function Complains({ navigation, route }) {
     }, []);
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={[{ flex: 1 }, (is_writed || complaints?.length > 0) ? {} : { paddingBottom: 60 }]}>
             <ScrollView>
                 {/* <ScrollView style={booking != null && booking?.b_status != 'completed' ? styles.nlMarginBottom : null}> */}
                 <Screen >

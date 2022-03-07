@@ -39,7 +39,7 @@ function ListView({ navigation, route }) {
     }, []);
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={[{ flex: 1 }, (is_writed || complaints?.length > 0) ? {} : { paddingBottom: 60 }]}>
             <ScrollView showsVerticalScrollIndicator={false}>
 
                 <Screen >
