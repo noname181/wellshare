@@ -311,7 +311,7 @@ function ListView({ navigation, route }) {
                         </View>
                     </View>
                     {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, (booking?.b_completed_date) && styles.nlLineBottom]}>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>배송상태</Text>
                         </View>
@@ -320,14 +320,14 @@ function ListView({ navigation, route }) {
                         </View>
                     </View>
                     {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, (photo || booking?.image || sign || booking?.sign) && styles.nlLineBottom]}>
+                    {booking?.b_completed_date && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, (photo || booking?.image || sign || booking?.sign) && styles.nlLineBottom]}>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>배송완료일</Text>
                         </View>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorBlack}>{booking?.b_completed_date}</Text>
                         </View>
-                    </View>
+                    </View>}
                     {/* Item Info */}
                     {(photo || booking?.image) && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }, , (sign || booking?.sign) && styles.nlLineBottom]}>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
