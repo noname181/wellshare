@@ -40,23 +40,28 @@ function ListView({ navigation, route }) {
     const [isCompleted, setIsCompleted] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
     const { b_no, backFromSign } = route.params;
+    const [complaints, setComplaints] = useState(null);
 
     useEffect(() => {
-        loadBooking();
-        return () => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            // do something
+            loadBooking();
+        });
 
+        return () => {
+            unsubscribe
         };
     }, []);
 
-    useEffect(() => {
-        if (backFromSign && isSign) {
-            actionSheetRefSign.current?.show();
-            setIsSign(false);
-        }
-        return () => {
+    // useEffect(() => {
+    //     if (backFromSign && isSign) {
+    //         actionSheetRefSign.current?.show();
+    //         setIsSign(false);
+    //     }
+    //     return () => {
 
-        };
-    });
+    //     };
+    // });
 
     useEffect(() => {
         if (photo) onSubmit();
@@ -77,7 +82,7 @@ function ListView({ navigation, route }) {
             .then(res => {
                 console.log(res.data);
                 setBooking(res.data.booking)
-
+                setComplaints(res.data.complaints)
 
             })
             .catch(err => {
@@ -406,9 +411,9 @@ function ListView({ navigation, route }) {
                 }>
                     <Text style={styles.actionsheet_row_txt}>서명받기</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.actionsheet_row} onPress={() => openLibrary('sign')}>
+                {/* <TouchableOpacity style={styles.actionsheet_row} onPress={() => openLibrary('sign')}>
                     <Text style={styles.actionsheet_row_txt}>앨범에서 선택</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
         </ActionSheet>
         <ActionSheet keyboardShouldPersistTaps="always" ref={actionSheetRefText} headerAlwaysVisible={true} gestureEnabled={true} containerStyle={styles.container_actionsheet} >

@@ -34,6 +34,10 @@ function VehicleLocationView({ navigation }) {
     }, []);
 
     useEffect(() => {
+        console.log(`https://scsman23.cafe24.com/admin/webview/car_location.php?car_no=${selectedCar}&b_season=${formatDate()}&value=${selectedValue}`)
+    }, [selectedValue])
+
+    useEffect(() => {
         axios.post(`/admin_load_hospital.php`, { type: 'car', week: selectedValue, b_season: formatDate(date), h_no: selectedHospital })
             .then(res => {
                 setCars(res.data.cars)
@@ -73,7 +77,7 @@ function VehicleLocationView({ navigation }) {
                     </TouchableOpacity>
                     <View style={styles.nlFormControl}>
                         <Picker
-                            selectedValue={selectedHospital}
+                            selectedValue={selectedValue}
                             style={styles.nlPicker}
                             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                         >
@@ -108,7 +112,7 @@ function VehicleLocationView({ navigation }) {
             <View style={[styles.nlCard]}>
                 <WebView
                     ref={(ref) => webViewRef.current = ref}
-                    source={{ uri: `https://scsman23.cafe24.com/admin/webview/car_location.php?car_no=${selectedCar}` }}
+                    source={{ uri: `https://scsman23.cafe24.com/admin/webview/car_location.php?car_no=${selectedCar}&b_season=${formatDate()}&value=${selectedValue}` }}
                     style={{}}
                 />
             </View>

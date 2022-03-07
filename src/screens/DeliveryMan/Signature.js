@@ -6,6 +6,7 @@ import SignatureScreen from "react-native-signature-canvas";
 import Screen from '../../components/Screen';
 import RNFS from "react-native-fs";
 import RNFetchBlob from 'rn-fetch-blob';
+import axios from '../../helpers/axiosInterceptor';
 
 async function hasAndroidPermission() {
     const permission = PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE;
@@ -19,33 +20,7 @@ async function hasAndroidPermission() {
     return status === 'granted';
 }
 
-const save_base64 = (base64Img, success, fail) => {
 
-    const dirs = Platform.OS === 'ios' ? RNFS.LibraryDirectoryPath : RNFS.ExternalDirectoryPath; // android
-    const downloadDest = `${dirs}/${((Math.random() * 10000000) | 0)}.png`;
-    const imageDatas = base64Img.split('data:image/png;base64,');
-    const imageData = imageDatas[1];
-
-    RNFetchBlob.fs.writeFile(downloadDest, imageData, 'base64').then(async (rst) => {
-        if (Platform.OS === "android" && !(await hasAndroidPermission())) {
-            return;
-        }
-        try {
-            CameraRoll.save(downloadDest, 'photo').then((e1) => {
-                console.log('sucess', e1)
-                console.log(downloadDest)
-                success && success()
-            }).catch((e2) => {
-                console.log('fail', e2)
-                Alert.alert('Save fail')
-            })
-        } catch (e3) {
-            // Alert.alert(JSON.stringify(e3))
-            console.log('catch', e3)
-            fail && fail(e3)
-        }
-    });
-}
 
 function Signature({ navigation, route }) {
     const [sign, setSign] = useState(null);
@@ -56,24 +31,32 @@ function Signature({ navigation, route }) {
         console.log(signature);
         // onOK(signature);
         setSign(signature);
-
-        save_base64(signature, () => {
-            Alert.alert('웰쉐어', "Saved your sign to library", [
+        Alert.alert(
+            '웰쉐어',
+            "배송이 완료되었습니까?",
+            [
                 {
-                    text: '예',
+                    text: "취소",
+                    onPress: () => { },
+                    style: "cancel",
+                },
+                {
+                    text: "저장",
                     onPress: () => {
-                        navigation.navigate('ListView', {
-                            backFromSign: true,
-                            b_no
+                        save_base64(signature, () => {
+                            navigation.navigate('ListView', {
+                                backFromSign: true,
+                                b_no
+                            })
+                        }, (err) => {
+                            console.log(err)
                         })
                     },
-                    style: "yes",
+                    style: "ok",
                 },
-            ]);
+            ]
+        );
 
-        }, (err) => {
-            console.log(err)
-        })
 
     };
 
@@ -90,6 +73,70 @@ function Signature({ navigation, route }) {
 
     const style = `.m-signature-pad--footer {display: none; margin: 0px;} .m-signature-pad {background-color: #fff; box-shadow: none; height: 100vh}`;
 
+    const createFormData = (uri, body = {}) => {
+        const data = new FormData();
+
+        data.append('photo', {
+
+            name: 'sign.png',
+            type: 'image/png',
+            uri: Platform.OS === 'ios' ? uri.replace('file://', '') : uri,
+        });
+
+        Object.keys(body).forEach((key) => {
+            data.append(key, body[key]);
+        });
+        console.log(data)
+        return data;
+    };
+
+    const save_base64 = (base64Img, success, fail) => {
+
+        const dirs = Platform.OS === 'ios' ? RNFS.LibraryDirectoryPath : RNFS.ExternalDirectoryPath; // android
+        const downloadDest = `${dirs}/${((Math.random() * 10000000) | 0)}.png`;
+        const imageDatas = base64Img.split('data:image/png;base64,');
+        const imageData = imageDatas[1];
+
+        RNFetchBlob.fs.writeFile(downloadDest, imageData, 'base64').then(async (rst) => {
+            if (Platform.OS === "android" && !(await hasAndroidPermission())) {
+                return;
+            }
+            try {
+                CameraRoll.save(downloadDest, 'photo').then((e1) => {
+                    console.log('sucess', e1)
+                    console.log(downloadDest)
+                    handleUploadSign(e1, success);
+                    // success && success()
+                }).catch((e2) => {
+                    console.log('fail', e2)
+                    Alert.alert('Save fail')
+                })
+            } catch (e3) {
+                // Alert.alert(JSON.stringify(e3))
+                console.log('catch', e3)
+                fail && fail(e3)
+            }
+        });
+    }
+
+    const handleUploadSign = (uri, success) => {
+        axios.post(`/upload_sign.php`, createFormData(uri, { b_no }), {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        })
+
+            .then((res) => {
+                console.log('response', res);
+                if (res.data.msg = 'ok') {
+                    success();
+                }
+
+            })
+            .catch((error) => {
+                console.log('error', error);
+            });
+    };
 
 
     return (
