@@ -50,14 +50,14 @@ function WriteComplain({ route, navigation }) {
                             style={{ textAlignVertical: 'top' }}
                             value={complaint}
                             onChangeText={(text) => setComplaint(text)}
-                            placeholder={'Write your complaint'}
+                            placeholder={'민원을 작성하세요.'}
                         >
                         </TextInput>
                     </View>
 
                     <TouchableOpacity onPress={() => submit()}>
                         <Text style={[styles.nlFont16, styles.nlBold, styles.nlButtonWhite]} >
-                            Write
+                            저장
                         </Text>
                     </TouchableOpacity>
                 </View>

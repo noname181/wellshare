@@ -117,7 +117,7 @@ function ComplainView({ route, navigation }) {
                         <TextInput multiline={true}
                             numberOfLines={8}
                             style={{ textAlignVertical: 'top' }}
-                            placeholder={"Write your answer"}
+                            placeholder={"답변하세요."}
                             value={answer}
                             onChangeText={(text) => setAnswer(text)}
                         >
@@ -128,7 +128,7 @@ function ComplainView({ route, navigation }) {
 
                     <TouchableOpacity onPress={submit}>
                         <Text style={[styles.nlFont16, styles.nlBold, styles.nlButtonWhite]} >
-                            Answer
+                            저장
                         </Text>
                     </TouchableOpacity>
                 </View>

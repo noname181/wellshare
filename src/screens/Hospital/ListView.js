@@ -186,7 +186,7 @@ function ListView({ navigation, route }) {
                 <TouchableOpacity style={[styles.nlButton, styles.nlMax]} onPress={() => navigation.navigate('WriteComplaint', {
                     b_no, d_no: booking.d_no, h_no: booking.h_no
                 })}>
-                    <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>Write complaint</Text>
+                    <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>민원작성</Text>
                 </TouchableOpacity>
 
             </View>}

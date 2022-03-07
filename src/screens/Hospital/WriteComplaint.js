@@ -50,7 +50,7 @@ function WriteComplain({ route, navigation }) {
                             style={{ textAlignVertical: 'top' }}
                             value={complaint}
                             onChangeText={(text) => setComplaint(text)}
-                            placeholder={'Write your complaint'}
+                            placeholder={'민원을 작성하세요.'}
                         >
                         </TextInput>
                     </View>

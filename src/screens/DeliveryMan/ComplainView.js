@@ -129,7 +129,7 @@ function ComplainView({ route, navigation }) {
                     </TextInput>
                     <TouchableOpacity >
                         <Text style={[styles.nlFont16, styles.nlBold, styles.nlButtonWhite]} >
-                            Write
+                            저장
                         </Text>
                     </TouchableOpacity>
                 </View> */}

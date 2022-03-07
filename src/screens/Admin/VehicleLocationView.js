@@ -38,13 +38,14 @@ function VehicleLocationView({ navigation }) {
     }, [selectedValue])
 
     useEffect(() => {
-        axios.post(`/admin_load_hospital.php`, { type: 'car', week: selectedValue, b_season: formatDate(date), h_no: selectedHospital })
-            .then(res => {
-                setCars(res.data.cars)
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        selectedHospital != 0 &&
+            axios.post(`/admin_load_hospital.php`, { type: 'car', week: selectedValue, b_season: formatDate(date), h_no: selectedHospital })
+                .then(res => {
+                    setCars(res.data.cars)
+                })
+                .catch(err => {
+                    console.log(err);
+                })
         return () => {
         };
     }, [selectedHospital]);
@@ -93,7 +94,7 @@ function VehicleLocationView({ navigation }) {
                         style={styles.nlPicker}
                         onValueChange={(itemValue, itemIndex) => { setSelectedHospital(itemValue); setSelectedCar(0) }}
                     >
-                        <Picker.Item label="공지사항" value="0" />
+                        <Picker.Item label="보건소" value="0" />
                         {hospitals?.map((v, i) => <Picker.Item key={i} label={v.h_name} value={v.h_no} />)}
                     </Picker>
                 </View>
@@ -103,8 +104,8 @@ function VehicleLocationView({ navigation }) {
                         style={styles.nlPicker}
                         onValueChange={(itemValue, itemIndex) => setSelectedCar(itemValue)}
                     >
-                        <Picker.Item label="공지사항" value="0" />
-                        {cars?.map((v, i) => <Picker.Item key={i} label={v.car_number} value={v.car_no} />)}
+                        <Picker.Item label="배송기사" value="0" />
+                        {cars?.map((v, i) => <Picker.Item key={i} label={v.d_name + ' - ' + v.car_number} value={v.car_no} />)}
                     </Picker>
                 </View>
             </View>
