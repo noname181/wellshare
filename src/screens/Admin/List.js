@@ -351,7 +351,7 @@ function List({ navigation }) {
                     </View>}
                 />}
                 {show && (
-                    <MonthPicker
+                    <MonthPicker okButton="예" cancelButton="아니요"
                         onChange={onValueChange}
                         value={date}
 
