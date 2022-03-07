@@ -15,8 +15,10 @@ function VehicleLocationView({ navigation }) {
     const [show, setShow] = useState(false);
     const [hospitals, setHospitals] = useState(null);
     const [cars, setCars] = useState(null);
+    const [monthDays, setMonthDays] = useState(null);
 
     const webViewRef = useRef();
+
 
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
@@ -33,9 +35,22 @@ function VehicleLocationView({ navigation }) {
         };
     }, []);
 
+    let days = [];
+
     useEffect(() => {
-        console.log(`https://scsman23.cafe24.com/admin/webview/car_location.php?car_no=${selectedCar}&b_season=${formatDate()}&value=${selectedValue}`)
-    }, [selectedValue])
+
+        let count = daysInMonth(date.getMonth() + 1, date.getFullYear());
+
+
+        for (let i = 0; i < count; i++) {
+            days.push(
+                i + 1
+            );
+        }
+        console.log(days);
+        setMonthDays(days)
+
+    }, [date])
 
     useEffect(() => {
         selectedHospital != 0 &&
@@ -67,6 +82,12 @@ function VehicleLocationView({ navigation }) {
         return date.getFullYear() + "-" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1));
     }
 
+    const daysInMonth = (month, year) => {
+        return new Date(year, month, 0).getDate();
+    }
+
+
+
 
     return (
         <Screen style={{ backgroundColor: '#f6f7f8', paddingBottom: 130 }}>
@@ -77,15 +98,15 @@ function VehicleLocationView({ navigation }) {
                         <Text style={{ color: "#000", paddingLeft: 10 }}>{formatDate()}</Text>
                     </TouchableOpacity>
                     <View style={styles.nlFormControl}>
-                        <Picker
+                        {monthDays && <Picker
                             selectedValue={selectedValue}
                             style={styles.nlPicker}
                             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                         >
-                            <Picker.Item label="1" value="1" />
-                            <Picker.Item label="2" value="2" />
 
-                        </Picker>
+                            {monthDays?.map((v, i) => <Picker.Item key={i} label={v.toString()} value={v} />)}
+
+                        </Picker>}
                     </View>
                 </View>
                 <View style={styles.nlFormControl}>
