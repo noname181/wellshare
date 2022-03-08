@@ -132,8 +132,7 @@ function List({ navigation }) {
     }
 
     const TrackingInit = () => {
-        console.log(user.delivery_time * 60000)
-        let loop_time = user.delivery_time * 60000
+        let loop_time = user?.delivery_time * 60000
         BackgroundGeolocation.configure({
             desiredAccuracy: BackgroundGeolocation.HIGH_ACCURACY,
             stationaryRadius: 30,
@@ -144,8 +143,8 @@ function List({ navigation }) {
             startOnBoot: false,
             stopOnTerminate: true,
             locationProvider: BackgroundGeolocation.ACTIVITY_PROVIDER,
-            interval: loop_time,
-            fastestInterval: loop_time,
+            interval: loop_time ? loop_time : 1800000,
+            fastestInterval: loop_time ? loop_time : 1800000,
             activitiesInterval: 10000,
             stopOnStillActivity: false,
             startForeground: true,
