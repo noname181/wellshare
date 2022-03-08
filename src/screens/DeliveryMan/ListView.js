@@ -353,7 +353,10 @@ function ListView({ navigation, route }) {
 
 
                 </View>
-
+                <TouchableOpacity style={[styles.nlButton, styles.nlMax]}>
+                        <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>navi map</Text>
+                </TouchableOpacity>
+                
             </Screen>
         </ScrollView>
         <View style={[styles.nlFixedAtBottom, styles.nlRow, { display: 'none' }, booking != null && booking?.b_status != 'completed' ? { display: 'flex' } : {}]}>
@@ -444,7 +447,6 @@ function ListView({ navigation, route }) {
                     }}>
                         <Text style={styles.actionsheet_row_txt}>저장</Text>
                     </TouchableOpacity>
-
                 </View>
             </View>
         </ActionSheet>
