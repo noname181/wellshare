@@ -253,7 +253,7 @@ function List({ navigation }) {
                     </View>
                 </View>
                 <TouchableOpacity style={[styles.nlFormControl, { width: '100%', marginTop: 10, justifyContent: 'center', backgroundColor: '#7c257a' }]} onPress={() => onSearch()}>
-                    <Text style={{ color: "#fff" }}>Search</Text>
+                    <Text style={{ color: "#fff" }}>검색</Text>
                 </TouchableOpacity>
 
             </View>
