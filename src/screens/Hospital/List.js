@@ -200,8 +200,8 @@ function List({ navigation }) {
                             style={styles.nlPicker}
                             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                         >
-                            <Picker.Item label="1" value="1" />
-                            <Picker.Item label="2" value="2" />
+                            <Picker.Item label="1차" value="1" />
+                            <Picker.Item label="2차" value="2" />
 
                         </Picker>
                     </View>

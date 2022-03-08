@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
-import { View, StyleSheet, Text, TouchableOpacity, ActivityIndicator, Image, FlatList, TextInput } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, ActivityIndicator, Image, FlatList, TextInput, Keyboard } from 'react-native';
 import Screen from '../../components/Screen';
 import { Picker } from '@react-native-picker/picker';
 import { useSelector } from 'react-redux'
@@ -74,7 +74,7 @@ function List({ navigation }) {
     }, [isRefresh]);
 
     const loadBookings = () => {
-        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: 1, week: valueRef.current, b_name: nameRef.current, hp: phoneRef.current, b_season: formatDate(date) })
+        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: 1, week: valueRef.current, b_name: nameRef.current, hp: phoneRef.current?.replace('-', '').replace('.', ''), b_season: formatDate(date) })
             .then(res => {
                 setBookingsAll(res.data.bookings)
 
@@ -84,7 +84,7 @@ function List({ navigation }) {
             .catch(err => {
                 console.log(err);
             })
-        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: 2, week: valueRef.current, b_name: nameRef.current, hp: phoneRef.current, b_season: formatDate(date) })
+        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: 2, week: valueRef.current, b_name: nameRef.current, hp: phoneRef.current?.replace('-', '').replace('.', ''), b_season: formatDate(date) })
             .then(res => {
                 setBookingsDelivering(res.data.bookings)
 
@@ -94,7 +94,7 @@ function List({ navigation }) {
             .catch(err => {
                 console.log(err);
             })
-        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: 3, week: valueRef.current, b_name: nameRef.current, hp: phoneRef.current, b_season: formatDate(date) })
+        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: 3, week: valueRef.current, b_name: nameRef.current, hp: phoneRef.current?.replace('-', '').replace('.', ''), b_season: formatDate(date) })
             .then(res => {
                 setBookingsCompleted(res.data.bookings)
 
@@ -186,6 +186,7 @@ function List({ navigation }) {
                         setTimeout(() => setLoadMore(false), 300)
                     }
                 }
+                Keyboard.dismiss();
 
             })
             .catch(err => {
@@ -226,8 +227,8 @@ function List({ navigation }) {
                             style={styles.nlPicker}
                             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                         >
-                            <Picker.Item label="1" value="1" />
-                            <Picker.Item label="2" value="2" />
+                            <Picker.Item label="1차" value="1" />
+                            <Picker.Item label="2차" value="2" />
 
                         </Picker>
                     </View>

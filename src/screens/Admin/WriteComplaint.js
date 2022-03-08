@@ -19,7 +19,7 @@ function WriteComplain({ route, navigation }) {
                     is_writed: true,
                     b_no
                 });
-                Alert.alert('웰쉐어', "성공적인", [
+                Alert.alert('웰쉐어', "완료되었습니다.", [
 
                     {
                         text: '예',

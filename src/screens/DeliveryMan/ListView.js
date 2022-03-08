@@ -125,7 +125,7 @@ function ListView({ navigation, route }) {
             .then((res) => {
                 console.log('response', res);
                 setPhoto(null)
-                Alert.alert('웰쉐어', "성공적인", [
+                Alert.alert('웰쉐어', "완료되었습니다.", [
 
                     {
                         text: '예',
@@ -153,7 +153,7 @@ function ListView({ navigation, route }) {
             .then((res) => {
                 console.log('response', res);
                 setPhoto(null)
-                Alert.alert('웰쉐어', "성공적인", [
+                Alert.alert('웰쉐어', "완료되었습니다.", [
 
                     {
                         text: '예',

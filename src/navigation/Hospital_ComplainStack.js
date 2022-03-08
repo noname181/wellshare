@@ -17,12 +17,12 @@ function HomeStack() {
             <Stack.Screen
                 name="Complains2"
                 component={Complains2}
-                options={{ header: props => <Header title="명단" isBack={false} {...props} /> }}
+                options={{ header: props => <Header title="민원" isBack={false} {...props} /> }}
             />
             <Stack.Screen
                 name="ComplainView"
                 component={ComplainView}
-                options={{ header: props => <Header title="명단" isBack={true} {...props} /> }}
+                options={{ header: props => <Header title="민원" isBack={true} {...props} /> }}
             />
         </Stack.Navigator>
     );
