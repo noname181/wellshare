@@ -153,7 +153,7 @@ function List({ navigation }) {
                 <View style={styles.h_box_list__first_child1}>
                     <View style={{ flexDirection: 'row' }}>
                         <Text style={styles.h_f_c1_text}>{item.b_name}</Text>
-                        <Text style={styles.h_f_c1_phone}>{item.b_hp1}</Text>
+                        <Text style={styles.h_f_c1_phone}>{item.b_hp1?.replace('-', '').includes(phoneSearch) ? item.b_hp1 : item.b_hp2}</Text>
                     </View>
                     <View style={{ paddingTop: 5 }}>
                         <Text style={styles.h_bl_f_c1_text}>{item.b_address}</Text>
