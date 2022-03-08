@@ -22,7 +22,7 @@ function Complains({ navigation, route }) {
             // do something
             axios.post(`/booking_detail.php`, { b_no })
                 .then(res => {
-                    console.log(res);
+
                     setBooking(res.data.booking)
                     setComplaints(res.data.complaints)
 

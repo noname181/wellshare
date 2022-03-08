@@ -42,7 +42,7 @@ function Complains1({ navigation }) {
     const loadComplaints = () => {
         axios.post(`/user_load_complaint.php`, { h_no: user.h_no, role: 'hospital' })
             .then(res => {
-                console.log(res)
+
                 setComplaints(res.data.complaints.filter(v => {
                     return v.com_confirm_yn == 'y';
                 }))

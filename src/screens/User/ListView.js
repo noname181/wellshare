@@ -15,7 +15,7 @@ function ListView({ navigation, route }) {
     useEffect(() => {
         axios.post(`/booking_detail.php`, { b_no })
             .then(res => {
-                console.log(res);
+
                 setBooking(res.data.booking)
 
 

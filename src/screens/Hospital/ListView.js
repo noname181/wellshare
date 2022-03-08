@@ -23,7 +23,7 @@ function ListView({ navigation, route }) {
             // do something
             axios.post(`/booking_detail.php`, { b_no, hm_no: user?.hm_no })
                 .then(res => {
-                    console.log(res);
+
                     setBooking(res.data.booking)
                     setComplaints(res.data.complaints)
 

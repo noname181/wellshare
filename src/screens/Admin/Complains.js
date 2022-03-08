@@ -77,7 +77,7 @@ function Complains({ navigation }) {
     const loadComplaints = () => {
         axios.post(`/user_load_complaint.php`, { role: 'admin', date: fortmatDate(), hp: hpRef.current.replace('-', ''), content: contentRef.current })
             .then(res => {
-                console.log(res)
+
                 setComplaints(res.data.complaints)
 
             })
