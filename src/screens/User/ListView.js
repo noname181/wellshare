@@ -9,7 +9,10 @@ import axios from '../../helpers/axiosInterceptor';
 
 function ListView({ navigation, route }) {
     const [booking, setBooking] = useState({});
+    const [complaints, setComplaints] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
+    const [indexPhotoShow, setIndexPhotoShow] = useState(null);
+
     const { b_no } = route.params;
 
     useEffect(() => {
@@ -17,7 +20,7 @@ function ListView({ navigation, route }) {
             .then(res => {
 
                 setBooking(res.data.booking)
-
+                setComplaints(res.data.complaints)
 
             })
             .catch(err => {
@@ -46,14 +49,14 @@ function ListView({ navigation, route }) {
                         </View>
                     </View>
                     {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                    {complaints?.length > 0 && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>민원내역</Text>
                         </View>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlMarkBlue}>0</Text>
+                            <Text style={styles.nlMarkBlue}>{complaints?.length}</Text>
                         </View>
-                    </View>
+                    </View>}
                     {/* Item Info */}
                     <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
@@ -109,7 +112,7 @@ function ListView({ navigation, route }) {
                         </View>
                     </View>
                     {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, (booking?.b_status == 'completed') && styles.nlLineBottom]}>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>배송상태</Text>
                         </View>
@@ -118,16 +121,16 @@ function ListView({ navigation, route }) {
                         </View>
                     </View>
                     {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, (booking?.image || booking?.sign) && styles.nlLineBottom]}>
+                    {booking?.b_status == 'completed' && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, (booking?.image || booking?.sign) && styles.nlLineBottom]}>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>배송완료일</Text>
                         </View>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorBlack}>{booking?.b_completed_date}</Text>
                         </View>
-                    </View>
+                    </View>}
                     {/* Item Info */}
-                    {booking?.image && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }]}>
+                    {/* {booking?.image && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }]}>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>사진</Text>
                         </View>
@@ -135,6 +138,22 @@ function ListView({ navigation, route }) {
                             <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
                                 <Image resizeMode="contain" style={{ height: 200, width: 200 }} source={{ uri: booking?.image }}></Image>
                             </TouchableOpacity>
+                        </View>
+                    </View>} */}
+                    {booking?.images?.length > 0 && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween]}>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorGrey}>사진</Text>
+                        </View>
+                        <View style={[styles.nlRow, styles.nlAlignCenter, { maxWidth: '90%', justifyContent: 'flex-end' }]}>
+
+                            {booking?.b_status == 'completed' && booking?.images.map((v, i) => <TouchableOpacity key={i} onPress={() => {
+                                setIndexPhotoShow(i);
+                                setModalVisible(!modalVisible)
+                            }}>
+
+                                <Image key={i} resizeMode="cover" style={{ height: 90, width: 90, borderRadius: 13, marginLeft: 10, marginVertical: 10 }} source={{ uri: v }}></Image>
+                            </TouchableOpacity>)}
+
                         </View>
                     </View>}
                     {booking?.sign && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, { alignItems: 'flex-start' }]}>
@@ -165,8 +184,7 @@ function ListView({ navigation, route }) {
                         <Text style={{ fontSize: 26, color: "#fff" }}>X</Text>
                     </TouchableOpacity>
 
-                    <Image resizeMode="contain" style={{ height: '80%', width: '100%' }} source={{ uri: booking?.image }}></Image>
-
+                    {indexPhotoShow && <Image resizeMode="contain" style={{ height: '80%', width: '100%' }} source={{ uri: booking?.images[indexPhotoShow] }}></Image>}
                 </View>
 
             </Modal>

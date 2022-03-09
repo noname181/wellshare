@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import {
     Text,
     View,
@@ -32,15 +32,32 @@ function User_List({ navigation }) {
     const [isRefresh, setIsRefresh] = useState(false);
 
     const user = useSelector(state => state.auth.user)
+    const dateRef = useRef(date);
+    const valueRef = useRef(selectedValue);
+    const _setDate = newText => {
+        dateRef.current = newText;
+
+    };
+    const _setSelectedValue = newText => {
+        valueRef.current = newText;
+
+    };
 
     useEffect(() => {
-        loadBookings();
+
         const unsubscribe = navigation.addListener('focus', () => {
             // do something
             loadBookings();
         });
         return () => {
             unsubscribe
+        };
+    }, []);
+    useEffect(() => {
+        _setDate(date)
+        _setSelectedValue(selectedValue);
+        loadBookings();
+        return () => {
         };
     }, [date, selectedValue]);
 
@@ -54,7 +71,7 @@ function User_List({ navigation }) {
     }, [isRefresh]);
 
     const loadBookings = () => {
-        axios.post(`/user_load_bookings.php`, { hp: user.user_hp, role: 'receiver', length: 0, type: 1, week: selectedValue, b_season: formatDate(date) })
+        axios.post(`/user_load_bookings.php`, { hp: user.user_hp, role: 'receiver', length: 0, type: 1, week: valueRef.current, b_season: formatDate(date) })
             .then(res => {
                 setBookingsAll(res.data.bookings)
                 setTimeout(() => setLoadMore(false), 300)
@@ -62,7 +79,7 @@ function User_List({ navigation }) {
             .catch(err => {
                 console.log(err);
             })
-        axios.post(`/user_load_bookings.php`, { hp: user.user_hp, role: 'receiver', length: 0, type: 2, week: selectedValue, b_season: formatDate(date) })
+        axios.post(`/user_load_bookings.php`, { hp: user.user_hp, role: 'receiver', length: 0, type: 2, week: valueRef.current, b_season: formatDate(date) })
             .then(res => {
                 setBookingsDelivering(res.data.bookings)
                 setTimeout(() => setLoadMore(false), 300)
@@ -70,7 +87,7 @@ function User_List({ navigation }) {
             .catch(err => {
                 console.log(err);
             })
-        axios.post(`/user_load_bookings.php`, { hp: user.user_hp, role: 'receiver', length: 0, type: 3, week: selectedValue, b_season: formatDate(date) })
+        axios.post(`/user_load_bookings.php`, { hp: user.user_hp, role: 'receiver', length: 0, type: 3, week: valueRef.current, b_season: formatDate(date) })
             .then(res => {
                 setBookingsCompleted(res.data.bookings)
                 setTimeout(() => setLoadMore(false), 300)
@@ -96,9 +113,11 @@ function User_List({ navigation }) {
         showMode('date');
     };
     const formatDate = () => {
+        return dateRef.current.getFullYear() + "-" + ((dateRef.current.getMonth() + 1) < 10 ? "0" + (dateRef.current.getMonth() + 1) : (dateRef.current.getMonth() + 1));
+    }
+    const formatDate2 = () => {
         return date.getFullYear() + "-" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1));
     }
-
     const showPicker = useCallback((value) => setShow(value), []);
 
     const onValueChange = useCallback(
@@ -168,7 +187,7 @@ function User_List({ navigation }) {
                 <View style={[styles.h_width_select_half]}>
                     <TouchableOpacity style={[styles.nlFormControl, { paddingLeft: 15 }]} onPress={() => showPicker(true)}>
                         <Calendar width={16} height={16} />
-                        <Text style={{ color: "#000", paddingLeft: 10 }}>{formatDate()}</Text>
+                        <Text style={{ color: "#000", paddingLeft: 10 }}>{formatDate2()}</Text>
                     </TouchableOpacity>
                     <View style={styles.nlFormControl}>
                         <Picker

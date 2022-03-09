@@ -124,6 +124,9 @@ function List({ navigation }) {
     const formatDate = () => {
         return dateRef.current.getFullYear() + "-" + ((dateRef.current.getMonth() + 1) < 10 ? "0" + (dateRef.current.getMonth() + 1) : (dateRef.current.getMonth() + 1));
     }
+    const formatDate2 = () => {
+        return date.getFullYear() + "-" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1));
+    }
 
     const onLoadMore = () => {
         setLoadMore(true);
@@ -192,7 +195,7 @@ function List({ navigation }) {
                 <View style={[styles.h_width_select_half]}>
                     <TouchableOpacity style={[styles.nlFormControl, { paddingLeft: 15 }]} onPress={() => showPicker(true)}>
                         <Calendar width={16} height={16} />
-                        <Text style={{ color: "#000", paddingLeft: 10 }}>{formatDate()}</Text>
+                        <Text style={{ color: "#000", paddingLeft: 10 }}>{formatDate2()}</Text>
                     </TouchableOpacity>
                     <View style={styles.nlFormControl}>
                         <Picker
