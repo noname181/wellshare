@@ -354,7 +354,7 @@ function ListView({ navigation, route }) {
 
                 </View>
                 <TouchableOpacity style={[styles.nlButton, styles.nlMax]}>
-                        <Text style={[styles.nlColorWhite, styles.nlTextCenter]}>navi map</Text>
+                        <Text style={[styles.nlColorWhite, styles.nlTextCenter]} onPress={() => navigation.navigate('VehicleNaviLocation')}>navi map</Text>
                 </TouchableOpacity>
                 
             </Screen>
