@@ -232,13 +232,14 @@ function List({ navigation }) {
                     renderItem={Item}
                     keyExtractor={(item, index) => String(index)}
                     style={styles.nlList}
-                    showsVerticalScrollIndicator={false}
+                    initialNumToRender={20}
+                    // showsVerticalScrollIndicator={false}
                     scrollEventThrottle={16}
-                    onEndReachedThreshold={0.1}
-                    onEndReached={({ distanceFromEnd }) => {
-                        console.log(distanceFromEnd);
-                        (distanceFromEnd > 0 && !loadMore) && onLoadMore();
-                    }}
+                    // onEndReachedThreshold={0.1}
+                    // onEndReached={({ distanceFromEnd }) => {
+                    //     console.log(distanceFromEnd);
+                    //     (distanceFromEnd > 0 && !loadMore) && onLoadMore();
+                    // }}
                     onRefresh={() => setIsRefresh(true)}
                     ListFooterComponent={loadMore ? <View
                         style={{
@@ -259,13 +260,14 @@ function List({ navigation }) {
                     renderItem={Item}
                     keyExtractor={(item, index) => String(index)}
                     style={styles.nlList}
-                    showsVerticalScrollIndicator={false}
+                    initialNumToRender={20}
+                    // showsVerticalScrollIndicator={false}
                     scrollEventThrottle={16}
-                    onEndReachedThreshold={0.1}
-                    onEndReached={({ distanceFromEnd }) => {
-                        console.log(distanceFromEnd);
-                        (distanceFromEnd > 0 && !loadMore) && onLoadMore();
-                    }}
+                    // onEndReachedThreshold={0.1}
+                    // onEndReached={({ distanceFromEnd }) => {
+                    //     console.log(distanceFromEnd);
+                    //     (distanceFromEnd > 0 && !loadMore) && onLoadMore();
+                    // }}
                     onRefresh={() => setIsRefresh(true)}
                     ListFooterComponent={loadMore ? <View
                         style={{
@@ -286,13 +288,14 @@ function List({ navigation }) {
                     renderItem={Item}
                     keyExtractor={(item, index) => String(index)}
                     style={styles.nlList}
-                    showsVerticalScrollIndicator={false}
+                    initialNumToRender={20}
+                    // showsVerticalScrollIndicator={false}
                     scrollEventThrottle={16}
-                    onEndReachedThreshold={0.1}
-                    onEndReached={({ distanceFromEnd }) => {
-                        console.log(distanceFromEnd);
-                        (distanceFromEnd > 0 && !loadMore) && onLoadMore();
-                    }}
+                    // onEndReachedThreshold={0.1}
+                    // onEndReached={({ distanceFromEnd }) => {
+                    //     console.log(distanceFromEnd);
+                    //     (distanceFromEnd > 0 && !loadMore) && onLoadMore();
+                    // }}
                     onRefresh={() => setIsRefresh(true)}
                     ListFooterComponent={loadMore ? <View
                         style={{
