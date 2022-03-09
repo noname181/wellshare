@@ -166,12 +166,12 @@ function User_My_Profile({ navigation }) {
                             <Text style={styles.textModalStyle}>보건소</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity
+                        {/* <TouchableOpacity
                             style={[styles.modal_button]}
                             onPress={() => changeMode('delivery')}
                         >
                             <Text style={styles.textModalStyle}>배송인</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
                 </Pressable>
             </Modal>

@@ -177,12 +177,12 @@ function Profile({ navigation }) {
                         >
                             <Text style={styles.textModalStyle}>보건소</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity
+                        {/* <TouchableOpacity
                             style={[styles.modal_button, { marginBottom: 10 }]}
                             onPress={() => changeMode('delivery')}
                         >
                             <Text style={styles.textModalStyle}>배송인</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
 
                         <TouchableOpacity
                             style={[styles.modal_button]}
