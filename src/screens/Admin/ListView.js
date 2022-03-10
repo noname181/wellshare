@@ -218,7 +218,7 @@ function Complains({ navigation, route }) {
                         <Text style={{ fontSize: 26, color: "#fff" }}>X</Text>
                     </TouchableOpacity>
 
-                    {indexPhotoShow && <Image resizeMode="contain" style={{ height: '80%', width: '100%' }} source={{ uri: booking?.images[indexPhotoShow] }}></Image>}
+                    {indexPhotoShow != null ? <Image resizeMode="contain" style={{ height: '80%', width: '100%' }} source={{ uri: booking?.images[indexPhotoShow] }}></Image> : null}
                 </View>
 
             </Modal>
