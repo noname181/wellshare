@@ -141,7 +141,7 @@ function List({ navigation }) {
         })}>
             <View style={styles.h_box_list__first}>
                 <View>
-                    <Text style={styles.h_bl_s_text1}>{item.b_date} <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text> 8:00</Text>
+                    <Text style={styles.h_bl_s_text1}>#{item.b_no} <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text>{item.b_date}</Text>
                 </View>
                 <View>
                     <TouchableOpacity style={item.b_status == 'completed' ? styles.h_button_list_purple : styles.h_button_list_green} activeOpacity={0.8}>
