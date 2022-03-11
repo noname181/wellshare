@@ -161,7 +161,7 @@ function User_List({ navigation }) {
 
             <View style={styles.h_box_list__first}>
                 <View style={styles.h_box_list__first_child1}>
-                    <Text style={styles.h_bl_f_c1_text}>{item.b_date}</Text>
+                    <Text style={styles.h_bl_s_text1}>#{item.b_no} <Text style={{ color: '#dddddd', fontSize: 13 }}> | </Text>{item.b_date}</Text>
                 </View>
                 <View style={styles.h_box_list__first_child2}>
                     <Text style={styles.h_bl_f_c2_text1}>{item.b_name} </Text>
