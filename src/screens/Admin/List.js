@@ -290,7 +290,7 @@ function List({ navigation }) {
                     renderItem={Item}
                     keyExtractor={(item, index) => String(index)}
                     style={styles.nlList}
-                    initialNumToRender={20}
+                    initialNumToRender={30}
                     // showsVerticalScrollIndicator={false}
                     scrollEventThrottle={16}
                     // onEndReachedThreshold={0.1}
@@ -319,7 +319,7 @@ function List({ navigation }) {
                     renderItem={Item}
                     keyExtractor={(item, index) => String(index)}
                     style={styles.nlList}
-                    initialNumToRender={20}
+                    initialNumToRender={30}
                     // showsVerticalScrollIndicator={false}
                     scrollEventThrottle={16}
                     // onEndReachedThreshold={0.1}
@@ -347,7 +347,7 @@ function List({ navigation }) {
                     renderItem={Item}
                     keyExtractor={(item, index) => String(index)}
                     style={styles.nlList}
-                    initialNumToRender={20}
+                    initialNumToRender={30}
                     // showsVerticalScrollIndicator={false}
                     scrollEventThrottle={16}
                     // onEndReachedThreshold={0.1}
