@@ -64,30 +64,30 @@ export default function Login({ navigation }) {
 
 
 
-        BackHandler.addEventListener('hardwareBackPress', function () {
+        // BackHandler.addEventListener('hardwareBackPress', function () {
 
-            if (navigation.getState().routes.length == 1) {
-                Alert.alert("웰쉐어", "어플을 종료할까요?", [
-                    {
-                        text: '아니요',
-                        onPress: () => {
+        //     if (navigation.getState().routes.length == 1) {
+        //         Alert.alert("웰쉐어", "어플을 종료할까요?", [
+        //             {
+        //                 text: '아니요',
+        //                 onPress: () => {
 
-                        }
-                    },
-                    {
-                        text: '예',
-                        onPress: () => {
-                            BackHandler.exitApp();
-                        }
-                    }
-                ])
-                return true;
-            } else {
-                navigation.goBack();
-                return true;
-            }
+        //                 }
+        //             },
+        //             {
+        //                 text: '예',
+        //                 onPress: () => {
+        //                     BackHandler.exitApp();
+        //                 }
+        //             }
+        //         ])
+        //         return true;
+        //     } else {
+        //         navigation.goBack();
+        //         return true;
+        //     }
 
-        });
+        // });
         if (role == 'admin') navigation.replace('Admin');
         else if (role == 'hospital') navigation.replace('Hospital');
         else if (role == 'delivery') navigation.replace('Delivery');
