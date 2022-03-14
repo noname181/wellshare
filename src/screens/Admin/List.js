@@ -10,6 +10,8 @@ import Empty from '../../images/svg/Empty';
 
 function List({ navigation }) {
     const [selectedValue, setSelectedValue] = useState(1);
+    const [selectedHospital, setSelectedHospital] = useState("hospital");
+    const [hospitals, setHospitals] = useState(null);
     const [tabSlected, settabSlected] = useState(1);
     const [bookingsAll, setBookingsAll] = useState(null);
     const [bookingsDelivering, setBookingsDelivering] = useState(null);
@@ -77,7 +79,7 @@ function List({ navigation }) {
         axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: 1, week: valueRef.current, b_name: nameRef.current, hp: phoneRef.current?.replace('-', '').replace('.', ''), b_season: formatDate(date) })
             .then(res => {
                 setBookingsAll(res.data.bookings)
-
+                setHospitals(res.data.hospitals)
                 setTimeout(() => setLoadMore(false), 300)
 
             })
@@ -87,7 +89,7 @@ function List({ navigation }) {
         axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: 2, week: valueRef.current, b_name: nameRef.current, hp: phoneRef.current?.replace('-', '').replace('.', ''), b_season: formatDate(date) })
             .then(res => {
                 setBookingsDelivering(res.data.bookings)
-
+                setHospitals(res.data.hospitals)
                 setTimeout(() => setLoadMore(false), 300)
 
             })
@@ -97,7 +99,7 @@ function List({ navigation }) {
         axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: 3, week: valueRef.current, b_name: nameRef.current, hp: phoneRef.current?.replace('-', '').replace('.', ''), b_season: formatDate(date) })
             .then(res => {
                 setBookingsCompleted(res.data.bookings)
-
+                setHospitals(res.data.hospitals)
                 setTimeout(() => setLoadMore(false), 300)
 
             })
@@ -168,7 +170,7 @@ function List({ navigation }) {
     );
 
     const onSearch = () => {
-        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: tabSlected, week: selectedValue, b_name: nameSearch, hp: phoneSearch, b_season: formatDate(dateRef.current) })
+        axios.post(`/user_load_bookings.php`, { m_no: user.m_no, role: 'admin', length: 0, type: tabSlected, week: selectedValue, b_name: nameSearch, hp: phoneSearch, b_season: formatDate(dateRef.current), h_no_filter: selectedHospital == 'hospital' ? null : selectedHospital })
             .then(res => {
                 if (tabSlected == 1) {
                     setBookingsAll(res.data.bookings)
@@ -233,6 +235,19 @@ function List({ navigation }) {
                         </Picker>
                     </View>
                 </View>
+                <View style={[styles.h_width_select_half, { marginBottom: 10 }]}>
+                    <View style={[styles.nlFormControl, { width: '100%' }]}>
+                        <Picker
+                            selectedValue={selectedHospital}
+                            style={styles.nlPicker}
+                            onValueChange={(itemValue, itemIndex) => setSelectedHospital(itemValue)}
+                        >
+                            <Picker.Item label="보건소" value="hospital" />
+                            {hospitals && hospitals.map((v, i) => <Picker.Item key={i} label={v.h_no + ' - ' + v.h_name} value={v.h_no} />)}
+
+                        </Picker>
+                    </View>
+                </View>
                 <View style={[styles.h_width_select_half]}>
                     <View style={styles.nlFormControl}>
                         <TextInput
@@ -257,7 +272,7 @@ function List({ navigation }) {
                 </TouchableOpacity>
 
             </View>
-            <Screen style={{ paddingTop: 160 }}>
+            <Screen style={{ paddingTop: 210 }}>
                 <View style={[styles.nlRow, styles.nlBetween, styles.nlListTabTop, { zIndex: 1 }]}>
                     <TouchableOpacity style={(tabSlected == 1) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(1)}>
                         <Text style={(tabSlected == 1) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>전체</Text>
