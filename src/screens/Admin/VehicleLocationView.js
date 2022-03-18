@@ -126,14 +126,14 @@ function VehicleLocationView({ navigation }) {
                         onValueChange={(itemValue, itemIndex) => setSelectedCar(itemValue)}
                     >
                         <Picker.Item label="배송기사" value="0" />
-                        {cars?.map((v, i) => <Picker.Item key={i} label={v.d_name + ' - ' + v.car_number} value={v.car_no} />)}
+                        {cars?.map((v, i) => <Picker.Item key={i} label={v.d_name} value={v.d_no} />)}
                     </Picker>
                 </View>
             </View>
             <View style={[styles.nlCard]}>
                 <WebView
                     ref={(ref) => webViewRef.current = ref}
-                    source={{ uri: `https://scsman23.cafe24.com/admin/webview/car_location.php?car_no=${selectedCar}&b_season=${formatDate()}&value=${selectedValue}` }}
+                    source={{ uri: `https://scsman23.cafe24.com/admin/webview/car_location.php?d_no=${selectedCar}&b_season=${formatDate()}&value=${selectedValue}` }}
                     style={{}}
                 />
             </View>
