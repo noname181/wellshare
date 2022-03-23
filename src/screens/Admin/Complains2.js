@@ -20,15 +20,18 @@ import { useSelector } from 'react-redux'
 import Empty from '../../images/svg/Empty';
 
 
-function Complains({ navigation }) {
+function Complains({ navigation, route }) {
+    const { b_name, b_hp1, b_hp2 } = route.params;
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
     const [complaints, setComplaints] = useState(null);
-    const [hpSearch, setHpSearch] = useState('');
-    const [contentSearct, setContentSearch] = useState('');
+    const [hpSearch, setHpSearch] = useState(b_hp1 ? b_hp1 : b_hp2 ? b_hp2 : '');
+    const [contentSearct, setContentSearch] = useState(b_name ? b_name : '');
 
     const user = useSelector(state => state.auth.user)
+
+
     const dateRef = useRef(date);
     const hpRef = useRef(hpSearch);
     const contentRef = useRef(contentSearct);
@@ -49,9 +52,18 @@ function Complains({ navigation }) {
         const unsubscribe = navigation.addListener('focus', () => {
             // do something
             loadComplaints();
+
+        });
+        const unsubscribe2 = navigation.addListener('blur', () => {
+            // do something
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'Complains' }],
+            });
         });
         return () => {
             unsubscribe
+            unsubscribe2
         };
 
     }, []);
@@ -157,7 +169,7 @@ function Complains({ navigation }) {
                             onChangeText={(text) => setHpSearch(text)} />
                     </View>
                     <View style={styles.width40}>
-                        <TextInput style={styles.text_input} value={contentSearct} placeholder='이름'
+                        <TextInput style={styles.text_input} value={contentSearct} placeholder='정보'
                             keyboardType='default'
                             onChangeText={(text) => setContentSearch(text)} />
                     </View>
