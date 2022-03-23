@@ -57,7 +57,13 @@ function ListView({ navigation, route }) {
                             </View>
                         </View>
                         {/* Item Info */}
-                        {complaints?.length > 0 ? <TouchableOpacity style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]} onPress={() => navigation.navigate('Complains')}>
+                        {complaints?.length > 0 ? <TouchableOpacity style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]} onPress={() => navigation.navigate('ComplainStack', {
+                            screen: 'Complains3', params: {
+                                b_name: booking?.b_name,
+                                b_hp1: booking?.b_hp1,
+                                b_hp2: booking?.b_hp2
+                            }
+                        })}>
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
                                 <Text style={styles.nlColorGrey}>민원내역</Text>
                             </View>
