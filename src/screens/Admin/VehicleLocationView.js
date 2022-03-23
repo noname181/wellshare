@@ -6,6 +6,9 @@ import Calendar from '../../images/svg/CalendarIcon';
 import MonthPicker from 'react-native-month-year-picker';
 import axios from '../../helpers/axiosInterceptor';
 import { WebView } from 'react-native-webview';
+import CalendarIcon from '../../images/svg/CalendarIcon';
+import Icon from 'react-native-vector-icons/Ionicons';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 function VehicleLocationView({ navigation }) {
     const [selectedValue, setSelectedValue] = useState(1);
@@ -16,6 +19,7 @@ function VehicleLocationView({ navigation }) {
     const [hospitals, setHospitals] = useState(null);
     const [cars, setCars] = useState(null);
     const [monthDays, setMonthDays] = useState(null);
+    const [mode, setMode] = useState('date');
 
     const webViewRef = useRef();
 
@@ -85,15 +89,29 @@ function VehicleLocationView({ navigation }) {
     const daysInMonth = (month, year) => {
         return new Date(year, month, 0).getDate();
     }
+    const showMode = (currentMode) => {
+        setShow(true);
+        setMode(currentMode);
+    };
 
+    const showDatepicker = () => {
+        showMode('date');
+    };
 
-
+    const fortmatDate2 = () => {
+        return date.getFullYear() + "-" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "-" + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate());
+    }
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'ios');
+        setDate(currentDate);
+    };
 
     return (
         <Screen style={{ backgroundColor: '#f6f7f8', paddingBottom: 130 }}>
             <View style={[styles.nlRow, styles.nlBetween]}>
                 <View style={[styles.h_width_select_half, { marginTop: 10 }, { marginBottom: 10 }]}>
-                    <TouchableOpacity style={[styles.nlFormControl, { paddingLeft: 15 }]} onPress={() => showPicker(true)}>
+                    {/* <TouchableOpacity style={[styles.nlFormControl, { paddingLeft: 15 }]} onPress={() => showPicker(true)}>
                         <Calendar width={16} height={16} />
                         <Text style={{ color: "#000", paddingLeft: 10 }}>{formatDate()}</Text>
                     </TouchableOpacity>
@@ -107,7 +125,21 @@ function VehicleLocationView({ navigation }) {
                             {monthDays?.map((v, i) => <Picker.Item key={i} label={v.toString()} value={v} />)}
 
                         </Picker>}
-                    </View>
+                    </View> */}
+                    <TouchableOpacity activeOpacity={1} style={styles.box_calendar} onPress={showDatepicker}>
+                        <CalendarIcon width={16} height={16} />
+                        <Text style={styles.text_calendar}>{fortmatDate2()}</Text>
+                        <Icon style={styles.icon_select} name={'chevron-down-outline'} color={'#9b9b9b'} size={20} />
+                    </TouchableOpacity>
+                    {show && (
+                        <DateTimePicker
+                            testID="dateTimePicker"
+                            value={date}
+                            mode={mode}
+                            display="default"
+                            onChange={onChange}
+                        />
+                    )}
                 </View>
                 <View style={styles.nlFormControl}>
                     <Picker
@@ -133,18 +165,18 @@ function VehicleLocationView({ navigation }) {
             <View style={[styles.nlCard]}>
                 <WebView
                     ref={(ref) => webViewRef.current = ref}
-                    source={{ uri: `https://scsman23.cafe24.com/admin/webview/car_location.php?d_no=${selectedCar}&b_season=${formatDate()}&value=${selectedValue}` }}
+                    source={{ uri: `https://scsman23.cafe24.com/admin/webview/car_location.php?d_no=${selectedCar}&b_season=${fortmatDate2()}&value=${selectedValue}` }}
                     style={{}}
                 />
             </View>
-            {show && (
+            {/* {show && (
                 <MonthPicker okButton="예" cancelButton="아니요"
                     onChange={onValueChange}
                     value={date}
 
                     locale="ko"
                 />
-            )}
+            )} */}
         </Screen>
     );
 }
@@ -209,7 +241,28 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
 
     },
-
+    box_calendar: {
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: '#e1e1e1',
+        borderRadius: 8,
+        overflow: 'hidden',
+        height: 40,
+        width: '100%',
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        flexDirection: 'row',
+        paddingHorizontal: 15
+    },
+    text_calendar: {
+        paddingLeft: 10,
+        fontSize: 15,
+        color: "#000"
+    },
+    icon_select: {
+        position: 'absolute',
+        right: 17,
+    },
 });
 
 export default VehicleLocationView
