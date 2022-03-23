@@ -152,7 +152,7 @@ export default function Login({ navigation }) {
                 if (data.msg == 'wrong_otp') {
                     Alert.alert(
                         '웰쉐어',
-                        "Wrong OTP",
+                        "잘못된 인증번호입니다.",
                         [
                             {
                                 text: "예",
@@ -304,7 +304,7 @@ export default function Login({ navigation }) {
                             <View style={[{ opacity: canSendOTP ? 1 : 0.5 }]}>
                                 <TouchableOpacity style={[styles.nlButtonOTP, { flexDirection: 'row' }]} activeOpacity={0.8} onPress={() => { !canSendOTP ? {} : sendOTP() }}>
 
-                                    <Text style={styles.nlColorWhite}>{resendOTP ? 'Resend OTP' : 'OTP 발송'}</Text>
+                                    <Text style={styles.nlColorWhite}>{resendOTP ? '인증번호발송' : 'OTP 발송'}</Text>
                                     <ActivityIndicator size="small" color="#fff" style={{ marginLeft: 5, display: loadingOTP ? 'flex' : 'none' }} />
                                 </TouchableOpacity>
                             </View>
