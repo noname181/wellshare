@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert, Keyboard, ActivityIndicator, BackHandler } from "react-native";
 import axios from '../helpers/axiosInterceptor';
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,15 +14,27 @@ export default function Login({ navigation }) {
     const [canSendOTP, setCanSendOTP] = useState(true);
     const [resendOTP, setResendOTP] = useState(false);
     const [OTP, setOTP] = useState("");
-    const [countDown, setCountDown] = useState(30);
+    const [countDown, setCountDown] = useState(180);
     const [time, setTime] = useState({ h: 0, m: 0, s: 0 });
     const [timer, setTimer] = useState(0);
     const [hp, setHp] = useState("");
     const [loadingOTP, setLoadingOTP] = useState(false);
+    const [timeStart, setTimeStart] = useState(null);
     const dispatch = useDispatch()
 
     const role = useSelector(state => state.auth.role)
     const user = useSelector(state => state.auth.user)
+
+    const timeStartRef = useRef(timeStart);
+    const _setTimeStart = newText => {
+        timeStartRef.current = newText;
+    };
+
+    useEffect(() => {
+        _setTimeStart(timeStart)
+        return () => {
+        };
+    }, [timeStart]);
 
     useEffect(() => {
         axios.interceptors.request.use(
@@ -167,7 +179,7 @@ export default function Login({ navigation }) {
                     clearInterval(timer);
                     setOTP("");
                     setHp("");
-                    setCountDown(30);
+                    setCountDown(180);
                     setShowOTP(false);
                     setResendOTP(false);
                     setCanSendOTP(true);
@@ -223,7 +235,14 @@ export default function Login({ navigation }) {
 
     const countDowns = () => {
         // Remove one second, set state so a re-render happens.
-        setCountDown(countDown => countDown - 1);
+        let seconds = Math.round((Date.now() - timeStartRef.current) / 1000);
+
+        setCountDown(countDown => {
+            if (180 - seconds > 0) {
+                return 180 - seconds;
+            } else
+                return 0;
+        });
     }
 
     const sendOTP = () => {
@@ -242,7 +261,7 @@ export default function Login({ navigation }) {
             );
             return;
         }
-        if (resendOTP) setCountDown(30);
+        if (resendOTP) setCountDown(180);
         setLoadingOTP(true);
         setOTP("")
 
@@ -250,7 +269,7 @@ export default function Login({ navigation }) {
             .then(res => {
                 setLoadingOTP(false);
                 if (res.data.msg == 'nonmember') {
-                    setCountDown(30);
+                    setCountDown(180);
                     setShowOTP(false);
                     setResendOTP(false);
                     setCanSendOTP(true);
@@ -266,6 +285,7 @@ export default function Login({ navigation }) {
                         ]
                     );
                 } else {
+                    setTimeStart(Date.now())
                     setTimer(setInterval(countDowns, 1000));
                     setShowOTP(true);
                     setCanSendOTP(false);
