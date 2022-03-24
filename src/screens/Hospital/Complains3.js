@@ -64,20 +64,21 @@ function Complains({ navigation, route }) {
 
             loadComplaints();
         });
-        const unsubscribe2 = navigation.addListener('blur', () => {
+        const unsubscribe2 = navigation.addListener('blur', (e) => {
             // do something
-            console.log(navigation.getState().index)
-            console.log(navigation.getState().routes.length)
-            navigation.getState().index == 0 && navigation.getState().routes.length == 1 &&
-                navigation.reset({
-                    index: 0,
-                    routes: [{ name: 'Complains2' }],
-                });
-            navigation.getState().index == 1 && navigation.getState().routes.length == 2 &&
-                navigation.reset({
-                    index: 0,
-                    routes: [{ name: 'Complains2' }],
-                });
+            setTimeout(() => {
+                navigation.getState().routes.forEach((v, i) => {
+                    if (v.name == "Complains3" && i == (navigation.getState().routes.length - 1)) {
+
+                        navigation.reset({
+                            index: 0,
+                            routes: [{ name: 'Complains2' }],
+                        });
+                    }
+                })
+
+            }, 0);
+
         });
         return () => {
             unsubscribe
@@ -95,6 +96,20 @@ function Complains({ navigation, route }) {
     }, [date]);
 
     const loadComplaints = () => {
+        axios.post(`/user_load_complaint.php`, { h_no: user.h_no, role: 'hospital', type: 'all', date: fortmatDate(), hp: hpRef.current.replace('-', ''), content: contentRef.current })
+            .then(res => {
+
+                // setComplaints(res.data.complaints.filter(v => {
+                //     return v.com_confirm_yn == 'y';
+                // }))
+                setComplaints(res.data.complaints)
+
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+    const loadComplaints2 = () => {
         axios.post(`/user_load_complaint.php`, { h_no: user.h_no, role: 'hospital', date: fortmatDate(), hp: hpRef.current.replace('-', ''), content: contentRef.current })
             .then(res => {
 
@@ -132,7 +147,7 @@ function Complains({ navigation, route }) {
     }
 
     const onSearch = () => {
-        loadComplaints();
+        loadComplaints2();
     }
 
     const Item = ({ item, index }) => (

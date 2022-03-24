@@ -54,12 +54,21 @@ function Complains({ navigation, route }) {
             loadComplaints();
 
         });
-        const unsubscribe2 = navigation.addListener('blur', () => {
+        const unsubscribe2 = navigation.addListener('blur', (e) => {
             // do something
-            navigation.reset({
-                index: 0,
-                routes: [{ name: 'Complains' }],
-            });
+            setTimeout(() => {
+                navigation.getState().routes.forEach((v, i) => {
+                    if (v.name == "Complains2" && i == (navigation.getState().routes.length - 1)) {
+
+                        navigation.reset({
+                            index: 0,
+                            routes: [{ name: 'Complains' }],
+                        });
+                    }
+                })
+
+            }, 0);
+
         });
         return () => {
             unsubscribe
@@ -87,6 +96,17 @@ function Complains({ navigation, route }) {
     }, [date]);
 
     const loadComplaints = () => {
+        axios.post(`/user_load_complaint.php`, { role: 'admin', type: 'all', date: fortmatDate(), hp: hpRef.current.replace('-', ''), content: contentRef.current })
+            .then(res => {
+
+                setComplaints(res.data.complaints)
+
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+    const loadComplaints2 = () => {
         axios.post(`/user_load_complaint.php`, { role: 'admin', date: fortmatDate(), hp: hpRef.current.replace('-', ''), content: contentRef.current })
             .then(res => {
 
@@ -121,7 +141,7 @@ function Complains({ navigation, route }) {
     }
 
     const onSearch = () => {
-        loadComplaints();
+        loadComplaints2();
     }
 
     const Item = ({ item, index }) => (
