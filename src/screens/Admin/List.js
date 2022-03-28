@@ -215,75 +215,76 @@ function List({ navigation }) {
     const formatDate2 = () => {
         return date.getFullYear() + "-" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1));
     }
+
+    const flatListHeader = () => <View><View style={[styles.h_width_select_half, { marginTop: 10 }, { marginBottom: 10 }]}>
+        <TouchableOpacity style={[styles.nlFormControl, { paddingLeft: 15 }]} onPress={() => showPicker(true)}>
+            <Calendar width={16} height={16} />
+            <Text style={{ color: "#000", paddingLeft: 10 }}>{formatDate2()}</Text>
+        </TouchableOpacity>
+        <View style={styles.nlFormControl}>
+            <Picker
+                selectedValue={selectedValue}
+                style={styles.nlPicker}
+                onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+            >
+                <Picker.Item label="1차" value="1" />
+                <Picker.Item label="2차" value="2" />
+
+            </Picker>
+        </View>
+    </View>
+        <View style={[styles.h_width_select_half, { marginBottom: 10 }]}>
+            <View style={[styles.nlFormControl, { width: '100%' }]}>
+                <Picker
+                    selectedValue={selectedHospital}
+                    style={styles.nlPicker}
+                    onValueChange={(itemValue, itemIndex) => setSelectedHospital(itemValue)}
+                >
+                    <Picker.Item label="보건소" value="hospital" />
+                    {hospitals && hospitals.map((v, i) => <Picker.Item key={i} label={v.h_name} value={v.h_no} />)}
+
+                </Picker>
+            </View>
+        </View>
+        <View style={[styles.h_width_select_half]}>
+            <View style={styles.nlFormControl}>
+                <TextInput
+                    placeholder='수령인 이름'
+                    style={{ paddingHorizontal: 15, width: '100%' }}
+                    value={nameSearch} onChangeText={(text) => setNameSearch(text)}
+                >
+                </TextInput>
+            </View>
+            <View style={[styles.nlFormControl]}>
+                <TextInput
+                    placeholder='수령인 전화번호'
+                    keyboardType='numeric'
+                    style={{ paddingHorizontal: 15, width: '100%' }}
+                    value={phoneSearch} onChangeText={(text) => setPhoneSearch(text)}
+                >
+                </TextInput>
+            </View>
+        </View>
+        <TouchableOpacity style={[styles.nlFormControl, { width: '100%', marginTop: 10, justifyContent: 'center', backgroundColor: '#7c257a' }]} onPress={() => onSearch()}>
+            <Text style={{ color: "#fff" }}>검색</Text>
+        </TouchableOpacity>
+        <View style={[styles.nlRow, styles.nlBetween, styles.nlListTabTop, { zIndex: 1 }]}>
+            <TouchableOpacity style={(tabSlected == 1) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(1)}>
+                <Text style={(tabSlected == 1) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>전체</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={(tabSlected == 2) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(2)}>
+                <Text style={(tabSlected == 2) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>배송전</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={(tabSlected == 3) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(3)}>
+                <Text style={(tabSlected == 3) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>배송완료</Text>
+            </TouchableOpacity>
+        </View></View>
+
     return (
         <View style={{ flex: 1 }}>
-            <View style={[styles.nlFixedAtTop]}>
-                <View style={[styles.h_width_select_half, { marginTop: 10 }, { marginBottom: 10 }]}>
-                    <TouchableOpacity style={[styles.nlFormControl, { paddingLeft: 15 }]} onPress={() => showPicker(true)}>
-                        <Calendar width={16} height={16} />
-                        <Text style={{ color: "#000", paddingLeft: 10 }}>{formatDate2()}</Text>
-                    </TouchableOpacity>
-                    <View style={styles.nlFormControl}>
-                        <Picker
-                            selectedValue={selectedValue}
-                            style={styles.nlPicker}
-                            onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-                        >
-                            <Picker.Item label="1차" value="1" />
-                            <Picker.Item label="2차" value="2" />
 
-                        </Picker>
-                    </View>
-                </View>
-                <View style={[styles.h_width_select_half, { marginBottom: 10 }]}>
-                    <View style={[styles.nlFormControl, { width: '100%' }]}>
-                        <Picker
-                            selectedValue={selectedHospital}
-                            style={styles.nlPicker}
-                            onValueChange={(itemValue, itemIndex) => setSelectedHospital(itemValue)}
-                        >
-                            <Picker.Item label="보건소" value="hospital" />
-                            {hospitals && hospitals.map((v, i) => <Picker.Item key={i} label={v.h_no + ' - ' + v.h_name} value={v.h_no} />)}
+            <Screen style={{ paddingTop: 0 }}>
 
-                        </Picker>
-                    </View>
-                </View>
-                <View style={[styles.h_width_select_half]}>
-                    <View style={styles.nlFormControl}>
-                        <TextInput
-                            placeholder='수령인 이름'
-                            style={{ paddingHorizontal: 15, width: '100%' }}
-                            value={nameSearch} onChangeText={(text) => setNameSearch(text)}
-                        >
-                        </TextInput>
-                    </View>
-                    <View style={[styles.nlFormControl]}>
-                        <TextInput
-                            placeholder='수령인 전화번호'
-                            keyboardType='numeric'
-                            style={{ paddingHorizontal: 15, width: '100%' }}
-                            value={phoneSearch} onChangeText={(text) => setPhoneSearch(text)}
-                        >
-                        </TextInput>
-                    </View>
-                </View>
-                <TouchableOpacity style={[styles.nlFormControl, { width: '100%', marginTop: 10, justifyContent: 'center', backgroundColor: '#7c257a' }]} onPress={() => onSearch()}>
-                    <Text style={{ color: "#fff" }}>검색</Text>
-                </TouchableOpacity>
-
-            </View>
-            <Screen style={{ paddingTop: 210 }}>
-                <View style={[styles.nlRow, styles.nlBetween, styles.nlListTabTop, { zIndex: 1 }]}>
-                    <TouchableOpacity style={(tabSlected == 1) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(1)}>
-                        <Text style={(tabSlected == 1) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>전체</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={(tabSlected == 2) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(2)}>
-                        <Text style={(tabSlected == 2) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>배송전</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={(tabSlected == 3) ? styles.nlTabTopSelected : styles.nlTabTop} onPress={() => settabSlected(3)}>
-                        <Text style={(tabSlected == 3) ? styles.nlTabTopTextSelected : styles.nlTabTopText}>배송완료</Text>
-                    </TouchableOpacity>
-                </View>
                 {tabSlected == 1 && <FlatList
                     refreshing={false}
                     data={bookingsAll}
@@ -291,7 +292,7 @@ function List({ navigation }) {
                     keyExtractor={(item, index) => String(index)}
                     style={styles.nlList}
                     initialNumToRender={30}
-                    // showsVerticalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}
                     scrollEventThrottle={16}
                     // onEndReachedThreshold={0.1}
                     // onEndReached={({ distanceFromEnd }) => {
@@ -300,6 +301,7 @@ function List({ navigation }) {
                     //     (distanceFromEnd > 0 && !loadMore) && onLoadMore();
                     // }}
                     onRefresh={() => setIsRefresh(true)}
+                    ListHeaderComponent={flatListHeader}
                     ListFooterComponent={loadMore ? <View
                         style={{
                             paddingBottom: 15,
@@ -320,7 +322,7 @@ function List({ navigation }) {
                     keyExtractor={(item, index) => String(index)}
                     style={styles.nlList}
                     initialNumToRender={30}
-                    // showsVerticalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}
                     scrollEventThrottle={16}
                     // onEndReachedThreshold={0.1}
                     // onEndReached={({ distanceFromEnd }) => {
@@ -328,6 +330,7 @@ function List({ navigation }) {
                     //     (distanceFromEnd > 0 && !loadMore) && onLoadMore();
                     // }}
                     onRefresh={() => setIsRefresh(true)}
+                    ListHeaderComponent={flatListHeader}
                     ListFooterComponent={loadMore ? <View
                         style={{
                             paddingBottom: 15,
@@ -348,7 +351,7 @@ function List({ navigation }) {
                     keyExtractor={(item, index) => String(index)}
                     style={styles.nlList}
                     initialNumToRender={30}
-                    // showsVerticalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}
                     scrollEventThrottle={16}
                     // onEndReachedThreshold={0.1}
                     // onEndReached={({ distanceFromEnd }) => {
@@ -356,6 +359,7 @@ function List({ navigation }) {
                     //     (distanceFromEnd > 0 && !loadMore) && onLoadMore();
                     // }}
                     onRefresh={() => setIsRefresh(true)}
+                    ListHeaderComponent={flatListHeader}
                     ListFooterComponent={loadMore ? <View
                         style={{
                             paddingBottom: 15,
