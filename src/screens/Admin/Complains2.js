@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {
     Text,
@@ -18,7 +18,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import axios from '../../helpers/axiosInterceptor';
 import { useSelector } from 'react-redux'
 import Empty from '../../images/svg/Empty';
-
+import Calendar from '../../images/svg/CalendarIcon';
+import { Picker } from '@react-native-picker/picker';
+import MonthPicker from 'react-native-month-year-picker';
+import CheckBox from '@react-native-community/checkbox';
 
 function Complains({ navigation, route }) {
     const { b_name, b_hp1, b_hp2 } = route.params;
@@ -28,13 +31,25 @@ function Complains({ navigation, route }) {
     const [complaints, setComplaints] = useState(null);
     const [hpSearch, setHpSearch] = useState(b_hp1 ? b_hp1 : b_hp2 ? b_hp2 : '');
     const [contentSearct, setContentSearch] = useState(b_name ? b_name : '');
+    const [selectedValue, setSelectedValue] = useState(1);
+    const [toggleCheckBox, setToggleCheckBox] = useState(true)
 
     const user = useSelector(state => state.auth.user)
 
 
+    const checkBoxRef = useRef(toggleCheckBox);
     const dateRef = useRef(date);
     const hpRef = useRef(hpSearch);
     const contentRef = useRef(contentSearct);
+    const valueRef = useRef(selectedValue);
+
+    const _setToggleCheckBox = newText => {
+        checkBoxRef.current = newText;
+    };
+    const _setSelectedValue = newText => {
+        valueRef.current = newText;
+    };
+
     const _setDate = newText => {
         dateRef.current = newText;
 
@@ -80,20 +95,24 @@ function Complains({ navigation, route }) {
     useEffect(() => {
         _setHpSearch(hpSearch)
         _setContentSearch(contentSearct)
+        _setDate(date)
+        _setSelectedValue(selectedValue)
+
         return () => {
 
         };
 
-    }, [hpSearch, contentSearct]);
+    }, [hpSearch, contentSearct, date, selectedValue]);
+
 
     useEffect(() => {
-        _setDate(date)
-        loadComplaints()
+        _setToggleCheckBox(toggleCheckBox)
+        loadComplaints2()
         return () => {
 
         };
 
-    }, [date]);
+    }, [toggleCheckBox]);
 
     const loadComplaints = () => {
         axios.post(`/user_load_complaint.php`, { role: 'admin', type: 'all', date: fortmatDate(), hp: hpRef.current.replace('-', ''), content: contentRef.current })
@@ -107,7 +126,7 @@ function Complains({ navigation, route }) {
             })
     }
     const loadComplaints2 = () => {
-        axios.post(`/user_load_complaint.php`, { role: 'admin', date: fortmatDate(), hp: hpRef.current.replace('-', ''), content: contentRef.current })
+        axios.post(`/user_load_complaint.php`, { role: 'admin', date: fortmatDate(), hp: hpRef.current.replace('-', ''), content: contentRef.current, type: checkBoxRef.current ? 'all' : '', week: valueRef.current })
             .then(res => {
 
                 setComplaints(res.data.complaints)
@@ -134,10 +153,10 @@ function Complains({ navigation, route }) {
     };
 
     const fortmatDate = () => {
-        return dateRef.current.getFullYear() + "-" + ((dateRef.current.getMonth() + 1) < 10 ? "0" + (dateRef.current.getMonth() + 1) : (dateRef.current.getMonth() + 1)) + "-" + (dateRef.current.getDate() < 10 ? "0" + dateRef.current.getDate() : dateRef.current.getDate());
+        return dateRef.current.getFullYear() + "-" + ((dateRef.current.getMonth() + 1) < 10 ? "0" + (dateRef.current.getMonth() + 1) : (dateRef.current.getMonth() + 1));
     }
     const fortmatDate2 = () => {
-        return date.getFullYear() + "-" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "-" + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate());
+        return date.getFullYear() + "-" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1));
     }
 
     const onSearch = () => {
@@ -165,10 +184,59 @@ function Complains({ navigation, route }) {
         </View>
     );
 
+    const showPicker = useCallback((value) => setShow(value), []);
+
+    const onValueChange = useCallback(
+        (event, newDate) => {
+            const selectedDate = newDate || date;
+
+            showPicker(false);
+            setDate(selectedDate);
+        },
+        [date, showPicker],
+    );
+
     return (
         <Screen style={styles.body_42_1}>
             <View style={{ flex: 1 }}>
-                <TouchableOpacity activeOpacity={1} style={styles.box_calendar} onPress={showDatepicker}>
+                <View style={[styles.h_width_select_half]}>
+
+                    <View style={[styles.nlFormControl, { paddingLeft: 15 }, toggleCheckBox ? { opacity: 0.5 } : { opacity: 1 }]}>
+                        {toggleCheckBox ?
+                            <View style={{ flexDirection: 'row' }} >
+                                <Calendar width={16} height={16} />
+                                <Text style={{ color: "#9b9b9b", paddingLeft: 10 }}>{fortmatDate2()}</Text>
+                            </View> :
+                            <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => showPicker(true)}>
+                                <Calendar width={16} height={16} />
+                                <Text style={{ color: "#000", paddingLeft: 10 }}>{fortmatDate2()}</Text>
+                            </TouchableOpacity>
+                        }
+                    </View>
+
+                    <View style={[styles.nlFormControl, toggleCheckBox ? { opacity: 0.7 } : { opacity: 1 }]}>
+                        <Picker
+                            selectedValue={selectedValue}
+                            style={styles.nlPicker}
+                            onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                            enabled={!toggleCheckBox}
+                        >
+                            <Picker.Item label="1차" value="1" />
+                            <Picker.Item label="2차" value="2" />
+
+                        </Picker>
+                    </View>
+                    <TouchableOpacity style={[styles.nlFormControl, { width: '20%', marginRight: 0, paddingLeft: 5 }]} onPress={() => setToggleCheckBox(!toggleCheckBox)}>
+                        <CheckBox
+                            disabled={false}
+                            value={toggleCheckBox}
+                            onValueChange={(newValue) => setToggleCheckBox(newValue)}
+                            tintColors={{ true: '#9b9b9b', false: '#9b9b9b' }}
+                        />
+                        <Text>전체</Text>
+                    </TouchableOpacity>
+                </View>
+                {/* <TouchableOpacity activeOpacity={1} style={styles.box_calendar} onPress={showDatepicker}>
                     <CalendarIcon width={16} height={16} />
                     <Text style={styles.text_calendar}>{fortmatDate2()}</Text>
                     <Icon style={styles.icon_select} name={'chevron-down-outline'} color={'#9b9b9b'} size={20} />
@@ -181,7 +249,7 @@ function Complains({ navigation, route }) {
                         display="default"
                         onChange={onChange}
                     />
-                )}
+                )} */}
                 <View style={styles.row__search}>
                     <View style={styles.width40}>
                         <TextInput value={hpSearch} style={styles.text_input} placeholder='전화번호'
@@ -212,7 +280,13 @@ function Complains({ navigation, route }) {
                         <Empty height={100} width={100}></Empty>
                     </View>}
                 />
-
+                {show && (
+                    <MonthPicker okButton="예" cancelButton="아니요"
+                        onChange={onValueChange}
+                        value={date}
+                        locale="ko"
+                    />
+                )}
                 {/* <View style={styles.row__info}>
                     <View style={styles.row__info__child}>
                         <View style={styles.row__info__child__text}>
@@ -286,11 +360,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     width40: {
-        width: '39%',
+        width: '37%',
         marginRight: 10,
     },
     width20: {
-        width: '15%',
+        width: '20%',
     },
     width100: {
         width: '100%',
@@ -361,7 +435,35 @@ const styles = StyleSheet.create({
         fontSize: 14,
 
 
-    }
+    },
+    h_width_select_half: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+
+    },
+    nlFormControl: {
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: '#e1e1e1',
+        borderRadius: 8,
+        overflow: 'hidden',
+        height: 46,
+        width: '37%',
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        flexDirection: 'row',
+        marginRight: 10,
+        shadowColor: '#222',
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.1,
+        shadowRadius: 10,
+        elevation: 4,
+    },
+    nlPicker: {
+        width: '100%',
+        height: '100%',
+    },
 
 });
 
