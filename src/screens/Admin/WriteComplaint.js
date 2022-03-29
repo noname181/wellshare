@@ -47,7 +47,7 @@ function WriteComplain({ route, navigation }) {
                     <View style={styles.nlTextInput}>
                         <TextInput multiline={true}
                             numberOfLines={8}
-                            style={{ textAlignVertical: 'top' }}
+                            style={{ textAlignVertical: 'top', color: "#000000" }}
                             value={complaint}
                             onChangeText={(text) => setComplaint(text)}
                             placeholder={'민원을 작성하세요.'}

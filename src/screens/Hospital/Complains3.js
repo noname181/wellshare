@@ -427,7 +427,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         elevation: 4,
         fontSize: 14,
-
+        color: "#000000"
 
     },
     h_width_select_half: {

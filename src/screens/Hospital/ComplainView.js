@@ -121,7 +121,7 @@ function ComplainView({ route, navigation }) {
                     <View style={[styles.nlTextInput]}>
                         <TextInput multiline={true}
                             numberOfLines={8}
-                            style={{ textAlignVertical: 'top' }}
+                            style={{ textAlignVertical: 'top', color: "#000000" }}
                             placeholder={"답변하세요."}
                             value={answer}
                             onChangeText={(text) => setAnswer(text)}
