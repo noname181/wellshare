@@ -33,6 +33,7 @@ function Complains({ navigation, route }) {
     const [contentSearct, setContentSearch] = useState(b_name ? b_name : '');
     const [selectedValue, setSelectedValue] = useState(1);
     const [toggleCheckBox, setToggleCheckBox] = useState(true)
+    const [isRefresh, setIsRefresh] = useState(false);
 
     const user = useSelector(state => state.auth.user)
 
@@ -113,6 +114,15 @@ function Complains({ navigation, route }) {
         };
 
     }, [toggleCheckBox]);
+
+    useEffect(() => {
+        if (isRefresh) {
+            loadComplaints2();
+            setIsRefresh(false)
+        }
+        return () => {
+        };
+    }, [isRefresh]);
 
     const loadComplaints = () => {
         axios.post(`/user_load_complaint.php`, { role: 'admin', type: 'all', date: fortmatDate(), hp: hpRef.current.replace('-', ''), content: contentRef.current })

@@ -35,6 +35,7 @@ function Complains({ navigation }) {
     const [contentSearct, setContentSearch] = useState('');
     const [selectedValue, setSelectedValue] = useState(1);
     const [toggleCheckBox, setToggleCheckBox] = useState(true)
+    const [isRefresh, setIsRefresh] = useState(false);
 
     const user = useSelector(state => state.auth.user)
 
@@ -95,6 +96,15 @@ function Complains({ navigation }) {
         };
 
     }, [toggleCheckBox]);
+
+    useEffect(() => {
+        if (isRefresh) {
+            loadComplaints();
+            setIsRefresh(false)
+        }
+        return () => {
+        };
+    }, [isRefresh]);
 
     const loadComplaints = () => {
         axios.post(`/user_load_complaint.php`, { h_no: user.h_no, role: 'hospital', date: fortmatDate(), hp: hpRef.current.replace('-', ''), content: contentRef.current, type: checkBoxRef.current ? 'all' : '', week: valueRef.current })
@@ -248,8 +258,8 @@ function Complains({ navigation }) {
                     keyExtractor={(item, index) => String(index)}
                     style={styles.nlList}
                     showsVerticalScrollIndicator={false}
-                    // onRefresh={() => setIsRefresh(true)}
-                    // refreshing={false}
+                    onRefresh={() => setIsRefresh(true)}
+                    refreshing={false}
                     contentContainerStyle={{ flexGrow: 1 }}
                     ListEmptyComponent={complaints != null && <View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
                         <Empty height={100} width={100}></Empty>
