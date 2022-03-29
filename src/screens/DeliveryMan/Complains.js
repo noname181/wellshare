@@ -122,7 +122,7 @@ function Complains({ navigation }) {
                         <Text style={styles.row__info__child__text1}>#{item.b_no} - {item.com_text}</Text>
                     </View>
                     <View>
-                        <Text style={styles.row__info__child__text3}>{item.com_regdate}</Text>
+                        <Text style={styles.row__info__child__text3}>{item.com_date}</Text>
                     </View>
                 </View>
                 <View style={styles.h_circle_blue}>
