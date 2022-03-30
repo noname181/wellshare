@@ -46,11 +46,11 @@ function Complains({ navigation, route }) {
                     <View style={[styles.nlCard, { backgroundColor: '#fff', padding: 20 }]}>
                         {/* Item Info */}
                         <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter, { paddingRight: 30 }]}>
                                 <Text style={styles.nlColorGrey}>수령인</Text>
                             </View>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking?.b_name}</Text>
+                            <View style={[styles.nlRow, styles.nlAlignCenter, { flexShrink: 1, justifyContent: 'flex-end' }]}>
+                                <Text style={[styles.nlColorBlack, { textAlign: 'right' }]}>{booking?.b_name}</Text>
                             </View>
                         </View>
                         {/* Item Info */}
@@ -70,17 +70,17 @@ function Complains({ navigation, route }) {
                         </TouchableOpacity> : null}
                         {/* Item Info */}
                         <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter, { paddingRight: 30 }]}>
                                 <Text style={styles.nlColorGrey}>패키지</Text>
                             </View>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking?.b_package}</Text>
+                            <View style={[styles.nlRow, styles.nlAlignCenter, { flexShrink: 1, justifyContent: 'flex-end' }]}>
+                                <Text style={[styles.nlColorBlack, { textAlign: 'right' }]}>{booking?.b_package}</Text>
                             </View>
                         </View>
 
                         {/* Item Info */}
                         <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter, { paddingRight: 30 }]}>
                                 <Text style={styles.nlColorGrey}>수령인HP</Text>
                             </View>
                             <View style={[styles.nlAlignCenter, styles.nlRow]}>
@@ -94,7 +94,7 @@ function Complains({ navigation, route }) {
                         </View>
                         {/* Item Info */}
                         <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter, { paddingRight: 30 }]}>
                                 <Text style={styles.nlColorGrey}>수령인 주소</Text>
                             </View>
                             <View style={[styles.nlRow, styles.nlAlignCenter, { maxWidth: '70%' }]}>
@@ -103,11 +103,11 @@ function Complains({ navigation, route }) {
                         </View>
                         {/* Item Info */}
                         <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter, { paddingRight: 30 }]}>
                                 <Text style={styles.nlColorGrey}>특이사항</Text>
                             </View>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking?.b_memo}</Text>
+                            <View style={[styles.nlRow, styles.nlAlignCenter, { flexShrink: 1, justifyContent: 'flex-end' }]}>
+                                <Text style={[styles.nlColorBlack, { textAlign: 'right' }]}>{booking?.b_memo}</Text>
                             </View>
                         </View>
                         {/* Item Info */}
@@ -115,8 +115,8 @@ function Complains({ navigation, route }) {
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
                                 <Text style={styles.nlColorGrey}>배송예정일</Text>
                             </View>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking?.b_date}</Text>
+                            <View style={[styles.nlRow, styles.nlAlignCenter, { flexShrink: 1, justifyContent: 'flex-end' }]}>
+                                <Text style={[styles.nlColorBlack, { textAlign: 'right' }]}>{booking?.b_date}</Text>
                             </View>
                         </View>
 
@@ -124,16 +124,16 @@ function Complains({ navigation, route }) {
                     <View style={[styles.nlCard, { backgroundColor: '#fff', padding: 20 }]}>
                         {/* Item Info */}
                         <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter, { paddingRight: 30 }]}>
                                 <Text style={styles.nlColorGrey}>배송인</Text>
                             </View>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking?.b_name}</Text>
+                            <View style={[styles.nlRow, styles.nlAlignCenter, { flexShrink: 1, justifyContent: 'flex-end' }]}>
+                                <Text style={[styles.nlColorBlack, { textAlign: 'right' }]}>{booking?.b_name}</Text>
                             </View>
                         </View>
                         {/* Item Info */}
                         <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter, { paddingRight: 30 }]}>
                                 <Text style={styles.nlColorGrey}>배송인HP</Text>
                             </View>
                             <View style={[styles.nlRow]}>
@@ -147,20 +147,20 @@ function Complains({ navigation, route }) {
                         </View>
                         {/* Item Info */}
                         <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, (booking?.b_status == 'completed') && styles.nlLineBottom]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter, { paddingRight: 30 }]}>
                                 <Text style={styles.nlColorGrey}>배송상태</Text>
                             </View>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking?.b_status == 'completed' ? '완료' : '배송중'}</Text>
+                            <View style={[styles.nlRow, styles.nlAlignCenter, { flexShrink: 1, justifyContent: 'flex-end' }]}>
+                                <Text style={[styles.nlColorBlack, { textAlign: 'right' }]}>{booking?.b_status == 'completed' ? '완료' : '배송중'}</Text>
                             </View>
                         </View>
                         {/* Item Info */}
                         {booking?.b_status == 'completed' && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, (booking?.images?.length > 0 || booking?.sign) && styles.nlLineBottom]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter, { paddingRight: 30 }]}>
                                 <Text style={styles.nlColorGrey}>배송완료일</Text>
                             </View>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking?.b_completed_date}</Text>
+                            <View style={[styles.nlRow, styles.nlAlignCenter, { flexShrink: 1, justifyContent: 'flex-end' }]}>
+                                <Text style={[styles.nlColorBlack, { textAlign: 'right' }]}>{booking?.b_completed_date}</Text>
                             </View>
                         </View>}
                         {/* Item Info */}
@@ -273,17 +273,16 @@ const styles = StyleSheet.create({
     },
     nlRow: {
         flexDirection: 'row',
-        flexWrap: 'wrap'
+        flexWrap: 'nowrap'
     },
     nlBetween: {
         justifyContent: 'space-between'
     },
     nlAlignCenter: {
         alignItems: 'center',
-        alignContent: 'center'
     },
     nlMax: {
-        width: '98%',
+        width: '96%',
     },
     nlItemInfo: {
         paddingVertical: 6,
