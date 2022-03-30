@@ -77,15 +77,7 @@ function Complains({ navigation, route }) {
                                 <Text style={styles.nlColorBlack}>{booking?.b_package}</Text>
                             </View>
                         </View>
-                        {/* Item Info */}
-                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorGrey}>특이사항</Text>
-                            </View>
-                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                                <Text style={styles.nlColorBlack}>{booking?.b_memo}</Text>
-                            </View>
-                        </View>
+
                         {/* Item Info */}
                         <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
                             <View style={[styles.nlRow, styles.nlAlignCenter]}>
@@ -107,6 +99,15 @@ function Complains({ navigation, route }) {
                             </View>
                             <View style={[styles.nlRow, styles.nlAlignCenter, { maxWidth: '70%' }]}>
                                 <Text style={styles.nlColorBlack}>{booking?.b_address}</Text>
+                            </View>
+                        </View>
+                        {/* Item Info */}
+                        <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorGrey}>특이사항</Text>
+                            </View>
+                            <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                                <Text style={styles.nlColorBlack}>{booking?.b_memo}</Text>
                             </View>
                         </View>
                         {/* Item Info */}

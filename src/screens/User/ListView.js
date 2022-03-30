@@ -49,14 +49,14 @@ function ListView({ navigation, route }) {
                         </View>
                     </View>
                     {/* Item Info */}
-                    {complaints?.length > 0 && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                    {/* {complaints?.length > 0 && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>민원내역</Text>
                         </View>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlMarkBlue}>{complaints?.length}</Text>
                         </View>
-                    </View>}
+                    </View>} */}
                     {/* Item Info */}
                     <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
@@ -66,15 +66,7 @@ function ListView({ navigation, route }) {
                             <Text style={styles.nlColorBlack}>{booking?.b_package}</Text>
                         </View>
                     </View>
-                    {/* Item Info */}
-                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorGrey}>특이사항</Text>
-                        </View>
-                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
-                            <Text style={styles.nlColorBlack}>{booking?.b_memo}</Text>
-                        </View>
-                    </View>
+
                     {/* Item Info */}
                     <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
@@ -112,6 +104,15 @@ function ListView({ navigation, route }) {
                         </View>
                     </View>
                     {/* Item Info */}
+                    <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, styles.nlLineBottom]}>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorGrey}>특이사항</Text>
+                        </View>
+                        <View style={[styles.nlRow, styles.nlAlignCenter]}>
+                            <Text style={styles.nlColorBlack}>{booking?.b_memo}</Text>
+                        </View>
+                    </View>
+                    {/* Item Info */}
                     <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, (booking?.b_status == 'completed') && styles.nlLineBottom]}>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>배송상태</Text>
@@ -121,7 +122,7 @@ function ListView({ navigation, route }) {
                         </View>
                     </View>
                     {/* Item Info */}
-                    {booking?.b_status == 'completed' && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, (booking?.image || booking?.sign) && styles.nlLineBottom]}>
+                    {booking?.b_status == 'completed' && <View style={[styles.nlItemInfo, styles.nlRow, styles.nlBetween, (booking?.image || booking?.sign || booking?.images?.length > 0) && styles.nlLineBottom]}>
                         <View style={[styles.nlRow, styles.nlAlignCenter]}>
                             <Text style={styles.nlColorGrey}>배송완료일</Text>
                         </View>
