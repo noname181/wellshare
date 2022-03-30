@@ -185,7 +185,7 @@ function Complains({ navigation }) {
             <View style={{ flex: 1 }}>
                 <View style={[styles.h_width_select_half]}>
 
-                    <View style={[styles.nlFormControl, { paddingLeft: 15 }, toggleCheckBox ? { opacity: 0.5 } : { opacity: 1 }]}>
+                    <View style={[styles.nlFormControl, { paddingLeft: 15, flexShrink: 1 }, toggleCheckBox ? { opacity: 0.5 } : { opacity: 1 }]}>
                         {toggleCheckBox ?
                             <View style={{ flexDirection: 'row' }} >
                                 <Calendar width={16} height={16} />
@@ -198,7 +198,7 @@ function Complains({ navigation }) {
                         }
                     </View>
 
-                    <View style={[styles.nlFormControl, toggleCheckBox ? { opacity: 0.7 } : { opacity: 1 }]}>
+                    <View style={[styles.nlFormControl, { flexShrink: 1 }, toggleCheckBox ? { opacity: 0.7 } : { opacity: 1 }]}>
                         <Picker
                             selectedValue={selectedValue}
                             style={styles.nlPicker}
@@ -210,7 +210,7 @@ function Complains({ navigation }) {
 
                         </Picker>
                     </View>
-                    <TouchableOpacity style={[styles.nlFormControl, { width: '20%', marginRight: 0, paddingLeft: 5 }]} onPress={() => setToggleCheckBox(!toggleCheckBox)}>
+                    <TouchableOpacity style={[styles.nlFormControl, { width: 75, marginRight: 0, paddingLeft: 5 }]} onPress={() => setToggleCheckBox(!toggleCheckBox)}>
                         <CheckBox
                             disabled={false}
                             value={toggleCheckBox}
@@ -323,18 +323,18 @@ const styles = StyleSheet.create({
         paddingTop: 10,
     },
     row__search: {
-        flexWrap: 'wrap',
         paddingTop: 14,
         paddingBottom: 14,
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
     width40: {
-        width: '37%',
+        width: '50%',
         marginRight: 10,
+        flexShrink: 1
     },
     width20: {
-        width: '20%',
+        width: 75,
     },
     width100: {
         width: '100%',
@@ -419,7 +419,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         overflow: 'hidden',
         height: 46,
-        width: '37%',
+        width: '50%',
         backgroundColor: '#fff',
         alignItems: 'center',
         flexDirection: 'row',
